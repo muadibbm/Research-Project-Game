@@ -10,6 +10,7 @@ public class MainJava {
   public static void main(String[] args) {
     JavaPlatform platform = JavaPlatform.register();
     platform.assets().setPathPrefix("com/project/game/resources");
+    platform.graphics().setSize(1600, 600);
     PlayN.run(new Main());
   }
 }

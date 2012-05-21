@@ -10,7 +10,7 @@ public class Main implements Game {
   @Override
   public void init() {
     // create and add background image layer
-    Image bgImage = assets().getImage("images/bg.png");
+    Image bgImage = assets().getImage("images/sample_environment.png");
     ImageLayer bgLayer = graphics().createImageLayer(bgImage);
     graphics().rootLayer().add(bgLayer);
   }
