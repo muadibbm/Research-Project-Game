@@ -15,9 +15,10 @@ public class GameLoop implements Game {
 	//set window size
 	graphics().setSize(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
     // create and add background image layer
-    final Image bgImage = assets().getImage("images/temp/giant_cat.jpg");
-    final ImageLayer bgLayer = graphics().createImageLayer(bgImage);
-	bgLayer.setSize(1000,1000);
+    final Image bgImage = assets().getImage("images/sample_environment.jpg");
+	final Camera camera = new Camera(0,0, bgImage);
+    final ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
+	bgLayer.setSize(3200,1800);
     graphics().rootLayer().add(bgLayer);
 
     System.out.println(bgImage.width() + " " + bgImage.height());
@@ -27,17 +28,28 @@ public class GameLoop implements Game {
     keyboard().setListener(new Keyboard.Adapter() {
       @Override
       public void onKeyDown(Keyboard.Event event) {
-	  /*float x = 100;
-		float y = 0;
         if(event.key().equals(Key.A))
-		    x = x + 10;
-			bgLayer.subImage(x,y,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
-		if(event.key().equals(Key.B))
-			y = y - 10;
-			bgLayer.subImage(x,y,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);*/
+		    camera.setX(camera.getX() - 20);
+		if(event.key().equals(Key.W))
+			camera.setY(camera.getY() - 20);
+		if(event.key().equals(Key.D))
+		    camera.setX(camera.getX() + 20);
+		if(event.key().equals(Key.S))
+			camera.setY(camera.getY() + 20);
 		if(event.key().equals(Key.ESCAPE))
 			System.exit(0);
       }
+	  /*@Override
+      public void onKeyUp(Keyboard.Event event) {
+        if(event.key().equals(Key.A))
+		    camera.setX(camera.getX() - 20);
+		if(event.key().equals(Key.W))
+			camera.setY(camera.getY() - 20);
+		if(event.key().equals(Key.D))
+		    camera.setX(camera.getX() + 20);
+		if(event.key().equals(Key.S))
+			camera.setY(camera.getY() + 20);
+      }*/
     });
     
   }
