@@ -11,7 +11,7 @@ import playn.core.ResourceCallback;
 enum Nucleotides {A, ADENINE, T, THYMINE, U, URACIL, G, GUANINE, C, CYTOSINE};
 
 public class Node {
-    private String img; //path to image file *** dependent on city?? 
+    private String img = "images/temp/pea.png";  //path to image file *** dependent on city?? 
 
     private ImageLayer layer;
 
@@ -20,13 +20,7 @@ public class Node {
     private List<Node> neighbors;
     private Tuple2f coordinates;
 
-    public Node() {
-        this.neighbors = new ArrayList<Node>();
-        this.coordinates = new Tuple2f();
-        this.nucleotide = Nucleotides.A;
-    }
-
-    public Node(final GroupLayer node_layer, final float x, final float y, Nucleotides n, int id) {
+    public Node(final GroupLayer graph_layer, final float x, final float y, Nucleotides n, int id) {
         Image image = assets().getImage(img);
         this.layer = graphics().createImageLayer(image);
 
@@ -42,7 +36,7 @@ public class Node {
             public void done(Image image) {
                 layer.setOrigin(image.width() / 2.0f, image.height() / 2.0f);
                 layer.setTranslation(x, y);
-                node_layer.add(layer);
+                graph_layer.add(layer);
             }
 
             @Override

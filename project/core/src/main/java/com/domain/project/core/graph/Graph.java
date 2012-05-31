@@ -3,12 +3,14 @@ import java.lang.Integer;
 import java.util.Map;
 import java.util.HashMap;
 
-public class GameMap {
+import playn.core.GroupLayer;
+
+public class Graph {
 
     private Map<Integer, Node> nodes;
     private Map<Integer, Edge> edges;
 
-    public GameMap() {
+    public Graph(GroupLayer graphLayer) {
         nodes = new HashMap<Integer, Node>();
         edges = new HashMap<Integer, Edge>();
     }

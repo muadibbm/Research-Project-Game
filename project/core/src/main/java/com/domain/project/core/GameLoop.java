@@ -12,21 +12,28 @@ import playn.core.Key;
 
 public class GameLoop implements Game {
 
-    GroupLayer graph_layer;
+    GroupLayer graphLayer; //contains background and graph
 
     @Override
     public void init() {
         //set window size
         graphics().setSize(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
+
+        //create group layer containing background and graph
+        graphLayer = graphics().createGroupLayer();
+        graphics().rootLayer().add(graphLayer);
+
         // create and add background image layer
         final Image bgImage = assets().getImage("images/sample_environment.jpg");
         final Camera camera = new Camera(0,0, bgImage);
         final ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
         bgLayer.setSize(3200,1800);
-        graphics().rootLayer().add(bgLayer);
+//        graphics().rootLayer().add(bgLayer);
+        graphLayer.add(bgLayer);
+
+        
 
         System.out.println(bgImage.width() + " " + bgImage.height());
-        //bgLayer.setSize(graphics().width(), graphics().height());
 
         // add a listener for Keyboard input
         keyboard().setListener(new Keyboard.Adapter() {
@@ -42,7 +49,7 @@ public class GameLoop implements Game {
                     camera.setY(camera.getY() + 20);
                 if(event.key().equals(Key.ESCAPE))
                     System.exit(0);
-          }
+        }
           /*@Override
           public void onKeyUp(Keyboard.Event event) {
             if(event.key().equals(Key.A))
@@ -60,7 +67,7 @@ public class GameLoop implements Game {
 
     @Override
     public void paint(float alpha) {
-       // the background automatically paints itself, so no need to do anything here!
+        // the background automatically paints itself, so no need to do anything here!
     }
 
     @Override
