@@ -14,6 +14,10 @@ public class GameLoop implements Game {
 
     GroupLayer graphLayer; //contains background and graph
 
+    Camera camera;
+    
+    KeyboardControls kbControls;
+
     @Override
     public void init() {
         //set window size
@@ -24,17 +28,17 @@ public class GameLoop implements Game {
         graphics().rootLayer().add(graphLayer);
 
         // create and add background image layer
-        final Image bgImage = assets().getImage("images/sample_environment.jpg");
-        final Camera camera = new Camera(0,0, bgImage);
-        final ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
+        Image bgImage = assets().getImage("images/sample_environment.jpg");
+        camera = new Camera(0,0, bgImage);
+        ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
         bgLayer.setSize(3200,1800);
 //        graphics().rootLayer().add(bgLayer);
         graphLayer.add(bgLayer);
 
-        
-
-        System.out.println(bgImage.width() + " " + bgImage.height());
-
+        //create and set keyboard controls
+        kbControls = new KeyboardControls();
+        keyboard().setListener(kbControls);
+/*
         // add a listener for Keyboard input
         keyboard().setListener(new Keyboard.Adapter() {
             @Override
@@ -49,8 +53,9 @@ public class GameLoop implements Game {
                     camera.setY(camera.getY() + 20);
                 if(event.key().equals(Key.ESCAPE))
                     System.exit(0);
-        }
-          /*@Override
+            }
+
+          @Override
           public void onKeyUp(Keyboard.Event event) {
             if(event.key().equals(Key.A))
                 camera.setX(camera.getX() - 20);
@@ -60,8 +65,9 @@ public class GameLoop implements Game {
                 camera.setX(camera.getX() + 20);
             if(event.key().equals(Key.S))
                 camera.setY(camera.getY() + 20);
-          }*/
+          }
         });
+*/
     
     }
 
@@ -72,7 +78,22 @@ public class GameLoop implements Game {
 
     @Override
     public void update(float delta) {
-    
+        //parse keyboard inputs
+        if(kbControls.scrollUp) {
+            camera.setY(camera.getY() - kbControls.panRate);
+//            if(camera.getY() < 0.0f) {
+//                camera.setY(0.0f);
+//            }
+        }
+        if(kbControls.scrollDown) {
+            camera.setY(camera.getY() + kbControls.panRate);
+        }
+        if(kbControls.scrollLeft) {
+            camera.setX(camera.getX() - kbControls.panRate);
+        }
+        if(kbControls.scrollRight) {
+            camera.setX(camera.getX() + kbControls.panRate);
+        }
     }
 
     @Override
