@@ -1,3 +1,5 @@
+package com.domain.project.core;
+
 import static playn.core.PlayN.*;
 import playn.core.Image;
 import playn.core.ImageLayer;
@@ -31,5 +33,5 @@ public class Edge {
         this.e2 = e2;
     }
 
-
+    
 }

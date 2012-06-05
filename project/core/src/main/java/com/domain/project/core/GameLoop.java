@@ -7,6 +7,8 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 
+import playn.core.ResourceCallback;
+
 import playn.core.Keyboard;
 import playn.core.Key;
 
@@ -38,6 +40,10 @@ public class GameLoop implements Game {
         //create and set keyboard controls
         kbControls = new KeyboardControls();
         keyboard().setListener(kbControls);
+
+        Graph g = new Graph();
+        g.generateGraph("3IZ9", graphLayer);
+
 /*
         // add a listener for Keyboard input
         keyboard().setListener(new Keyboard.Adapter() {
@@ -78,6 +84,15 @@ public class GameLoop implements Game {
 
     @Override
     public void update(float delta) {
+        parseKB();
+    }
+
+    @Override
+    public int updateRate() {
+        return 25;
+    }
+
+    private void parseKB() {
         //parse keyboard inputs
         if(kbControls.scrollUp) {
             camera.setY(camera.getY() - kbControls.panRate);
@@ -96,8 +111,4 @@ public class GameLoop implements Game {
         }
     }
 
-    @Override
-    public int updateRate() {
-        return 25;
-    }
 }

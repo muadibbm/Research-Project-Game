@@ -1,3 +1,5 @@
+package com.domain.project.core;
+
 public class Tuple2f {
     private float x;
     private float y;
