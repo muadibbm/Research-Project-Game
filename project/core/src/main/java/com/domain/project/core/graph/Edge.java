@@ -5,7 +5,7 @@ import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
 
-enum Isomer {CIS, C, TRANS, T};
+enum Isomer {cis, c, trans, t};
 enum EdgeType {W, w, H, h, S, s}; 
 
 public class Edge {
@@ -13,25 +13,25 @@ public class Edge {
 
     private ImageLayer layer;
 
-    private int n1_id;
-    private int n2_id;
+    private int id; //line number in file
     private Isomer isomer;
     private EdgeType e1;
     private EdgeType e2;
 
-
-    public Edge() {
-        this.n1_id = -1;
-        this.n2_id = -1;
-    }
-
-    public Edge(int n1, int n2, Isomer i, EdgeType e1, EdgeType e2) {
-        this.n1_id = n1;
-        this.n2_id = n2;
-        this.isomer = i;
+    public Edge(int id, Isomer isomer, EdgeType e1, EdgeType e2) {
+        this.id = id;
+        this.isomer = isomer;
         this.e1 = e1;
         this.e2 = e2;
     }
 
-    
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return id + "(" + isomer + e1 + e2 + ")";
+    }
+
 }

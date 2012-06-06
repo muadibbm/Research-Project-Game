@@ -43,6 +43,7 @@ public class GameLoop implements Game {
 
         Graph g = new Graph();
         g.generateGraph("3IZ9", graphLayer);
+        System.out.println(g);
 
 /*
         // add a listener for Keyboard input
