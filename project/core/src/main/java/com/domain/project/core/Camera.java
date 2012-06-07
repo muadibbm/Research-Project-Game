@@ -16,8 +16,8 @@ public class Camera
     {
         this.xOffset = xOffset;
         this.yOffset = yOffset;
-		width = bgImage.width();
-		height = bgImage.height();
+        width = bgImage.width();
+        height = bgImage.height();
         view = bgImage.subImage(xOffset, yOffset, width, height);
     }
 

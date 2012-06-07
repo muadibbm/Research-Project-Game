@@ -17,7 +17,7 @@ public class GameLoop implements Game {
     GroupLayer graphLayer; //contains background and graph
 
     Camera camera;
-    
+
     KeyboardControls kbControls;
 
     @Override
@@ -27,19 +27,21 @@ public class GameLoop implements Game {
 
         //create group layer containing background and graph
         graphLayer = graphics().createGroupLayer();
-		
         graphics().rootLayer().add(graphLayer);
 
         // create and add background image layer
-        Image bgImage = assets().getImage("images/texture_wall_painted11.png");
+        Image bgImage = assets().getImage("images/sample_environment.jpg");
         camera = new Camera(0,0, bgImage);
-        ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
-		graphLayer.add(bgLayer);
-		bgLayer.setSize(Const.WORLD_WIDTH,Const.WORLD_HEIGHT);
-		bgLayer.setRepeatX(true);
-		bgLayer.setRepeatY(true);
-		//graphics().rootLayer().setScale(graphics().screenWidth(),graphics().screenHeight());
-		//graphics().rootLayer().add(bgLayer);
+//        ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
+        ImageLayer bgLayer = graphics().createImageLayer(bgImage);
+        graphLayer.add(bgLayer);
+        bgLayer.setSize(Const.WORLD_WIDTH,Const.WORLD_HEIGHT);
+        bgLayer.setRepeatX(true);
+        bgLayer.setRepeatY(true);
+
+        graphLayer.setTranslation(500,500);
+        //graphics().rootLayer().setScale(graphics().screenWidth(),graphics().screenHeight());
+        //graphics().rootLayer().add(bgLayer);
         //graphLayer.add(bgLayer);
 
         //create and set keyboard controls
@@ -68,20 +70,20 @@ public class GameLoop implements Game {
     private void parseKB() {
         //parse keyboard inputs
         if(kbControls.scrollUp) {
-			if(camera.getY() > 0)
-				camera.setY(camera.getY() - kbControls.panRate);
+            if(camera.getY() > 0)
+                camera.setY(camera.getY() - kbControls.panRate);
         }
         if(kbControls.scrollDown) {
-			if(camera.getY() < Const.WORLD_HEIGHT)
-				camera.setY(camera.getY() + kbControls.panRate);
+            if(camera.getY() < Const.WORLD_HEIGHT)
+                camera.setY(camera.getY() + kbControls.panRate);
         }
         if(kbControls.scrollLeft) {
-			if(camera.getX() > 0)
-				camera.setX(camera.getX() - kbControls.panRate);
+            if(camera.getX() > 0)
+                camera.setX(camera.getX() - kbControls.panRate);
         }
         if(kbControls.scrollRight) {
-			if(camera.getX() < Const.WORLD_WIDTH)
-				camera.setX(camera.getX() + kbControls.panRate);
+            if(camera.getX() < Const.WORLD_WIDTH)
+                camera.setX(camera.getX() + kbControls.panRate);
         }
     }
 
