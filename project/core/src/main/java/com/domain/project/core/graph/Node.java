@@ -32,13 +32,13 @@ public class Node {
 
     public Node(final GroupLayer graph_layer, final float x, final float y, Nucleotide n, int id) {
         Image image = assets().getImage(img);
-        this.layer = graphics().createImageLayer(image);
+        layer = graphics().createImageLayer(image);
 
-        this.id = id;
+        id = id;
 
-        this.neighbors = new ArrayList<Node>();
-        this.coordinates = new Tuple2f(x, y); //might not be necessary
-        this.nucleotide = n;
+        neighbors = new ArrayList<Node>();
+        coordinates = new Tuple2f(x, y); //might not be necessary
+        nucleotide = n;
 
 
         image.addCallback(new ResourceCallback<Image>() {
@@ -56,13 +56,25 @@ public class Node {
         });
     }
 
-   public void addNeighbor(Node n) {
-       this.neighbors.add(n);
-   }
-    
+    public void addNeighbor(Node n) {
+        neighbors.add(n);
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public Nucleotide getNucleotide() {
+        return nucleotide;
+    }
+
     @Override
     public String toString() {
-       return "Node ID: " + Integer.toString(this.id) + " (" + this.nucleotide + ")";
+        String ret = "Node ID: " + Integer.toString(id) + "(" + nucleotide + ") \t- Neighbors:";
+        for(Node n : neighbors) {
+            ret = ret + " " + Integer.toString(n.getID()) + "(" + n.getNucleotide() + ")";
+        }
+        return ret;
     }
 
 
