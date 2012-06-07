@@ -3,9 +3,6 @@ package com.domain.project.core;
 import static playn.core.PlayN.*;
 
 import playn.core.Game;
-import playn.core.GroupLayer;
-import playn.core.Image;
-import playn.core.ImageLayer;
 
 import playn.core.ResourceCallback;
 
@@ -13,41 +10,25 @@ import playn.core.Keyboard;
 import playn.core.Key;
 
 public class GameLoop implements Game {
-
-    GroupLayer graphLayer; //contains background and graph
-
+	
     Camera camera;
+	
+	Environment environmet;
     
     KeyboardControls kbControls;
 
     @Override
     public void init() {
-        //set window size
-        graphics().setSize(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
-
-        //create group layer containing background and graph
-        graphLayer = graphics().createGroupLayer();
 		
-        graphics().rootLayer().add(graphLayer);
-
-        // create and add background image layer
-        Image bgImage = assets().getImage("images/texture_wall_painted11.png");
-        camera = new Camera(0,0, bgImage);
-        ImageLayer bgLayer = graphics().createImageLayer(camera.getView());
-		graphLayer.add(bgLayer);
-		bgLayer.setSize(Const.WORLD_WIDTH,Const.WORLD_HEIGHT);
-		bgLayer.setRepeatX(true);
-		bgLayer.setRepeatY(true);
-		//graphics().rootLayer().setScale(graphics().screenWidth(),graphics().screenHeight());
-		//graphics().rootLayer().add(bgLayer);
-        //graphLayer.add(bgLayer);
-
+		environmet = new Environment();
+        camera = new Camera(0,0, environmet.getBaseImage());
+		
+		Graph g = new Graph();
+        g.generateGraph("3IZ9", environmet.getGraphLayer());
+		
         //create and set keyboard controls
         kbControls = new KeyboardControls();
         keyboard().setListener(kbControls);
-
-        Graph g = new Graph();
-        g.generateGraph("3IZ9", graphLayer);
     }
 
     @Override
