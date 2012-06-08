@@ -1,8 +1,8 @@
 package com.domain.project.core.graph;
 
 public class Tuple2f {
-    private float x;
-    private float y;
+    public float x;
+    public float y;
 
     public Tuple2f() {
         this.x = 0.0f;
@@ -13,4 +13,5 @@ public class Tuple2f {
         this.x = x;
         this.y = y;
     }
+
 }

@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 import playn.core.GroupLayer;
 
+import com.domain.project.core.Const;
+
 public class Graph {
 
     private final Map<Integer, Node> nodes;
@@ -23,11 +25,12 @@ public class Graph {
         this.edges = new HashMap<Integer, Edge>();
     }
 
-    public void generateGraph(String filename, GroupLayer groupLayer) {
-        parseGraphFile(filename);
+    public void generateGraph(String filename, GroupLayer graphLayer) {
+        parseGraphFile(filename, graphLayer);
+        placeNodes();
     }
 
-    private void parseGraphFile(String filename) {
+    private void parseGraphFile(String filename, final GroupLayer graphLayer) {
 
         assets().getText(PATH + filename, new ResourceCallback<String>() {
             @Override
@@ -147,7 +150,7 @@ public class Graph {
                     nodeID = Integer.parseInt(subEntries[2]);
 
                     if(!contains(nodeID)) {
-                        n1 = new Node(nodeID, nucl);
+                        n1 = new Node(nodeID, nucl, graphLayer);
                         addNode(n1);
                     } else {
                         n1 = getNode(nodeID);
@@ -179,7 +182,7 @@ public class Graph {
                     neighborID = Integer.parseInt(subEntries[5]);
 
                     if(!contains(neighborID)) {
-                        n2 = new Node(neighborID, nucl);
+                        n2 = new Node(neighborID, nucl, graphLayer);
                         addNode(n2);
                     } else {
                         n2 = getNode(neighborID);
@@ -195,6 +198,13 @@ public class Graph {
                 log().error("error loading graph", e);
             }
         });
+    }
+
+    public void placeNodes() {
+        java.util.Random r = new java.util.Random();
+        for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+            entry.getValue().placeNode(r.nextFloat() * Const.WORLD_WIDTH, r.nextFloat() * Const.WORLD_HEIGHT);
+        }
     }
 
     public void addNode(Node n) {

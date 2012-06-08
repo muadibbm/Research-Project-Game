@@ -30,30 +30,33 @@ public class Node {
         this.coordinates = new Tuple2f();
     }
 
-    public Node(final GroupLayer graph_layer, final float x, final float y, Nucleotide n, int id) {
-        Image image = assets().getImage(img);
+    public Node(int id, Nucleotide nucl, final GroupLayer graphLayer) {
+        this.id = id;
+        this.nucleotide = nucl;
+        this.neighbors = new ArrayList<Node>();
+        this.coordinates = new Tuple2f();
+
+        Image image = assets().getImage(img); //hardcoded image for now
         layer = graphics().createImageLayer(image);
-
-        id = id;
-
-        neighbors = new ArrayList<Node>();
-        coordinates = new Tuple2f(x, y); //might not be necessary
-        nucleotide = n;
-
 
         image.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
                 layer.setOrigin(image.width() / 2.0f, image.height() / 2.0f);
-                layer.setTranslation(x, y);
-                graph_layer.add(layer);
+                graphLayer.add(layer);
             }
 
             @Override
-            public void error(Throwable err) {
-                System.err.println("error loading node image");
+            public void error(Throwable e) {
+                log().error("error loading node", e);
             }
         });
+    }
+
+    public void placeNode(float x, float y) {
+        coordinates.x = x;
+        coordinates.y = y;
+        layer.setTranslation(coordinates.x, coordinates.y);
     }
 
     public void addNeighbor(Node n) {
