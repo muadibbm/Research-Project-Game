@@ -1,4 +1,4 @@
-package com.domain.project.core;
+package com.domain.project.core.controls;
 
 import playn.core.Keyboard;
 import playn.core.Key;
@@ -90,7 +90,7 @@ public class KeyboardControls implements Keyboard.Listener {
                 break;
             }
             case ESCAPE: {
-                System.exit(0);
+//                System.exit(0);
                 break;
             }
         }

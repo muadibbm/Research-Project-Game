@@ -1,4 +1,4 @@
-package com.domain.project.core;
+package com.domain.project.core.graph;
 
 import static playn.core.PlayN.*;
 
