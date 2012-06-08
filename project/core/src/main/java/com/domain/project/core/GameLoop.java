@@ -24,7 +24,7 @@ public class GameLoop implements Game {
     public void init() {
         
         environment = new Environment();
-        camera = new Camera(0,0, environment.getBaseImage());
+        camera = new Camera(0,0);
         
         Graph g = new Graph();
         g.generateGraph("3IZ9", environment.getGraphLayer());

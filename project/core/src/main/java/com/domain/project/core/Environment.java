@@ -8,6 +8,7 @@ import playn.core.ImageLayer;
 
 public class Environment
 {
+	private GroupLayer mainLayer;
     private GroupLayer graphLayer; //contains graph objects(city graphs, camp graphs, etc)
     private ImageLayer bgLayer;
     private GroupLayer uiLayer; //contains all the objects and layers for the game UI
@@ -17,6 +18,7 @@ public class Environment
     {
         //set window size
         graphics().setSize(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
+		//graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
         //TODO : Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
 
 
@@ -28,17 +30,16 @@ public class Environment
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);
 
+		mainLayer = graphics().createGroupLayer();
         //create group layer containing the graphs
         graphLayer = graphics().createGroupLayer();
         //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
-        //add all the layer to the root Layer
-        graphics().rootLayer().add(bgLayer);
-        graphics().rootLayer().add(graphLayer);
-        //graphics().rootLayer().add(uiLayer);
-
-        graphLayer.add(bgLayer);
-
+        //add all the layer to the main Layer and then the root Layer
+		mainLayer.add(graphLayer);
+		mainLayer.add(bgLayer);
+        graphics().rootLayer().add(uiLayer);
+        graphics().rootLayer().add(mainLayer);
     }
 
     public Image getBaseImage()
@@ -52,6 +53,6 @@ public class Environment
     }
 
     public void updateView(float x, float y) {
-        graphLayer.setOrigin(x, y);
+        mainLayer.setOrigin(x, y);
     }
 }
