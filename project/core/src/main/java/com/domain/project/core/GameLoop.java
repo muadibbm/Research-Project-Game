@@ -57,7 +57,7 @@ public class GameLoop implements Game {
                 camera.setY(camera.getY() - kbControls.panRate);
         }
         if(kbControls.scrollDown) {
-            if(camera.getY() < Const.WORLD_HEIGHT)
+            if(camera.getY() < Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT)
                 camera.setY(camera.getY() + kbControls.panRate);
         }
         if(kbControls.scrollLeft) {
@@ -65,7 +65,7 @@ public class GameLoop implements Game {
                 camera.setX(camera.getX() - kbControls.panRate);
         }
         if(kbControls.scrollRight) {
-            if(camera.getX() < Const.WORLD_WIDTH)
+            if(camera.getX() < Const.WORLD_WIDTH - Const.WINDOW_WIDTH)
                 camera.setX(camera.getX() + kbControls.panRate);
         }
     }
