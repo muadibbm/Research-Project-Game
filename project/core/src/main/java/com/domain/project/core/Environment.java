@@ -8,10 +8,10 @@ import playn.core.ImageLayer;
 
 public class Environment
 {
-    private GroupLayer mainLayer;
-    private GroupLayer graphLayer; //contains graph objects(city graphs, camp graphs, etc)
-    private ImageLayer bgLayer;
-    private GroupLayer uiLayer; //contains all the objects and layers for the game UI
+    final private GroupLayer mainLayer;
+    final private GroupLayer graphLayer; //contains graph objects(city graphs, camp graphs, etc)
+    final private ImageLayer bgLayer;
+    final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
     //TODO : any more layers ?
 
 /*
@@ -21,6 +21,7 @@ public class Environment
             - bgLayer
         - uiLayer
 */
+
     public Environment()
     {
         //set window size

@@ -19,9 +19,12 @@ public class Graph {
     private final Map<Integer, Edge> edges;
 
     private final String PATH = "graph_data/";
+	
+	private boolean isCityGraph;
 
-    public Graph() {
-        this.nodes = new HashMap<Integer, Node>();
+    public Graph(boolean isCityGraph) {
+		this.isCityGraph = isCityGraph;
+		this.nodes = new HashMap<Integer, Node>();
         this.edges = new HashMap<Integer, Edge>();
     }
 
@@ -150,7 +153,7 @@ public class Graph {
                     nodeID = Integer.parseInt(subEntries[2]);
 
                     if(!contains(nodeID)) {
-                        n1 = new Node(nodeID, nucl, graphLayer);
+						n1 = new Node(nodeID, nucl, isCityGraph, graphLayer);
                         addNode(n1);
                     } else {
                         n1 = getNode(nodeID);
@@ -182,7 +185,7 @@ public class Graph {
                     neighborID = Integer.parseInt(subEntries[5]);
 
                     if(!contains(neighborID)) {
-                        n2 = new Node(neighborID, nucl, graphLayer);
+                        n2 = new Node(neighborID, nucl, isCityGraph, graphLayer);
                         addNode(n2);
                     } else {
                         n2 = getNode(neighborID);
@@ -201,6 +204,7 @@ public class Graph {
     }
 
     public void placeNodes() {
+		//TODO : placement algorithm goes here
         java.util.Random r = new java.util.Random();
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
             entry.getValue().placeNode(r.nextFloat() * Const.WORLD_WIDTH, r.nextFloat() * Const.WORLD_HEIGHT);
@@ -208,7 +212,7 @@ public class Graph {
     }
 
     public void addNode(Node n) {
-//        System.out.println("Adding " + n.getID());
+//      System.out.println("Adding " + n.getID());
         nodes.put(n.getID(), n);
     }
 
@@ -222,12 +226,16 @@ public class Graph {
 
     public boolean contains(int id) {
         if(nodes.containsKey(id)) {
-//            System.out.println("Node " + id + " already present.");
+//          System.out.println("Node " + id + " already present.");
             return true;
         }
         return false;
     }
 
+	public boolean isCityGraph() {
+		return isCityGraph;
+	}
+	
     @Override
     public String toString() {
         String ret = "";

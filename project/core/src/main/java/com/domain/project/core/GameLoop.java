@@ -26,7 +26,7 @@ public class GameLoop implements Game {
         environment = new Environment();
         camera = new Camera(0,0);
         
-        Graph g = new Graph();
+        Graph g = new Graph(true);
         g.generateGraph("3IZ9", environment.getGraphLayer());
         
         //create and set keyboard controls
