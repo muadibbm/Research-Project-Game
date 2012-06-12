@@ -19,10 +19,9 @@ public class Base
 		this.level = 0;
 		final GroupLayer copy_graphlayer = graphLayer;
 		
-		Image image = assets().getImage(Const.BASE_IMAGE);
-        baseLayer = graphics().createImageLayer(image);
+        baseLayer = graphics().createImageLayer(Const.BASE_IMAGE);
 
-        image.addCallback(new ResourceCallback<Image>() {
+        Const.BASE_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
                 baseLayer.setOrigin(image.width() / 2.0f, image.height() / 2.0f);
@@ -34,6 +33,11 @@ public class Base
                 log().error("error loading node", e);
             }
         });
+		
+	}
+	
+	public int getLevel() {
+		return level;
 	}
 	
 	public ImageLayer getBaseLayer(){

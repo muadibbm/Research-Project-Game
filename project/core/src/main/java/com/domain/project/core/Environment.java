@@ -6,6 +6,8 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 
+import com.domain.project.core.Const;
+
 public class Environment
 {
     final private GroupLayer mainLayer;
@@ -29,11 +31,7 @@ public class Environment
         //graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
         //TODO : Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
 
-
-       // create background image layer
-        Image bgImage = assets().getImage("images/texture_wall_painted11.png");
-        //Image image = assets().getImage("images/sample_environment.jpg");
-        bgLayer = graphics().createImageLayer(bgImage);//TODO: camera.getView()
+        bgLayer = graphics().createImageLayer(Const.BACKGROUND_IMAGE);//TODO: camera.getView()
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);

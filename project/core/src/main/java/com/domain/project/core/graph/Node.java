@@ -38,6 +38,7 @@ public class Node {
     public void placeNode(float x, float y) {
         coordinates.x = x;
         coordinates.y = y;
+		base.getBaseLayer().setScale(0.3f, 0.3f);
         base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);
     }
 

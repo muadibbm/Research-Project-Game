@@ -3,14 +3,13 @@ package com.domain.project.core;
 import static playn.core.PlayN.*;
 
 import playn.core.Game;
-
-import playn.core.ResourceCallback;
-
 import playn.core.Keyboard;
 import playn.core.Key;
 
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.controls.KeyboardControls;
+
+import com.domain.project.core.Const;
 
 public class GameLoop implements Game {
     
@@ -21,8 +20,9 @@ public class GameLoop implements Game {
     KeyboardControls kbControls;
 
     @Override
-    public void init() {
-        
+    public void init() { 
+	
+		Const.loadImages();
         environment = new Environment();
         camera = new Camera(0,0);
         
