@@ -11,7 +11,7 @@ import com.domain.project.core.Const;
 public class Environment
 {
     final private GroupLayer mainLayer;
-    final private GroupLayer graphLayer; //contains graph objects(city graphs, camp graphs, etc)
+    final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
     final private ImageLayer bgLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
     //TODO : any more layers ?

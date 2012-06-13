@@ -17,38 +17,59 @@ public class Node {
     private List<Node> neighbors;
     private Tuple2f coordinates;
 	
+	private boolean placed;
+	
     public Node(int id, Nucleotide nucl) {
         this.id = id;
         this.nucleotide = nucl;
-        this.neighbors = new ArrayList<Node>();
-        this.coordinates = new Tuple2f();
+        neighbors = new ArrayList<Node>();
+        coordinates = new Tuple2f();
+		placed = false;
     }
 
     public Node(int id, Nucleotide nucl, boolean isCity, final GroupLayer graphLayer) {
         this.id = id;
         this.nucleotide = nucl;
         this.neighbors = new ArrayList<Node>();
-        this.coordinates = new Tuple2f();
+        coordinates = new Tuple2f();
+		placed = false;
 		if(isCity)
-			this.base = new City(graphLayer);
+			base = new City(graphLayer);
 		else
-			this.base = new Camp(graphLayer);
+			base = new Camp(graphLayer);
     }
 
     public void placeNode(float x, float y) {
-        coordinates.x = x;
-        coordinates.y = y;
+        this.setPos(x, y);
 		base.getBaseLayer().setScale(0.3f, 0.3f);
         base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);
+		placed = true;
     }
+	
+	public boolean isPlaced() {
+		return placed;
+	}
 
     public void addNeighbor(Node n) {
         neighbors.add(n);
     }
+	
+	public List<Node> getNeighbors() {
+		return neighbors;
+	}
 
     public int getID() {
         return id;
     }
+	
+	public Tuple2f getPos() {
+		return coordinates;
+	}
+	
+	public void setPos(float x, float y) {
+		coordinates.x = x;
+        coordinates.y = y;
+	}
 
     public Nucleotide getNucleotide() {
         return nucleotide;

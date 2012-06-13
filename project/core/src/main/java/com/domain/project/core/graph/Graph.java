@@ -2,14 +2,13 @@ package com.domain.project.core.graph;
 
 import static playn.core.PlayN.*;
 
-import playn.core.ResourceCallback;
-
 import java.lang.Integer;
 
 import java.util.Map;
 import java.util.HashMap;
 
 import playn.core.GroupLayer;
+import playn.core.ResourceCallback;
 
 import com.domain.project.core.Const;
 
@@ -20,12 +19,21 @@ public class Graph {
 
     private final String PATH = "graph_data/";
 	
+	private float xOffset;
+	private float yOffset;
+	private float width;
+	private float height;
+	
 	private boolean isCityGraph;
 
-    public Graph(boolean isCityGraph) {
+    public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height) {
 		this.isCityGraph = isCityGraph;
 		this.nodes = new HashMap<Integer, Node>();
         this.edges = new HashMap<Integer, Edge>();
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+		this.width = width;
+		this.height = height;
     }
 
     public void generateGraph(String filename, GroupLayer graphLayer) {
@@ -204,15 +212,37 @@ public class Graph {
     }
 
     public void placeNodes() {
-		//TODO : placement algorithm goes here
+	//TODO: finish the placement algorithm
         java.util.Random r = new java.util.Random();
+		float tmpX;
+		float tmpY;
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
-            entry.getValue().placeNode(r.nextFloat() * Const.WORLD_WIDTH, r.nextFloat() * Const.WORLD_HEIGHT);
+			while(!entry.getValue().isPlaced())
+			{
+				tmpX = r.nextFloat()*this.width + this.xOffset;
+				tmpY = r.nextFloat()*this.height + this.yOffset;
+				if(this.isSeperated(entry.getValue(), new Tuple2f(tmpX, tmpY)))
+					entry.getValue().placeNode(tmpX+this.xOffset, tmpY+this.yOffset);
+			}
         }
     }
+	
+	public void drawRoads() {
+		//TODO
+	}
+	
+	//TODO : check for all nodes not only neighbors
+	private boolean isSeperated(Node node, Tuple2f test_coordinates) {
+		float distance;
+		for(Node neighbour : node.getNeighbors()) {
+			distance = neighbour.getPos().getDistanceFrom(test_coordinates);
+			if((isCityGraph & distance < Const.MIN_CITY_DISTANCE) || (!isCityGraph & distance < Const.MIN_CAMP_DISTANCE))
+				return false;
+		}
+		return true;
+	}
 
     public void addNode(Node n) {
-//      System.out.println("Adding " + n.getID());
         nodes.put(n.getID(), n);
     }
 
@@ -226,7 +256,6 @@ public class Graph {
 
     public boolean contains(int id) {
         if(nodes.containsKey(id)) {
-//          System.out.println("Node " + id + " already present.");
             return true;
         }
         return false;

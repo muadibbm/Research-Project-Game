@@ -1,5 +1,7 @@
 package com.domain.project.core.graph;
 
+import java.lang.Math;
+
 public class Tuple2f {
     public float x;
     public float y;
@@ -13,5 +15,8 @@ public class Tuple2f {
         this.x = x;
         this.y = y;
     }
-
+	
+	public float getDistanceFrom(Tuple2f point) {
+		return (float)Math.sqrt(Math.pow(this.x - point.x, 2.0f) + Math.pow(this.y - point.y, 2.0f));
+	}
 }
