@@ -8,30 +8,34 @@ import playn.core.Key;
 
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.controls.KeyboardControls;
+import com.domain.project.core.controls.MouseControls;
 
 import com.domain.project.core.Const;
 
 public class GameLoop implements Game {
-    
+
     Camera camera;
-    
+
     Environment environment;
-    
+
     KeyboardControls kbControls;
+    MouseControls mControls;
 
     @Override
     public void init() { 
-	
-		Const.loadImages();
+
+        Const.loadImages();
         environment = new Environment();
         camera = new Camera(0,0);
-        
+
         Graph cityGraph = new Graph(true, Const.CITY_GRAPH_X, Const.CITY_GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
         cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
-        
-        //create and set keyboard controls
-        kbControls = new KeyboardControls();
+
+        //create and set controls
+        kbControls = new KeyboardControls(environment);
         keyboard().setListener(kbControls);
+        mControls = new MouseControls(environment);
+        mouse().setListener(mControls);
     }
 
     @Override
@@ -53,20 +57,24 @@ public class GameLoop implements Game {
     private void parseKB() {
         //parse keyboard inputs
         if(kbControls.scrollUp) {
-            if(camera.getY() > 0)
+            if(camera.getY() > 0) {
                 camera.setY(camera.getY() - kbControls.panRate);
+            }
         }
         if(kbControls.scrollDown) {
-            if(camera.getY() < Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT)
+            if(camera.getY() < Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) {
                 camera.setY(camera.getY() + kbControls.panRate);
+            }
         }
         if(kbControls.scrollLeft) {
-            if(camera.getX() > 0)
+            if(camera.getX() > 0) {
                 camera.setX(camera.getX() - kbControls.panRate);
+            }
         }
         if(kbControls.scrollRight) {
-            if(camera.getX() < Const.WORLD_WIDTH - Const.WINDOW_WIDTH)
+            if(camera.getX() < Const.WORLD_WIDTH - Const.WINDOW_WIDTH) {
                 camera.setX(camera.getX() + kbControls.panRate);
+            }
         }
     }
 

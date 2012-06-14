@@ -3,6 +3,8 @@ package com.domain.project.core.controls;
 import playn.core.Keyboard;
 import playn.core.Key;
 
+import com.domain.project.core.Environment;
+
 public class KeyboardControls implements Keyboard.Listener {
 
     public static boolean scrollUp = false;
@@ -11,9 +13,11 @@ public class KeyboardControls implements Keyboard.Listener {
     public static boolean scrollRight = false;
 
     public float panRate = 5.0f;
-    
-    public KeyboardControls() {
 
+    private Environment env;
+    
+    public KeyboardControls(Environment env) {
+        this.env = env;
     }
 
     @Override
@@ -91,6 +95,11 @@ public class KeyboardControls implements Keyboard.Listener {
             }
             case ESCAPE: {
 //                System.exit(0);
+                break;
+            }
+
+            case SPACE: {
+
                 break;
             }
         }

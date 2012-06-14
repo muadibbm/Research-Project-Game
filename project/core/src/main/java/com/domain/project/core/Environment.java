@@ -33,8 +33,8 @@ public class Environment
 
         bgLayer = graphics().createImageLayer(Const.BACKGROUND_IMAGE);//TODO: camera.getView()
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
-        bgLayer.setRepeatX(true);
-        bgLayer.setRepeatY(true);
+//        bgLayer.setRepeatX(true);
+//        bgLayer.setRepeatY(true);
 
         mainLayer = graphics().createGroupLayer();
         //create group layer containing the graphs
