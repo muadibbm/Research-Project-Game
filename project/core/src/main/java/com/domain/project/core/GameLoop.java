@@ -28,6 +28,7 @@ public class GameLoop implements Game {
         
         Graph cityGraph = new Graph(true, Const.CITY_GRAPH_X, Const.CITY_GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
         cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
+		cityGraph.drawRoads(environment.getGraphLayer());
         
         //create and set keyboard controls
         kbControls = new KeyboardControls();

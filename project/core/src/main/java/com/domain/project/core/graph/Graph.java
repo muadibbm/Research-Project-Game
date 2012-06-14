@@ -212,7 +212,7 @@ public class Graph {
     }
 
     public void placeNodes() {
-	//TODO: finish the placement algorithm
+	//TODO: finish the placement algorithm, we want the neighbours to be in closer range
         java.util.Random r = new java.util.Random();
 		float tmpX;
 		float tmpY;
@@ -227,8 +227,20 @@ public class Graph {
         }
     }
 	
-	public void drawRoads() {
-		//TODO
+	public void drawRoads(GroupLayer graphLayer) {
+		Node node;
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+			node = entry.getValue();
+			for(Node neighbour : entry.getValue().getNeighbors()) {
+				if(!node.roadAlreadyExists(neighbour))
+				{
+					//TODO : add random road image generation
+					Road road = new Road(graphLayer, node.getPos(), neighbour.getPos(), Const.ROAD_IMAGE);
+					node.addRoad(road);
+					neighbour.addRoad(road);
+				}
+			}
+		}
 	}
 	
 	//TODO : check for all nodes not only neighbors
@@ -236,7 +248,7 @@ public class Graph {
 		float distance;
 		for(Node neighbour : node.getNeighbors()) {
 			distance = neighbour.getPos().getDistanceFrom(test_coordinates);
-			if((isCityGraph & distance < Const.MIN_CITY_DISTANCE) || (!isCityGraph & distance < Const.MIN_CAMP_DISTANCE))
+			if((isCityGraph & distance < Const.MIN_CITY_DISTANCE & distance > Const.MAX_CITY_DISTANCE) || (!isCityGraph & distance < Const.MIN_CAMP_DISTANCE & distance > Const.MAX_CAMP_DISTANCE))
 				return false;
 		}
 		return true;

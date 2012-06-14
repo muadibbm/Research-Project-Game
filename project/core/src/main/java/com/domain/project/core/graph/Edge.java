@@ -9,8 +9,6 @@ enum Isomer {cis, c, trans, t};
 enum EdgeType {W, w, H, h, S, s}; 
 
 public class Edge {
-    private String img;
-
     private ImageLayer layer;
 
     private int id; //line number in file
