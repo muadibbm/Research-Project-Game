@@ -9,17 +9,19 @@ enum Isomer {cis, c, trans, t};
 enum EdgeType {W, w, H, h, S, s}; 
 
 public class Edge {
-    private String img;
-
     private ImageLayer layer;
 
     private int id; //line number in file
     private Isomer isomer;
+    private int n1;
+    private int n2;
     private EdgeType e1;
     private EdgeType e2;
 
-    public Edge(int id, Isomer isomer, EdgeType e1, EdgeType e2) {
+    public Edge(int id, Isomer isomer, int n1, int n2, EdgeType e1, EdgeType e2) {
         this.id = id;
+        this.n1 = n1;
+        this.n2 = n2;
         this.isomer = isomer;
         this.e1 = e1;
         this.e2 = e2;
@@ -31,7 +33,7 @@ public class Edge {
 
     @Override
     public String toString() {
-        return id + "(" + isomer + e1 + e2 + ")";
+        return "Edge ID: " + id + "\t(" + isomer + e1 + e2 + " between " + n1 + " - " + n2 + ")";
     }
 
 }

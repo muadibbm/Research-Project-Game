@@ -8,6 +8,8 @@ public class MouseControls implements Mouse.Listener {
 
     private Environment env;
 
+    private boolean middlePressed = false;
+
     public MouseControls(Environment env) {
         this.env = env;
     }
@@ -15,19 +17,23 @@ public class MouseControls implements Mouse.Listener {
     @Override
     public void onMouseDown(Mouse.ButtonEvent event) {
         if(event.button() == Mouse.BUTTON_MIDDLE) {
-            System.out.println(event.x() + " " + event.y());
-            System.out.println("local: " + event.localX() + " " + event.localY());
+            middlePressed = true;
         }
     }
 
     @Override
     public void onMouseUp(Mouse.ButtonEvent event) {
+        if(event.button() == Mouse.BUTTON_MIDDLE) {
+            middlePressed = false;
+        }
 
     }
 
     @Override
     public void onMouseMove(Mouse.MotionEvent event) {
-
+        if(middlePressed) {
+            System.out.println(event.x() + " " + event.y());
+        }
     }
 
     @Override

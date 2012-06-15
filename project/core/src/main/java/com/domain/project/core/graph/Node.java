@@ -10,66 +10,93 @@ enum Nucleotide {A, ADENINE, T, THYMINE, U, URACIL, G, GUANINE, C, CYTOSINE};
 
 public class Node {
 
-	private Base base;
+    private Base base;
 
     private int id;
     private Nucleotide nucleotide;
     private List<Node> neighbors;
+    private List<Road> roads;
     private Tuple2f coordinates;
-	
-	private boolean placed;
-	
+
+    private boolean placed;
+
     public Node(int id, Nucleotide nucl) {
         this.id = id;
         this.nucleotide = nucl;
         neighbors = new ArrayList<Node>();
+        roads = new ArrayList<Road>();
         coordinates = new Tuple2f();
-		placed = false;
+        placed = false;
     }
 
     public Node(int id, Nucleotide nucl, boolean isCity, final GroupLayer graphLayer) {
         this.id = id;
         this.nucleotide = nucl;
         this.neighbors = new ArrayList<Node>();
+        roads = new ArrayList<Road>();
         coordinates = new Tuple2f();
-		placed = false;
-		if(isCity)
-			base = new City(graphLayer);
-		else
-			base = new Camp(graphLayer);
+        placed = false;
+        if(isCity)
+            base = new City(graphLayer);
+        else
+            base = new Camp(graphLayer);
     }
 
     public void placeNode(float x, float y) {
         this.setPos(x, y);
-		base.getBaseLayer().setScale(0.3f, 0.3f);
+        base.getBaseLayer().setScale(0.3f, 0.3f);
         base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);
-		placed = true;
+        placed = true;
     }
-	
-	public boolean isPlaced() {
-		return placed;
-	}
+
+    public void addRoad(Road road) {
+        roads.add(road);
+    }
+
+    public void removeRoad(Road road) {
+        roads.remove(road);
+    }
+
+    public boolean roadAlreadyExists(Road newRoad) {
+        for(Road road : roads) {
+            if(newRoad.equals(road))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean roadAlreadyExists(Node node) {
+        for(Road road : roads) {
+            if(node.roadAlreadyExists(road))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean isPlaced() {
+        return placed;
+    }
 
     public void addNeighbor(Node n) {
         neighbors.add(n);
     }
-	
-	public List<Node> getNeighbors() {
-		return neighbors;
-	}
+    
+    public List<Node> getNeighbors() {
+        return neighbors;
+    }
 
     public int getID() {
         return id;
     }
-	
-	public Tuple2f getPos() {
-		return coordinates;
-	}
-	
-	public void setPos(float x, float y) {
-		coordinates.x = x;
+    
+    public Tuple2f getPos() {
+        return coordinates;
+    }
+    
+    public void setPos(float x, float y) {
+        coordinates.x = x;
         coordinates.y = y;
-	}
+    }
 
     public Nucleotide getNucleotide() {
         return nucleotide;

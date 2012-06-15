@@ -18,22 +18,22 @@ public class Graph {
     private final Map<Integer, Edge> edges;
 
     private final String PATH = "graph_data/";
-	
-	private float xOffset;
-	private float yOffset;
-	private float width;
-	private float height;
-	
-	private boolean isCityGraph;
+    
+    private float xOffset;
+    private float yOffset;
+    private float width;
+    private float height;
+    
+    private boolean isCityGraph;
 
     public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height) {
-		this.isCityGraph = isCityGraph;
-		this.nodes = new HashMap<Integer, Node>();
+        this.isCityGraph = isCityGraph;
+        this.nodes = new HashMap<Integer, Node>();
         this.edges = new HashMap<Integer, Edge>();
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
-		this.width = width;
-		this.height = height;
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+        this.width = width;
+        this.height = height;
     }
 
     public void generateGraph(String filename, GroupLayer graphLayer) {
@@ -132,7 +132,11 @@ public class Graph {
                             et2 = EdgeType.s;
                             break;
                     }
-                    e = new Edge(edgeID, iso, et1, et2);
+
+                    nodeID = Integer.parseInt(subEntries[2]);
+                    neighborID = Integer.parseInt(subEntries[5]);
+
+                    e = new Edge(edgeID, iso, nodeID, neighborID, et1, et2);
                     addEdge(e);
 
                     //parse first node
@@ -158,10 +162,10 @@ public class Graph {
                             break;
                     }
 
-                    nodeID = Integer.parseInt(subEntries[2]);
+//                    nodeID = Integer.parseInt(subEntries[2]);
 
                     if(!contains(nodeID)) {
-						n1 = new Node(nodeID, nucl, isCityGraph, graphLayer);
+                        n1 = new Node(nodeID, nucl, isCityGraph, graphLayer);
                         addNode(n1);
                     } else {
                         n1 = getNode(nodeID);
@@ -190,7 +194,7 @@ public class Graph {
                             break;
                     }
 
-                    neighborID = Integer.parseInt(subEntries[5]);
+//                    neighborID = Integer.parseInt(subEntries[5]);
 
                     if(!contains(neighborID)) {
                         n2 = new Node(neighborID, nucl, isCityGraph, graphLayer);
@@ -212,35 +216,47 @@ public class Graph {
     }
 
     public void placeNodes() {
-	//TODO: finish the placement algorithm
+    //TODO: finish the placement algorithm, we want the neighbours to be in closer range
         java.util.Random r = new java.util.Random();
-		float tmpX;
-		float tmpY;
+        float tmpX;
+        float tmpY;
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
-			while(!entry.getValue().isPlaced())
-			{
-				tmpX = r.nextFloat()*this.width + this.xOffset;
-				tmpY = r.nextFloat()*this.height + this.yOffset;
-				if(this.isSeperated(entry.getValue(), new Tuple2f(tmpX, tmpY)))
-					entry.getValue().placeNode(tmpX+this.xOffset, tmpY+this.yOffset);
-			}
+            while(!entry.getValue().isPlaced())
+            {
+                tmpX = r.nextFloat()*this.width + this.xOffset;
+                tmpY = r.nextFloat()*this.height + this.yOffset;
+                if(this.isSeperated(entry.getValue(), new Tuple2f(tmpX, tmpY)))
+                    entry.getValue().placeNode(tmpX+this.xOffset, tmpY+this.yOffset);
+            }
         }
     }
-	
-	public void drawRoads() {
-		//TODO
-	}
-	
-	//TODO : check for all nodes not only neighbors
-	private boolean isSeperated(Node node, Tuple2f test_coordinates) {
-		float distance;
-		for(Node neighbour : node.getNeighbors()) {
-			distance = neighbour.getPos().getDistanceFrom(test_coordinates);
-			if((isCityGraph & distance < Const.MIN_CITY_DISTANCE) || (!isCityGraph & distance < Const.MIN_CAMP_DISTANCE))
-				return false;
-		}
-		return true;
-	}
+    
+    public void drawRoads(GroupLayer graphLayer) {
+        Node node;
+        for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+            node = entry.getValue();
+            for(Node neighbour : entry.getValue().getNeighbors()) {
+                if(!node.roadAlreadyExists(neighbour))
+                {
+                    //TODO : add random road image generation
+                    Road road = new Road(graphLayer, node.getPos(), neighbour.getPos(), Const.ROAD_IMAGE);
+                    node.addRoad(road);
+                    neighbour.addRoad(road);
+                }
+            }
+        }
+    }
+    
+    //TODO : check for all nodes not only neighbors
+    private boolean isSeperated(Node node, Tuple2f test_coordinates) {
+        float distance;
+        for(Node neighbour : node.getNeighbors()) {
+            distance = neighbour.getPos().getDistanceFrom(test_coordinates);
+            if((isCityGraph & distance < Const.MIN_CITY_DISTANCE & distance > Const.MAX_CITY_DISTANCE) || (!isCityGraph & distance < Const.MIN_CAMP_DISTANCE & distance > Const.MAX_CAMP_DISTANCE))
+                return false;
+        }
+        return true;
+    }
 
     public void addNode(Node n) {
         nodes.put(n.getID(), n);
@@ -261,17 +277,21 @@ public class Graph {
         return false;
     }
 
-	public boolean isCityGraph() {
-		return isCityGraph;
-	}
-	
+    public boolean isCityGraph() {
+        return isCityGraph;
+    }
+    
     @Override
     public String toString() {
         String ret = "";
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
             ret = ret + entry.getValue() + "\n";
         }
-        ret = ret + "Total number of nodes: " + nodes.size() + "\n";
+        ret = ret + "Total number of nodes: " + nodes.size() + "\n\n";
+
+        for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
+            ret = ret + entry.getValue() + "\n";
+        }
         ret = ret + "Total number of edges: " + edges.size();
         return ret;
     }
