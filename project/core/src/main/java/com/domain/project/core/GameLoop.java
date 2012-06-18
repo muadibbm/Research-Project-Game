@@ -29,9 +29,7 @@ public class GameLoop implements Game {
         camera = new Camera(0,0);
 
         Graph cityGraph = new Graph(true, Const.CITY_GRAPH_X, Const.CITY_GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
-        cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
-        cityGraph.drawRoads(environment.getGraphLayer());
-
+        cityGraph.generateGraph("3IZ9", environment.getGraphLayer(), environment.getPathLayer());
 
         System.out.println(cityGraph);
 
@@ -61,22 +59,22 @@ public class GameLoop implements Game {
     private void parseKB() {
         //parse keyboard inputs
         if(kbControls.scrollUp) {
-            if(camera.getY() > 0) {
+            if(camera.getY() > Const.WORLD_ORIGIN_Y) {
                 camera.setY(camera.getY() - kbControls.panRate);
             }
         }
         if(kbControls.scrollDown) {
-            if(camera.getY() < Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) {
+            if(camera.getY() < Const.WORLD_END_Y - Const.WINDOW_HEIGHT) {
                 camera.setY(camera.getY() + kbControls.panRate);
             }
         }
         if(kbControls.scrollLeft) {
-            if(camera.getX() > 0) {
+            if(camera.getX() > Const.WORLD_ORIGIN_X) {
                 camera.setX(camera.getX() - kbControls.panRate);
             }
         }
         if(kbControls.scrollRight) {
-            if(camera.getX() < Const.WORLD_WIDTH - Const.WINDOW_WIDTH) {
+            if(camera.getX() < Const.WORLD_END_X - Const.WINDOW_WIDTH) {
                 camera.setX(camera.getX() + kbControls.panRate);
             }
         }

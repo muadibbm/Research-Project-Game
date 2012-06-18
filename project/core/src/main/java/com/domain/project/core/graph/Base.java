@@ -20,11 +20,10 @@ public class Base
 		final GroupLayer copy_graphlayer = graphLayer;
 		
         baseLayer = graphics().createImageLayer(Const.BASE_IMAGE);
-
         Const.BASE_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-                baseLayer.setOrigin(image.width() / 2.0f, image.height() / 2.0f);
+                baseLayer.setOrigin(image.width(), image.height());
                 copy_graphlayer.add(baseLayer);
             }
 

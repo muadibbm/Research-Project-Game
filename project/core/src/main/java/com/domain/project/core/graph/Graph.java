@@ -36,12 +36,13 @@ public class Graph {
         this.height = height;
     }
 
-    public void generateGraph(String filename, GroupLayer graphLayer) {
-        parseGraphFile(filename, graphLayer);
+    public void generateGraph(String filename, GroupLayer graphLayer, GroupLayer pathLayer) {
+        parseGraphFile(filename, graphLayer, pathLayer);
         placeNodes();
+		placeEdges();
     }
 
-    private void parseGraphFile(String filename, final GroupLayer graphLayer) {
+    private void parseGraphFile(String filename, final GroupLayer graphLayer, final GroupLayer pathLayer) {
 
         assets().getText(PATH + filename, new ResourceCallback<String>() {
             @Override
@@ -136,7 +137,7 @@ public class Graph {
                     nodeID = Integer.parseInt(subEntries[2]);
                     neighborID = Integer.parseInt(subEntries[5]);
 
-                    e = new Edge(edgeID, iso, nodeID, neighborID, et1, et2);
+                    e = new Edge(edgeID, iso, nodeID, neighborID, et1, et2, pathLayer);
                     addEdge(e);
 
                     //parse first node
@@ -218,8 +219,8 @@ public class Graph {
     public void placeNodes() {
     //TODO: finish the placement algorithm, we want the neighbours to be in closer range
         java.util.Random r = new java.util.Random();
-        float tmpX;
-        float tmpY;
+        float tmpX = 0;
+        float tmpY = 0;
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
             while(!entry.getValue().isPlaced())
             {
@@ -228,24 +229,37 @@ public class Graph {
                 if(this.isSeperated(entry.getValue(), new Tuple2f(tmpX, tmpY)))
                     entry.getValue().placeNode(tmpX+this.xOffset, tmpY+this.yOffset);
             }
+			
         }
     }
     
-    public void drawRoads(GroupLayer graphLayer) {
-        Node node;
-        for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
-            node = entry.getValue();
-            for(Node neighbour : entry.getValue().getNeighbors()) {
-                if(!node.roadAlreadyExists(neighbour))
-                {
-                    //TODO : add random road image generation
-                    Road road = new Road(graphLayer, node.getPos(), neighbour.getPos(), Const.ROAD_IMAGE);
-                    node.addRoad(road);
-                    neighbour.addRoad(road);
-                }
-            }
-        }
+    public void placeEdges() {
+		Tuple2f n1;
+        Tuple2f n2;
+        for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
+			n1 = getNode1(entry.getValue()).getPos();
+			n2 = getNode2(entry.getValue()).getPos();
+			entry.getValue().getRoad().placeRoad(n1, n2);
+			//TODO : the following should be only triggered when node1 is mouse clicked
+			entry.getValue().getRoad().setVisible(true);
+		}
     }
+	
+	public Node getNode1(Edge edge) {
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+			if(edge.getN1() == entry.getValue().getID())
+				return entry.getValue();
+		}
+		return null;
+	}
+	
+	public Node getNode2(Edge edge) {
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+			if(edge.getN2() == entry.getValue().getID())
+				return entry.getValue();
+		}
+		return null;
+	}
     
     //TODO : check for all nodes not only neighbors
     private boolean isSeperated(Node node, Tuple2f test_coordinates) {

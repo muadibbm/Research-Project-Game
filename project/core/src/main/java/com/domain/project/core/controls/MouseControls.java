@@ -39,10 +39,10 @@ public class MouseControls implements Mouse.Listener {
     @Override
     public void onMouseWheelScroll(Mouse.WheelEvent event) {
         if(event.velocity() > 0) {
-            System.out.println("up");
+            System.out.println("down");
         }
         if(event.velocity() < 0) {
-            System.out.println("down");
+            System.out.println("up");
         }
     }
 
