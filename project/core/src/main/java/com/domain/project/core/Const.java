@@ -9,6 +9,9 @@ import playn.core.GroupLayer;
 
 public final class Const 
 {
+
+    public static final int UPDATE_RATE = 25;
+
     public static int WINDOW_WIDTH = 1440;
     public static int WINDOW_HEIGHT = 900;
 

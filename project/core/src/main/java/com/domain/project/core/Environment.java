@@ -8,6 +8,8 @@ import playn.core.ImageLayer;
 
 import com.domain.project.core.Const;
 
+import tripleplay.anim.Animator;
+
 public class Environment
 {
     final private GroupLayer mainLayer;
@@ -25,6 +27,13 @@ public class Environment
             - bgLayer
         - uiLayer
 */
+
+    public final Animator animator = Animator.create();
+
+    private float xOffset;
+    private float yOffset;
+
+    private float elapsed;
 
     public Environment()
     {
@@ -55,6 +64,9 @@ public class Environment
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
         pathLayer.setDepth(Const.PATH_DEPTH);
+
+        xOffset = 0.0f;
+        yOffset = 0.0f;
     }
 
     public Image getBaseImage()
@@ -76,7 +88,31 @@ public class Environment
         return mainLayer;
     }
 
-    public void updateView(float x, float y) {
-        mainLayer.setOrigin(x, y);
+//    public void update(float x, float y) {
+//        mainLayer.setOrigin(x, y);
+//    }
+    public void update(float delta) {
+        elapsed += delta;
+        mainLayer.setOrigin(xOffset, yOffset);
+    }
+
+    public void paint(float alpha) {
+        animator.update(elapsed + Const.UPDATE_RATE * alpha);
+    }
+
+    public void setX(float xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    public void setY(float yOffset) {
+        this.yOffset = yOffset;
+    }
+
+    public float getX() {
+        return xOffset;
+    }
+
+    public float getY() {
+        return yOffset;
     }
 }

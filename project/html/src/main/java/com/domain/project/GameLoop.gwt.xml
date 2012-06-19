@@ -7,4 +7,6 @@
   <public path="resources" />
 
   <entry-point class='com.domain.project.html.GameLoopHtml'/>
+
+  <inherits name="tripleplay.TriplePlay"/>
 </module>
