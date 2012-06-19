@@ -12,6 +12,8 @@ public class Camera
 
     //private Region view;
 
+    private Environment env;
+
     public Camera(float xOffset, float yOffset)
     {
         this.xOffset = xOffset;
@@ -19,6 +21,12 @@ public class Camera
         //width = bgImage.width();
         //height = bgImage.height();
         //view = bgImage.subImage(xOffset, yOffset, width, height);
+    }
+
+    public Camera(Environment env) {
+        this.env = env;
+        this.xOffset = 0.0f;
+        this.yOffset = 0.0f;
     }
 
     public void setX(float xOffset)

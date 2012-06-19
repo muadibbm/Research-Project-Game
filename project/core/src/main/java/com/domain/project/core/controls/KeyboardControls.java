@@ -4,6 +4,9 @@ import playn.core.Keyboard;
 import playn.core.Key;
 
 import com.domain.project.core.Environment;
+import com.domain.project.core.Camera;
+
+import com.domain.project.core.Const;
 
 public class KeyboardControls implements Keyboard.Listener {
 
@@ -14,10 +17,10 @@ public class KeyboardControls implements Keyboard.Listener {
 
     public float panRate = 5.0f;
 
-    private Environment env;
-    
-    public KeyboardControls(Environment env) {
-        this.env = env;
+    private Camera camera;
+
+    public KeyboardControls(Camera cam) {
+        this.camera = cam;
     }
 
     @Override
@@ -108,6 +111,30 @@ public class KeyboardControls implements Keyboard.Listener {
     @Override
     public void onKeyTyped(Keyboard.TypedEvent event){
 
+    }
+
+    public void parse() {
+        //parse keyboard input
+        if(scrollUp) {
+            if(camera.getY() > Const.WORLD_ORIGIN_Y) {
+                camera.setY(camera.getY() - panRate);
+            }
+        }
+        if(scrollDown) {
+            if(camera.getY() < Const.WORLD_END_Y - Const.WINDOW_HEIGHT) {
+                camera.setY(camera.getY() + panRate);
+            }
+        }
+        if(scrollLeft) {
+            if(camera.getX() > Const.WORLD_ORIGIN_X) {
+                camera.setX(camera.getX() - panRate);
+            }
+        }
+        if(scrollRight) {
+            if(camera.getX() < Const.WORLD_END_X - Const.WINDOW_WIDTH) {
+                camera.setX(camera.getX() + panRate);
+            }
+        }
     }
 
 }

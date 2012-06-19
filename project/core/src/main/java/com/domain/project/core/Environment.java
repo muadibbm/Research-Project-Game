@@ -12,7 +12,7 @@ public class Environment
 {
     final private GroupLayer mainLayer;
     final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
-	final private GroupLayer pathLayer; //contains all the roads and mappings
+    final private GroupLayer pathLayer; //contains all the roads and mappings
     final private ImageLayer bgLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
     //TODO : any more layers ?
@@ -21,7 +21,7 @@ public class Environment
     - root
         - mainLayer
             - graphLayer
-			- pathlayer
+            - pathlayer
             - bgLayer
         - uiLayer
 */
@@ -42,19 +42,19 @@ public class Environment
         //create group layer containing the graphs
         graphLayer = graphics().createGroupLayer();
         //create group layer containing the edges
-		pathLayer = graphics().createGroupLayer();
-		//create group layer containing the UI
+        pathLayer = graphics().createGroupLayer();
+        //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
-		mainLayer.add(pathLayer);
+        mainLayer.add(pathLayer);
         mainLayer.add(graphLayer);
         mainLayer.add(bgLayer);
         graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);
 
-		bgLayer.setDepth(Const.BACKGROUND_DEPTH);
+        bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
-		pathLayer.setDepth(Const.PATH_DEPTH);
+        pathLayer.setDepth(Const.PATH_DEPTH);
     }
 
     public Image getBaseImage()
@@ -66,8 +66,8 @@ public class Environment
     {
         return graphLayer;
     }
-	
-	public GroupLayer getPathLayer()
+
+    public GroupLayer getPathLayer()
     {
         return pathLayer;
     }
