@@ -11,33 +11,23 @@ import com.domain.project.core.Const;
 
 public class Road
 {
+	private Image roadImage;
     private ImageLayer roadLayer;
     private boolean visible;
 
-    //private Node node1;
-    //private Node node2;
-
-    public Road(GroupLayer graphLayer, Tuple2f posOne, Tuple2f posTwo, Image roadImage)
+    public Road(GroupLayer graphLayer)
     {
         visible = false;
-        //this.node1 = node1;
-        //this.node2 = node2;
-        //node1.addRoad(this);
-        //node2.addRoad(this);
-
-        final Tuple2f pos1 = posOne;
-        final Tuple2f pos2 = posTwo;
-        final GroupLayer copy_graphlayer = graphLayer;
+		//TODO: randomly choose from diffrent road images
+		roadImage = Const.ROAD_IMAGE;
         roadLayer = graphics().createImageLayer(roadImage);
-        //TODO : should not be visible at this stage
+		roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
+		
+		final GroupLayer copy_graphlayer = graphLayer;
         roadImage.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-                roadLayer.setOrigin(image.width(), image.height());
-                roadLayer.setTranslation(pos1.x, pos1.y);
-                roadLayer.setScale(pos1.getDistanceFrom(pos2)/image.width(), 1.0f);
-                roadLayer.setRotation((float)Math.tan(pos1.y - pos2.y/pos1.x - pos2.x));
-                copy_graphlayer.add(roadLayer); //TODO: move to setVisible or ?
+                copy_graphlayer.add(roadLayer);
             }
 
             @Override
@@ -54,9 +44,19 @@ public class Road
 
     public void setVisible(boolean visible) {
         this.visible = visible;
-        //TODO: how to add or remove image layer ?
+		if(visible)
+			roadLayer.setDepth(Const.ROAD_VISIBLE_DEPTH);
+		else
+			roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
     }
 
+	public void placeRoad(Tuple2f pos1, Tuple2f pos2)	{
+		//roadLayer.setTranslation(0, 0);
+		roadLayer.setRotation((float)(Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)));
+        roadLayer.setScale(pos1.getDistanceFrom(pos2)/roadImage.width(), Const.ROAD_WIDTH);
+		roadLayer.setTranslation(pos1.x, pos1.y);
+	}
+	
     public ImageLayer getLayer()    {
         return roadLayer;
     }

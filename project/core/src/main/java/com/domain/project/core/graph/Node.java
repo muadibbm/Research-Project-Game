@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 import playn.core.GroupLayer;
 
+import com.domain.project.core.Const;
+
 enum Nucleotide {A, ADENINE, T, THYMINE, U, URACIL, G, GUANINE, C, CYTOSINE};
-    
 
 public class Node {
 
@@ -15,7 +16,6 @@ public class Node {
     private int id;
     private Nucleotide nucleotide;
     private List<Node> neighbors;
-    private List<Road> roads;
     private Tuple2f coordinates;
 
     private boolean placed;
@@ -24,16 +24,14 @@ public class Node {
         this.id = id;
         this.nucleotide = nucl;
         neighbors = new ArrayList<Node>();
-        roads = new ArrayList<Road>();
         coordinates = new Tuple2f();
         placed = false;
     }
 
-    public Node(int id, Nucleotide nucl, boolean isCity, final GroupLayer graphLayer) {
+    public Node(int id, Nucleotide nucl, boolean isCity, GroupLayer graphLayer) {
         this.id = id;
         this.nucleotide = nucl;
         this.neighbors = new ArrayList<Node>();
-        roads = new ArrayList<Road>();
         coordinates = new Tuple2f();
         placed = false;
         if(isCity)
@@ -44,33 +42,8 @@ public class Node {
 
     public void placeNode(float x, float y) {
         this.setPos(x, y);
-        base.getBaseLayer().setScale(0.3f, 0.3f);
-        base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);
-        placed = true;
-    }
-
-    public void addRoad(Road road) {
-        roads.add(road);
-    }
-
-    public void removeRoad(Road road) {
-        roads.remove(road);
-    }
-
-    public boolean roadAlreadyExists(Road newRoad) {
-        for(Road road : roads) {
-            if(newRoad.equals(road))
-                return true;
-        }
-        return false;
-    }
-    
-    public boolean roadAlreadyExists(Node node) {
-        for(Road road : roads) {
-            if(node.roadAlreadyExists(road))
-                return true;
-        }
-        return false;
+        base.getBaseLayer().setScale(Const.BASE_SCALE, Const.BASE_SCALE);
+        base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);        placed = true;
     }
     
     public boolean isPlaced() {

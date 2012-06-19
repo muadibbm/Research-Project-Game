@@ -12,6 +12,7 @@ public class Environment
 {
     final private GroupLayer mainLayer;
     final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
+	final private GroupLayer pathLayer; //contains all the roads and mappings
     final private ImageLayer bgLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
     //TODO : any more layers ?
@@ -20,6 +21,7 @@ public class Environment
     - root
         - mainLayer
             - graphLayer
+			- pathlayer
             - bgLayer
         - uiLayer
 */
@@ -33,21 +35,26 @@ public class Environment
 
         bgLayer = graphics().createImageLayer(Const.BACKGROUND_IMAGE);//TODO: camera.getView()
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
-//        bgLayer.setRepeatX(true);
-//        bgLayer.setRepeatY(true);
+        bgLayer.setRepeatX(true);
+        bgLayer.setRepeatY(true);
 
         mainLayer = graphics().createGroupLayer();
         //create group layer containing the graphs
         graphLayer = graphics().createGroupLayer();
-        //create group layer containing the UI
+        //create group layer containing the edges
+		pathLayer = graphics().createGroupLayer();
+		//create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
+		mainLayer.add(pathLayer);
         mainLayer.add(graphLayer);
         mainLayer.add(bgLayer);
         graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);
 
-        graphLayer.setDepth(1.0f);
+		bgLayer.setDepth(Const.BACKGROUND_DEPTH);
+        graphLayer.setDepth(Const.GRAPH_DEPTH);
+		pathLayer.setDepth(Const.PATH_DEPTH);
     }
 
     public Image getBaseImage()
@@ -58,6 +65,11 @@ public class Environment
     public GroupLayer getGraphLayer()
     {
         return graphLayer;
+    }
+	
+	public GroupLayer getPathLayer()
+    {
+        return pathLayer;
     }
 
     public GroupLayer getMainLayer() {
