@@ -6,6 +6,8 @@ import playn.core.Game;
 import playn.core.Keyboard;
 import playn.core.Key;
 
+import tripleplay.anim.Animator;
+
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.controls.KeyboardControls;
 import com.domain.project.core.controls.MouseControls;
@@ -14,12 +16,14 @@ import com.domain.project.core.Const;
 
 public class GameLoop implements Game {
 
-    Camera camera;
+    private Animator animator = Animator.create();
 
-    Environment environment;
+    private Camera camera;
 
-    KeyboardControls kbControls;
-    MouseControls mControls;
+    private Environment environment;
+
+    private KeyboardControls kbControls;
+    private MouseControls mControls;
 
     @Override
     public void init() { 

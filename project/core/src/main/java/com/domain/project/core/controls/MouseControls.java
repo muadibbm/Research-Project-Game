@@ -40,9 +40,11 @@ public class MouseControls implements Mouse.Listener {
     public void onMouseWheelScroll(Mouse.WheelEvent event) {
         if(event.velocity() > 0) {
             System.out.println("up");
+            env.getMainLayer().setScale(1.5f);
         }
         if(event.velocity() < 0) {
             System.out.println("down");
+            env.getMainLayer().setScale(-1.5f);
         }
     }
 

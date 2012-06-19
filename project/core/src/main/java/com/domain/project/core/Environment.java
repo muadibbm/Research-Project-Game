@@ -60,6 +60,10 @@ public class Environment
         return graphLayer;
     }
 
+    public GroupLayer getMainLayer() {
+        return mainLayer;
+    }
+
     public void updateView(float x, float y) {
         mainLayer.setOrigin(x, y);
     }
