@@ -67,13 +67,8 @@ public class Environment
 		frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
-<<<<<<< HEAD
-=======
-        pathLayer.setDepth(Const.PATH_DEPTH);
-
         xOffset = 0.0f;
         yOffset = 0.0f;
->>>>>>> 42670a775f51eeeeb92a0e8033b4a1de58a6add1
     }
 
     public Image getBaseImage()
