@@ -27,6 +27,11 @@ public class Edge {
         this.e2 = e2;
 		road = new Road(graphLayer);
     }
+	
+	public void paint() {
+		road.paint();
+		road.paintVisibility(road.isVisible());
+	}
 
     public int getID() {
         return id;

@@ -18,6 +18,8 @@ public class GameLoop implements Game {
 
     private KeyboardControls kbControls;
     private MouseControls mControls;
+	
+	private Graph cityGraph;
 
     @Override
     public void init() { 
@@ -25,10 +27,9 @@ public class GameLoop implements Game {
         Const.loadImages();
         environment = new Environment();
 
-        Graph cityGraph = new Graph(true, 50, 50, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
+        cityGraph = new Graph(true, 50, 50, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
         cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
-		//environment.getPathLayer().setScale(0.5f,0.5f);
         //System.out.println(cityGraph);
 
         //create and set controls
@@ -42,12 +43,14 @@ public class GameLoop implements Game {
     public void paint(float alpha) {
         // the background automatically paints itself, so no need to do anything here!
         environment.paint(alpha);
+		cityGraph.paintAll();
     }
 
     @Override
     public void update(float delta) {
         kbControls.parse();
         environment.update(delta);
+		cityGraph.updateAll();
     }
 
     @Override

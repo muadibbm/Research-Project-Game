@@ -12,13 +12,13 @@ public final class Const
 
     public static final int UPDATE_RATE = 25;
 
-    public static int WINDOW_WIDTH = 1440;
-    public static int WINDOW_HEIGHT = 900;
+    public static int WINDOW_WIDTH = 800;
+    public static int WINDOW_HEIGHT = 600;
 	
-    public static int WORLD_WIDTH = 2200;
-    public static int WORLD_HEIGHT = 2000;
+    public static int WORLD_WIDTH = 1200;
+    public static int WORLD_HEIGHT = 1000;
 
-	public static int FRAME_SIZE = 100;//Adjust this only
+	public static int FRAME_SIZE = 50;//Adjust this only
     public static int WORLD_ORIGIN_X = 0-FRAME_SIZE;
     public static int WORLD_ORIGIN_Y = 0-FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;

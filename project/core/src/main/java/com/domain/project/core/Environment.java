@@ -58,8 +58,8 @@ public class Environment
         //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
-        mainLayer.add(graphLayer);
 		graphLayer.add(bgLayer);
+		mainLayer.add(graphLayer);
 		mainLayer.add(frameLayer);
         graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);

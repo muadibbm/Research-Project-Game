@@ -16,18 +16,18 @@ public class Base
 	
 	private ImageLayer baseLayer;
 	
-	public Base(GroupLayer graphLayer)
+	public Base(final GroupLayer graphLayer)
 	{
 		this.level = 0;
-		final GroupLayer copy_graphlayer = graphLayer;
 		
         baseLayer = graphics().createImageLayer(Const.BASE_IMAGE);
 		baseLayer.setDepth(Const.BASE_DEPTH);
+		
         Const.BASE_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-                baseLayer.setOrigin(image.width(), image.height());
-                copy_graphlayer.add(baseLayer);
+                baseLayer.setOrigin(image.width()/2, image.height()/2);
+                graphLayer.add(baseLayer);
             }
 
             @Override
@@ -35,7 +35,6 @@ public class Base
                 log().error("error loading node", e);
             }
         });
-		
 	}
 	
 	public void setLevel(int level) {
@@ -44,6 +43,11 @@ public class Base
 		
 	public int getLevel() {
 		return level;
+	}
+	
+	public void paint(float x, float y) {
+		baseLayer.setScale(Const.BASE_SCALE, Const.BASE_SCALE);
+        baseLayer.setTranslation(x, y);
 	}
 	
 	public ImageLayer getBaseLayer(){

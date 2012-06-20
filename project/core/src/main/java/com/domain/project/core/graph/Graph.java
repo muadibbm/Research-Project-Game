@@ -14,6 +14,8 @@ import com.domain.project.core.Const;
 
 public class Graph {
 
+	private java.util.Random r = new java.util.Random();
+	
     private final Map<Integer, Node> nodes;
     private final Map<Integer, Edge> edges;
 
@@ -38,10 +40,13 @@ public class Graph {
 
     public void generateGraph(String filename, GroupLayer graphLayer) {
         parseGraphFile(filename, graphLayer);
-        placeNodes();
+    }
+	
+	public void updateAll() {
+		placeNodes();
 		setNodeLevels();
 		placeEdges();
-    }
+	}
 
     private void parseGraphFile(String filename, final GroupLayer graphLayer) {
 
@@ -216,10 +221,16 @@ public class Graph {
             }
         });
     }
+	
+	public void paintAll() {
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet())
+			entry.getValue().paint();
+		for(Map.Entry<Integer, Edge> entry : edges.entrySet())
+			entry.getValue().paint();
+	}
 
-    public void placeNodes() {
+    private void placeNodes() {
     //TODO: finish the placement algorithm, we want the neighbours to be in closer range
-        java.util.Random r = new java.util.Random();
         float tmpX = 0;
         float tmpY = 0;
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
@@ -233,23 +244,25 @@ public class Graph {
         }
     }
 	
-	public void setNodeLevels() {
+	private void setNodeLevels() {
 		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			entry.getValue().setNodeLevel();
 		}
 	}
     
-    public void placeEdges() {
+    private void placeEdges() {
 		Node n1;
         Node n2;
         for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
-			n1 = getNode1(entry.getValue());
-			n2 = getNode2(entry.getValue());
-			entry.getValue().getRoad().placeRoad(n1.getPos(), n2.getPos());
+			if(!entry.getValue().getRoad().isPlaced()) {
+				n1 = getNode1(entry.getValue());
+				n2 = getNode2(entry.getValue());
+				entry.getValue().getRoad().placeRoad(n1.getPos(), n2.getPos());
+			}
 		}
     }
 	
-	public Node getNode1(Edge edge) {
+	private Node getNode1(Edge edge) {
 		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			if(edge.getN1() == entry.getValue().getID())
 				return entry.getValue();
@@ -257,7 +270,7 @@ public class Graph {
 		return null;
 	}
 	
-	public Node getNode2(Edge edge) {
+	private Node getNode2(Edge edge) {
 		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			if(edge.getN2() == entry.getValue().getID())
 				return entry.getValue();

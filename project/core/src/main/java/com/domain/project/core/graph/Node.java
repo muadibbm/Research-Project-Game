@@ -41,11 +41,13 @@ public class Node {
     }
 
     public void placeNode(float x, float y) {
-        this.setPos(x, y);
-        base.getBaseLayer().setScale(Const.BASE_SCALE, Const.BASE_SCALE);
-        base.getBaseLayer().setTranslation(coordinates.x, coordinates.y);        
+        setPos(x, y);    
 		placed = true;
     }
+	
+	public void paint() {
+		base.paint(coordinates.x, coordinates.y);
+	}
     
     public boolean isPlaced() {
         return placed;
