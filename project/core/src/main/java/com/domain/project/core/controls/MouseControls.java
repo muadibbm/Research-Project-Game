@@ -9,6 +9,8 @@ import com.domain.project.core.Const;
 
 public class MouseControls implements Mouse.Listener {
 
+    private enum ZoomLevel{CLOSE, FAR};
+
     public boolean clickScroll = false;
 
     private Environment env;
@@ -18,11 +20,10 @@ public class MouseControls implements Mouse.Listener {
     private float xOffset = 0.0f;
     private float yOffset = 0.0f;
 
-    private float xCurrentOld = 0.0f;
-    private float yCurrentOld = 0.0f;
     private float xCurrent = 0.0f;
     private float yCurrent = 0.0f;
-
+    
+    ZoomLevel zLevel;
     public MouseControls(Environment env) {
         this.env = env;
     }
@@ -55,7 +56,7 @@ public class MouseControls implements Mouse.Listener {
 
             //set x bounds
             if(env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
-                env.setX(env.getX() + xOffset);
+                env.setX(env.getX() - xOffset);
             }
             if(env.getX() < Const.WORLD_ORIGIN_X) {
                 env.setX(Const.WORLD_ORIGIN_X);
@@ -92,11 +93,11 @@ public class MouseControls implements Mouse.Listener {
     private void zoomIn(GroupLayer layer) {
         float scaleFactor = 3.0f;
         env.animator.tweenScale(layer).in(500f).easeInOut().to(scaleFactor);
-//        env.animator.tweenXY(layer).in(500f).easeInOut().to(Const.WORLD_ORIGIN_X - xCurrent * scaleFactor, Const.WORLD_ORIGIN_Y - yCurrent * scaleFactor);
+        env.animator.tweenXY(layer).in(500f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
     }
     private void zoomOut(GroupLayer layer) {
         env.animator.tweenScale(layer).in(500f).easeInOut().to(1.0f);
-//        env.animator.tweenXY(layer).in(500f).easeInOut().to(xOffset, yOffset);
+        env.animator.tweenXY(layer).in(500f).easeInOut().to(xOffset, yOffset);
     }
 
 }

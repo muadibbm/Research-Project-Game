@@ -14,7 +14,7 @@ public class KeyboardControls implements Keyboard.Listener {
     public static boolean scrollLeft = false;
     public static boolean scrollRight = false;
 
-    public float panRate = 5.0f;
+    public float panRate = 20.0f;
 
     private Environment env;
 

@@ -15,7 +15,7 @@ public class Environment
     final private GroupLayer mainLayer;
     final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
     final private ImageLayer bgLayer;
-	final private ImageLayer frameLayer;
+    final private ImageLayer frameLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
     //TODO : any more layers ?
 
@@ -23,7 +23,7 @@ public class Environment
     - root
         - mainLayer
             - graphLayer
-				- bgLayer
+                - bgLayer
         - uiLayer
 */
 
@@ -45,9 +45,9 @@ public class Environment
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);
-		
-		frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
-		frameLayer.setTranslation(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
+        
+        frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
+        frameLayer.setTranslation(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
         frameLayer.setSize(Const.WORLD_END_WIDTH - Const.WORLD_ORIGIN_X, Const.WORLD_END_HEIGHT - Const.WORLD_ORIGIN_Y);
         frameLayer.setRepeatX(true);
         frameLayer.setRepeatY(true);
@@ -58,13 +58,13 @@ public class Environment
         //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
-		graphLayer.add(bgLayer);
-		mainLayer.add(graphLayer);
-		mainLayer.add(frameLayer);
+        graphLayer.add(bgLayer);
+        mainLayer.add(graphLayer);
+        mainLayer.add(frameLayer);
         graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);
 
-		frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
+        frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
         xOffset = 0.0f;
@@ -90,10 +90,11 @@ public class Environment
 //    }
     public void update(float delta) {
         elapsed += delta;
-        mainLayer.setOrigin(xOffset, yOffset);
+//        mainLayer.setOrigin(xOffset, yOffset);
     }
 
     public void paint(float alpha) {
+        mainLayer.setOrigin(xOffset, yOffset);
         animator.update(elapsed + Const.UPDATE_RATE * alpha);
     }
 
