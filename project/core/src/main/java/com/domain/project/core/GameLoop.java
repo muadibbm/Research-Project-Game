@@ -6,8 +6,6 @@ import playn.core.Game;
 import playn.core.Keyboard;
 import playn.core.Key;
 
-import tripleplay.anim.Animator;
-
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.controls.KeyboardControls;
 import com.domain.project.core.controls.MouseControls;
@@ -15,10 +13,6 @@ import com.domain.project.core.controls.MouseControls;
 import com.domain.project.core.Const;
 
 public class GameLoop implements Game {
-
-    private Animator animator = Animator.create();
-
-    private Camera camera;
 
     private Environment environment;
 
@@ -30,7 +24,6 @@ public class GameLoop implements Game {
 
         Const.loadImages();
         environment = new Environment();
-        camera = new Camera(environment);
 
         Graph cityGraph = new Graph(true, 50, 50, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
         cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
@@ -39,26 +32,27 @@ public class GameLoop implements Game {
         //System.out.println(cityGraph);
 
         //create and set controls
-        kbControls = new KeyboardControls(camera);
+        kbControls = new KeyboardControls(environment);
         keyboard().setListener(kbControls);
-        mControls = new MouseControls(camera);
+        mControls = new MouseControls(environment);
         mouse().setListener(mControls);
     }
 
     @Override
     public void paint(float alpha) {
         // the background automatically paints itself, so no need to do anything here!
+        environment.paint(alpha);
     }
 
     @Override
     public void update(float delta) {
         kbControls.parse();
-        environment.updateView(camera.getX(), camera.getY());
+        environment.update(delta);
     }
 
     @Override
     public int updateRate() {
-        return 25;
+        return Const.UPDATE_RATE;
     }
 
 }

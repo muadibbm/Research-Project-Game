@@ -4,7 +4,6 @@ import playn.core.Keyboard;
 import playn.core.Key;
 
 import com.domain.project.core.Environment;
-import com.domain.project.core.Camera;
 
 import com.domain.project.core.Const;
 
@@ -17,10 +16,10 @@ public class KeyboardControls implements Keyboard.Listener {
 
     public float panRate = 5.0f;
 
-    private Camera camera;
+    private Environment env;
 
-    public KeyboardControls(Camera cam) {
-        this.camera = cam;
+    public KeyboardControls(Environment env) {
+        this.env = env;
     }
 
     @Override
@@ -100,11 +99,6 @@ public class KeyboardControls implements Keyboard.Listener {
 //                System.exit(0);
                 break;
             }
-
-            case SPACE: {
-
-                break;
-            }
         }
     }
 
@@ -116,23 +110,23 @@ public class KeyboardControls implements Keyboard.Listener {
     public void parse() {
         //parse keyboard input
         if(scrollUp) {
-            if(camera.getY() > Const.WORLD_ORIGIN_Y) {
-                camera.setY(camera.getY() - panRate);
+            if(env.getY() > Const.WORLD_ORIGIN_Y) {
+                env.setY(env.getY() - panRate);
             }
         }
         if(scrollDown) {
-            if(camera.getY() < Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) {
-                camera.setY(camera.getY() + panRate);
+            if(env.getY() < Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) {
+                env.setY(env.getY() + panRate);
             }
         }
         if(scrollLeft) {
-            if(camera.getX() > Const.WORLD_ORIGIN_X) {
-                camera.setX(camera.getX() - panRate);
+            if(env.getX() > Const.WORLD_ORIGIN_X) {
+                env.setX(env.getX() - panRate);
             }
         }
         if(scrollRight) {
-            if(camera.getX() < Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
-                camera.setX(camera.getX() + panRate);
+            if(env.getX() < Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
+                env.setX(env.getX() + panRate);
             }
         }
     }
