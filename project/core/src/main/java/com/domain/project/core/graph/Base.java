@@ -16,14 +16,14 @@ public class Base
 	
 	private ImageLayer baseLayer;
 	
-	public Base(final GroupLayer graphLayer)
+	public Base(final GroupLayer graphLayer, Image baseImage)
 	{
 		this.level = 0;
 		
-        baseLayer = graphics().createImageLayer(Const.BASE_IMAGE);
+        baseLayer = graphics().createImageLayer(baseImage);
 		baseLayer.setDepth(Const.BASE_DEPTH);
 		
-        Const.BASE_IMAGE.addCallback(new ResourceCallback<Image>() {
+        baseImage.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
                 baseLayer.setOrigin(image.width()/2, image.height()/2);

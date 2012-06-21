@@ -19,7 +19,10 @@ public class GameLoop implements Game {
     private KeyboardControls kbControls;
     private MouseControls mControls;
 	
-	private Graph cityGraph;
+	private Graph cityGraphA;
+	private Graph cityGraphB;
+	private Graph campGraphA;
+	private Graph campGraphB;
 
     @Override
     public void init() { 
@@ -27,10 +30,20 @@ public class GameLoop implements Game {
         Const.loadImages();
         environment = new Environment();
 
-        cityGraph = new Graph(true, 50, 50, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
-        cityGraph.generateGraph("3IZ9", environment.getGraphLayer());
+		float graphXOffset = 30;
+		float graphYOffset = 40;
+		
+        cityGraphA = new Graph(true, graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
+        cityGraphA.generateGraph("3IZ9", environment.getGraphLayer());
+		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT/2 + graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
+        cityGraphB.generateGraph("3IZ9", environment.getGraphLayer());
+		
+		campGraphA = new Graph(false, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
+        campGraphA.generateGraph("2LDZ", environment.getGraphLayer());
+		campGraphB = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/4 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
+        campGraphB.generateGraph("2LDZ", environment.getGraphLayer());
+		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
-        //System.out.println(cityGraph);
 
         //create and set controls
         kbControls = new KeyboardControls(environment);
@@ -43,14 +56,20 @@ public class GameLoop implements Game {
     public void paint(float alpha) {
         // the background automatically paints itself, so no need to do anything here!
         environment.paint(alpha);
-		cityGraph.paintAll();
+		cityGraphA.paintAll();
+		cityGraphB.paintAll();
+		campGraphA.paintAll();
+		campGraphB.paintAll();
     }
 
     @Override
     public void update(float delta) {
         kbControls.parse();
         environment.update(delta);
-		cityGraph.updateAll();
+		cityGraphA.updateAll();
+		cityGraphB.updateAll();
+		campGraphA.updateAll();
+		campGraphB.updateAll();
     }
 
     @Override

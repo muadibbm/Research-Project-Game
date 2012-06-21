@@ -91,7 +91,7 @@ public class MouseControls implements Mouse.Listener {
     }
 
     private void zoomIn(GroupLayer layer) {
-        float scaleFactor = 3.0f;
+        float scaleFactor = Const.ZOOM_SCALE_FACTOR;
         env.animator.tweenScale(layer).in(500f).easeInOut().to(scaleFactor);
         env.animator.tweenXY(layer).in(500f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
     }

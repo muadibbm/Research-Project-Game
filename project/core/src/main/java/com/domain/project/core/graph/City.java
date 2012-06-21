@@ -3,6 +3,8 @@ package com.domain.project.core.graph;
 import playn.core.ImageLayer;
 import playn.core.GroupLayer;
 
+import com.domain.project.core.Const;
+
 public class City extends Base
 {
 	private ImageLayer townHall;
@@ -13,7 +15,7 @@ public class City extends Base
 	//TODO: how to position the city and its componants
 
 	public City(GroupLayer graphLayer){
-		super(graphLayer);
+		super(graphLayer, Const.CITY_BASE_IMAGE);
 	}
 	
 	//TODO: add setters and getters
