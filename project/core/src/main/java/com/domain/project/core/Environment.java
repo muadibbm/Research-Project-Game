@@ -47,8 +47,8 @@ public class Environment
         bgLayer.setRepeatY(true);
         
         frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
-        frameLayer.setTranslation(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
-        frameLayer.setSize(Const.WORLD_END_WIDTH - Const.WORLD_ORIGIN_X, Const.WORLD_END_HEIGHT - Const.WORLD_ORIGIN_Y);
+        frameLayer.setTranslation(Const.WORLD_ORIGIN_X*2, Const.WORLD_ORIGIN_Y*2);
+        frameLayer.setSize(Const.WORLD_END_WIDTH*2 - Const.WORLD_ORIGIN_X, Const.WORLD_END_HEIGHT*2 - Const.WORLD_ORIGIN_Y);
         frameLayer.setRepeatX(true);
         frameLayer.setRepeatY(true);
 

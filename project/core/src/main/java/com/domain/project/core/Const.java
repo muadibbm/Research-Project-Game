@@ -16,9 +16,9 @@ public final class Const
     public static int WINDOW_HEIGHT = 600;
 	
     public static int WORLD_WIDTH = 1200;
-    public static int WORLD_HEIGHT = 1000;
+    public static int WORLD_HEIGHT = 900;
 
-	public static int FRAME_SIZE = 50;//Adjust this only
+	public static int FRAME_SIZE = 90;//Adjust this only
     public static int WORLD_ORIGIN_X = 0-FRAME_SIZE;
     public static int WORLD_ORIGIN_Y = 0-FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
@@ -53,9 +53,10 @@ public final class Const
     }
 
     public static void loadImages() {
-		FRAME_IMAGE = assets().getImage("images/Background/texture_sky1.png");
+//		FRAME_IMAGE = assets().getImage("images/Background/texture_sky1.png");
+		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
-//        BACKGROUND_IMAGE = assets().getImage("images/temp/cat.jpg");
+//      BACKGROUND_IMAGE = assets().getImage("images/temp/cat.jpg");
         BASE_IMAGE = assets().getImage("images/City/texture_trees2.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
     }
