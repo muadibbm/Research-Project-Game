@@ -7,7 +7,7 @@ import com.domain.project.core.Environment;
 
 import com.domain.project.core.Const;
 
-public class MouseControls implements Mouse.Listener {
+public class MouseControls extends Controls implements Mouse.Listener {
 
     private enum ZoomLevel{CLOSE, FAR};
 
@@ -22,8 +22,8 @@ public class MouseControls implements Mouse.Listener {
 
     private float xCurrent = 0.0f;
     private float yCurrent = 0.0f;
-    
-    ZoomLevel zLevel;
+   
+
     public MouseControls(Environment env) {
         this.env = env;
     }
@@ -55,14 +55,14 @@ public class MouseControls implements Mouse.Listener {
 //            System.out.println(xOffset + " " + yOffset);
 
             //set x bounds
-            if(env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
+            if(env.getX() >= Const.WORLD_ORIGIN_X * scaleFactor && env.getX() <= (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor) {
                 env.setX(env.getX() - xOffset);
             }
-            if(env.getX() < Const.WORLD_ORIGIN_X) {
-                env.setX(Const.WORLD_ORIGIN_X);
+            if(env.getX() < Const.WORLD_ORIGIN_X * scaleFactor) {
+                env.setX(Const.WORLD_ORIGIN_X * scaleFactor);
             }
-            if(env.getX() > Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
-                env.setX(Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH);
+            if(env.getX() > (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor ) {
+                env.setX((Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor);
             }
 
             //set y bounds
@@ -83,21 +83,26 @@ public class MouseControls implements Mouse.Listener {
     @Override
     public void onMouseWheelScroll(Mouse.WheelEvent event) {
         if(event.velocity() > 0) {
-            zoomIn(env.getMainLayer());
+            if(scaleFactor < scaleFactorMax) {
+                scaleFactor += scaleRate;
+                zoomIn(env.getMainLayer(), scaleFactor);
+            }
         }
         if(event.velocity() < 0) {
-            zoomOut(env.getMainLayer());
+            scaleFactor = 1.0f;
+            zoomOut(env.getMainLayer(), scaleFactor);
         }
     }
 
-    private void zoomIn(GroupLayer layer) {
-        float scaleFactor = 3.0f;
-        env.animator.tweenScale(layer).in(500f).easeInOut().to(scaleFactor);
-        env.animator.tweenXY(layer).in(500f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
+    private void zoomIn(GroupLayer layer, float scale) {
+        env.animator.tweenScale(layer).in(250f).linear().to(scale);
+//        env.animator.tweenXY(layer).in(250f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
+        env.animator.tweenXY(layer).in(250f).linear().to(-(scale * Const.WINDOW_WIDTH / 2.0f) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * Const.WINDOW_HEIGHT / 2.0f) + (Const.WINDOW_HEIGHT / 2.0f));
+
     }
-    private void zoomOut(GroupLayer layer) {
-        env.animator.tweenScale(layer).in(500f).easeInOut().to(1.0f);
-        env.animator.tweenXY(layer).in(500f).easeInOut().to(xOffset, yOffset);
+    private void zoomOut(GroupLayer layer, float scale) {
+        env.animator.tweenScale(layer).in(250f).linear().to(scale);
+        env.animator.tweenXY(layer).in(250f).linear().to(xOffset, yOffset);
     }
 
 }

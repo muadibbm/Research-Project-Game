@@ -7,14 +7,14 @@ import com.domain.project.core.Environment;
 
 import com.domain.project.core.Const;
 
-public class KeyboardControls implements Keyboard.Listener {
+public class KeyboardControls extends Controls implements Keyboard.Listener {
 
     public static boolean scrollUp = false;
     public static boolean scrollDown = false;
     public static boolean scrollLeft = false;
     public static boolean scrollRight = false;
 
-    public float panRate = 20.0f;
+    private float panRate = 5.0f;
 
     private Environment env;
 
@@ -62,6 +62,7 @@ public class KeyboardControls implements Keyboard.Listener {
 
     @Override
     public void onKeyDown(Keyboard.Event event) {
+        System.out.println(env.getX() + " " + env.getY());
         switch(event.key()) {
             case W: {
                 scrollUp = true;
@@ -110,25 +111,26 @@ public class KeyboardControls implements Keyboard.Listener {
     public void parse() {
         //parse keyboard input
         if(scrollUp) {
-            if(env.getY() > Const.WORLD_ORIGIN_Y) {
+            if(env.getY() > Const.WORLD_ORIGIN_Y * scaleFactor) {
                 env.setY(env.getY() - panRate);
             }
         }
         if(scrollDown) {
-            if(env.getY() < Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) {
+            if(env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) * scaleFactor) {
                 env.setY(env.getY() + panRate);
             }
         }
         if(scrollLeft) {
-            if(env.getX() > Const.WORLD_ORIGIN_X) {
+            if(env.getX() > Const.WORLD_ORIGIN_X * scaleFactor) {
                 env.setX(env.getX() - panRate);
             }
         }
         if(scrollRight) {
-            if(env.getX() < Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
+            if(env.getX() < (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor) {
                 env.setX(env.getX() + panRate);
             }
         }
+
     }
 
 }

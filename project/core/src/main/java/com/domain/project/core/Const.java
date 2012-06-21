@@ -19,8 +19,8 @@ public final class Const
     public static int WORLD_HEIGHT = 900;
 
 	public static int FRAME_SIZE = 90;//Adjust this only
-    public static int WORLD_ORIGIN_X = 0-FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0-FRAME_SIZE;
+    public static int WORLD_ORIGIN_X = 0 - FRAME_SIZE;
+    public static int WORLD_ORIGIN_Y = 0 - FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
     public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
 
