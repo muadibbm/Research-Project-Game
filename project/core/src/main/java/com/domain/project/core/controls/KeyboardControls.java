@@ -111,22 +111,22 @@ public class KeyboardControls extends Controls implements Keyboard.Listener {
     public void parse() {
         //parse keyboard input
         if(scrollUp) {
-            if(env.getY() > Const.WORLD_ORIGIN_Y * scaleFactor) {
+            if(env.getY() > Const.WORLD_ORIGIN_Y) {
                 env.setY(env.getY() - panRate);
             }
         }
         if(scrollDown) {
-            if(env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) * scaleFactor) {
+            if(env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT)) {
                 env.setY(env.getY() + panRate);
             }
         }
         if(scrollLeft) {
-            if(env.getX() > Const.WORLD_ORIGIN_X * scaleFactor) {
+            if(env.getX() > Const.WORLD_ORIGIN_X) {
                 env.setX(env.getX() - panRate);
             }
         }
         if(scrollRight) {
-            if(env.getX() < (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor) {
+            if(env.getX() < (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
                 env.setX(env.getX() + panRate);
             }
         }

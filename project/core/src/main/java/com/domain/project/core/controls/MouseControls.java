@@ -55,14 +55,14 @@ public class MouseControls extends Controls implements Mouse.Listener {
 //            System.out.println(xOffset + " " + yOffset);
 
             //set x bounds
-            if(env.getX() >= Const.WORLD_ORIGIN_X * scaleFactor && env.getX() <= (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor) {
+            if(env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
                 env.setX(env.getX() - xOffset);
             }
-            if(env.getX() < Const.WORLD_ORIGIN_X * scaleFactor) {
-                env.setX(Const.WORLD_ORIGIN_X * scaleFactor);
+            if(env.getX() < Const.WORLD_ORIGIN_X) {
+                env.setX(Const.WORLD_ORIGIN_X);
             }
-            if(env.getX() > (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor ) {
-                env.setX((Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) * scaleFactor);
+            if(env.getX() > (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
+                env.setX((Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH));
             }
 
             //set y bounds
