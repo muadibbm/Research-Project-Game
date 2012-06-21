@@ -31,17 +31,17 @@ public class GameLoop implements Game {
         environment = new Environment();
 
 		float graphXOffset = 30;
-		float graphYOffset = 40;
+		float graphYOffset = 50;
 		
         cityGraphA = new Graph(true, graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
         cityGraphA.generateGraph("3IZ9", environment.getGraphLayer());
-		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT/2 + graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
-        cityGraphB.generateGraph("3IZ9", environment.getGraphLayer());
-		
-		campGraphA = new Graph(false, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
+		campGraphA = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/4 + graphYOffset/2, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
         campGraphA.generateGraph("2LDZ", environment.getGraphLayer());
-		campGraphB = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/4 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
+		
+		campGraphB = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/2 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
         campGraphB.generateGraph("2LDZ", environment.getGraphLayer());
+		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT - graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
+        cityGraphB.generateGraph("3IZ9", environment.getGraphLayer());
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 
