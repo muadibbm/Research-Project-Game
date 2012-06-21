@@ -94,11 +94,11 @@ public class MouseControls extends Controls implements Mouse.Listener {
         }
     }
 
+
     private void zoomIn(GroupLayer layer, float scale) {
         env.animator.tweenScale(layer).in(250f).linear().to(scale);
 //        env.animator.tweenXY(layer).in(250f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
         env.animator.tweenXY(layer).in(250f).linear().to(-(scale * Const.WINDOW_WIDTH / 2.0f) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * Const.WINDOW_HEIGHT / 2.0f) + (Const.WINDOW_HEIGHT / 2.0f));
-
     }
     private void zoomOut(GroupLayer layer, float scale) {
         env.animator.tweenScale(layer).in(250f).linear().to(scale);
