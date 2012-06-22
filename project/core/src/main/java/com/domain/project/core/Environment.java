@@ -6,6 +6,8 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 
+import playn.core.Mouse;
+
 import com.domain.project.core.Const;
 
 import tripleplay.anim.Animator;
@@ -69,6 +71,7 @@ public class Environment
         graphLayer.setDepth(Const.GRAPH_DEPTH);
         xOffset = 0.0f;
         yOffset = 0.0f;
+        
     }
 
     public Image getBaseImage()

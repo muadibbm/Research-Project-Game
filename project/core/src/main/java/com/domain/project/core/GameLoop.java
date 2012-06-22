@@ -3,8 +3,6 @@ package com.domain.project.core;
 import static playn.core.PlayN.*;
 
 import playn.core.Game;
-import playn.core.Keyboard;
-import playn.core.Key;
 
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.controls.KeyboardControls;
