@@ -9,8 +9,10 @@ import playn.core.ImageLayer;
 import playn.core.Mouse;
 
 import com.domain.project.core.Const;
+import com.domain.project.core.enums.Zoom;
 
 import tripleplay.anim.Animator;
+
 
 public class Environment
 {
@@ -30,9 +32,13 @@ public class Environment
 */
 
     public final Animator animator = Animator.create();
+    
 
+    
     private float xOffset;
     private float yOffset;
+    
+    private Zoom zLevel;
 
     private float elapsed;
 
@@ -69,8 +75,11 @@ public class Environment
         frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
+        
         xOffset = 0.0f;
         yOffset = 0.0f;
+        
+        zLevel = Zoom.DEFAULT;
         
     }
 
@@ -115,5 +124,12 @@ public class Environment
 
     public float getY() {
         return yOffset;
+    }
+  
+    public void setZoomLevel(Zoom zLevel) {
+        this.zLevel = zLevel;
+    }
+    public Zoom zLevel() {
+        return zLevel;
     }
 }

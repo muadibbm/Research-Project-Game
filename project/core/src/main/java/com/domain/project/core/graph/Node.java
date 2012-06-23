@@ -1,13 +1,14 @@
 package com.domain.project.core.graph;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 
 import playn.core.GroupLayer;
 
 import com.domain.project.core.Const;
-
-enum Nucleotide {A, ADENINE, T, THYMINE, U, URACIL, G, GUANINE, C, CYTOSINE};
+import com.domain.project.core.enums.Nucleotide;
 
 public class Node {
 

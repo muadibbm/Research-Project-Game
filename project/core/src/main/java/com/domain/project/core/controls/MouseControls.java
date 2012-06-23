@@ -4,10 +4,10 @@ import playn.core.Mouse;
 import playn.core.GroupLayer;
 
 import com.domain.project.core.Environment;
-
+import com.domain.project.core.enums.Zoom;
 import com.domain.project.core.Const;
 
-public class MouseControls extends Controls implements Mouse.Listener {
+public class MouseControls implements Mouse.Listener {
 
     public boolean clickScroll = false;
 
@@ -46,7 +46,7 @@ public class MouseControls extends Controls implements Mouse.Listener {
     public void onMouseMove(Mouse.MotionEvent event) {
         xCurrent = event.x(); //wrt window coords
         yCurrent = event.y();
-        if(clickScroll && zLevel != Zoom.OUT) {
+        if(clickScroll && env.zLevel() != Zoom.OUT) {
             xOffset = event.x() - xOld;
             yOffset = event.y() - yOld;
 //            System.out.println(xOffset + " " + yOffset);
@@ -80,42 +80,55 @@ public class MouseControls extends Controls implements Mouse.Listener {
     @Override
     public void onMouseWheelScroll(Mouse.WheelEvent event) {
         if(event.velocity() > 0) {
-//            if(scaleFactor < scaleFactorMax) {
-//                scaleFactor += scaleRate;
-//                zoomIn(env.getMainLayer(), scaleFactor);
-//            }
-            if(zLevel == Zoom.DEFAULT) {
-                zLevel = Zoom.IN;
+            if(env.zLevel() == Zoom.DEFAULT) {
+                env.setZoomLevel(Zoom.IN);
                 zoomIn(env.getMainLayer(), 2.0f);
-            } else if(zLevel == Zoom.OUT) {
-                zLevel = Zoom.DEFAULT;
+            } else if(env.zLevel() == Zoom.OUT) {
+                env.setZoomLevel(Zoom.DEFAULT);
                 zoomIn(env.getMainLayer(), 1.0f);
             }
         }
         if(event.velocity() < 0) {
-//            scaleFactor = 1.0f;
-//            zoomOut(env.getMainLayer(), scaleFactor);
-            if(zLevel == Zoom.DEFAULT) {
-                zLevel = Zoom.OUT;
-                zoomOut(env.getMainLayer(), 0.5f);
-            } else if(zLevel == Zoom.IN) {
-                zLevel = Zoom.DEFAULT;
+            if(env.zLevel() == Zoom.DEFAULT) {
+                env.setZoomLevel(Zoom.OUT);
+                zoomOut(env.getMainLayer(), 0.0f); //0.0f to zoom all the way out
+            } else if(env.zLevel() == Zoom.IN) {
+                env.setZoomLevel(Zoom.DEFAULT);
                 zoomIn(env.getMainLayer(), 1.0f);
             }
         }
-
     }
 
 
     private void zoomIn(GroupLayer layer, float scale) {
-        env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
-//        env.animator.tweenXY(layer).in(250f).easeInOut().to(-(scaleFactor * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scaleFactor * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
-        env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * Const.WINDOW_WIDTH) / 2.0f + (Const.WINDOW_WIDTH / 2.0f) , -(scale * Const.WINDOW_HEIGHT) / 2.0f + (Const.WINDOW_HEIGHT / 2.0f));
-    }
-    private void zoomOut(GroupLayer layer, float scale) {
-        if(zLevel == Zoom.OUT) {
+        if(env.zLevel() == Zoom.DEFAULT) {
             env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
-            env.animator.tweenXY(layer).in(400f).easeInOut().to(xOffset, yOffset);
+            env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) - scale * env.getX(), -(scale * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f) - env.getY() * scale);
+        } else {
+            env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
+            env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * Const.WINDOW_WIDTH / 2.0f) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * Const.WINDOW_HEIGHT / 2.0f) + (Const.WINDOW_HEIGHT / 2.0f));
+            //env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
+        }
+
+    }
+    
+    private void zoomOut(GroupLayer layer, float scale) {
+        if(scale == 0.0f) {
+            float xScale = (float)Const.WINDOW_WIDTH / (float)(Const.WORLD_END_WIDTH - Const.WORLD_ORIGIN_X);
+            float yScale = (float)Const.WINDOW_HEIGHT / (float)(Const.WORLD_END_HEIGHT - Const.WORLD_ORIGIN_Y);
+            if(xScale < yScale) {
+                scale = xScale;
+            } else {
+                scale = yScale;
+            }
+
+            float scaledWidth = (Const.WORLD_END_WIDTH - Const.FRAME_SIZE) * scale;
+            float scaledHeight = (Const.WORLD_END_HEIGHT - Const.FRAME_SIZE) * scale;
+            float newOffsetX = ((Const.WINDOW_WIDTH - scaledWidth ) / 2.0f) + (env.getX() * scale);
+            float newOffsetY = ((Const.WINDOW_HEIGHT - scaledHeight) / 2.0f) + (env.getY() * scale);
+
+            env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
+            env.animator.tweenXY(layer).in(400f).easeInOut().to(newOffsetX, newOffsetY);
         } else {
             env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
             env.animator.tweenXY(layer).in(400f).easeInOut().to(xOffset, yOffset);       

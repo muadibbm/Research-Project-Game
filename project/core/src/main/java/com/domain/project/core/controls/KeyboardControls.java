@@ -4,10 +4,10 @@ import playn.core.Keyboard;
 import playn.core.Key;
 
 import com.domain.project.core.Environment;
-
+import com.domain.project.core.enums.Zoom;
 import com.domain.project.core.Const;
 
-public class KeyboardControls extends Controls implements Keyboard.Listener {
+public class KeyboardControls implements Keyboard.Listener {
 
     public static boolean scrollUp = false;
     public static boolean scrollDown = false;
@@ -100,6 +100,12 @@ public class KeyboardControls extends Controls implements Keyboard.Listener {
 //                System.exit(0);
                 break;
             }
+            
+            case SPACE: {
+                System.out.println(env.getX() + " " + env.getY());
+                System.out.println(env.zLevel());
+                break;
+            }
         }
     }
 
@@ -111,22 +117,22 @@ public class KeyboardControls extends Controls implements Keyboard.Listener {
     public void parse() {
         //parse keyboard input
         if(scrollUp) {
-            if(env.getY() > Const.WORLD_ORIGIN_Y) {
+            if(env.getY() > Const.WORLD_ORIGIN_Y && env.zLevel() != Zoom.OUT) {
                 env.setY(env.getY() - panRate);
             }
         }
         if(scrollDown) {
-            if(env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT)) {
+            if(env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) && env.zLevel() != Zoom.OUT) {
                 env.setY(env.getY() + panRate);
             }
         }
         if(scrollLeft) {
-            if(env.getX() > Const.WORLD_ORIGIN_X) {
+            if(env.getX() > Const.WORLD_ORIGIN_X && env.zLevel() != Zoom.OUT) {
                 env.setX(env.getX() - panRate);
             }
         }
         if(scrollRight) {
-            if(env.getX() < (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
+            if(env.getX() < (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) && env.zLevel() != Zoom.OUT) {
                 env.setX(env.getX() + panRate);
             }
         }

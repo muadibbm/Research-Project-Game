@@ -1,11 +1,11 @@
 package com.domain.project.core.graph;
 
-import static playn.core.PlayN.*;
+//import static playn.core.PlayN.*;
 
 import playn.core.GroupLayer;
 
-enum Isomer {cis, c, trans, t};
-enum EdgeType {W, w, H, h, S, s}; 
+import com.domain.project.core.enums.Isomer;
+import com.domain.project.core.enums.EdgeType;
 
 public class Edge {
     

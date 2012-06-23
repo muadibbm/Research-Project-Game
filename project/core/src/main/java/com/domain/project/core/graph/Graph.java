@@ -11,6 +11,9 @@ import playn.core.GroupLayer;
 import playn.core.ResourceCallback;
 
 import com.domain.project.core.Const;
+import com.domain.project.core.enums.Nucleotide;
+import com.domain.project.core.enums.Isomer;
+import com.domain.project.core.enums.EdgeType;
 
 public class Graph {
 
