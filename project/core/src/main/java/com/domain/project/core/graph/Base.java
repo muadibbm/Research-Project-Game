@@ -46,7 +46,10 @@ public class Base
 	}
 	
 	public void paint(float x, float y) {
-		baseLayer.setScale(Const.BASE_SCALE, Const.BASE_SCALE);
+		if(this instanceof City) 
+			baseLayer.setScale(Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
+		else
+			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);
         baseLayer.setTranslation(x, y);
 	}
 	

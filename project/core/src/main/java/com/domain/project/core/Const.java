@@ -14,30 +14,33 @@ public final class Const
     public static int WINDOW_WIDTH = 1000;
     public static int WINDOW_HEIGHT = 1000;
 	
+
     public static int WORLD_WIDTH = 1800;
     public static int WORLD_HEIGHT = 2800;
 
-	public static int FRAME_SIZE = 90;//Adjust this only
-    public static int WORLD_ORIGIN_X = 0 - FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0 - FRAME_SIZE;
+
+	public static int FRAME_SIZE = 60;//Adjust this only
+    public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
+    public static int WORLD_ORIGIN_Y = 0 - 5*FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
     public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
 
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
 
-    public static float BASE_SCALE = 0.05f;
+    public static float BASE_CITY_SCALE = 0.05f;
+	public static float BASE_CAMP_SCALE = 0.1f;
 	public static float BASE_DEPTH = 3.0f;
 
     public static float MIN_CITY_DISTANCE = 60;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
-    public static float CITY_GRAPH_WIDTH = WORLD_WIDTH-80;
-    public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT/(4.5f);
+    public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
+    public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
 
     public static float MIN_CAMP_DISTANCE = 40;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
-    public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH-100;
-    public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT/(4.7f);
+    public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
+    public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
 
     public static float ROAD_VISIBLE_DEPTH = 2.5f;
     public static float ROAD_HIDDEN_DEPTH = 2.5f;

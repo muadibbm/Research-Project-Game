@@ -31,17 +31,19 @@ public class GameLoop implements Game {
 	private Graph campGraphB;
     
     private String graphA = "1FUF_modified";
-    private String graphB = "1FUF_modified";
+    private String graphB = "3CGP_modified";
 
     @Override
     public void init() { 
 
         Const.loadImages();
         environment = new Environment();
-
-		float graphXOffset = 30;
-		float graphYOffset = 80;
 		
+		Player player1 = new Player(1, "player 1");
+		Player player2 = new Player(2, "player 2");
+		
+		float graphXOffset = 90;
+		float graphYOffset = 30;
 		//TODO : read two graphs from database and put into these 4 graph instances
 		
         cityGraphA = new Graph(true, graphXOffset, graphYOffset/4, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
@@ -53,6 +55,7 @@ public class GameLoop implements Game {
         campGraphB.generateGraph(graphA, environment.getGraphLayer());
 		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT - graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
         cityGraphB.generateGraph(graphB, environment.getGraphLayer());
+
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 
@@ -103,7 +106,7 @@ public class GameLoop implements Game {
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
 						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
-							if(node.equals(graph.getNode1(edge.getValue())) || node.equals(graph.getNode2(edge.getValue()))) 
+							if(node.equals(graph.getNode1(edge.getValue()))) // || node.equals(graph.getNode2(edge.getValue())) 
 								edge.getValue().getRoad().setVisible(true);
 							else
 								edge.getValue().getRoad().setVisible(false);
