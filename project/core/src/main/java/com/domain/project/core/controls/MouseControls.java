@@ -82,7 +82,7 @@ public class MouseControls implements Mouse.Listener {
         if(event.velocity() > 0) {
             if(env.zLevel() == Zoom.DEFAULT) {
                 env.setZoomLevel(Zoom.IN);
-                zoomIn(env.getMainLayer(), 2.0f);
+                zoomIn(env.getMainLayer(), 8.0f);
             } else if(env.zLevel() == Zoom.OUT) {
                 env.setZoomLevel(Zoom.DEFAULT);
                 zoomIn(env.getMainLayer(), 1.0f);

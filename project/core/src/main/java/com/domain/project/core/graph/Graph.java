@@ -32,8 +32,9 @@ public class Graph {
     private boolean isCityGraph;
 	
 	private int id;
+	private int player_id;
 
-    public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height, int id) {
+    public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height, int id, int player_id) {
         this.isCityGraph = isCityGraph;
         this.nodes = new HashMap<Integer, Node>();
         this.edges = new HashMap<Integer, Edge>();
@@ -42,6 +43,7 @@ public class Graph {
         this.width = width;
         this.height = height;
 		this.id = id;
+		this.player_id = player_id;
     }
 
     public void generateGraph(String filename, GroupLayer graphLayer) {
