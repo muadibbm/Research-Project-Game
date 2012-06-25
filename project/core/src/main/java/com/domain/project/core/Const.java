@@ -11,12 +11,12 @@ public final class Const
 {
     public static final int UPDATE_RATE = 25;
 
-    public static int WINDOW_WIDTH = 1000;
-    public static int WINDOW_HEIGHT = 1000;
+    public static int WINDOW_WIDTH = 1440;
+    public static int WINDOW_HEIGHT = 900;
 	
 
-    public static int WORLD_WIDTH = 1800;
-    public static int WORLD_HEIGHT = 2800;
+    public static int WORLD_WIDTH = 2200;
+    public static int WORLD_HEIGHT = 1500;
 
 
 	public static int FRAME_SIZE = 60;//Adjust this only

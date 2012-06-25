@@ -31,7 +31,7 @@ public class GameLoop implements Game {
 	private Graph campGraphB;
     
     private String graphA = "1FUF_modified";
-    private String graphB = "3CGP_modified";
+    private String graphB = "1FUF_modified";
 
     @Override
     public void init() { 
@@ -46,16 +46,15 @@ public class GameLoop implements Game {
 		float graphYOffset = 30;
 		//TODO : read two graphs from database and put into these 4 graph instances
 		
-        cityGraphA = new Graph(true, graphXOffset, graphYOffset/4, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
+        cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1, player1.getId());
         cityGraphA.generateGraph(graphA, environment.getGraphLayer());
-		campGraphA = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/4 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2);
+		campGraphA = new Graph(false, Const.WORLD_WIDTH/4 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2, player1.getId());
         campGraphA.generateGraph(graphB, environment.getGraphLayer());
 		
-		campGraphB = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/2 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3);
+		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3, player2.getId());
         campGraphB.generateGraph(graphA, environment.getGraphLayer());
-		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT - graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
+		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4, player2.getId());
         cityGraphB.generateGraph(graphB, environment.getGraphLayer());
-
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 
