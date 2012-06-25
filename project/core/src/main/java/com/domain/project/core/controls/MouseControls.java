@@ -101,14 +101,14 @@ public class MouseControls implements Mouse.Listener {
 
 
     private void zoomIn(GroupLayer layer, float scale) {
-        if(env.zLevel() == Zoom.DEFAULT) {
-            env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
-            env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) - scale * env.getX(), -(scale * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f) - env.getY() * scale);
-        } else {
+//        if(env.zLevel() == Zoom.DEFAULT) {
+//            env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
+//            env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) - scale * env.getX(), -(scale * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f) - env.getY() * scale);
+//        } else {
             env.animator.tweenScale(layer).in(400f).easeInOut().to(scale);
             env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * Const.WINDOW_WIDTH / 2.0f) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * Const.WINDOW_HEIGHT / 2.0f) + (Const.WINDOW_HEIGHT / 2.0f));
             //env.animator.tweenXY(layer).in(400f).easeInOut().to(-(scale * xCurrent) + (Const.WINDOW_WIDTH / 2.0f) , -(scale * yCurrent) + (Const.WINDOW_HEIGHT / 2.0f));
-        }
+//        }
 
     }
     

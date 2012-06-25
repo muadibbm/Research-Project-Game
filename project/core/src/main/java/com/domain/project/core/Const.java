@@ -11,11 +11,11 @@ public final class Const
 {
     public static final int UPDATE_RATE = 25;
 
-    public static int WINDOW_WIDTH = 800;
-    public static int WINDOW_HEIGHT = 600;
+    public static int WINDOW_WIDTH = 1000;
+    public static int WINDOW_HEIGHT = 1000;
 	
     public static int WORLD_WIDTH = 1800;
-    public static int WORLD_HEIGHT = 1400;
+    public static int WORLD_HEIGHT = 2800;
 
 	public static int FRAME_SIZE = 90;//Adjust this only
     public static int WORLD_ORIGIN_X = 0 - FRAME_SIZE;
@@ -40,7 +40,7 @@ public final class Const
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT/(4.7f);
 
     public static float ROAD_VISIBLE_DEPTH = 2.5f;
-    public static float ROAD_HIDDEN_DEPTH = 0.0f;
+    public static float ROAD_HIDDEN_DEPTH = 2.5f;
     public static float ROAD_WIDTH = 0.4f;
 
 	public static Image FRAME_IMAGE;

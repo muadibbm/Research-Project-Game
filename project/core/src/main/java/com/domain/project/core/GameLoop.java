@@ -29,6 +29,9 @@ public class GameLoop implements Game {
 	private Graph cityGraphB;
 	private Graph campGraphA;
 	private Graph campGraphB;
+    
+    private String graphA = "1FUF_modified";
+    private String graphB = "1FUF_modified";
 
     @Override
     public void init() { 
@@ -42,14 +45,14 @@ public class GameLoop implements Game {
 		//TODO : read two graphs from database and put into these 4 graph instances
 		
         cityGraphA = new Graph(true, graphXOffset, graphYOffset/4, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
-        cityGraphA.generateGraph("3IZ9", environment.getGraphLayer());
+        cityGraphA.generateGraph(graphA, environment.getGraphLayer());
 		campGraphA = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/4 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2);
-        campGraphA.generateGraph("2LDZ", environment.getGraphLayer());
+        campGraphA.generateGraph(graphB, environment.getGraphLayer());
 		
 		campGraphB = new Graph(false, graphXOffset, Const.WORLD_HEIGHT/2 + graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3);
-        campGraphB.generateGraph("2LDZ", environment.getGraphLayer());
+        campGraphB.generateGraph(graphA, environment.getGraphLayer());
 		cityGraphB = new Graph(true, graphXOffset, Const.WORLD_HEIGHT - Const.CAMP_GRAPH_HEIGHT - graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
-        cityGraphB.generateGraph("3IZ9", environment.getGraphLayer());
+        cityGraphB.generateGraph(graphB, environment.getGraphLayer());
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 
@@ -104,8 +107,8 @@ public class GameLoop implements Game {
 								edge.getValue().getRoad().setVisible(true);
 							else
 								edge.getValue().getRoad().setVisible(false);
-							
 						}
+                        System.out.println(node);
 					}
 				}
 				@Override
