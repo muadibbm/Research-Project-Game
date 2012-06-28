@@ -100,7 +100,6 @@ public class KeyboardControls implements Keyboard.Listener {
 //                System.exit(0);
                 break;
             }
-            
             case SPACE: {
                 System.out.println(env.getX() + " " + env.getY());
                 System.out.println(env.zLevel());

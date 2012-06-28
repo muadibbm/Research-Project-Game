@@ -28,7 +28,8 @@ public class Environment
         - mainLayer
             - graphLayer
                 - bgLayer
-        - uiLayer
+			- uiLayer
+			- frameLayer
 */
 
     public final Animator animator = Animator.create();
@@ -69,12 +70,14 @@ public class Environment
         graphLayer.add(bgLayer);
         mainLayer.add(graphLayer);
         mainLayer.add(frameLayer);
-        graphics().rootLayer().add(uiLayer);
+		//mainLayer.add(uiLayer);
+		graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);
 
         frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
+		uiLayer.setDepth(Const.UI_DEPTH);
         
         xOffset = 0.0f;
         yOffset = 0.0f;
@@ -95,6 +98,10 @@ public class Environment
 
     public GroupLayer getMainLayer() {
         return mainLayer;
+    }
+	
+	public GroupLayer getUILayer() {
+        return uiLayer;
     }
 
 //    public void update(float x, float y) {

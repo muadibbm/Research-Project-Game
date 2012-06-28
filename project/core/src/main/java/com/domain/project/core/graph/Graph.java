@@ -32,9 +32,8 @@ public class Graph {
     private boolean isCityGraph;
 	
 	private int id;
-	private int player_id;
 
-    public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height, int id, int player_id) {
+    public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height, int id) {
         this.isCityGraph = isCityGraph;
         this.nodes = new HashMap<Integer, Node>();
         this.edges = new HashMap<Integer, Edge>();
@@ -43,11 +42,10 @@ public class Graph {
         this.width = width;
         this.height = height;
 		this.id = id;
-		this.player_id = player_id;
     }
 
-    public void generateGraph(String filename, GroupLayer graphLayer) {
-        parseGraphFile(filename, graphLayer);
+    public void generateGraph(String filename, GroupLayer graphLayer, int player_id) {
+        parseGraphFile(filename, graphLayer, player_id);
 		placeNodes();
 		setNodeLevels();
 		placeEdges();
@@ -70,7 +68,7 @@ public class Graph {
 		placeEdges();
 	}
 
-    private void parseGraphFile(String filename, final GroupLayer graphLayer) {
+    private void parseGraphFile(String filename, final GroupLayer graphLayer, final int player_id) {
 
         assets().getText(PATH + filename, new ResourceCallback<String>() {
             @Override
@@ -194,7 +192,7 @@ public class Graph {
 //                    nodeID = Integer.parseInt(subEntries[2]);
 
                     if(!contains(nodeID)) {
-                        n1 = new Node(nodeID, nucl, isCityGraph, graphLayer, id);
+                        n1 = new Node(nodeID, nucl, isCityGraph, graphLayer, id, player_id);
                         addNode(n1);
                     } else {
                         n1 = getNode(nodeID);
@@ -226,7 +224,7 @@ public class Graph {
 //                    neighborID = Integer.parseInt(subEntries[5]);
 
                     if(!contains(neighborID)) {
-                        n2 = new Node(neighborID, nucl, isCityGraph, graphLayer, id);
+                        n2 = new Node(neighborID, nucl, isCityGraph, graphLayer, id, player_id);
                         addNode(n2);
                     } else {
                         n2 = getNode(neighborID);
@@ -245,8 +243,11 @@ public class Graph {
     }
 	
 	public void paintAll() {
-		for(Map.Entry<Integer, Node> entry : nodes.entrySet())
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			entry.getValue().paint();
+			if(entry.getValue().getMapping() != null)
+				entry.getValue().getMapping().paint();
+		}
 		for(Map.Entry<Integer, Edge> entry : edges.entrySet())
 			entry.getValue().paint();
 	}

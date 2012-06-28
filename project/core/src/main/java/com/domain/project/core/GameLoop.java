@@ -7,6 +7,9 @@ import playn.core.Game;
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
 import com.domain.project.core.graph.Edge;
+import com.domain.project.core.graph.Mapping;
+import com.domain.project.core.Gui;
+import com.domain.project.core.Const;
 
 import com.domain.project.core.controls.KeyboardControls;
 import com.domain.project.core.controls.MouseControls;
@@ -15,8 +18,6 @@ import playn.core.Mouse;
 import java.lang.Integer;
 import java.util.Map;
 import java.util.HashMap;
-
-import com.domain.project.core.Const;
 
 public class GameLoop implements Game {
 
@@ -32,6 +33,11 @@ public class GameLoop implements Game {
     
     private String graphA = "1FUF_modified";
     private String graphB = "1FUF_modified";
+	
+	private Player player1;
+	private Gui gui1;
+	private Player player2;
+	private Gui gui2;
 
     @Override
     public void init() { 
@@ -39,22 +45,24 @@ public class GameLoop implements Game {
         Const.loadImages();
         environment = new Environment();
 		
-		Player player1 = new Player(1, "player 1");
-		Player player2 = new Player(2, "player 2");
+		player1 = new Player(1, "player 1");
+		gui1 = new Gui(environment.getUILayer());
+		player2 = new Player(2, "player 2");
+		//TODO : gui2 = new Gui(environment.getUILayer());
 		
 		float graphXOffset = 90;
 		float graphYOffset = 30;
 		//TODO : read two graphs from database and put into these 4 graph instances
 		
-        cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1, player1.getId());
-        cityGraphA.generateGraph(graphA, environment.getGraphLayer());
-		campGraphA = new Graph(false, Const.WORLD_WIDTH/4 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2, player1.getId());
-        campGraphA.generateGraph(graphB, environment.getGraphLayer());
+        cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
+        cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
+		campGraphA = new Graph(false, Const.WORLD_WIDTH/4 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2);
+        campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
 		
-		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3, player2.getId());
-        campGraphB.generateGraph(graphA, environment.getGraphLayer());
-		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4, player2.getId());
-        cityGraphB.generateGraph(graphB, environment.getGraphLayer());
+		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3);
+        campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
+		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
+        cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 
@@ -63,6 +71,8 @@ public class GameLoop implements Game {
         keyboard().setListener(kbControls);
         mControls = new MouseControls(environment);
         mouse().setListener(mControls);
+		gui1.addListener(player1);
+		//TODO : gui2.addListener(player2);
 		addAllListeners(cityGraphA);
 		addAllListeners(campGraphA);
 		addAllListeners(campGraphB);
@@ -94,9 +104,10 @@ public class GameLoop implements Game {
         return Const.UPDATE_RATE;
     }
 	
-	/* Any interatcion with the game and the responding game logic goes here */
+	//TODO : Multiplayer aspect, mouse should be associated with a player
+	//TODO : add Networking, where does the players interations diverge ?
 	
-	//TODO : fix this
+	/* Any interatcion with the game "Graph" layers and the responding game logic */
 	private void addAllListeners(final Graph graph) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
@@ -104,13 +115,17 @@ public class GameLoop implements Game {
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
+						/* Select Node */
+						player1.selectNode(node);
+						/* Show all roads/edges */
 						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
 							if(node.equals(graph.getNode1(edge.getValue()))) // || node.equals(graph.getNode2(edge.getValue())) 
 								edge.getValue().getRoad().setVisible(true);
 							else
 								edge.getValue().getRoad().setVisible(false);
 						}
-                        System.out.println(node);
+						/* show the available Constructions */
+						//TODO : gui1.paint(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y); ???
 					}
 				}
 				@Override
