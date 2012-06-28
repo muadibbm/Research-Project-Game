@@ -67,10 +67,10 @@ public class Gui
             @Override
             public void done(Image image) {
 				option1.setTranslation(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
-				option2.setTranslation(Const.CONSTRUCTION_PANEL_X + 100, Const.CONSTRUCTION_PANEL_Y);
-				option3.setTranslation(Const.CONSTRUCTION_PANEL_X + 200, Const.CONSTRUCTION_PANEL_Y);
-				option4.setTranslation(Const.CONSTRUCTION_PANEL_X + 300, Const.CONSTRUCTION_PANEL_Y);
-				option5.setTranslation(Const.CONSTRUCTION_PANEL_X + 400, Const.CONSTRUCTION_PANEL_Y);
+				option2.setTranslation(Const.CONSTRUCTION_PANEL_X + (0.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
+				option3.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
+				option4.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
+				option5.setTranslation(Const.CONSTRUCTION_PANEL_X + (2.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
 				option1.setScale(Const.CONSTRUCTION_PANEL_SCALE);
 				option2.setScale(Const.CONSTRUCTION_PANEL_SCALE);
 				option3.setScale(Const.CONSTRUCTION_PANEL_SCALE);

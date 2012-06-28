@@ -11,8 +11,8 @@ public final class Const
 {
     public static final int UPDATE_RATE = 25;
 
-    public static int WINDOW_WIDTH = 1440;
-    public static int WINDOW_HEIGHT = 900;
+    public static int WINDOW_WIDTH = 1024;
+    public static int WINDOW_HEIGHT = 768;
 
     public static int WORLD_WIDTH = 2200;
     public static int WORLD_HEIGHT = 1500;
@@ -49,7 +49,7 @@ public final class Const
 	public static float MAPPING_WIDTH = 0.3f;
 	
 	public static float UI_DEPTH = 3.0f;
-	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/3;
+	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
 	public static float CONSTRUCTION_PANEL_Y = 0.0f;
 	public static float CONSTRUCTION_PANEL_SCALE = 0.2f;
 	public static float BUTTON_SCALE = 0.3f;
