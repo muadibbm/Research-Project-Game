@@ -82,7 +82,7 @@ public final class Const
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
 		CONSTRUCTION_PANEL_IMAGE = assets().getImage("images/UI/costructionPanel.png");
-		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapbutton.png");
-		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapbutton.png");
+		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
+		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
     }
 }

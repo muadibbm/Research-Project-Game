@@ -253,7 +253,7 @@ public class Graph {
 	}
 
     private void placeNodes() {
-    //TODO: finish the placement algorithm, we want the neighbours to be in closer range
+    //TODO: finish the placement algorithm
         float tmpX = 0;
         float tmpY = 0;
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
@@ -277,12 +277,15 @@ public class Graph {
     private void placeEdges() {
 		Node n1;
         Node n2;
+		//Road road;
         for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
 			if(!entry.getValue().getRoad().isPlaced()) {
 				n1 = getNode1(entry.getValue());
 				n2 = getNode2(entry.getValue());
 				entry.getValue().getRoad().placeRoad(n1.getPos(), n2.getPos());
 			}
+			//road = entry.getValue().getRoad();
+			//road.setVisible(road.isVisible());
 		}
     }
 	
