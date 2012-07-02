@@ -94,7 +94,7 @@ public class Graph {
                     if(s1.startsWith("%")) continue;
 
                     s1 = s1.replaceAll("\\s+", "");
-                    s1 = s1.replaceAll("([0-9]*)([ATUGC])([0-9]*)(\\([A-Z0-9]\\))-([ATUGC])([0-9]*)(\\([A-Z0-9]\\))-([a-zA-Z]*)-([0-9]*)", "$1 $2 $3 $4 $5 $6 $7 $8 $9"); 
+                    s1 = s1.replaceAll("([0-9]*)([ATUGCatugc])([0-9]*)(\\([A-Z0-9]\\))-([ATUGCatugc])([0-9]*)(\\([A-Z0-9]\\))-([a-zA-Z]*)-([0-9]*)", "$1 $2 $3 $4 $5 $6 $7 $8 $9"); 
                     //99 A 99 (A) A 99 (A) cWW 99
                     subEntries = s1.split(" ");
 
