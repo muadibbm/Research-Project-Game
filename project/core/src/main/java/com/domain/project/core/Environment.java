@@ -13,7 +13,10 @@ import com.domain.project.core.enums.Zoom;
 
 import tripleplay.anim.Animator;
 
-
+/**
+ *  Holds playn layers
+ *
+ */
 public class Environment
 {
     final private GroupLayer mainLayer;

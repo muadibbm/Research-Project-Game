@@ -41,7 +41,7 @@ public final class Const
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
 
     public static float ROAD_VISIBLE_DEPTH = 2.5f;
-    public static float ROAD_HIDDEN_DEPTH = 0.0f;
+    public static float ROAD_HIDDEN_DEPTH = 2.5f;
     public static float ROAD_WIDTH = 0.4f;
 	
 	public static float MAPPING_VISIBLE_DEPTH = 2.4f;

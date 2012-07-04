@@ -53,9 +53,11 @@ public class Road
 	
 	public void paintVisibility(boolean visible) {
 		if(visible)
-			roadLayer.setDepth(Const.ROAD_VISIBLE_DEPTH);
+//			roadLayer.setDepth(Const.ROAD_VISIBLE_DEPTH);
+            roadLayer.setVisible(true);
 		else
-			roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
+//			roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
+            roadLayer.setVisible(false);
 	}
 
 	public void placeRoad(Tuple2f pos1, Tuple2f pos2)	{
