@@ -284,8 +284,7 @@ public class Graph {
 				n2 = getNode2(entry.getValue());
 				entry.getValue().getRoad().placeRoad(n1.getPos(), n2.getPos());
 			}
-			//road = entry.getValue().getRoad();
-			//road.setVisible(road.isVisible());
+			entry.getValue().getRoad().setVisible(entry.getValue().getRoad().isVisible());
 		}
     }
 	

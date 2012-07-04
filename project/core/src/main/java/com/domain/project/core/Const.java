@@ -57,6 +57,9 @@ public final class Const
 	public static float MAP_BUTTON_Y = WINDOW_HEIGHT-90;
 	public static float UNMAP_BUTTON_X = 2*WINDOW_WIDTH/3-100;
 	public static float UNMAP_BUTTON_Y = WINDOW_HEIGHT-90;
+	public static float INFO_PANEL_X = 0.0f;
+	public static float INFO_PANEL_Y = 27.0f;
+	public static float INFO_PANEL_SCALE = 0.09f;
 
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;
@@ -67,6 +70,7 @@ public final class Const
 	public static Image CONSTRUCTION_PANEL_IMAGE;
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
+	public static Image INFO_PANEL_IMAGE;
 
     private Const() {
         //prevents the caller from creating an instantce of this class
@@ -84,5 +88,6 @@ public final class Const
 		CONSTRUCTION_PANEL_IMAGE = assets().getImage("images/UI/costructionPanel.png");
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
+		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
     }
 }

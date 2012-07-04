@@ -115,11 +115,11 @@ public class Node {
     }
 	
 	public void setNodeLevel() {
-		base.setLevel(neighbors.size());
+		base.setPopulation(neighbors.size());
 	}
 	
 	public int getNodeLevel() {
-		return base.getLevel();
+		return base.getPopulation();
 	}
 
     public int getID() {

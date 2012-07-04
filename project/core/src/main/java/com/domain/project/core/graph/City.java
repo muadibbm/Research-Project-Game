@@ -7,11 +7,12 @@ import com.domain.project.core.Const;
 
 public class City extends Base
 {
-	private ImageLayer townHall;
+	private ImageLayer palace;
 	private ImageLayer bazar;
 	private ImageLayer garden;
 	private ImageLayer tower;
 	private ImageLayer wall;
+	private ImageLayer smithy;
 	//TODO: how to position the city and its componants
 
 	public City(GroupLayer graphLayer){

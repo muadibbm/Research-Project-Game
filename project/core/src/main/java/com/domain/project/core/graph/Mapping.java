@@ -17,12 +17,15 @@ public class Mapping
 	
 	private Tuple2f pos1;
 	private Tuple2f pos2;
+	
+	private int points;
 
     public Mapping(final GroupLayer graphLayer, Tuple2f pos1, Tuple2f pos2)
     {
 		mapImage = Const.MAP_IMAGE;
         mapLayer = graphics().createImageLayer(mapImage);
 		visible = true;
+		points = 0;
 		mapLayer.setDepth(Const.MAPPING_VISIBLE_DEPTH);
 		this.pos1 = pos1;
 		this.pos2 = pos2;
@@ -73,6 +76,14 @@ public class Mapping
     public ImageLayer getLayer()    {
         return mapLayer;
     }
+	
+	public int getPoints() {
+		return points;
+	}
+	
+	public void setPoints(int points) {
+		this.points = points;
+	}
 	
 	public void destroy() {
 		this.visible = false;
