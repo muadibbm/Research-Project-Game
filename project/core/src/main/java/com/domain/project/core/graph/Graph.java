@@ -245,8 +245,10 @@ public class Graph {
 	public void paintAll() {
 		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			entry.getValue().paint();
-			if(entry.getValue().getMapping() != null)
+			if(entry.getValue().getMapping() != null) {
 				entry.getValue().getMapping().paint();
+				entry.getValue().getMapping().paintVisibility(entry.getValue().getMapping().isVisible());
+			}
 		}
 		for(Map.Entry<Integer, Edge> entry : edges.entrySet())
 			entry.getValue().paint();
@@ -265,6 +267,9 @@ public class Graph {
                     entry.getValue().placeNode(tmpX, tmpY);
 					
             }
+			if(entry.getValue().getMapping() != null) {
+				entry.getValue().getMapping().setVisible(entry.getValue().getMapping().isVisible());
+			}
         }
     }
 	

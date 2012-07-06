@@ -6,6 +6,8 @@ import playn.core.Game;
 
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
+import com.domain.project.core.graph.City;
+import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.Edge;
 import com.domain.project.core.graph.Mapping;
 import com.domain.project.core.Gui;
@@ -73,10 +75,10 @@ public class GameLoop implements Game {
         mouse().setListener(mControls);
 		gui1.addListener(player1);
 		//TODO : gui2.addListener(player2);
-		addAllListeners(cityGraphA);
-		addAllListeners(campGraphA);
-		addAllListeners(campGraphB);
-		addAllListeners(cityGraphB);
+		addAllListeners(cityGraphA, player1);
+		addAllListeners(campGraphA, player1);
+		addAllListeners(campGraphB, player1);
+		addAllListeners(cityGraphB, player1);
     }
 
     @Override
@@ -108,21 +110,43 @@ public class GameLoop implements Game {
 	//TODO : add Networking, where does the players interations diverge ?
 	
 	/* Any interatcion with the game "Graph" layers and the responding game logic */
-	private void addAllListeners(final Graph graph) {
+	private void addAllListeners(final Graph graph, final Player player) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
 			entry.getValue().getBase().getBaseLayer().addListener(new Mouse.Listener() {
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
-						/* Select Node */
-						player1.selectNode(node);
-						/* Show all roads/edges */
-						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
-							if(node.equals(graph.getNode1(edge.getValue()))) // || node.equals(graph.getNode2(edge.getValue())) 
+						/* Hide previous selections */
+						HideAllEdges();
+						HideAllMappings();
+						/* Select New Node */
+						player.selectNode(node);
+						/* Set all edges of the selected node visible */
+						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
+							if(node.equals(graph.getNode1(edge.getValue())))
 								edge.getValue().getRoad().setVisible(true);
-							else
-								edge.getValue().getRoad().setVisible(false);
+						if(node.getPlayer() == player.getId()) {
+							/* Create Mapping if a Node is already set to be mapped */
+							if(player.getNodeToBeMapped() != null) {
+								if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
+									if(player.getSelectedNode().getBase() instanceof City & player.getNodeToBeMapped().getBase() instanceof Camp)
+										player.getSelectedNode().setMapping(player.getNodeToBeMapped());
+									else if(player.getSelectedNode().getBase() instanceof Camp & player.getNodeToBeMapped().getBase() instanceof City)
+										player.getNodeToBeMapped().setMapping(player.getSelectedNode());
+								}
+								System.out.println("remove graphical indication");
+								//TODO : remove graphical indication
+								player.setNodeToBeMapped(null);
+							}
+							/* Set the mapping of the selected node visible */
+							if(node.getMapping() != null)
+								node.getMapping().setVisible(true);
+							/* Set the edges of the mapped_node of the selected node visible */ //TODO : too much ???
+							//if(node.getMappedNode()!= null)
+								//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
+									//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
+										//edge.getValue().getRoad().setVisible(true);
 						}
 						/* show the available Constructions */
 						//TODO : gui1.paint(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y); ???
@@ -142,5 +166,44 @@ public class GameLoop implements Game {
 				}
 			});
 		}
+	}
+	
+	private Graph getGraph(int graphId) {
+		if(cityGraphA.getId() == graphId)
+			return cityGraphA;
+		else if(campGraphA.getId() == graphId)
+			return campGraphA;
+		else if(cityGraphB.getId() == graphId)
+			return cityGraphB;
+		else if(campGraphB.getId() == graphId)
+			return campGraphB;
+		else
+			return null; //Is this safe ? may cause bug !!
+	}
+	
+	private void HideAllEdges() {
+		HideEdges(cityGraphA);
+		HideEdges(campGraphA);
+		HideEdges(campGraphB);
+		HideEdges(cityGraphB);
+	}
+	
+	private void HideEdges(Graph graph) {
+		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
+			edge.getValue().getRoad().setVisible(false);
+	}
+	
+	private void HideAllMappings() {
+		HideMappings(cityGraphA);
+		HideMappings(campGraphA);
+		HideMappings(campGraphB);
+		HideMappings(cityGraphB);
+	}
+	
+	private void HideMappings(Graph graph) {
+		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet())
+			if(node.getValue().getMapping() != null) {
+				node.getValue().getMapping().setVisible(false);
+			}
 	}
 }

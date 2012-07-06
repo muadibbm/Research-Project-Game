@@ -1,7 +1,5 @@
 package com.domain.project.core.graph;
 
-
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -58,6 +56,7 @@ public class Node {
 
 	public void setMapping(Node node) {
 		mapped_node = node;
+		mapped_node.setMappedNode(this);
 		mapping = new Mapping(this.graphLayer, this.coordinates, mapped_node.getPos());
 		mapped_node.setMapping(mapping);
 	}
@@ -83,6 +82,10 @@ public class Node {
 	
 	public Node getMappedNode() {
 		return mapped_node;
+	}
+	
+	public void setMappedNode(Node node) {
+		mapped_node = node;
 	}
 	
 	public int getGraphId() {
@@ -151,6 +154,4 @@ public class Node {
         }
         return ret;
     }
-
-
 }

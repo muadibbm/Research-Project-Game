@@ -6,12 +6,14 @@ public class Player
 {
 	private int player_id;
 	private String name;
-	private Node [] selected_nodes;
+	private Node selected_node;
+	private Node nodeToBeMapped;
 	
 	public Player(int player_id, String name) {
 		this.player_id = player_id;
 		this.name = name;
-		selected_nodes = new Node [2];
+		selected_node = null;
+		nodeToBeMapped = null;
 	}
 	
 	public int getId() {
@@ -23,15 +25,18 @@ public class Player
 	}
 	
 	public void selectNode(Node node) {
-		selected_nodes[1] = selected_nodes[0];
-		selected_nodes[0] = node;
+		selected_node = node;
 	}
 	
-	public Node getSelectedNode1() {
-		return selected_nodes[0];
+	public void setNodeToBeMapped(Node node) {
+		nodeToBeMapped = node;
 	}
 	
-	public Node getSelectedNode2() {
-		return selected_nodes[1];
+	public Node getSelectedNode() {
+		return selected_node;
+	}
+	
+	public Node getNodeToBeMapped() {
+		return nodeToBeMapped;
 	}
 }

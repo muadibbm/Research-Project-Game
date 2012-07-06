@@ -23,8 +23,8 @@ public class Base
 		this.population = 0;
         baseLayer = graphics().createImageLayer(baseImage);
 		baseLayer.setDepth(Const.BASE_DEPTH);
-		infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
-		infoLayer.setDepth(Const.UI_DEPTH);
+		//infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
+		//infoLayer.setDepth(Const.UI_DEPTH);
 		
         baseImage.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -38,7 +38,7 @@ public class Base
                 log().error("error loading node", e);
             }
         });
-		
+		/*
 		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
@@ -52,6 +52,7 @@ public class Base
                 log().error("error loading node", e);
             }
         });
+		*/
 	}
 	
 	public void setPopulation(int population) {
@@ -68,7 +69,7 @@ public class Base
 		else
 			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);
         baseLayer.setTranslation(x, y);
-		infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
+		//infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
 	}
 	
 	public ImageLayer getBaseLayer(){

@@ -27,7 +27,8 @@ public class Road
 		//TODO: randomly choose from diffrent road images
 		roadImage = Const.ROAD_IMAGE;
         roadLayer = graphics().createImageLayer(roadImage);
-		roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
+		roadLayer.setDepth(Const.ROAD_DEPTH);
+		roadLayer.setVisible(false);
 
         roadImage.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -53,10 +54,8 @@ public class Road
 	
 	public void paintVisibility(boolean visible) {
 		if(visible)
-//			roadLayer.setDepth(Const.ROAD_VISIBLE_DEPTH);
             roadLayer.setVisible(true);
 		else
-//			roadLayer.setDepth(Const.ROAD_HIDDEN_DEPTH);
             roadLayer.setVisible(false);
 	}
 

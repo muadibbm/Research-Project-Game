@@ -95,13 +95,10 @@ public class Gui
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode1() != null & player.getSelectedNode2() != null)
-							if(player.getId() == player.getSelectedNode1().getPlayer() & player.getId() == player.getSelectedNode2().getPlayer() & 
-								player.getSelectedNode1().getMapping() == null & player.getSelectedNode2().getMapping() == null) {
-								if(player.getSelectedNode1().getBase() instanceof City & player.getSelectedNode2().getBase() instanceof Camp)
-									player.getSelectedNode1().setMapping(player.getSelectedNode2());
-								else if(player.getSelectedNode1().getBase() instanceof Camp & player.getSelectedNode2().getBase() instanceof City)
-									player.getSelectedNode2().setMapping(player.getSelectedNode1());
+						if(player.getSelectedNode() != null & player.getNodeToBeMapped() == null)
+							if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
+								player.setNodeToBeMapped(player.getSelectedNode());
+								//TODO : add some graphical indication
 							}
 					}
 				}
@@ -123,15 +120,13 @@ public class Gui
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode1() != null & player.getSelectedNode2() != null)
-							if(player.getSelectedNode1().getMapping() != null & player.getSelectedNode2().getMapping() != null)
-								if(player.getId() == player.getSelectedNode1().getPlayer() & player.getId() == player.getSelectedNode2().getPlayer() & 
-									player.getSelectedNode1().getMapping().equals(player.getSelectedNode2().getMapping())) {
-									if(player.getSelectedNode1().getBase() instanceof City & player.getSelectedNode2().getBase() instanceof Camp)
-										player.getSelectedNode1().unMap();
-									else if(player.getSelectedNode1().getBase() instanceof Camp & player.getSelectedNode2().getBase() instanceof City)
-										player.getSelectedNode2().unMap();
-								}
+						if(player.getSelectedNode() != null)
+							if(player.getSelectedNode().getMapping() != null & player.getId() == player.getSelectedNode().getPlayer()) {
+								if(player.getSelectedNode().getBase() instanceof City)
+									player.getSelectedNode().unMap();
+								else if(player.getSelectedNode().getBase() instanceof Camp)
+									player.getSelectedNode().getMappedNode().unMap();
+							}
 					}
 				}
 				@Override
