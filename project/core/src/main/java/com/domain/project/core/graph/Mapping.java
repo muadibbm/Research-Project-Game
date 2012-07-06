@@ -27,7 +27,7 @@ public class Mapping
 		visible = true;
 		points = 0;
 		mapLayer.setDepth(Const.MAPPING_DEPTH);
-		mapLayer.setVisible(true);
+		mapLayer.setAlpha(Const.VISIBLE);//mapLayer.setVisible(true);
 		this.pos1 = pos1;
 		this.pos2 = pos2;
 
@@ -55,9 +55,9 @@ public class Mapping
 	
 	public void paintVisibility(boolean visible) {
 		if(visible)
-			mapLayer.setVisible(true);
+			mapLayer.setAlpha(Const.VISIBLE);//mapLayer.setVisible(true);
 		else
-			mapLayer.setVisible(false);
+			mapLayer.setAlpha(Const.HIDDEN_MAPPING);//mapLayer.setVisible(false);
 	}
 
 	public void setMapping(Tuple2f pos1, Tuple2f pos2)	{

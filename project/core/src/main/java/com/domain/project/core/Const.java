@@ -69,6 +69,10 @@ public final class Const
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
+	
+	public static float VISIBLE = 1.0f;
+	public static float HIDDEN_ROAD = 0.18f;
+	public static float HIDDEN_MAPPING = 0.3f;
 
     private Const() {
         //prevents the caller from creating an instantce of this class

@@ -28,7 +28,7 @@ public class Road
 		roadImage = Const.ROAD_IMAGE;
         roadLayer = graphics().createImageLayer(roadImage);
 		roadLayer.setDepth(Const.ROAD_DEPTH);
-		roadLayer.setVisible(false);
+		roadLayer.setAlpha(Const.HIDDEN_ROAD);//roadLayer.setVisible(false);
 
         roadImage.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -54,9 +54,9 @@ public class Road
 	
 	public void paintVisibility(boolean visible) {
 		if(visible)
-            roadLayer.setVisible(true);
+            roadLayer.setAlpha(Const.VISIBLE);//roadLayer.setVisible(true);
 		else
-            roadLayer.setVisible(false);
+            roadLayer.setAlpha(Const.HIDDEN_ROAD);//roadLayer.setVisible(false);
 	}
 
 	public void placeRoad(Tuple2f pos1, Tuple2f pos2)	{
