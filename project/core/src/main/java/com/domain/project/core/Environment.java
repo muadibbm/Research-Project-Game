@@ -139,6 +139,7 @@ public class Environment
     public void setZoomLevel(Zoom zLevel) {
         this.zLevel = zLevel;
     }
+	
     public Zoom zLevel() {
         return zLevel;
     }

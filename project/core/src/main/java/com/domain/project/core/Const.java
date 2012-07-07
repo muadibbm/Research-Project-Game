@@ -14,8 +14,8 @@ public final class Const
     public static int WINDOW_WIDTH = 1024;
     public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 2200;
-    public static int WORLD_HEIGHT = 1500;
+    public static int WORLD_WIDTH = 3000;
+    public static int WORLD_HEIGHT = 1800;
 
 	public static int FRAME_SIZE = 60;//Adjust this only
     public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
@@ -26,16 +26,16 @@ public final class Const
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
 
-    public static float BASE_CITY_SCALE = 0.05f;
-	public static float BASE_CAMP_SCALE = 0.1f;
+    public static float BASE_CITY_SCALE = 0.06f;
+	public static float BASE_CAMP_SCALE = 0.07f;
 	public static float BASE_DEPTH = 3.0f;
 
-    public static float MIN_CITY_DISTANCE = 60;
+    public static float MIN_CITY_DISTANCE = 90;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
 
-    public static float MIN_CAMP_DISTANCE = 40;
+    public static float MIN_CAMP_DISTANCE = 50;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
@@ -58,6 +58,12 @@ public final class Const
 	public static float INFO_PANEL_X = 0.0f;
 	public static float INFO_PANEL_Y = 27.0f;
 	public static float INFO_PANEL_SCALE = 0.09f;
+	
+	public static float TREE_DEPTH = 2.7f;
+	public static float TREE_SCALE = 0.07f;
+	public static int MAX_TREE_NUMBER = 7000;
+	public static float MIN_INBETWEEN_TREE_DISTANCE = 3.0f;
+	public static float MIN_NODE_TREE_DISTANCE = 50.0f;
 
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;
@@ -69,10 +75,11 @@ public final class Const
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
+	public static Image TREE1_IMAGE;
 	
 	public static float VISIBLE = 1.0f;
-	public static float HIDDEN_ROAD = 0.18f;
-	public static float HIDDEN_MAPPING = 0.3f;
+	public static float HIDDEN_ROAD = 0.21f;
+	public static float HIDDEN_MAPPING = 0.32f;
 
     private Const() {
         //prevents the caller from creating an instantce of this class
@@ -91,5 +98,6 @@ public final class Const
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
+		TREE1_IMAGE = assets().getImage("images/Background/texture_trees1.png");
     }
 }

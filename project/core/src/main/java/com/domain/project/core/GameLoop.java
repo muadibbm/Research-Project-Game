@@ -6,6 +6,8 @@ import playn.core.Game;
 
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
+import com.domain.project.core.graph.Tree;
+import com.domain.project.core.graph.Tuple2f;
 import com.domain.project.core.graph.City;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.Edge;
@@ -20,6 +22,9 @@ import playn.core.Mouse;
 import java.lang.Integer;
 import java.util.Map;
 import java.util.HashMap;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class GameLoop implements Game {
 
@@ -40,12 +45,16 @@ public class GameLoop implements Game {
 	private Gui gui1;
 	private Player player2;
 	private Gui gui2;
+	
+	private java.util.Random r = new java.util.Random();
+	private List <Tree> trees;;
 
     @Override
     public void init() { 
 
         Const.loadImages();
         environment = new Environment();
+		trees = new ArrayList <Tree> ();
 		
 		player1 = new Player(1, "player 1");
 		gui1 = new Gui(environment.getUILayer());
@@ -67,6 +76,8 @@ public class GameLoop implements Game {
         cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
 		
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
+		plantTrees();
+		paintTrees();//performance ?
 
         //create and set controls
         kbControls = new KeyboardControls(environment);
@@ -89,6 +100,7 @@ public class GameLoop implements Game {
 		cityGraphB.paintAll();
 		campGraphA.paintAll();
 		campGraphB.paintAll();
+		//paintTrees(); <-- for html it has to be here
     }
 
     @Override
@@ -205,5 +217,36 @@ public class GameLoop implements Game {
 			if(node.getValue().getMapping() != null) {
 				node.getValue().getMapping().setVisible(false);
 			}
+	}
+	
+	private void plantTrees() {
+		int number = 0;
+		float tmpX = 0.0f;
+		float tmpY = 0.0f;
+		while(number < Const.MAX_TREE_NUMBER) {
+			tmpX = r.nextFloat()*Const.WORLD_WIDTH;
+            tmpY = r.nextFloat()*Const.WORLD_HEIGHT;
+			if(isTreeSeperated(cityGraphA, tmpX, tmpY) & isTreeSeperated(campGraphA, tmpX, tmpY) &
+				isTreeSeperated(campGraphB, tmpX, tmpY) & isTreeSeperated(cityGraphB, tmpX, tmpY)) {
+				Tree tree = new Tree(environment.getGraphLayer(), tmpX, tmpY);
+				trees.add(tree);
+				number++;
+			}
+		}
+	}
+	
+	private boolean isTreeSeperated(Graph graph, float posX, float posY) {
+        float distance = 0.0f;
+        for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
+			distance = entry.getValue().getPos().getDistanceFrom(new Tuple2f(posX, posY));
+				if(distance < Const.MIN_NODE_TREE_DISTANCE)
+						return false;
+        }
+        return true;
+    }
+	
+	private void paintTrees() {
+		for(Tree tree : trees)
+			tree.paint();
 	}
 }
