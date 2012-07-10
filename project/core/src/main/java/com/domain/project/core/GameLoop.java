@@ -228,7 +228,15 @@ public class GameLoop implements Game {
             tmpY = r.nextFloat()*Const.WORLD_HEIGHT;
 			if(isTreeSeperated(cityGraphA, tmpX, tmpY) & isTreeSeperated(campGraphA, tmpX, tmpY) &
 				isTreeSeperated(campGraphB, tmpX, tmpY) & isTreeSeperated(cityGraphB, tmpX, tmpY)) {
-				Tree tree = new Tree(environment.getGraphLayer(), tmpX, tmpY);
+				Tree tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE1_IMAGE, Const.TREE1_SHADOW_IMAGE);
+				/*switch(r.nextInt(4))
+				{
+					case 0 : tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE1_IMAGE); break;
+					case 1 : tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE2_IMAGE); break;
+					case 2 : tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE3_IMAGE); break;
+					case 3 : tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE4_IMAGE); break;
+					default : tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE5_IMAGE); break;
+				}*/
 				trees.add(tree);
 				number++;
 			}
@@ -239,9 +247,14 @@ public class GameLoop implements Game {
         float distance = 0.0f;
         for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			distance = entry.getValue().getPos().getDistanceFrom(new Tuple2f(posX, posY));
-				if(distance < Const.MIN_NODE_TREE_DISTANCE)
-						return false;
+			if(distance < Const.MIN_NODE_TREE_DISTANCE)
+				return false;
         }
+		//for(Tree tree : trees) {
+		//	distance = entry.getValue().getPos().getDistanceFrom(new Tuple2f(posX, posY));
+		//	if(distance < Const.MIN_NODE_TREE_DISTANCE)
+		//		return false;
+		//}
         return true;
     }
 	

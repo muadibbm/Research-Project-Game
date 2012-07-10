@@ -9,6 +9,9 @@ import playn.core.GroupLayer;
 
 public final class Const 
 {
+	//graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
+    //TODO : Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
+		
     public static final int UPDATE_RATE = 25;
 
     public static int WINDOW_WIDTH = 1024;
@@ -41,10 +44,10 @@ public final class Const
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
 
     public static float ROAD_DEPTH = 2.4f;
-    public static float ROAD_WIDTH = 0.4f;
+    public static float ROAD_WIDTH = 0.5f;
 	
 	public static float MAPPING_DEPTH = 2.5f;
-	public static float MAPPING_WIDTH = 0.3f;
+	public static float MAPPING_WIDTH = 0.4f;
 	
 	public static float UI_DEPTH = 3.0f;
 	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
@@ -59,10 +62,11 @@ public final class Const
 	public static float INFO_PANEL_Y = 27.0f;
 	public static float INFO_PANEL_SCALE = 0.09f;
 	
+	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
-	public static float TREE_SCALE = 0.07f;
+	public static float TREE_SCALE = 0.08f;
 	public static int MAX_TREE_NUMBER = 7000;
-	public static float MIN_INBETWEEN_TREE_DISTANCE = 3.0f;
+	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
 	public static float MIN_NODE_TREE_DISTANCE = 50.0f;
 
 	public static Image FRAME_IMAGE;
@@ -76,10 +80,19 @@ public final class Const
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
 	public static Image TREE1_IMAGE;
+	public static Image TREE1_SHADOW_IMAGE;
+	//public static Image TREE2_IMAGE;
+	//public static Image TREE3_IMAGE;
+	//public static Image TREE4_IMAGE;
+	//public static Image TREE5_IMAGE;
+	public static Image TOWN_HALL_LEVEL1;
+	public static Image TOWER_LEVEL1;
+	public static Image BAZAR_FOOD_LEVEL1;
 	
 	public static float VISIBLE = 1.0f;
-	public static float HIDDEN_ROAD = 0.21f;
-	public static float HIDDEN_MAPPING = 0.32f;
+	public static float HIDDEN_ROAD = 0.1f;
+	public static float HIDDEN_MAPPING = 0.33f;
+	public static float SHADOW = 0.5f;
 
     private Const() {
         //prevents the caller from creating an instantce of this class
@@ -99,5 +112,11 @@ public final class Const
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
 		TREE1_IMAGE = assets().getImage("images/Background/texture_trees1.png");
+		TREE1_SHADOW_IMAGE = assets().getImage("images/Background/texture_trees1_shadow.png");
+		//TREE2_IMAGE = assets().getImage("images/Background/texture_trees2.png");
+		//TREE3_IMAGE = assets().getImage("images/Background/texture_trees3.png");
+		//TREE4_IMAGE = assets().getImage("images/Background/texture_trees4.png");
+		//TREE5_IMAGE = assets().getImage("images/Background/texture_trees5.png");
+		TOWN_HALL_LEVEL1 = assets().getImage("images/City/Town_Hall_level1.png");
     }
 }

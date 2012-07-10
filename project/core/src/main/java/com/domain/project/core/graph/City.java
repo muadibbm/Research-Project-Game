@@ -8,6 +8,7 @@ import com.domain.project.core.Const;
 public class City extends Base
 {
 	private ImageLayer palace;
+	private ImageLayer tavern;
 	private ImageLayer bazar;
 	private ImageLayer garden;
 	private ImageLayer tower;
