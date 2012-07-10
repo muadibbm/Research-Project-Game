@@ -50,8 +50,6 @@ public class Environment
     {
         //set window size
         graphics().setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-        //graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
-        //TODO : Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
 
         bgLayer = graphics().createImageLayer(Const.BACKGROUND_IMAGE);
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
