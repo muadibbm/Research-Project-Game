@@ -20,6 +20,8 @@ public class Gui
 	private ImageLayer option3;
 	private ImageLayer option4;
 	private ImageLayer option5;
+    
+    private int numOptions = 5;
 	
 	private ImageLayer map;
 	private ImageLayer unmap;
@@ -66,11 +68,16 @@ public class Gui
         Const.CONSTRUCTION_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-				option1.setTranslation(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
-				option2.setTranslation(Const.CONSTRUCTION_PANEL_X + (0.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
-				option3.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
-				option4.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
-				option5.setTranslation(Const.CONSTRUCTION_PANEL_X + (2.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y);
+                option1.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
+                option2.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
+                option3.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
+                option4.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
+                option5.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
+				option1.setTranslation(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
+				option2.setTranslation(Const.CONSTRUCTION_PANEL_X + (0.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
+				option3.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
+				option4.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
+				option5.setTranslation(Const.CONSTRUCTION_PANEL_X + (2.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
 				option1.setScale(Const.CONSTRUCTION_PANEL_SCALE);
 				option2.setScale(Const.CONSTRUCTION_PANEL_SCALE);
 				option3.setScale(Const.CONSTRUCTION_PANEL_SCALE);

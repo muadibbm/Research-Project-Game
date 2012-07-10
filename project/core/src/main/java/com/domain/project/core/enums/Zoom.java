@@ -1,7 +1,7 @@
 package com.domain.project.core.enums;
 
 public enum Zoom {
-    IN(4.0f), OUT(0.0f), DEFAULT(1.0f);
+    IN(15.0f), OUT(0.0f), DEFAULT(1.0f);
     
     private final float scale;
     Zoom(float scale) {

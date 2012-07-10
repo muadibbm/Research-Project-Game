@@ -14,12 +14,15 @@ public final class Const
     public static int WINDOW_WIDTH = 1024;
     public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 3000;
-    public static int WORLD_HEIGHT = 1800;
+//    public static int WORLD_WIDTH = 3000;
+//    public static int WORLD_HEIGHT = 1800;
 
-	public static int FRAME_SIZE = 60;//Adjust this only
-    public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0 - 5*FRAME_SIZE;
+    public static int WORLD_WIDTH = WINDOW_WIDTH * 2;
+    public static int WORLD_HEIGHT = WINDOW_HEIGHT * 2;
+
+	public static int FRAME_SIZE = 100;//Adjust this only
+    public static int WORLD_ORIGIN_X = 0 - FRAME_SIZE;
+    public static int WORLD_ORIGIN_Y = 0 - FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
     public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
 
@@ -47,7 +50,7 @@ public final class Const
 	public static float MAPPING_WIDTH = 0.3f;
 	
 	public static float UI_DEPTH = 3.0f;
-	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
+	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4.0f;
 	public static float CONSTRUCTION_PANEL_Y = 0.0f;
 	public static float CONSTRUCTION_PANEL_SCALE = 0.2f;
 	public static float BUTTON_SCALE = 0.3f;

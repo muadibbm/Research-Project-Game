@@ -46,22 +46,24 @@ public class MouseControls implements Mouse.Listener {
 
     @Override
     public void onMouseMove(Mouse.MotionEvent event) {
+
         xCurrent = event.x(); //wrt window coords
         yCurrent = event.y();
+        
+
         if(clickScroll && env.zLevel() != Zoom.OUT) {
-            xOffset = event.x() - xOld;
-            yOffset = event.y() - yOld;
-//            System.out.println(xOffset + " " + yOffset);
+            xOffset = xCurrent - xOld;
+            yOffset = yCurrent - yOld;
 
             //set x bounds
-            if(env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
+            if(env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
                 env.setX(env.getX() - xOffset);
             }
             if(env.getX() < Const.WORLD_ORIGIN_X) {
                 env.setX(Const.WORLD_ORIGIN_X);
             }
-            if(env.getX() > (Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH)) {
-                env.setX((Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH));
+            if(env.getX() > Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
+                env.setX(Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH);
             }
 
             //set y bounds
@@ -71,11 +73,14 @@ public class MouseControls implements Mouse.Listener {
             if(env.getY() < Const.WORLD_ORIGIN_Y) {
                 env.setY(Const.WORLD_ORIGIN_Y);
             }
-            if(env.getY() > Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) {
+            if(env.getY() > Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT)  {
                 env.setY(Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT);
             }
-            xOld = event.x();
-            yOld = event.y();
+            
+            //System.out.println(env.getX() + " " + env.getY());
+            xOld = xCurrent;
+            yOld = yCurrent;
+
         }
     }
 

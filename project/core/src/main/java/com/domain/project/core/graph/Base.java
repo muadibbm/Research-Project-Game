@@ -29,7 +29,7 @@ public class Base
         baseImage.addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-                baseLayer.setOrigin(image.width()/2, image.height()/2);
+                baseLayer.setOrigin(image.width()/2f, image.height()/2f);
                 graphLayer.add(baseLayer);
             }
 

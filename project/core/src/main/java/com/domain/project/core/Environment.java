@@ -128,10 +128,16 @@ public class Environment
         this.yOffset = yOffset;
     }
 
+    /**
+     * Get current x offset
+     */
     public float getX() {
         return xOffset;
     }
 
+    /**
+     * Get current y offset
+     */
     public float getY() {
         return yOffset;
     }
