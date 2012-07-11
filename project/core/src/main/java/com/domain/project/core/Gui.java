@@ -20,8 +20,9 @@ public class Gui
 	private ImageLayer option3;
 	private ImageLayer option4;
 	private ImageLayer option5;
-    
-    private int numOptions = 5;
+	
+	private ImageLayer infoPanel;
+	private ImageLayer populationLayer;
 	
 	private ImageLayer map;
 	private ImageLayer unmap;
@@ -33,6 +34,8 @@ public class Gui
 		option3 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
 		option4 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
 		option5 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
+		
+		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		
 		map = graphics().createImageLayer(Const.MAP_BUTTON_IMAGE);
 		unmap = graphics().createImageLayer(Const.UNMAP_BUTTON_IMAGE);
@@ -95,6 +98,20 @@ public class Gui
                 log().error("error loading node", e);
             }
         });
+		
+		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+				infoPanel.setTranslation(Const.INFO_PANEL_X, Const.INFO_PANEL_Y);
+				infoPanel.setScale(Const.INFO_PANEL_SCALE);
+				uiLayer.add(infoPanel);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
 	}
 	
 	public void addListener(final Player player) {
@@ -149,5 +166,27 @@ public class Gui
 					//TODO
 				}
 		});
+	}
+	
+	public void setPopulation(int population, final GroupLayer uiLayer, Image number_image) {
+		if(populationLayer != null)
+			populationLayer.destroy();
+
+		populationLayer = graphics().createImageLayer(number_image);
+		
+		number_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+				populationLayer.setTranslation(Const.POPULATION_X, Const.POPULATION_Y);
+				populationLayer.setScale(Const.POPULATION_SCALE);
+				populationLayer.setDepth(1.0f);
+				uiLayer.add(populationLayer);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
 	}
 }

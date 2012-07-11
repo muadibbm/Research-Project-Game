@@ -86,10 +86,10 @@ public class GameLoop implements Game {
         mouse().setListener(mControls);
 		gui1.addListener(player1);
 		//TODO : gui2.addListener(player2);
-		addAllListeners(cityGraphA, player1);
-		addAllListeners(campGraphA, player1);
-		addAllListeners(campGraphB, player1);
-		addAllListeners(cityGraphB, player1);
+		addAllListeners(cityGraphA, player1, gui1);
+		addAllListeners(campGraphA, player1, gui1);
+		addAllListeners(campGraphB, player1, gui1);
+		addAllListeners(cityGraphB, player1, gui1);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class GameLoop implements Game {
 	//TODO : add Networking, where does the players interations diverge ?
 	
 	/* Any interatcion with the game "Graph" layers and the responding game logic */
-	private void addAllListeners(final Graph graph, final Player player) {
+	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
 			entry.getValue().getBase().getBaseLayer().addListener(new Mouse.Listener() {
@@ -159,6 +159,19 @@ public class GameLoop implements Game {
 								//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
 									//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
 										//edge.getValue().getRoad().setVisible(true);
+						}
+						/* Show population */
+						System.out.println(node.getNodeLevel());
+						switch(node.getNodeLevel()) {
+							case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
 						}
 						/* show the available Constructions */
 						//TODO : gui1.paint(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y); ???

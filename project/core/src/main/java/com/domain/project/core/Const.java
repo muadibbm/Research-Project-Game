@@ -17,15 +17,12 @@ public final class Const
     public static int WINDOW_WIDTH = 1024;
     public static int WINDOW_HEIGHT = 768;
 
-//    public static int WORLD_WIDTH = 3000;
-//    public static int WORLD_HEIGHT = 1800;
+    public static int WORLD_WIDTH = 3000;
+    public static int WORLD_HEIGHT = 1800;
 
-    public static int WORLD_WIDTH = WINDOW_WIDTH * 2;
-    public static int WORLD_HEIGHT = WINDOW_HEIGHT * 2;
-
-	public static int FRAME_SIZE = 100;//Adjust this only
-    public static int WORLD_ORIGIN_X = 0 - FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0 - FRAME_SIZE;
+	public static int FRAME_SIZE = 60;//Adjust this only
+    public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
+    public static int WORLD_ORIGIN_Y = 0 - 5*FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
     public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
 
@@ -33,8 +30,9 @@ public final class Const
     public static float GRAPH_DEPTH = 2.0f;
 
     public static float BASE_CITY_SCALE = 0.06f;
-	public static float BASE_CAMP_SCALE = 0.07f;
+	public static float BASE_CAMP_SCALE = 0.05f;
 	public static float BASE_DEPTH = 3.0f;
+	public static float BASE_ALPHA = 0.83f;
 
     public static float MIN_CITY_DISTANCE = 90;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
@@ -53,7 +51,7 @@ public final class Const
 	public static float MAPPING_WIDTH = 0.4f;
 	
 	public static float UI_DEPTH = 3.0f;
-	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4.0f;
+	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
 	public static float CONSTRUCTION_PANEL_Y = 0.0f;
 	public static float CONSTRUCTION_PANEL_SCALE = 0.2f;
 	public static float BUTTON_SCALE = 0.3f;
@@ -62,8 +60,11 @@ public final class Const
 	public static float UNMAP_BUTTON_X = 2*WINDOW_WIDTH/3-100;
 	public static float UNMAP_BUTTON_Y = WINDOW_HEIGHT-90;
 	public static float INFO_PANEL_X = 0.0f;
-	public static float INFO_PANEL_Y = 27.0f;
-	public static float INFO_PANEL_SCALE = 0.09f;
+	public static float INFO_PANEL_Y = WINDOW_HEIGHT-90;
+	public static float INFO_PANEL_SCALE = 0.3f;
+	public static float POPULATION_SCALE = 0.9f;
+	public static float POPULATION_X = INFO_PANEL_X + 200.0f;
+	public static float POPULATION_Y = WINDOW_HEIGHT-70;
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
@@ -82,6 +83,15 @@ public final class Const
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
+	public static Image N1_IMAGE;
+	public static Image N2_IMAGE;
+	public static Image N3_IMAGE;
+	public static Image N4_IMAGE;
+	public static Image N5_IMAGE;
+	public static Image N6_IMAGE;
+	public static Image N7_IMAGE;
+	public static Image N8_IMAGE;
+	public static Image N9_IMAGE;
 	public static Image TREE1_IMAGE;
 	public static Image TREE1_SHADOW_IMAGE;
 	//public static Image TREE2_IMAGE;
@@ -114,6 +124,15 @@ public final class Const
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
+		N1_IMAGE = assets().getImage("images/UI/1.png");
+		N2_IMAGE = assets().getImage("images/UI/2.png");
+		N3_IMAGE = assets().getImage("images/UI/3.png");
+		N4_IMAGE = assets().getImage("images/UI/4.png");
+		N5_IMAGE = assets().getImage("images/UI/5.png");
+		N6_IMAGE = assets().getImage("images/UI/6.png");
+		N7_IMAGE = assets().getImage("images/UI/7.png");
+		N8_IMAGE = assets().getImage("images/UI/8.png");
+		N9_IMAGE = assets().getImage("images/UI/9.png");
 		TREE1_IMAGE = assets().getImage("images/Background/texture_trees1.png");
 		TREE1_SHADOW_IMAGE = assets().getImage("images/Background/texture_trees1_shadow.png");
 		//TREE2_IMAGE = assets().getImage("images/Background/texture_trees2.png");

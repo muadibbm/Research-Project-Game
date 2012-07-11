@@ -14,7 +14,7 @@ import com.domain.project.core.Const;
 public class Base
 {
 	private int population;//degree of the node
-	private ImageLayer infoLayer;
+	//private ImageLayer infoLayer;
 	
 	private ImageLayer baseLayer;
 	
@@ -23,6 +23,7 @@ public class Base
 		this.population = 0;
         baseLayer = graphics().createImageLayer(baseImage);
 		baseLayer.setDepth(Const.BASE_DEPTH);
+		baseLayer.setAlpha(Const.BASE_ALPHA);
 		//infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		//infoLayer.setDepth(Const.UI_DEPTH);
 		
