@@ -84,8 +84,8 @@ public class GameLoop implements Game {
         keyboard().setListener(kbControls);
         mControls = new MouseControls(environment);
         mouse().setListener(mControls);
-		gui1.addListener(player1);
-		//TODO : gui2.addListener(player2);
+		gui1.addListener(player1, environment.getGraphLayer());
+		//TODO : gui2.addListener(player2, environment.getGraphLayer());
 		addAllListeners(cityGraphA, player1, gui1);
 		addAllListeners(campGraphA, player1, gui1);
 		addAllListeners(campGraphB, player1, gui1);
@@ -172,9 +172,10 @@ public class GameLoop implements Game {
 							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
 							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
 							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
 						}
 						/* show the available Constructions */
-						//TODO : gui1.paint(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y); ???
+						gui.paint(graph.isCityGraph());
 					}
 				}
 				@Override

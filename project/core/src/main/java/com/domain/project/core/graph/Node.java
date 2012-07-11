@@ -46,7 +46,7 @@ public class Node {
 		this.graphLayer = graphLayer;
         if(isCity)
             base = new City(this.graphLayer);
-        else
+		else
             base = new Camp(this.graphLayer);
 		this.graph_id = graph_id;
 		mapped_node = null;
@@ -55,6 +55,7 @@ public class Node {
     }
 
 	public void setMapping(Node node) {
+		base.hello();
 		mapped_node = node;
 		mapped_node.setMappedNode(this);
 		mapping = new Mapping(this.graphLayer, this.coordinates, mapped_node.getPos());

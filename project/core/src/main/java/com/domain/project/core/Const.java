@@ -32,12 +32,16 @@ public final class Const
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.05f;
 	public static float BASE_DEPTH = 3.0f;
-	public static float BASE_ALPHA = 0.83f;
+	public static float BASE_ALPHA = 0.93f;
 
     public static float MIN_CITY_DISTANCE = 90;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
+	public static float TOWER_X = 10.0f;
+	public static float TOWER_Y = 10.0f;
+	public static float TOWER_DEPTH = 3.1f;
+	public static float TOWER_SCALE = 0.03f;
 
     public static float MIN_CAMP_DISTANCE = 50;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
@@ -64,7 +68,7 @@ public final class Const
 	public static float INFO_PANEL_SCALE = 0.3f;
 	public static float POPULATION_SCALE = 0.9f;
 	public static float POPULATION_X = INFO_PANEL_X + 200.0f;
-	public static float POPULATION_Y = WINDOW_HEIGHT-70;
+	public static float POPULATION_Y = WINDOW_HEIGHT-72;
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
@@ -79,10 +83,18 @@ public final class Const
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
 	public static Image MAP_IMAGE;
-	public static Image CONSTRUCTION_PANEL_IMAGE;
+	public static Image CONSTRUCTION_TOWN_HALL_LEVEL1;
+	public static Image CONSTRUCTION_TOWER_LEVEL1;
+	public static Image CONSTRUCTION_BAZAR_FOOD_LEVEL1;
+	public static Image CONSTRUCTION_BAZAR_CHINA_LEVEL1;
+	public static Image CONSTRUCTION_BAZAR_CARPET_LEVEL1;
+	public static Image CONSTRUCTION_SMITHY_LEVEL1;
+	public static Image CONSTRUCTION_WALL_LEVEL1;
+	public static Image CONSTRUCTION_GARDEN_LEVEL1;
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
+	public static Image N0_IMAGE;
 	public static Image N1_IMAGE;
 	public static Image N2_IMAGE;
 	public static Image N3_IMAGE;
@@ -105,7 +117,7 @@ public final class Const
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.1f;
 	public static float HIDDEN_MAPPING = 0.33f;
-	public static float SHADOW = 0.5f;
+	public static float SHADOW = 0.45f;
 
     private Const() {
         //prevents the caller from creating an instantce of this class
@@ -120,10 +132,18 @@ public final class Const
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
-		CONSTRUCTION_PANEL_IMAGE = assets().getImage("images/UI/costructionPanel.png");
+		CONSTRUCTION_TOWN_HALL_LEVEL1 = assets().getImage("images/UI/costructionPanel_townHall.png");
+		CONSTRUCTION_BAZAR_CARPET_LEVEL1 = assets().getImage("images/UI/costructionPanel_carpetMarket.png");
+		CONSTRUCTION_BAZAR_CHINA_LEVEL1 = assets().getImage("images/UI/costructionPanel_chinaMarket.png");
+		CONSTRUCTION_BAZAR_FOOD_LEVEL1 = assets().getImage("images/UI/costructionPanel_foodMarket.png");
+		CONSTRUCTION_GARDEN_LEVEL1 = assets().getImage("images/UI/costructionPanel_garden.png");
+		CONSTRUCTION_SMITHY_LEVEL1 = assets().getImage("images/UI/costructionPanel_smithy.png");
+		CONSTRUCTION_TOWER_LEVEL1 = assets().getImage("images/UI/costructionPanel_tower.png");
+		CONSTRUCTION_WALL_LEVEL1 = assets().getImage("images/UI/costructionPanel_wall.png");
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
+		N0_IMAGE = assets().getImage("images/UI/0.png");
 		N1_IMAGE = assets().getImage("images/UI/1.png");
 		N2_IMAGE = assets().getImage("images/UI/2.png");
 		N3_IMAGE = assets().getImage("images/UI/3.png");
@@ -140,5 +160,6 @@ public final class Const
 		//TREE4_IMAGE = assets().getImage("images/Background/texture_trees4.png");
 		//TREE5_IMAGE = assets().getImage("images/Background/texture_trees5.png");
 		TOWN_HALL_LEVEL1 = assets().getImage("images/City/Town_Hall_level1.png");
+		TOWER_LEVEL1 = assets().getImage("images/City/Tower_Level1.png");
     }
 }

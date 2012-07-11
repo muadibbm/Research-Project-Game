@@ -10,16 +10,20 @@ import playn.core.GroupLayer;
 import playn.core.Mouse;
 
 import com.domain.project.core.graph.Mapping;
+import com.domain.project.core.graph.Base;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.City;
 
 public class Gui
 {
-	private ImageLayer option1;
-	private ImageLayer option2;
-	private ImageLayer option3;
-	private ImageLayer option4;
-	private ImageLayer option5;
+	private ImageLayer option1;//TOWN_HALL
+	private ImageLayer option2;//FOOD_MARKET
+	private ImageLayer option3;//CHINA_MARKET
+	private ImageLayer option4;//CARPET_MARKET
+	private ImageLayer option5;//GARDEN
+	private ImageLayer option6;//SMITHY
+	private ImageLayer option7;//TOWER
+	private ImageLayer option8;//WALL
 	
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
@@ -29,11 +33,22 @@ public class Gui
 	
 	public Gui(final GroupLayer uiLayer)
 	{
-        option1 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
-		option2 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
-		option3 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
-		option4 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
-		option5 = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_IMAGE);
+        option1 = graphics().createImageLayer(Const.CONSTRUCTION_TOWN_HALL_LEVEL1);
+		createImage(uiLayer, option1, Const.CONSTRUCTION_TOWN_HALL_LEVEL1, 0.0f);
+		option2 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_FOOD_LEVEL1);
+		createImage(uiLayer, option2, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.3f);
+		option3 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1);
+		createImage(uiLayer, option3, Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1, 0.6f);
+		option4 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1);
+		createImage(uiLayer, option4, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.9f);
+		option5 = graphics().createImageLayer(Const.CONSTRUCTION_GARDEN_LEVEL1);
+		createImage(uiLayer, option5, Const.CONSTRUCTION_GARDEN_LEVEL1, 1.2f);
+		option6 = graphics().createImageLayer(Const.CONSTRUCTION_SMITHY_LEVEL1);
+		createImage(uiLayer, option6, Const.CONSTRUCTION_SMITHY_LEVEL1, 1.5f);
+		option7 = graphics().createImageLayer(Const.CONSTRUCTION_TOWER_LEVEL1);
+		createImage(uiLayer, option7, Const.CONSTRUCTION_TOWER_LEVEL1, 1.8f);
+		option8 = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
+		createImage(uiLayer, option8, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		
@@ -67,37 +82,6 @@ public class Gui
                 log().error("error loading node", e);
             }
         });
-			
-        Const.CONSTRUCTION_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                option1.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
-                option2.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
-                option3.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
-                option4.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
-                option5.setOrigin(Const.CONSTRUCTION_PANEL_IMAGE.width()/2f, Const.CONSTRUCTION_PANEL_IMAGE.height()/2f);
-				option1.setTranslation(Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
-				option2.setTranslation(Const.CONSTRUCTION_PANEL_X + (0.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
-				option3.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
-				option4.setTranslation(Const.CONSTRUCTION_PANEL_X + (1.5f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
-				option5.setTranslation(Const.CONSTRUCTION_PANEL_X + (2.0f)*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + Const.CONSTRUCTION_PANEL_IMAGE.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
-				option1.setScale(Const.CONSTRUCTION_PANEL_SCALE);
-				option2.setScale(Const.CONSTRUCTION_PANEL_SCALE);
-				option3.setScale(Const.CONSTRUCTION_PANEL_SCALE);
-				option4.setScale(Const.CONSTRUCTION_PANEL_SCALE);
-				option5.setScale(Const.CONSTRUCTION_PANEL_SCALE);
-                uiLayer.add(option1);
-				uiLayer.add(option2);
-				uiLayer.add(option3);
-				uiLayer.add(option4);
-				uiLayer.add(option5);
-            }
-
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
 		
 		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -114,7 +98,7 @@ public class Gui
         });
 	}
 	
-	public void addListener(final Player player) {
+	public void addListener(final Player player, final GroupLayer graphLayer) {
 		map.addListener(new Mouse.Listener() {
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -166,6 +150,38 @@ public class Gui
 					//TODO
 				}
 		});
+		
+		/* Building TOWER */
+		option7.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								if(player.getSelectedNode().getBase() instanceof City){
+									player.getSelectedNode().getBase().buildTower(graphLayer, Const.TOWER_LEVEL1);
+									//base = base(City)base.buildTower(graphLayer);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
 	}
 	
 	public void setPopulation(int population, final GroupLayer uiLayer, Image number_image) {
@@ -181,6 +197,27 @@ public class Gui
 				populationLayer.setScale(Const.POPULATION_SCALE);
 				populationLayer.setDepth(1.0f);
 				uiLayer.add(populationLayer);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+	}
+	
+	public void paint(boolean isCity) {
+		
+	}
+	
+	private void createImage(final GroupLayer uiLayer, final ImageLayer layerImage, Image optionImage, final float x_offset) {
+		optionImage.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+                layerImage.setOrigin(image.width()/2f, image.height()/2f);
+				layerImage.setTranslation(Const.CONSTRUCTION_PANEL_X + x_offset*Const.CONSTRUCTION_PANEL_X, Const.CONSTRUCTION_PANEL_Y + image.height()/2f * Const.CONSTRUCTION_PANEL_SCALE);
+				layerImage.setScale(Const.CONSTRUCTION_PANEL_SCALE);
+                uiLayer.add(layerImage);
             }
 
             @Override

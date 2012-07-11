@@ -4,10 +4,8 @@ import static playn.core.PlayN.*;
 
 import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.CanvasLayer;
 import playn.core.ResourceCallback;
 import playn.core.GroupLayer;
-import playn.core.TextFormat;
 
 import com.domain.project.core.Const;
 
@@ -76,4 +74,8 @@ public class Base
 	public ImageLayer getBaseLayer(){
 		return baseLayer;
 	}
+	
+	/* OVERRIDEN METHODS IN SUBCLASSES*/
+	public void buildTower(GroupLayer graphLayer, Image image){};
+	public int getTowerLevel(){return 0;};
 }
