@@ -55,7 +55,6 @@ public class Node {
     }
 
 	public void setMapping(Node node) {
-		base.hello();
 		mapped_node = node;
 		mapped_node.setMappedNode(this);
 		mapping = new Mapping(this.graphLayer, this.coordinates, mapped_node.getPos());
