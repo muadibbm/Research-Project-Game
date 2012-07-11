@@ -179,8 +179,8 @@ public final class Const
 		//TREE3_IMAGE = assets().getImage("images/Background/texture_trees3.png");
 		//TREE4_IMAGE = assets().getImage("images/Background/texture_trees4.png");
 		//TREE5_IMAGE = assets().getImage("images/Background/texture_trees5.png");
-		PALACE_LEVEL1 = assets().getImage("images/City/Palace_level1.png");
-		TOWER_LEVEL1 = assets().getImage("images/City/Tower_Level1.png");
+		PALACE_LEVEL1 = assets().getImage("images/City/Palace_Level1.png");
+		TOWER_LEVEL1 = assets().getImage("images/City/Tower_level1.png");
 		BAZAR_FOOD_LEVEL1 = assets().getImage("images/City/Food_Bazar_Level1.png");
 		BAZAR_CHINA_LEVEL1 = assets().getImage("images/City/China_Bazar_Level1.png");
 		BAZAR_CARPET_LEVEL1 = assets().getImage("images/City/Carpet_Bazar_Level1.png");
