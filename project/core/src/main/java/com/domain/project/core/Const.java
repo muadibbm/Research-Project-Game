@@ -38,10 +38,28 @@ public final class Const
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
-	public static float TOWER_X = 10.0f;
-	public static float TOWER_Y = 10.0f;
-	public static float TOWER_DEPTH = 3.1f;
-	public static float TOWER_SCALE = 0.03f;
+	public static float PALACE_X = 0.0f;
+	public static float PALACE_Y = -8.0f;
+	public static float PALACE_DEPTH = 3.2f;
+	public static float PALACE_SCALE = 0.05f;
+	public static float BAZAR_FOOD_X = 9.0f;
+	public static float BAZAR_FOOD_Y = 4.0f;
+	public static float BAZAR_FOOD_DEPTH = 3.3f;
+	public static float BAZAR_FOOD_SCALE = 0.003f;
+	public static float BAZAR_CHINA_X = 0.0f;
+	public static float BAZAR_CHINA_Y = 4.0f;
+	public static float BAZAR_CHINA_DEPTH = 3.3f;
+	public static float BAZAR_CHINA_SCALE = 0.003f;
+	public static float BAZAR_CARPET_X = -9.0f;
+	public static float BAZAR_CARPET_Y = 4.0f;
+	public static float BAZAR_CARPET_DEPTH = 3.3f;
+	public static float BAZAR_CARPET_SCALE = 0.003f;
+	public static float TOWER1_X = 17.0f;
+	public static float TOWER1_Y = 15.0f;
+	public static float TOWER2_X = -17.0f;
+	public static float TOWER2_Y = 15.0f;
+	public static float TOWER_DEPTH = 3.7f;
+	public static float TOWER_SCALE = 0.015f;
 
     public static float MIN_CAMP_DISTANCE = 50;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
@@ -83,7 +101,7 @@ public final class Const
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
 	public static Image MAP_IMAGE;
-	public static Image CONSTRUCTION_TOWN_HALL_LEVEL1;
+	public static Image CONSTRUCTION_PALACE_LEVEL1;
 	public static Image CONSTRUCTION_TOWER_LEVEL1;
 	public static Image CONSTRUCTION_BAZAR_FOOD_LEVEL1;
 	public static Image CONSTRUCTION_BAZAR_CHINA_LEVEL1;
@@ -110,9 +128,11 @@ public final class Const
 	//public static Image TREE3_IMAGE;
 	//public static Image TREE4_IMAGE;
 	//public static Image TREE5_IMAGE;
-	public static Image TOWN_HALL_LEVEL1;
+	public static Image PALACE_LEVEL1;
 	public static Image TOWER_LEVEL1;
 	public static Image BAZAR_FOOD_LEVEL1;
+	public static Image BAZAR_CHINA_LEVEL1;
+	public static Image BAZAR_CARPET_LEVEL1;
 	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.1f;
@@ -132,7 +152,7 @@ public final class Const
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
-		CONSTRUCTION_TOWN_HALL_LEVEL1 = assets().getImage("images/UI/costructionPanel_townHall.png");
+		CONSTRUCTION_PALACE_LEVEL1 = assets().getImage("images/UI/costructionPanel_palace.png");
 		CONSTRUCTION_BAZAR_CARPET_LEVEL1 = assets().getImage("images/UI/costructionPanel_carpetMarket.png");
 		CONSTRUCTION_BAZAR_CHINA_LEVEL1 = assets().getImage("images/UI/costructionPanel_chinaMarket.png");
 		CONSTRUCTION_BAZAR_FOOD_LEVEL1 = assets().getImage("images/UI/costructionPanel_foodMarket.png");
@@ -159,7 +179,10 @@ public final class Const
 		//TREE3_IMAGE = assets().getImage("images/Background/texture_trees3.png");
 		//TREE4_IMAGE = assets().getImage("images/Background/texture_trees4.png");
 		//TREE5_IMAGE = assets().getImage("images/Background/texture_trees5.png");
-		TOWN_HALL_LEVEL1 = assets().getImage("images/City/Town_Hall_level1.png");
+		PALACE_LEVEL1 = assets().getImage("images/City/Palace_level1.png");
 		TOWER_LEVEL1 = assets().getImage("images/City/Tower_Level1.png");
+		BAZAR_FOOD_LEVEL1 = assets().getImage("images/City/Food_Bazar_Level1.png");
+		BAZAR_CHINA_LEVEL1 = assets().getImage("images/City/China_Bazar_Level1.png");
+		BAZAR_CARPET_LEVEL1 = assets().getImage("images/City/Carpet_Bazar_Level1.png");
     }
 }

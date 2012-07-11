@@ -76,6 +76,15 @@ public class Base
 	}
 	
 	/* OVERRIDEN METHODS IN SUBCLASSES*/
+	public void buildPalace(GroupLayer graphLayer, Image image){};
+	public void buildBazarFood(GroupLayer graphLayer, Image image){};
+	public void buildBazarChina(GroupLayer graphLayer, Image image){};
+	public void buildBazarCarpet(GroupLayer graphLayer, Image image){};
 	public void buildTower(GroupLayer graphLayer, Image image){};
+	public int getCityLevel(){return 0;};
+	public void setCityLevel(int level){};
+	public int getBazarLevel(){return 0;};
+	public void setBazarLevel(int level){};
 	public int getTowerLevel(){return 0;};
+	public void setTowerLevel(int level){};
 }

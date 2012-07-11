@@ -17,9 +17,9 @@ import com.domain.project.core.graph.City;
 public class Gui
 {
 	private ImageLayer option1;//TOWN_HALL
-	private ImageLayer option2;//FOOD_MARKET
-	private ImageLayer option3;//CHINA_MARKET
-	private ImageLayer option4;//CARPET_MARKET
+	private ImageLayer option2;//FOOD_BAZAR
+	private ImageLayer option3;//CHINA_BAZAR
+	private ImageLayer option4;//CARPET_BAZAR
 	private ImageLayer option5;//GARDEN
 	private ImageLayer option6;//SMITHY
 	private ImageLayer option7;//TOWER
@@ -33,8 +33,8 @@ public class Gui
 	
 	public Gui(final GroupLayer uiLayer)
 	{
-        option1 = graphics().createImageLayer(Const.CONSTRUCTION_TOWN_HALL_LEVEL1);
-		createImage(uiLayer, option1, Const.CONSTRUCTION_TOWN_HALL_LEVEL1, 0.0f);
+        option1 = graphics().createImageLayer(Const.CONSTRUCTION_PALACE_LEVEL1);
+		createImage(uiLayer, option1, Const.CONSTRUCTION_PALACE_LEVEL1, 0.0f);
 		option2 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_FOOD_LEVEL1);
 		createImage(uiLayer, option2, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.3f);
 		option3 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1);
@@ -151,6 +151,138 @@ public class Gui
 				}
 		});
 		
+		/* Building TOWN HALL */
+		option1.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+								    //TODO : check level, check resources, update gui itself
+									base.setCityLevel(base.getCityLevel() + 1);
+									base.buildPalace(graphLayer, Const.PALACE_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building BAZAR FOOD */
+		option2.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									//TODO : check bazar level
+									base.buildBazarFood(graphLayer, Const.BAZAR_FOOD_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building BAZAR CHINA */
+		option3.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									//TODO : check bazar level
+									base.buildBazarChina(graphLayer, Const.BAZAR_CHINA_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building BAZAR CARPET */
+		option4.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									//TODO : check bazar level
+									base.buildBazarCarpet(graphLayer, Const.BAZAR_CARPET_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
 		/* Building TOWER */
 		option7.addListener(new Mouse.Listener() {
 				Base base;
@@ -159,9 +291,11 @@ public class Gui
 					if(event.button() == Mouse.BUTTON_LEFT) {
 						if(player.getSelectedNode() != null)
 							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								if(player.getSelectedNode().getBase() instanceof City){
-									player.getSelectedNode().getBase().buildTower(graphLayer, Const.TOWER_LEVEL1);
-									//base = base(City)base.buildTower(graphLayer);
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									base.setTowerLevel(base.getTowerLevel() + 1);
+									base.buildTower(graphLayer, Const.TOWER_LEVEL1);
 								}
 								//else if(player.getSelectedNode().getBase() instanceof Camp)
 									//TODO
