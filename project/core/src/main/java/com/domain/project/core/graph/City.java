@@ -28,9 +28,16 @@ public class City extends Base
 	
 	private ImageLayer tower1;
 	private ImageLayer tower2;
+	private ImageLayer tower3;
+	private ImageLayer tower4;
+	private ImageLayer tower_gate1;
+	private ImageLayer tower_gate2;
 	private int tower_level;
 	
-	private ImageLayer wall;
+	private ImageLayer wall_front;
+	private ImageLayer wall_back;
+	private ImageLayer wall_right;
+	private ImageLayer wall_left;
 	private int wall_level;
 	
 	private ImageLayer smithy;
@@ -160,11 +167,27 @@ public class City extends Base
 			tower1.destroy();
 		if(tower2 != null)
 			tower2.destroy();
+		if(tower3 != null)
+			tower3.destroy();
+		if(tower4 != null)
+			tower4.destroy();
+		if(tower_gate1 != null)
+			tower_gate1.destroy();
+		if(tower_gate2 != null)
+			tower_gate2.destroy();
 		
 		tower1 = graphics().createImageLayer(tower_image);
-		tower1.setDepth(Const.TOWER_DEPTH);
+		tower1.setDepth(Const.TOWER_FRONT_DEPTH);
 		tower2 = graphics().createImageLayer(tower_image);
-		tower2.setDepth(Const.TOWER_DEPTH);
+		tower2.setDepth(Const.TOWER_FRONT_DEPTH);
+		tower_gate1 = graphics().createImageLayer(tower_image);
+		tower_gate1.setDepth(Const.TOWER_FRONT_DEPTH);
+		tower_gate2 = graphics().createImageLayer(tower_image);
+		tower_gate2.setDepth(Const.TOWER_FRONT_DEPTH);
+		tower3 = graphics().createImageLayer(tower_image);
+		tower3.setDepth(Const.TOWER_BACK_DEPTH);
+		tower4 = graphics().createImageLayer(tower_image);
+		tower4.setDepth(Const.TOWER_BACK_DEPTH);
 		
 		tower_image.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -173,6 +196,14 @@ public class City extends Base
                 graphLayer.add(tower1);
 				tower2.setOrigin(image.width()/2f, image.height()/2f);
 				graphLayer.add(tower2);
+				tower_gate1.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(tower_gate1);
+				tower_gate2.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(tower_gate2);
+				tower3.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(tower3);
+				tower4.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(tower4);
             }
 
             @Override
@@ -190,6 +221,88 @@ public class City extends Base
 	@Override
 	public void setTowerLevel(int level) {
 		tower_level = level;
+	}
+	
+	@Override
+	public void buildWall(final GroupLayer graphLayer, Image wall_front_image, Image wall_back_image, Image wall_right_image, Image wall_left_image) {
+		if(wall_front != null)
+			wall_front.destroy();
+		if(wall_back != null)
+			wall_back.destroy();
+		if(wall_right != null)
+			wall_right.destroy();
+		if(wall_left != null)
+			wall_left.destroy();
+		
+		wall_front = graphics().createImageLayer(wall_front_image);
+		wall_front.setDepth(Const.WALL_FRONT_DEPTH);
+		wall_back = graphics().createImageLayer(wall_back_image);
+		wall_back.setDepth(Const.WALL_BACK_DEPTH);
+		wall_right = graphics().createImageLayer(wall_right_image);
+		wall_right.setDepth(Const.WALL_BACK_DEPTH);
+		wall_left = graphics().createImageLayer(wall_left_image);
+		wall_left.setDepth(Const.WALL_BACK_DEPTH);
+		
+		wall_front_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+                wall_front.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(wall_front);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+		wall_back_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+				wall_back.setOrigin(image.width()/2f, image.height()/2f);
+				wall_back.setAlpha(0.75f);
+				graphLayer.add(wall_back);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+		wall_right_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+                wall_right.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(wall_right);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+		
+		wall_left_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+                wall_left.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(wall_left);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+	}
+	
+	@Override
+	public int getWallLevel() {
+		return wall_level;
+	}
+	
+	@Override
+	public void setWallLevel(int level) {
+		wall_level = level;
 	}
 	
 	@Override
@@ -212,12 +325,44 @@ public class City extends Base
 			bazar_carpet.setTranslation(x + Const.BAZAR_CARPET_X, y + Const.BAZAR_CARPET_Y);
 		}
 		if(tower1 != null) {
-			tower1.setScale(Const.TOWER_SCALE, Const.TOWER_SCALE);
+			tower1.setScale(Const.TOWER_FRONT_SCALE, Const.TOWER_FRONT_SCALE);
 			tower1.setTranslation(x + Const.TOWER1_X, y + Const.TOWER1_Y);
 		}
 		if(tower2 != null) {
-			tower2.setScale(Const.TOWER_SCALE, Const.TOWER_SCALE);
+			tower2.setScale(Const.TOWER_FRONT_SCALE, Const.TOWER_FRONT_SCALE);
 			tower2.setTranslation(x + Const.TOWER2_X, y + Const.TOWER2_Y);
+		}
+		if(tower3 != null) {
+			tower3.setScale(Const.TOWER_BACK_SCALE, Const.TOWER_BACK_SCALE);
+			tower3.setTranslation(x + Const.TOWER3_X, y + Const.TOWER3_Y);
+		}
+		if(tower4 != null) {
+			tower4.setScale(Const.TOWER_BACK_SCALE, Const.TOWER_BACK_SCALE);
+			tower4.setTranslation(x + Const.TOWER4_X, y + Const.TOWER4_Y);
+		}
+		if(tower_gate1 != null) {
+			tower_gate1.setScale(Const.TOWER_GATE_SCALE, Const.TOWER_GATE_SCALE);
+			tower_gate1.setTranslation(x + Const.TOWER_GATE1_X, y + Const.TOWER_GATE1_Y);
+		}
+		if(tower_gate2 != null) {
+			tower_gate2.setScale(Const.TOWER_GATE_SCALE, Const.TOWER_GATE_SCALE);
+			tower_gate2.setTranslation(x + Const.TOWER_GATE2_X, y + Const.TOWER_GATE2_Y);
+		}
+		if(wall_front != null) {
+			wall_front.setScale(Const.WALL_FRONT_SCALE, Const.WALL_FRONT_SCALE_VERTICAL);
+			wall_front.setTranslation(x + Const.WALL_FRONT_X, y + Const.WALL_FRONT_Y);
+		}
+		if(wall_back != null) {
+			wall_back.setScale(Const.WALL_BACK_SCALE, Const.WALL_BACK_SCALE_VERTICAL);
+			wall_back.setTranslation(x + Const.WALL_BACK_X, y + Const.WALL_BACK_Y);
+		}
+		if(wall_right != null) {
+			wall_right.setScale(Const.WALL_SIDE_SCALE, Const.WALL_SIDE_SCALE_VERTICAL);
+			wall_right.setTranslation(x + Const.WALL_RIGHT_X, y + Const.WALL_RIGHT_Y);
+		}
+		if(wall_left != null) {
+			wall_left.setScale(Const.WALL_SIDE_SCALE, Const.WALL_SIDE_SCALE_VERTICAL);
+			wall_left.setTranslation(x + Const.WALL_LEFT_X, y + Const.WALL_LEFT_Y);
 		}
 	}
 }
