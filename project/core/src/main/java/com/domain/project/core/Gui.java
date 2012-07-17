@@ -283,6 +283,39 @@ public class Gui
 				}
 		});
 		
+		/* Building GARDEN */
+		option5.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									//TODO : check garden level
+									base.buildGarden(graphLayer, Const.GARDEN_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
 		/* Building TOWER */
 		option7.addListener(new Mouse.Listener() {
 				Base base;

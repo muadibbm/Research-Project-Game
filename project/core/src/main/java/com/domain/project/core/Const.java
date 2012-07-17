@@ -39,21 +39,25 @@ public final class Const
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
 	public static float PALACE_X = 0.0f;
-	public static float PALACE_Y = -8.0f;
+	public static float PALACE_Y = -23.0f;
 	public static float PALACE_DEPTH = 3.2f;
-	public static float PALACE_SCALE = 0.05f;
-	public static float BAZAR_FOOD_X = 9.0f;
-	public static float BAZAR_FOOD_Y = 4.0f;
-	public static float BAZAR_FOOD_DEPTH = 3.3f;
-	public static float BAZAR_FOOD_SCALE = 0.01f;
-	public static float BAZAR_CHINA_X = 0.0f;
-	public static float BAZAR_CHINA_Y = 4.0f;
-	public static float BAZAR_CHINA_DEPTH = 3.3f;
-	public static float BAZAR_CHINA_SCALE = 0.01f;
-	public static float BAZAR_CARPET_X = -9.0f;
-	public static float BAZAR_CARPET_Y = 4.0f;
-	public static float BAZAR_CARPET_DEPTH = 3.3f;
-	public static float BAZAR_CARPET_SCALE = 0.01f;
+	public static float PALACE_SCALE = 0.048f;
+	public static float BAZAR_FOOD_X = -17.5f;
+	public static float BAZAR_FOOD_Y = -2.0f;
+	public static float BAZAR_FOOD_DEPTH = 3.42f;
+	public static float BAZAR_FOOD_SCALE = 0.015f;
+	public static float BAZAR_CHINA_X = -16.0f;
+	public static float BAZAR_CHINA_Y = -9.5f;
+	public static float BAZAR_CHINA_DEPTH = 3.41f;
+	public static float BAZAR_CHINA_SCALE = 0.014f;
+	public static float BAZAR_CARPET_X = -20.0f;
+	public static float BAZAR_CARPET_Y = 7.0f;
+	public static float BAZAR_CARPET_DEPTH = 3.43f;
+	public static float BAZAR_CARPET_SCALE = 0.016f;
+	public static float GARDEN_X = 18.8f;
+	public static float GARDEN_Y = -5.0f;
+	public static float GARDEN_DEPTH = 3.3f;
+	public static float GARDEN_SCALE = 0.029f;
 	public static float TOWER1_X = 29.0f;
 	public static float TOWER1_Y = 19.0f;
 	public static float TOWER2_X = -29.0f;
@@ -160,6 +164,7 @@ public final class Const
 	public static Image BAZAR_FOOD_LEVEL1;
 	public static Image BAZAR_CHINA_LEVEL1;
 	public static Image BAZAR_CARPET_LEVEL1;
+	public static Image GARDEN_LEVEL1;
 	public static Image WALL_FRONT_LEVEL1;
 	public static Image WALL_BACK_LEVEL1;
 	public static Image WALL_LEFT_LEVEL1;
@@ -219,5 +224,6 @@ public final class Const
 		WALL_BACK_LEVEL1 = assets().getImage("images/City/Wall_back_level1.png");
 		WALL_LEFT_LEVEL1 = assets().getImage("images/City/Wall_left_level1.png");
 		WALL_RIGHT_LEVEL1 = assets().getImage("images/City/Wall_right_level1.png");
+		GARDEN_LEVEL1 = assets().getImage("images/City/Garden_Level1.png");
     }
 }

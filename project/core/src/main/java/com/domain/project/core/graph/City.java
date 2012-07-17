@@ -162,6 +162,38 @@ public class City extends Base
 	}
 	
 	@Override
+	public void buildGarden(final GroupLayer graphLayer, Image garden_image) {
+		if(garden != null)
+			garden.destroy();
+		
+		garden = graphics().createImageLayer(garden_image);
+		garden.setDepth(Const.GARDEN_DEPTH);
+		
+		garden_image.addCallback(new ResourceCallback<Image>() {
+            @Override
+            public void done(Image image) {
+                garden.setOrigin(image.width()/2f, image.height()/2f);
+                graphLayer.add(garden);
+            }
+
+            @Override
+            public void error(Throwable e) {
+                log().error("error loading node", e);
+            }
+        });
+	}
+	
+	@Override
+	public int getGardenLevel() {
+		return garden_level;
+	}
+	
+	@Override
+	public void setGardenLevel(int level) {
+		garden_level = level;
+	}
+	
+	@Override
 	public void buildTower(final GroupLayer graphLayer, Image tower_image) {
 		if(tower1 != null)
 			tower1.destroy();
@@ -323,6 +355,10 @@ public class City extends Base
 		if(bazar_carpet != null) {
 			bazar_carpet.setScale(Const.BAZAR_CARPET_SCALE, Const.BAZAR_CARPET_SCALE);
 			bazar_carpet.setTranslation(x + Const.BAZAR_CARPET_X, y + Const.BAZAR_CARPET_Y);
+		}
+		if(garden != null) {
+			garden.setScale(Const.GARDEN_SCALE, Const.GARDEN_SCALE);
+			garden.setTranslation(x + Const.GARDEN_X, y + Const.GARDEN_Y);
 		}
 		if(tower1 != null) {
 			tower1.setScale(Const.TOWER_FRONT_SCALE, Const.TOWER_FRONT_SCALE);
