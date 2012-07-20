@@ -27,6 +27,7 @@ public class Gui
 	
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
+	private Digits gold;
 	
 	private ImageLayer map;
 	private ImageLayer unmap;
@@ -51,6 +52,7 @@ public class Gui
 		createImage(uiLayer, option8, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
+		gold = new Digits(uiLayer);
 		
 		map = graphics().createImageLayer(Const.MAP_BUTTON_IMAGE);
 		unmap = graphics().createImageLayer(Const.UNMAP_BUTTON_IMAGE);
@@ -404,6 +406,10 @@ public class Gui
                 log().error("error loading node", e);
             }
         });
+	}
+	
+	public void setGold(int amount) {
+		gold.setDigits(amount);
 	}
 	
 	public void paint(boolean isCity) {
