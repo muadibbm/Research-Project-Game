@@ -27,6 +27,7 @@ public class Gui
 	
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
+	private Digits gold;
 	
 	private ImageLayer map;
 	private ImageLayer unmap;
@@ -51,6 +52,7 @@ public class Gui
 		createImage(uiLayer, option8, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
+		gold = new Digits(uiLayer);
 		
 		map = graphics().createImageLayer(Const.MAP_BUTTON_IMAGE);
 		unmap = graphics().createImageLayer(Const.UNMAP_BUTTON_IMAGE);
@@ -283,6 +285,39 @@ public class Gui
 				}
 		});
 		
+		/* Building GARDEN */
+		option5.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									//TODO : check garden level
+									base.buildGarden(graphLayer, Const.GARDEN_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
 		/* Building TOWER */
 		option7.addListener(new Mouse.Listener() {
 				Base base;
@@ -296,6 +331,39 @@ public class Gui
 									//TODO : check level, check resources, update gui itself
 									base.setTowerLevel(base.getTowerLevel() + 1);
 									base.buildTower(graphLayer, Const.TOWER_LEVEL1);
+								}
+								//else if(player.getSelectedNode().getBase() instanceof Camp)
+									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building WALL */
+		option8.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof City){
+									//TODO : check level, check resources, update gui itself
+									base.setWallLevel(base.getWallLevel() + 1);
+									base.buildWall(graphLayer, Const.WALL_FRONT_LEVEL1, Const.WALL_BACK_LEVEL1, Const.WALL_RIGHT_LEVEL1, Const.WALL_LEFT_LEVEL1);
 								}
 								//else if(player.getSelectedNode().getBase() instanceof Camp)
 									//TODO
@@ -338,6 +406,10 @@ public class Gui
                 log().error("error loading node", e);
             }
         });
+	}
+	
+	public void setGold(int amount) {
+		gold.setDigits(amount);
 	}
 	
 	public void paint(boolean isCity) {
