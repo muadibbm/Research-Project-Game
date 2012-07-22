@@ -80,11 +80,17 @@ public class Base
 	public void buildBazarFood(GroupLayer graphLayer, Image image){};
 	public void buildBazarChina(GroupLayer graphLayer, Image image){};
 	public void buildBazarCarpet(GroupLayer graphLayer, Image image){};
+	public void buildGarden(GroupLayer graphLayer, Image image){};
 	public void buildTower(GroupLayer graphLayer, Image image){};
+	public void buildWall(GroupLayer graphLayer, Image image1, Image image2, Image image3, Image image4){};
 	public int getCityLevel(){return 0;};
 	public void setCityLevel(int level){};
 	public int getBazarLevel(){return 0;};
 	public void setBazarLevel(int level){};
+	public int getGardenLevel(){return 0;};
+	public void setGardenLevel(int level){};
 	public int getTowerLevel(){return 0;};
 	public void setTowerLevel(int level){};
+	public int getWallLevel(){return 0;};
+	public void setWallLevel(int level){};
 }

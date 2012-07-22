@@ -11,7 +11,6 @@ import com.domain.project.core.graph.Tuple2f;
 import com.domain.project.core.graph.City;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.Edge;
-import com.domain.project.core.graph.Mapping;
 import com.domain.project.core.Gui;
 import com.domain.project.core.Const;
 
@@ -21,8 +20,6 @@ import playn.core.Mouse;
 
 import java.lang.Integer;
 import java.util.Map;
-import java.util.HashMap;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -47,7 +44,7 @@ public class GameLoop implements Game {
 	private Gui gui2;
 	
 	private java.util.Random r = new java.util.Random();
-	private List <Tree> trees;;
+	private List <Tree> trees;
 
     @Override
     public void init() { 

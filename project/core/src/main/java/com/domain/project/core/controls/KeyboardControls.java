@@ -1,8 +1,6 @@
 package com.domain.project.core.controls;
 
 import playn.core.Keyboard;
-import playn.core.Key;
-
 import com.domain.project.core.Environment;
 import com.domain.project.core.enums.Zoom;
 import com.domain.project.core.Const;
@@ -57,6 +55,8 @@ public class KeyboardControls implements Keyboard.Listener {
                 scrollRight = false;
                 break;
             }
+		default:
+			break;
         }
     }
 
@@ -105,6 +105,8 @@ public class KeyboardControls implements Keyboard.Listener {
                 System.out.println(env.zLevel());
                 break;
             }
+		default:
+			break;
         }
     }
 

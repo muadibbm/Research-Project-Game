@@ -3,9 +3,6 @@ package com.domain.project.core;
 import static playn.core.PlayN.*;
 
 import playn.core.Image;
-import playn.core.ImageLayer;
-import playn.core.ResourceCallback;
-import playn.core.GroupLayer;
 
 public final class Const 
 {

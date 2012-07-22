@@ -6,8 +6,6 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 
-import playn.core.Mouse;
-
 import com.domain.project.core.Const;
 import com.domain.project.core.enums.Zoom;
 

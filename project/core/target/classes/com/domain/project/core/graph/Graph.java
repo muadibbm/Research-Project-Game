@@ -198,7 +198,7 @@ public class Graph {
                         n1 = getNode(nodeID);
                     }
 
-                    //parse second node (neighor) and assign neighbor
+                    //parse second node (neighbor) and assign neighbor
                     switch(subEntries[4].charAt(0)) {
                         case 'A':
                             nucl = Nucleotide.A;

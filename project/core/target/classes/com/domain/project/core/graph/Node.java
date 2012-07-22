@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import playn.core.GroupLayer;
 
-import com.domain.project.core.Const;
 import com.domain.project.core.graph.Mapping;
 import com.domain.project.core.enums.Nucleotide;
 

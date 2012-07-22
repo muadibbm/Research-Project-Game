@@ -10,7 +10,7 @@ public class Camp extends Base
 	private ImageLayer tent;
 	private ImageLayer barracks;
 	private ImageLayer watchTower;
-	//TODO: how to position the camp and its componants
+	//TODO: how to position the camp and its components
 
 	public Camp(GroupLayer graphLayer){
 		super(graphLayer, Const.CAMP_BASE_IMAGE);

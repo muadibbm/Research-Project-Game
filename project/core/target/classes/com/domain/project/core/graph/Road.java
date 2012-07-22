@@ -24,7 +24,7 @@ public class Road
     {
         visible = false;
 		placed = false;
-		//TODO: randomly choose from diffrent road images
+		//TODO: randomly choose from different road images
 		roadImage = Const.ROAD_IMAGE;
         roadLayer = graphics().createImageLayer(roadImage);
 		roadLayer.setDepth(Const.ROAD_DEPTH);
