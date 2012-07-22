@@ -140,7 +140,7 @@ public final class Const
 	public static float SHADOW = 0.45f;
 
     private Const() {
-        //prevents the caller from creating an instantce of this class
+        //prevents the caller from creating an instance of this class
         throw new AssertionError();
     }
 
