@@ -9,6 +9,9 @@ import com.domain.project.core.Const;
 import com.domain.project.core.graph.Mapping;
 import com.domain.project.core.enums.Nucleotide;
 
+/**
+* Contains all the research-based data for a node and also the game logic required for every node
+*/
 public class Node {
 
     private Base base;
@@ -27,6 +30,11 @@ public class Node {
 	private Node mapped_node;
 	private Mapping mapping;
 
+	/**
+	* Constructor of the Node
+	* @param id - the unique integer associated with this node read from the raw data
+	* @param nucl - type of Nucleotide read from raw data
+	*/
     public Node(int id, Nucleotide nucl) {
         this.id = id;
         this.nucleotide = nucl;
@@ -37,6 +45,14 @@ public class Node {
 		mapping = null;
     }
 
+	/**
+	* Constructor of the Node(Complete version)
+	* @param id - the unique integer associated with this node read from the raw data
+	* @param nucl - type of Nucleotide read from raw data
+	* @param isCity - boolean value determining whether this node is city or camp
+	* @param graphLayer - the GroupLayer of the graph
+	* @param player_id - the unique integer value of the player assigned to this graph
+	*/
     public Node(int id, Nucleotide nucl, boolean isCity, GroupLayer graphLayer, int graph_id, int player_id) {
         this.id = id;
         this.nucleotide = nucl;
@@ -54,6 +70,10 @@ public class Node {
 		this.player_id = player_id;
     }
 
+	/**
+	* Sets a mapping from this node to the given node
+	* @param node - the node to be mapped to
+	*/
 	public void setMapping(Node node) {
 		mapped_node = node;
 		mapped_node.setMappedNode(this);
@@ -65,10 +85,18 @@ public class Node {
 		this.mapping = mapping;
 	}
 	
+	/**
+	* Returns the mapping this node has
+	* @return mapping - the instance of Mapping
+	*/
 	public Mapping getMapping() {
 		return mapping;
 	}
 
+	/**
+	* Removes the existing mapping from this node to the given node
+	* Note : If used on a node with no mapping will cause a NullPointerException
+	*/
 	public void unMap() {
 		mapped_node.removeMapping();
 		mapping.destroy();
@@ -80,68 +108,123 @@ public class Node {
 		this.mapping = null;
 	}
 	
+	/**
+	* Returns the node which this instance is mapped to
+	* @return mapped_node - the instance of Node
+	*/
 	public Node getMappedNode() {
 		return mapped_node;
 	}
 	
+	/**
+	* Sets the mapped_node to be the given node
+	* @param node - the instance of Node
+	*/
 	public void setMappedNode(Node node) {
 		mapped_node = node;
 	}
 	
+	/**
+	* @return the graph id
+	*/
 	public int getGraphId() {
 		return graph_id;
 	}
 	
+	/**
+	* @return the player id
+	*/
 	public int getPlayer() {
 		return player_id;
 	}
 
+	/**
+	* places the node at the given (x,y) coordinates and flags placed to true
+	* @param x - float x coordinate
+	* @param y - float y coordinate
+	*/
     public void placeNode(float x, float y) {
         setPos(x, y);    
 		placed = true;
     }
 	
+	/**
+	* paints all the images contained in this node
+	*/
 	public void paint() {
 		base.paint(coordinates.x, coordinates.y);
 	}
     
+	/**
+	* @return true if node is place and false otherwise
+	*/
     public boolean isPlaced() {
         return placed;
     }
 
+	/**
+	* Adds the specific node to the list of neighbors
+	* @param n - instance of Node
+	*/
     public void addNeighbor(Node n) {
         neighbors.add(n);
     }
     
+	/**
+	* @return list of neighbors of type List<Node>
+	*/
     public List<Node> getNeighbors() {
         return neighbors;
     }
 	
+	/**
+	* automaticly sets the population of this node to its degree
+	*/
 	public void setNodeLevel() {
 		base.setPopulation(neighbors.size());
 	}
 	
+	/**
+	* @return the degree(population) of this node
+	*/
 	public int getNodeLevel() {
 		return base.getPopulation();
 	}
-
+	
+	/**
+	* @return the unique integer id
+	*/
     public int getID() {
         return id;
     }
     
+	/**
+	* @return the coordinates of this node of type Tuple2f
+	*/
     public Tuple2f getPos() {
         return coordinates;
     }
     
+	/**
+	* Sets the coordinates of this node to the given values
+	* @param x - float x coordinate
+	* @param y - float y coordinate
+	*/
     public void setPos(float x, float y) {
         coordinates.x = x;
         coordinates.y = y;
     }
 
+	/**
+	* @return the nucleotide value
+	*/
     public Nucleotide getNucleotide() {
         return nucleotide;
     }
 	
+	/**
+	* @return the base instance of this node
+	*/
 	public Base getBase() {
 		return base;
 	}

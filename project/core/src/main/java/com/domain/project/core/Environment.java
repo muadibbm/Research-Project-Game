@@ -15,7 +15,12 @@ import tripleplay.anim.Animator;
 
 /**
  *  Holds playn layers
- *
+ *  - root
+ *      - mainLayer
+ *          - graphLayer
+ *              - bgLayer
+ *			- uiLayer
+ *			- frameLayer
  */
 public class Environment
 {
@@ -24,20 +29,8 @@ public class Environment
     final private ImageLayer bgLayer;
     final private ImageLayer frameLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
-    //TODO : any more layers ?
-
-/*
-    - root
-        - mainLayer
-            - graphLayer
-                - bgLayer
-			- uiLayer
-			- frameLayer
-*/
 
     public final Animator animator = Animator.create();
-    
-
     
     private float xOffset;
     private float yOffset;
@@ -46,6 +39,9 @@ public class Environment
 
     private float elapsed;
 
+	/** 
+	* Constructor of the Environment
+	*/
     public Environment()
     {
         //set window size
@@ -87,20 +83,32 @@ public class Environment
         
     }
 
+	/**
+	* @return the background layer of ImageLayer type
+	*/
     public Image getBaseImage()
     {
         return bgLayer.image();
     }
 
+	/**
+	* @return the graph layer of GroupLayer type
+	*/
     public GroupLayer getGraphLayer()
     {
         return graphLayer;
     }
 
+	/**
+	* @return the main layer of the GroupLayer type
+	*/
     public GroupLayer getMainLayer() {
         return mainLayer;
     }
 	
+	/**
+	* @return the user interface layer of the GroupLayer type
+	*/
 	public GroupLayer getUILayer() {
         return uiLayer;
     }
@@ -113,37 +121,55 @@ public class Environment
 //        mainLayer.setOrigin(xOffset, yOffset);
     }
 
+	/**
+	* paints the environment
+	*/
     public void paint(float alpha) {
         mainLayer.setOrigin(xOffset, yOffset);
         animator.update(elapsed + Const.UPDATE_RATE * alpha);
     }
 
+	/**
+     * Set x offset to the given value
+	 * @param xOffset - float
+     */
     public void setX(float xOffset) {
         this.xOffset = xOffset;
     }
 
+	/**
+     * Set y offset to the given value
+	 * @param yOffset - float
+     */
     public void setY(float yOffset) {
         this.yOffset = yOffset;
     }
 
     /**
-     * Get current x offset
+     * @return current x offset
      */
     public float getX() {
         return xOffset;
     }
 
     /**
-     * Get current y offset
+     * @return current y offset
      */
     public float getY() {
         return yOffset;
     }
   
+    /**
+	* Sets the zoom level the the given level
+	* @param zlevel - zoom level of type Zoom
+	*/
     public void setZoomLevel(Zoom zLevel) {
         this.zLevel = zLevel;
     }
 	
+	/**
+     * @return zlevel of type Zoom
+     */
     public Zoom zLevel() {
         return zLevel;
     }

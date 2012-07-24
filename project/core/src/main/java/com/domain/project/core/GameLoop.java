@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+* This is the main game loop where are the calculations and drawing takes place.
+*/
 public class GameLoop implements Game {
 
     private Environment environment;
@@ -49,6 +52,10 @@ public class GameLoop implements Game {
 	private java.util.Random r = new java.util.Random();
 	private List <Tree> trees;;
 
+	/**
+	* Initilizes all the game variables before starting the game.
+	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	*/
     @Override
     public void init() { 
 
@@ -91,7 +98,13 @@ public class GameLoop implements Game {
 		addAllListeners(campGraphB, player1, gui1);
 		addAllListeners(cityGraphB, player1, gui1);
     }
-
+	
+	/**
+	* Paints all the images contained in the scene graph layers.
+	* Any transformation applied to the layers should be called here.
+	* @param alpha - a value between 0 and 1, representing the proportion of time passed between the last two update ticks
+	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	*/
     @Override
     public void paint(float alpha) {
         // the background automatically paints itself, so no need to do anything here!
@@ -104,6 +117,11 @@ public class GameLoop implements Game {
 		gui1.setGold(player1.getGold());
     }
 
+	/**
+	* All the updates to the game logic should be called here.
+	* @param delta - time, in ms, passed since the previous update(float)
+	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	*/
     @Override
     public void update(float delta) {
         kbControls.parse();
@@ -116,6 +134,11 @@ public class GameLoop implements Game {
 		player1.setGold(player1.getGold()+1);
     }
 
+	/**
+	* Return the update rate of the main game loop, in ms.
+	* @return update rate of the main game loop, in ms
+	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	*/
     @Override
     public int updateRate() {
         return Const.UPDATE_RATE;
@@ -124,7 +147,13 @@ public class GameLoop implements Game {
 	//TODO : Multiplayer aspect, mouse should be associated with a player
 	//TODO : add Networking, where does the players interations diverge ?
 	
-	/* Any interatcion with the game "Graph" layers and the responding game logic */
+	/** 
+	* Contains any interatcion with the layers in the game's graphs and the corresponding game logic. 
+	* TODO : This does not affect paint method in html version of the game.
+	* @param graph - the associated graph object
+	* @param player - the assciated player with the mouse click
+	* @param gui - the user interface corresponding to the player
+	*/
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
@@ -196,6 +225,11 @@ public class GameLoop implements Game {
 		}
 	}
 	
+	/**
+	* Returns the graph object that has the given graphId
+	* @param graphId - the unique integer id associated with the graph at the time of construction
+	* @return the graph instance
+	*/
 	private Graph getGraph(int graphId) {
 		if(cityGraphA.getId() == graphId)
 			return cityGraphA;
@@ -209,6 +243,9 @@ public class GameLoop implements Game {
 			return null; //Is this safe ? may cause bug !!
 	}
 	
+	/**
+	* sets all the edges invisible
+	*/
 	private void HideAllEdges() {
 		HideEdges(cityGraphA);
 		HideEdges(campGraphA);
@@ -216,11 +253,17 @@ public class GameLoop implements Game {
 		HideEdges(cityGraphB);
 	}
 	
+	/**
+	* sets the edges of the given graph invisible
+	*/
 	private void HideEdges(Graph graph) {
 		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
 			edge.getValue().getRoad().setVisible(false);
 	}
 	
+	/**
+	* sets all the mappings invisible
+	*/
 	private void HideAllMappings() {
 		HideMappings(cityGraphA);
 		HideMappings(campGraphA);
@@ -228,6 +271,9 @@ public class GameLoop implements Game {
 		HideMappings(cityGraphB);
 	}
 	
+	/**
+	* sets the mappings of the nodes in the given graph invisible
+	*/
 	private void HideMappings(Graph graph) {
 		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet())
 			if(node.getValue().getMapping() != null) {
@@ -235,6 +281,9 @@ public class GameLoop implements Game {
 			}
 	}
 	
+	/**
+	* draws all the background tree imagesLayers
+	*/
 	private void plantTrees() {
 		int number = 0;
 		float tmpX = 0.0f;
@@ -259,6 +308,9 @@ public class GameLoop implements Game {
 		}
 	}
 	
+	/**
+	* Checks if a tree is as far as a given distance from all the other already placed trees
+	*/
 	private boolean isTreeSeperated(Graph graph, float posX, float posY) {
         float distance = 0.0f;
         for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
@@ -274,6 +326,9 @@ public class GameLoop implements Game {
         return true;
     }
 	
+	/**
+	* paints all the trees
+	*/
 	private void paintTrees() {
 		for(Tree tree : trees)
 			tree.paint();

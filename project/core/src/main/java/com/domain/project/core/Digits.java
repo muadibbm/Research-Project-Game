@@ -9,6 +9,9 @@ import playn.core.GroupLayer;
 
 import java.util.StringTokenizer; 
 
+/**
+* Represents a numbering system given by the number images
+*/
 public class Digits
 {	
     private ImageLayer digit1;
@@ -22,6 +25,13 @@ public class Digits
 	
 	final GroupLayer uiLayer;
 
+	/**
+	* Constructor of Digits
+	* @param uiLayer - Grouplayer of the user interface
+	* @param xPos - the x coordinate at which the digits start(from left)
+	* @param yPos - the y coordinate at which the digits start(from left)
+	* @param scale - the scale of the digits
+	*/
     public Digits(final GroupLayer uiLayer, final float xPos, final float yPos, final float scale)
     {
 		this.uiLayer = uiLayer;
@@ -48,6 +58,10 @@ public class Digits
 
     }
 	
+	/**
+	* Draws the image of the given number
+	* @param digits - integer
+	*/
 	public void setDigits(int digits) {
 		String sDigits =  reverse(Integer.toString(digits));
 		String sDigit;
