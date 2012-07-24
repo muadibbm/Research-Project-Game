@@ -118,10 +118,10 @@ public class GameLoop implements Game {
         return Const.UPDATE_RATE;
     }
 	
-	//TODO : Multiplayer aspect, mouse should be associated with a player
-	//TODO : add Networking, where does the players interations diverge ?
+	//TODO : Multiplier aspect, mouse should be associated with a player
+	//TODO : add Networking, where does the players iterations diverge ?
 	
-	/* Any interatcion with the game "Graph" layers and the responding game logic */
+	/* Any interaction with the game "Graph" layers and the responding game logic */
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();

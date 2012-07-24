@@ -13,7 +13,7 @@ public class Node {
     private Base base;
 	private GroupLayer graphLayer;
 
-    private int id;
+	private int id;
     private Nucleotide nucleotide;
     private List<Node> neighbors;
     private Tuple2f coordinates;
@@ -26,9 +26,9 @@ public class Node {
 	private Node mapped_node;
 	private Mapping mapping;
 
-    public Node(int id, Nucleotide nucl) {
+    public Node(int id, Nucleotide nucleotide) {
         this.id = id;
-        this.nucleotide = nucl;
+        this.nucleotide = nucleotide;
         neighbors = new ArrayList<Node>();
         coordinates = new Tuple2f();
         placed = false;
@@ -52,6 +52,10 @@ public class Node {
 		mapping = null;
 		this.player_id = player_id;
     }
+    
+    public GroupLayer getGraphLayer() {
+		return graphLayer;
+	}
 
 	public void setMapping(Node node) {
 		mapped_node = node;
@@ -96,7 +100,7 @@ public class Node {
 	}
 
     public void placeNode(float x, float y) {
-        setPos(x, y);    
+        setPos(x, y);
 		placed = true;
     }
 	

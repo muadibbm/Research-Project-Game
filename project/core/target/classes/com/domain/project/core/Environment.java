@@ -34,14 +34,9 @@ public class Environment
 */
 
     public final Animator animator = Animator.create();
-    
-
-    
     private float xOffset;
     private float yOffset;
-    
     private Zoom zLevel;
-
     private float elapsed;
 
     public Environment()
@@ -82,7 +77,6 @@ public class Environment
         yOffset = 0.0f;
         
         zLevel = Zoom.DEFAULT;
-        
     }
 
     public Image getBaseImage()
