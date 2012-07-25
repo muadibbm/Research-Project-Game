@@ -92,7 +92,9 @@ public class GameLoop implements Game {
         mControls = new MouseControls(environment);
         mouse().setListener(mControls);
 		gui1.addListener(player1, environment.getGraphLayer());
-		//TODO : gui2.addListener(player2, environment.getGraphLayer());
+		gui1.showConstructions(false, false);
+		/*TODO : gui2.addListener(player2, environment.getGraphLayer());
+		gui2.showConstructions(false, false); */
 		addAllListeners(cityGraphA, player1, gui1);
 		addAllListeners(campGraphA, player1, gui1);
 		addAllListeners(campGraphB, player1, gui1);
@@ -186,11 +188,19 @@ public class GameLoop implements Game {
 							/* Set the mapping of the selected node visible */
 							if(node.getMapping() != null)
 								node.getMapping().setVisible(true);
+								
 							/* Set the edges of the mapped_node of the selected node visible */ //TODO : too much ???
 							//if(node.getMappedNode()!= null)
 								//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
 									//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
 										//edge.getValue().getRoad().setVisible(true);
+										
+							/* show the available Constructions for this node*/
+							gui.showConstructions(graph.isCityGraph(), true);
+						}
+						else {//This node does not belong to the player
+							/* show the available Constructions for this node*/
+							gui.showConstructions(graph.isCityGraph(), false);
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
@@ -205,8 +215,6 @@ public class GameLoop implements Game {
 							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
 							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
 						}
-						/* show the available Constructions */
-						gui.paint(graph.isCityGraph());
 					}
 				}
 				@Override
