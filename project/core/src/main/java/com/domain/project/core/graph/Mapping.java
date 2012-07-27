@@ -8,6 +8,7 @@ import playn.core.ResourceCallback;
 import playn.core.GroupLayer;
 
 import com.domain.project.core.Const;
+import com.domain.project.core.Digits;
 
 /**
 * This class contains all the image and game logic for a Mapping
@@ -21,20 +22,24 @@ public class Mapping
 	private Tuple2f pos1;
 	private Tuple2f pos2;
 	
-	private int points;
+	private int score;
+	private Digits scoreImage;
 	
 	/**
 	* Constructor of the Mapping
 	* @param graphLayer - the GroupLayer of the graph
 	* @param pos1 - the coordinates of the node the mapping is starting from
 	* @param pos2 - the coordinates of the node the mapping goes to
+	* @param score - the mapping score
 	*/
-    public Mapping(final GroupLayer graphLayer, Tuple2f pos1, Tuple2f pos2)
+    public Mapping(final GroupLayer graphLayer, Tuple2f pos1, Tuple2f pos2, int score)
     {
 		mapImage = Const.MAP_IMAGE;
         mapLayer = graphics().createImageLayer(mapImage);
 		visible = true;
-		points = 0;
+		this.score = score;
+		scoreImage = new Digits(graphLayer, Const.MAPPING_POINT_X + (pos2.x + pos1.x)/2.0f, Const.MAPPING_POINT_Y + (pos2.y + pos1.y)/2.0f, Const.MAPPING_POINT_SCALE, Const.MAPPING_DEPTH+1.0f);
+		scoreImage.setAlpha(Const.VISIBLE);
 		mapLayer.setDepth(Const.MAPPING_DEPTH);
 		mapLayer.setAlpha(Const.VISIBLE);//mapLayer.setVisible(true);
 		this.pos1 = pos1;
@@ -51,7 +56,6 @@ public class Mapping
                 log().error("error loading node", e);
             }
         });
-
     }
 
 	/**
@@ -74,10 +78,20 @@ public class Mapping
 	* @param visible - the boolean flag
 	*/
 	public void paintVisibility(boolean visible) {
-		if(visible)
+		if(visible) {
 			mapLayer.setAlpha(Const.VISIBLE);//mapLayer.setVisible(true);
-		else
+			scoreImage.setAlpha(Const.VISIBLE);
+		}
+		else {
 			mapLayer.setAlpha(Const.HIDDEN_MAPPING);//mapLayer.setVisible(false);
+			scoreImage.setAlpha(Const.HIDDEN_MAPPING);
+		}
+	}
+	
+	private void paintScore() {
+		if(!scoreImage.destroyed()) {
+			scoreImage.setDigits(this.score);
+		}
 	}
 
 	/**
@@ -94,7 +108,7 @@ public class Mapping
 	* paints the mapping image and applies all the transformations
 	*/
 	public void paint() {
-		//mapLayer.setTranslation(0, 0);
+		paintScore();
 		if(!mapLayer.destroyed()) {
 			mapLayer.setRotation((float)(Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)));
 			mapLayer.setScale(pos1.getDistanceFrom(pos2)/mapImage.width(), Const.MAPPING_WIDTH);
@@ -112,16 +126,19 @@ public class Mapping
 	/**
 	* @return the points this mapping has
 	*/
-	public int getPoints() {
-		return points;
+	public int getScore() {
+		return score;
 	}
 	
 	/**
 	* Sets the points of this mapping to the given value
 	* @param points - integer
 	*/
-	public void setPoints(int points) {
-		this.points = points;
+	public void setScore(int score) {
+		if(score < 0)
+			this.score = 0;
+		else
+			this.score = score;
 	}
 	
 	/**
@@ -130,5 +147,8 @@ public class Mapping
 	public void destroy() {
 		this.visible = false;
 		mapLayer.destroy();
+		scoreImage.destroy();
+		mapLayer = null;
+		scoreImage = null;
 	}
 }

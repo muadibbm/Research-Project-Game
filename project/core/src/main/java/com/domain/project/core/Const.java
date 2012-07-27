@@ -102,6 +102,9 @@ public final class Const
 	
 	public static float MAPPING_DEPTH = 2.5f;
 	public static float MAPPING_WIDTH = 0.4f;
+	public static float MAPPING_POINT_X = 0.0f;
+	public static float MAPPING_POINT_Y = 0.0f;
+	public static float MAPPING_POINT_SCALE = 0.63f;
 	
 	public static float UI_DEPTH = 3.0f;
 	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;

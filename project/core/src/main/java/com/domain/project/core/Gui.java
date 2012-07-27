@@ -104,7 +104,7 @@ public class Gui
 		createImage(uiLayer, option8_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
-		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE);
+		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE, 1.0f);
 		
 		map = graphics().createImageLayer(Const.MAP_BUTTON_IMAGE);
 		unmap = graphics().createImageLayer(Const.UNMAP_BUTTON_IMAGE);

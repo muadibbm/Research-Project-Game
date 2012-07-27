@@ -73,12 +73,29 @@ public class Node {
 	/**
 	* Sets a mapping from this node to the given node
 	* @param node - the node to be mapped to
+	* @param score - the mapping score
 	*/
-	public void setMapping(Node node) {
+	public void setMapping(Node node, int score) {
 		mapped_node = node;
 		mapped_node.setMappedNode(this);
-		mapping = new Mapping(this.graphLayer, this.coordinates, mapped_node.getPos());
+		mapping = new Mapping(this.graphLayer, this.coordinates, mapped_node.getPos(), score);
 		mapped_node.setMapping(mapping);
+		propagateMapping(score-1);
+	}
+	
+	/* Mapping Score Propagation Logic */
+	//TODO add more gameplay scoring elements
+	private void propagateMapping(int score) {
+		for(Node neighbor : neighbors) {
+			if(neighbor.getMapping() != null) {
+				if(mapped_node!=null & neighbor.getMappedNode() != null) {
+					if(neighbor.getMappedNode().isNeighbor(mapped_node))
+						neighbor.getMapping().setScore(neighbor.getMapping().getScore()+score+1);
+				}
+				else
+					neighbor.getMapping().setScore(neighbor.getMapping().getScore()+score);
+			}
+		}
 	}
 	
 	private void setMapping(Mapping mapping) {
@@ -176,6 +193,15 @@ public class Node {
     public List<Node> getNeighbors() {
         return neighbors;
     }
+	
+	/**
+	* @param node - of type Node
+	* @return true if the given node is one of this node's neighbors
+	*/
+	public boolean isNeighbor(Node node) {
+		return neighbors.contains(node);
+	}
+	
 	
 	/**
 	* automaticly sets the population of this node to its degree

@@ -305,6 +305,7 @@ public class Graph {
             }
 			if(entry.getValue().getMapping() != null) {
 				entry.getValue().getMapping().setVisible(entry.getValue().getMapping().isVisible());
+				entry.getValue().getMapping().setScore(entry.getValue().getMapping().getScore());
 			}
         }
     }

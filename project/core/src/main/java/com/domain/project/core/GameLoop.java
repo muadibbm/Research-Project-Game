@@ -176,14 +176,44 @@ public class GameLoop implements Game {
 							/* Create Mapping if a Node is already set to be mapped */
 							if(player.getNodeToBeMapped() != null) {
 								if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
-									if(player.getSelectedNode().getBase() instanceof City & player.getNodeToBeMapped().getBase() instanceof Camp)
-										player.getSelectedNode().setMapping(player.getNodeToBeMapped());
-									else if(player.getSelectedNode().getBase() instanceof Camp & player.getNodeToBeMapped().getBase() instanceof City)
-										player.getNodeToBeMapped().setMapping(player.getSelectedNode());
-								}
+									if(player.getSelectedNode().getBase() instanceof City & player.getNodeToBeMapped().getBase() instanceof Camp) {
+										/* Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
+											mapping score : 0 , mapping propagation score : -1 */
+										if(player.getSelectedNode().getNodeLevel() < player.getNodeToBeMapped().getNodeLevel()) {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 0);
+										}
+										/* Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+											mapping score : 1 , mapping propagation score : 0 */
+										else if(player.getSelectedNode().getNodeLevel() > player.getNodeToBeMapped().getNodeLevel()) {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 1);
+										}
+										/* Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+											mapping score : 2 , mapping propagation score : 1 */
+										else {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 2);
+										}
+									}
+									else if(player.getSelectedNode().getBase() instanceof Camp & player.getNodeToBeMapped().getBase() instanceof City) {
+										/* Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
+											mapping score : 0 , mapping propagation score : -1 */
+										if(player.getNodeToBeMapped().getNodeLevel() < player.getSelectedNode().getNodeLevel()) {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 0);
+										}
+										/* Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+											mapping score : 1 , mapping propagation score : 0 */
+										else if(player.getNodeToBeMapped().getNodeLevel() > player.getSelectedNode().getNodeLevel()) {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 1);
+										}
+										/* Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+											mapping score : 2 , mapping propagation score : 1 */
+										else {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 2);
+										}
+									}
 								System.out.println("remove graphical indication");
-								//TODO : remove graphical indication
+								//TODO : remove graphical indication (not yet added)
 								player.setNodeToBeMapped(null);
+								}
 							}
 							/* Set the mapping of the selected node visible */
 							if(node.getMapping() != null)
