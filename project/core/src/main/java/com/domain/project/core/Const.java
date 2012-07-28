@@ -3,9 +3,6 @@ package com.domain.project.core;
 import static playn.core.PlayN.*;
 
 import playn.core.Image;
-import playn.core.ImageLayer;
-import playn.core.ResourceCallback;
-import playn.core.GroupLayer;
 
 public final class Const 
 {
@@ -194,7 +191,7 @@ public final class Const
 	public static float SHADOW = 0.45f;
 
     private Const() {
-        //prevents the caller from creating an instantce of this class
+        //prevents the caller from creating an instance of this class
         throw new AssertionError();
     }
 
@@ -203,7 +200,7 @@ public final class Const
 		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
         CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
-        CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");
+        CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
 		CONSTRUCTION_PANEL_EMPTY = assets().getImage("images/UI/costructionPanel.png");

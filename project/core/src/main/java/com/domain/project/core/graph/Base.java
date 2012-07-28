@@ -16,9 +16,9 @@ public class Base
 {
 	private int population;//degree of the node
 	//private ImageLayer infoLayer;
-	
+
 	private ImageLayer baseLayer;
-	
+
 	/**
 	* Constructor of the Base
 	* @param graphLayer - the GroupLayer of the graph
@@ -27,24 +27,28 @@ public class Base
 	public Base(final GroupLayer graphLayer, Image baseImage)
 	{
 		this.population = 0;
-        baseLayer = graphics().createImageLayer(baseImage);
+		
+		baseLayer = graphics().createImageLayer(baseImage);
+
 		baseLayer.setDepth(Const.BASE_DEPTH);
 		baseLayer.setAlpha(Const.BASE_ALPHA);
+
 		//infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		//infoLayer.setDepth(Const.UI_DEPTH);
-		
-        baseImage.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                baseLayer.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(baseLayer);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		baseImage.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				baseLayer.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(baseLayer);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
+		
 		/*
 		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -59,7 +63,7 @@ public class Base
                 log().error("error loading node", e);
             }
         });
-		*/
+		 */
 	}
 	
 	/**
@@ -83,11 +87,13 @@ public class Base
 	* @param y - float y coordinate
 	*/
 	public void paint(float x, float y) {
-		if(this instanceof City) 
+		if(this instanceof City) { 
 			baseLayer.setScale(Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
-		else
-			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);
-        baseLayer.setTranslation(x, y);
+		} else {
+			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);			
+		}
+		baseLayer.setTranslation(x, y);
+		
 		//infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
 	}
 	
@@ -98,6 +104,8 @@ public class Base
 		return baseLayer;
 	}
 	
+//	public float getScale
+
 	/* OVERRIDEN METHODS IN SUBCLASSES*/
 	//CITY METHODS
 	public void buildPalace(GroupLayer graphLayer, Image image){};

@@ -31,7 +31,7 @@ public class Road
     {
         visible = false;
 		placed = false;
-		//TODO: randomly choose from diffrent road images
+		//TODO: randomly choose from different road images
 		roadImage = Const.ROAD_IMAGE;
         roadLayer = graphics().createImageLayer(roadImage);
 		roadLayer.setDepth(Const.ROAD_DEPTH);
@@ -67,7 +67,7 @@ public class Road
     }
 	
 	/**
-	* sets the visibiliy(transparency level) of the Road image according to the given vibility flag
+	* sets the visibility(transparency level) of the Road image according to the given visibility flag
 	* @param visible - the boolean flag
 	*/
 	public void paintVisibility(boolean visible) {
@@ -93,9 +93,9 @@ public class Road
 	*/
 	public void paint() {
 		//roadLayer.setTranslation(0, 0);
-		roadLayer.setRotation((float)(Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)));
+		roadLayer.setRotation((float)(Math.atan2(pos2.getY() - pos1.getY(), pos2.getX() - pos1.getX())));
         roadLayer.setScale(pos1.getDistanceFrom(pos2)/roadImage.width(), Const.ROAD_WIDTH);
-		roadLayer.setTranslation(pos1.x, pos1.y);
+		roadLayer.setTranslation(pos1.getX(), pos1.getY());
 	}
 	
 	/**

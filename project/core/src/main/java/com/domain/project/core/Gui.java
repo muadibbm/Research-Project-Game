@@ -9,7 +9,6 @@ import playn.core.GroupLayer;
 
 import playn.core.Mouse;
 
-import com.domain.project.core.graph.Mapping;
 import com.domain.project.core.graph.Base;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.City;

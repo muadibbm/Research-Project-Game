@@ -38,7 +38,7 @@ public class Mapping
         mapLayer = graphics().createImageLayer(mapImage);
 		visible = true;
 		this.score = score;
-		scoreImage = new Digits(graphLayer, Const.MAPPING_POINT_X + (pos2.x + pos1.x)/2.0f, Const.MAPPING_POINT_Y + (pos2.y + pos1.y)/2.0f, Const.MAPPING_POINT_SCALE, Const.MAPPING_DEPTH+1.0f);
+		scoreImage = new Digits(graphLayer, Const.MAPPING_POINT_X + (pos2.getX() + pos1.getX())/2.0f, Const.MAPPING_POINT_Y + (pos2.getY() + pos1.getY())/2.0f, Const.MAPPING_POINT_SCALE, Const.MAPPING_DEPTH+1.0f);
 		scoreImage.setAlpha(Const.VISIBLE);
 		mapLayer.setDepth(Const.MAPPING_DEPTH);
 		mapLayer.setAlpha(Const.VISIBLE);//mapLayer.setVisible(true);
@@ -74,7 +74,7 @@ public class Mapping
     }
 	
 	/**
-	* sets the visibiliy(transparency level) of the Mapping image according to the given vibility flag
+	* sets the visibility(transparency level) of the Mapping image according to the given visibility flag
 	* @param visible - the boolean flag
 	*/
 	public void paintVisibility(boolean visible) {
@@ -110,9 +110,9 @@ public class Mapping
 	public void paint() {
 		paintScore();
 		if(!mapLayer.destroyed()) {
-			mapLayer.setRotation((float)(Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)));
+			mapLayer.setRotation((float)(Math.atan2(pos2.getY() - pos1.getY(), pos2.getX() - pos1.getX())));
 			mapLayer.setScale(pos1.getDistanceFrom(pos2)/mapImage.width(), Const.MAPPING_WIDTH);
-			mapLayer.setTranslation(pos1.x, pos1.y);
+			mapLayer.setTranslation(pos1.getX(), pos1.getY());
 		}
 	}
 	

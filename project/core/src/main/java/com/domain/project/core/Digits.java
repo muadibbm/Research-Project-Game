@@ -5,9 +5,7 @@ import static playn.core.PlayN.*;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
-import playn.core.GroupLayer;
-
-import java.util.StringTokenizer; 
+import playn.core.GroupLayer; 
 
 /**
 * Represents a numbering system given by the number images
