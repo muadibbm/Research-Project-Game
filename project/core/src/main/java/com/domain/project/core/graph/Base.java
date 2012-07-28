@@ -9,26 +9,29 @@ import playn.core.GroupLayer;
 
 import com.domain.project.core.Const;
 
+/**
+* This class contains all the image and game logic for a corresponding node
+*/
 public class Base
 {
 	private int population;//degree of the node
 	//private ImageLayer infoLayer;
 
 	private ImageLayer baseLayer;
-	private ImageLayer testLayer;
 
+	/**
+	* Constructor of the Base
+	* @param graphLayer - the GroupLayer of the graph
+	* @param baseImage - the image of the base
+	*/
 	public Base(final GroupLayer graphLayer, Image baseImage)
 	{
 		this.population = 0;
 		
 		baseLayer = graphics().createImageLayer(baseImage);
-		testLayer = graphics().createImageLayer(Const.TEST);
 
 		baseLayer.setDepth(Const.BASE_DEPTH);
 		baseLayer.setAlpha(Const.BASE_ALPHA);
-
-		testLayer.setDepth(Const.BASE_DEPTH + 1.0f);
-		testLayer.setAlpha(Const.BASE_ALPHA);
 
 		//infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		//infoLayer.setDepth(Const.UI_DEPTH);
@@ -45,21 +48,7 @@ public class Base
 				log().error("error loading node", e);
 			}
 		});
-
-		Const.TEST.addCallback(new ResourceCallback<Image>() {
-
-			@Override
-			public void done(Image image) {
-				testLayer.setOrigin(image.width()/2f, image.height()/2f);
-				graphLayer.add(testLayer);
-			}
-
-			@Override
-			public void error(Throwable e) {
-				log().error("error loading node", e);
-			}
-		});
-
+		
 		/*
 		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -76,30 +65,46 @@ public class Base
         });
 		 */
 	}
-
+	
+	/**
+	* Sets the population of this node to the given number
+	* @param population - int
+	*/
 	public void setPopulation(int population) {
 		this.population = population;
 	}
-
+		
+	/**
+	* @return the population of this node
+	*/
 	public int getPopulation() {
 		return population;
 	}
-
+	
+	/**
+	* paints the base at the given coordinates
+	* @param x - float x coordinate
+	* @param y - float y coordinate
+	*/
 	public void paint(float x, float y) {
 		if(this instanceof City) { 
 			baseLayer.setScale(Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
-			testLayer.setScale(Const.BASE_CITY_SCALE * 10, Const.BASE_CITY_SCALE * 10);
-			testLayer.setTranslation(x - baseLayer.scaledWidth()/2, y - baseLayer.scaledHeight()/2);
 		} else {
-			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);
+			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);			
 		}
 		baseLayer.setTranslation(x, y);
+		
 		//infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
 	}
-
+	
+	/**
+	* @return the baseLayer of type ImageLayer
+	*/
 	public ImageLayer getBaseLayer(){
 		return baseLayer;
 	}
+	
+//	public float getScale
 
 	/* OVERRIDEN METHODS IN SUBCLASSES*/
 	public void buildPalace(GroupLayer graphLayer, Image image){};

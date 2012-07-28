@@ -170,8 +170,6 @@ public final class Const
 	public static Image WALL_LEFT_LEVEL1;
 	public static Image WALL_RIGHT_LEVEL1;
 	
-	public static Image TEST;
-	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.1f;
 	public static float HIDDEN_MAPPING = 0.33f;
@@ -187,10 +185,7 @@ public final class Const
 		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
         CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
-        CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");
-        
-        TEST = assets().getImage("images/City/red.png");
-        
+        CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
 		CONSTRUCTION_PALACE_LEVEL1 = assets().getImage("images/UI/costructionPanel_palace.png");

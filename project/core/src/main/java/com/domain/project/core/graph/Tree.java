@@ -9,8 +9,6 @@ import playn.core.GroupLayer;
 
 import com.domain.project.core.Const;
 
-import java.lang.Integer;
-
 public class Tree
 {
 	private Tuple2f coordinate;
@@ -55,9 +53,9 @@ public class Tree
 	
 	public void paint() {
 		treeLayer.setScale(Const.TREE_SCALE, Const.TREE_SCALE);
-        treeLayer.setTranslation(coordinate.x, coordinate.y);
+        treeLayer.setTranslation(coordinate.getX(), coordinate.getY());
 		shadowLayer.setScale(Const.TREE_SCALE, Const.TREE_SCALE);
-		shadowLayer.setTranslation(coordinate.x, coordinate.y + treeLayer.image().height()/100);
+		shadowLayer.setTranslation(coordinate.getX(), coordinate.getY() + treeLayer.image().height()/100);
 	}
 	
 	public ImageLayer getLayer(){

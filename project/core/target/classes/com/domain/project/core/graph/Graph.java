@@ -2,8 +2,11 @@ package com.domain.project.core.graph;
 
 import static playn.core.PlayN.*;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.lang.Integer;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -18,6 +21,9 @@ import com.domain.project.core.enums.Nucleotide;
 import com.domain.project.core.enums.Isomer;
 import com.domain.project.core.enums.EdgeType;
 
+/**
+ * This class contains the nodes and edges of the graph read from the database
+ */
 public class Graph {
 
 	private java.util.Random r = new java.util.Random();
@@ -36,6 +42,15 @@ public class Graph {
 
 	private int id;
 
+	/**
+	 * Constructs a graph instance 
+	 * @param isCityGraph - defines if it is a graph of cities or camps
+	 * @param xOffset - float value representing the top left origin of the graph on the x axis
+	 * @param yOffset - float value representing the top left origin of the graph in the y axis
+	 * @param widht - float value is the width of the graph
+	 * @param height - float value is the height of the graph
+	 * @param id - the unique integer value assigned to this instance
+	 */
 	public Graph(boolean isCityGraph, float xOffset, float yOffset, float width, float height, int id) {
 		this.isCityGraph = isCityGraph;
 		this.nodes = new HashMap<Integer, Node>();
@@ -47,6 +62,12 @@ public class Graph {
 		this.id = id;
 	}
 
+	/**
+	 * Constructs a graph instance 
+	 * @param filename - the path to the database file containing the graph raw data
+	 * @param graphLayer - the GroupLayer that all the imageLayers in this graph instance are added to
+	 * @param player_id - the unique integer value of the player assigned to this graph
+	 */
 	public void generateGraph(String filename, GroupLayer graphLayer, int player_id) {
 		parseGraphFile(filename, graphLayer, player_id);
 		placeNodes();
@@ -54,23 +75,38 @@ public class Graph {
 		placeEdges();
 	}
 
+	/**
+	 * @return the graph id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @return the list of nodes in this graph
+	 */
 	public Map<Integer, Node> getNodes() {
 		return nodes;
 	}
 
+	/**
+	 * @return the list of edges in this graph
+	 */
 	public Map<Integer, Edge> getEdges() {
 		return edges;
 	}
 
+	/**
+	 * updates all the positions of the nodes and edges in the graph
+	 */
 	public void updateAll() {
 		placeNodes();
 		placeEdges();
 	}
 
+	/**
+	 * parses the file containing the raw graph data and create all the nodes and edges instances
+	 */
 	private void parseGraphFile(String filename, final GroupLayer graphLayer, final int player_id) {
 
 		assets().getText(PATH + filename, new ResourceCallback<String>() {
@@ -245,6 +281,9 @@ public class Graph {
 		});
 	}
 
+	/**
+	 * paints all the imageLayers in this graph instance
+	 */
 	public void paintAll() {
 		for(Entry<Integer, Node> entry : nodes.entrySet()) {
 			entry.getValue().paint();
@@ -260,62 +299,60 @@ public class Graph {
 
 	private void placeNodes() {
 		//TODO: finish the placement algorithm
-		float tmpX = 0;
-		float tmpY = 0;
+		float tempNodeX = 0;
+		float tempNodeY = 0;
+		float scaledWidth;
+		float scaledHeight;
+		ArrayList<Node> placedNodesList = new ArrayList<Node>();
 
+		// Check every node in the list
 		for (Entry<Integer, Node> entry : nodes.entrySet()) {
-			while (!entry.getValue().isPlaced()) {
-				tmpX = r.nextFloat()*this.width + this.xOffset;
-				tmpY = r.nextFloat()*this.height + this.yOffset;
-				boolean intersected = false;
-				
-				// Do the line intersection here.
-				for (Entry<Integer, Edge> edge: edges.entrySet()) {
-					Node node1 = getNode1(edge.getValue());
-					Node node2 = getNode2(edge.getValue());
+			Node node = entry.getValue();
 
-					Tuple2f pos1 = node1.getPos();
-					Tuple2f pos2 = node2.getPos();
+			while (!node.isPlaced()) {
+				scaledWidth = node.getBase().getBaseLayer().scaledWidth() / 3;
+				scaledHeight = node.getBase().getBaseLayer().scaledHeight() / 3;
+				tempNodeX = r.nextFloat() * this.width + this.xOffset;
+				tempNodeY = r.nextFloat() * this.height + this.yOffset;
+				boolean restartLoops = false;
 
-					if (node1.isPlaced() && node2.isPlaced()) {
-						float slope = pos1.getSlope(pos2);
-						float b = (float) Math.floor(pos1.y - (pos1.x * slope));
-
-						System.out.println("Pos1: " + pos1);
-						System.out.println("Pos2: " + pos2);
-						System.out.println("Slope: " + slope + ", " + "b: " + b);
-
-						if (isIntersecting(new Tuple2f(tmpX, tmpY), slope, b)) {
-							System.out.println("Intersection!");
-							intersected = true;
+				if (!placedNodesList.isEmpty()) {
+					for (Node n: placedNodesList) {
+						if (!node.equals(n)) {
+							for (Node neighbour: n.getNeighbors()) {
+								if (!node.equals(neighbour) && neighbour.isPlaced()) {
+									Line2D.Float line = new Line2D.Float(n.getPos().getX(), n.getPos().getY(), neighbour.getPos().getX(), neighbour.getPos().getY());
+									Rectangle2D.Float rectangle = new Rectangle2D.Float(tempNodeX, tempNodeY, scaledWidth, scaledHeight);
+									
+									if (rectangle.intersectsLine(line)) {
+										restartLoops = true;
+										break;
+									}
+								}
+							}
+						}
+						
+						if (restartLoops) {
 							break;
 						}
 					}
-				}
-				
-				if (intersected) {
-					continue;
+					
+					if (restartLoops) {
+						continue;
+					}
 				}
 
-				if (this.isSeperated(new Tuple2f(tmpX, tmpY))) {
-					entry.getValue().placeNode(tmpX, tmpY);
+				if (this.isSeperated(new Tuple2f(tempNodeX, tempNodeY))) {
+					node.placeNode(tempNodeX, tempNodeY);
 				}
 			}
-			
-			if (entry.getValue().getMapping() != null) {
-				entry.getValue().getMapping().setVisible(entry.getValue().getMapping().isVisible());
+
+			placedNodesList.add(node);
+
+			if (node.getMapping() != null) {
+				node.getMapping().setVisible(node.getMapping().isVisible());
 			}
 		}
-	}
-
-	private boolean isIntersecting(Tuple2f tuple, float slope, float b) {
-		System.out.println("newNodePos: (" + tuple.x + ", " + tuple.y + ")");
-
-		if (Math.floor(tuple.y) == Math.floor(slope * tuple.x + b)) {
-			System.out.println("True");
-			return true;
-		}
-		return false;
 	}
 
 	private void setNodeLevels() {
@@ -338,20 +375,22 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * return the Node instance of the node1 of the given edge
+	 * @param edge - a given Edge instance
+	 * @return node - the Node instance
+	 */
 	public Node getNode1(Edge edge) {
-		for(Entry<Integer, Node> entry : nodes.entrySet()) {
-			if(edge.getN1() == entry.getValue().getID())
-				return entry.getValue();
-		}
-		return null;
+		return getNode(edge.getN1());
 	}
 
+	/**
+	 * return the Node instance of the node2 of the given edge
+	 * @param edge - a given Edge instance
+	 * @return node - the Node instance
+	 */
 	public Node getNode2(Edge edge) {
-		for(Entry<Integer, Node> entry : nodes.entrySet()) {
-			if(edge.getN2() == entry.getValue().getID())
-				return entry.getValue();
-		}
-		return null;
+		return getNode(edge.getN2());
 	}
 
 	private boolean isSeperated(Tuple2f test_coordinates) {
@@ -376,25 +415,28 @@ public class Graph {
 		return true;
 	}
 
-	public void addNode(Node n) {
+	private void addNode(Node n) {
 		nodes.put(n.getID(), n);
 	}
 
-	public Node getNode(int nodeID) {
+	private Node getNode(int nodeID) {
 		return nodes.get(nodeID);
 	}
 
-	public void addEdge(Edge e) {
+	private void addEdge(Edge e) {
 		edges.put(e.getID(), e);
 	}
 
-	public boolean contains(int id) {
+	private boolean contains(int id) {
 		if(nodes.containsKey(id)) {
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * @return true if this graph instance is a city type and false otherwise
+	 */
 	public boolean isCityGraph() {
 		return isCityGraph;
 	}
@@ -402,16 +444,15 @@ public class Graph {
 	@Override
 	public String toString() {
 		String ret = "";
-		for(Entry<Integer, Node> entry : nodes.entrySet()) {
+		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
 			ret = ret + entry.getValue() + "\n";
 		}
 		ret = ret + "Total number of nodes: " + nodes.size() + "\n\n";
 
-		for(Entry<Integer, Edge> entry : edges.entrySet()) {
+		for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
 			ret = ret + entry.getValue() + "\n";
 		}
 		ret = ret + "Total number of edges: " + edges.size();
 		return ret;
 	}
-
 }

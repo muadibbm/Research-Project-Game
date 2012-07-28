@@ -3,8 +3,8 @@ package com.domain.project.core.graph;
 import java.lang.Math;
 
 public class Tuple2f {
-	public float x;
-	public float y;
+	private float x;
+	private float y;
 
 	public Tuple2f() {
 		this.x = 0.0f;
@@ -29,6 +29,22 @@ public class Tuple2f {
 		return 0.0f;
 	}
 	
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
 	@Override
 	public String toString() {
 		return ("(" + this.x + ", " + this.y + ")");
