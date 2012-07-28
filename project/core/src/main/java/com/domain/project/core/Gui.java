@@ -219,8 +219,6 @@ public class Gui
 									base.setCityLevel(base.getCityLevel() + 1);
 									base.buildPalace(graphLayer, Const.PALACE_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -252,8 +250,6 @@ public class Gui
 									//TODO : check bazar level
 									base.buildBazarFood(graphLayer, Const.BAZAR_FOOD_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -285,8 +281,6 @@ public class Gui
 									//TODO : check bazar level
 									base.buildBazarChina(graphLayer, Const.BAZAR_CHINA_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -318,8 +312,6 @@ public class Gui
 									//TODO : check bazar level
 									base.buildBazarCarpet(graphLayer, Const.BAZAR_CARPET_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -351,8 +343,6 @@ public class Gui
 									//TODO : check garden level
 									base.buildGarden(graphLayer, Const.GARDEN_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -384,8 +374,6 @@ public class Gui
 									base.setTowerLevel(base.getTowerLevel() + 1);
 									base.buildTower(graphLayer, Const.TOWER_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
 							}
 					}
 				}
@@ -417,8 +405,68 @@ public class Gui
 									base.setWallLevel(base.getWallLevel() + 1);
 									base.buildWall(graphLayer, Const.WALL_FRONT_LEVEL1, Const.WALL_BACK_LEVEL1, Const.WALL_RIGHT_LEVEL1, Const.WALL_LEFT_LEVEL1);
 								}
-								//else if(player.getSelectedNode().getBase() instanceof Camp)
-									//TODO
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building COMMAND TENT */
+		option1_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setCommandTentLevel(base.getCommandTentLevel() + 1);
+									base.buildCommandTent(graphLayer, Const.COMMAND_TENT_LEVEL1);
+								}
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+		
+		/* Building SOLDIER TENT */
+		option2_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
+									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+								}
 							}
 					}
 				}

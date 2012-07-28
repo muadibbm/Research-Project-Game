@@ -99,6 +99,7 @@ public class Base
 	}
 	
 	/* OVERRIDEN METHODS IN SUBCLASSES*/
+	//CITY METHODS
 	public void buildPalace(GroupLayer graphLayer, Image image){};
 	public void buildBazarFood(GroupLayer graphLayer, Image image){};
 	public void buildBazarChina(GroupLayer graphLayer, Image image){};
@@ -116,4 +117,11 @@ public class Base
 	public void setTowerLevel(int level){};
 	public int getWallLevel(){return 0;};
 	public void setWallLevel(int level){};
+	//CAMP METHODS
+	public void buildSoldierTent(GroupLayer graphLayer, Image image){};
+	public int getSoldierTentLevel(){return 0;};
+	public void setSoldierTentLevel(int level){};
+	public void buildCommandTent(GroupLayer graphLayer, Image image){};
+	public int getCommandTentLevel(){return 0;};
+	public void setCommandTentLevel(int level){};
 }
