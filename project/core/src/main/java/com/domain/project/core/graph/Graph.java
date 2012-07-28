@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import playn.core.GroupLayer;
-import playn.core.Image;
-import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
 
 import com.domain.project.core.Const;
@@ -351,6 +349,11 @@ public class Graph {
 
 			if (node.getMapping() != null) {
 				node.getMapping().setVisible(node.getMapping().isVisible());
+            }
+
+			if(entry.getValue().getMapping() != null) {
+				entry.getValue().getMapping().setVisible(entry.getValue().getMapping().isVisible());
+				entry.getValue().getMapping().setScore(entry.getValue().getMapping().getScore());
 			}
 		}
 	}

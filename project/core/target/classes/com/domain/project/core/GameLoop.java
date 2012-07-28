@@ -47,10 +47,10 @@ public class GameLoop implements Game {
 	private Gui gui2;
 	
 	private java.util.Random r = new java.util.Random();
-	private List <Tree> trees;
+	private List <Tree> trees;;
 
 	/**
-	* Initilizes all the game variables before starting the game.
+	* Initializes all the game variables before starting the game.
 	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
 	*/
     @Override
@@ -89,7 +89,9 @@ public class GameLoop implements Game {
         mControls = new MouseControls(environment);
         mouse().setListener(mControls);
 		gui1.addListener(player1, environment.getGraphLayer());
-		//TODO : gui2.addListener(player2, environment.getGraphLayer());
+		gui1.showConstructions(false, false);
+		/*TODO : gui2.addListener(player2, environment.getGraphLayer());
+		gui2.showConstructions(false, false); */
 		addAllListeners(cityGraphA, player1, gui1);
 		addAllListeners(campGraphA, player1, gui1);
 		addAllListeners(campGraphB, player1, gui1);
@@ -141,16 +143,14 @@ public class GameLoop implements Game {
         return Const.UPDATE_RATE;
     }
 	
-	//TODO : Multiplier aspect, mouse should be associated with a player
-	//TODO : add Networking, where does the players iterations diverge ?
+	//TODO : Multiplayer aspect, mouse should be associated with a player
+	//TODO : add Networking, where does the players interations diverge ?
 	
-
-	/* Any interaction with the game "Graph" layers and the responding game logic */
 	/** 
-	* Contains any interaction with the layers in the game's graphs and the corresponding game logic. 
+	* Contains any interatcion with the layers in the game's graphs and the corresponding game logic. 
 	* TODO : This does not affect paint method in html version of the game.
 	* @param graph - the associated graph object
-	* @param player - the associated player with the mouse click
+	* @param player - the assciated player with the mouse click
 	* @param gui - the user interface corresponding to the player
 	*/
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
@@ -173,23 +173,61 @@ public class GameLoop implements Game {
 							/* Create Mapping if a Node is already set to be mapped */
 							if(player.getNodeToBeMapped() != null) {
 								if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
-									if(player.getSelectedNode().getBase() instanceof City & player.getNodeToBeMapped().getBase() instanceof Camp)
-										player.getSelectedNode().setMapping(player.getNodeToBeMapped());
-									else if(player.getSelectedNode().getBase() instanceof Camp & player.getNodeToBeMapped().getBase() instanceof City)
-										player.getNodeToBeMapped().setMapping(player.getSelectedNode());
-								}
+									if(player.getSelectedNode().getBase() instanceof City & player.getNodeToBeMapped().getBase() instanceof Camp) {
+										/* Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
+											mapping score : 0 , mapping propagation score : -1 */
+										if(player.getSelectedNode().getNodeLevel() < player.getNodeToBeMapped().getNodeLevel()) {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 0);
+										}
+										/* Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+											mapping score : 1 , mapping propagation score : 0 */
+										else if(player.getSelectedNode().getNodeLevel() > player.getNodeToBeMapped().getNodeLevel()) {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 1);
+										}
+										/* Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+											mapping score : 2 , mapping propagation score : 1 */
+										else {
+											player.getSelectedNode().setMapping(player.getNodeToBeMapped(), 2);
+										}
+									}
+									else if(player.getSelectedNode().getBase() instanceof Camp & player.getNodeToBeMapped().getBase() instanceof City) {
+										/* Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
+											mapping score : 0 , mapping propagation score : -1 */
+										if(player.getNodeToBeMapped().getNodeLevel() < player.getSelectedNode().getNodeLevel()) {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 0);
+										}
+										/* Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+											mapping score : 1 , mapping propagation score : 0 */
+										else if(player.getNodeToBeMapped().getNodeLevel() > player.getSelectedNode().getNodeLevel()) {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 1);
+										}
+										/* Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+											mapping score : 2 , mapping propagation score : 1 */
+										else {
+											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 2);
+										}
+									}
 								System.out.println("remove graphical indication");
-								//TODO : remove graphical indication
+								//TODO : remove graphical indication (not yet added)
 								player.setNodeToBeMapped(null);
+								}
 							}
 							/* Set the mapping of the selected node visible */
 							if(node.getMapping() != null)
 								node.getMapping().setVisible(true);
+								
 							/* Set the edges of the mapped_node of the selected node visible */ //TODO : too much ???
 							//if(node.getMappedNode()!= null)
 								//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
 									//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
 										//edge.getValue().getRoad().setVisible(true);
+										
+							/* show the available Constructions for this node*/
+							gui.showConstructions(graph.isCityGraph(), true);
+						}
+						else {//This node does not belong to the player
+							/* show the available Constructions for this node*/
+							gui.showConstructions(graph.isCityGraph(), false);
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
@@ -204,8 +242,6 @@ public class GameLoop implements Game {
 							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
 							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
 						}
-						/* show the available Constructions */
-						gui.paint(graph.isCityGraph());
 					}
 				}
 				@Override

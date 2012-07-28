@@ -81,11 +81,11 @@ public final class Const
 	public static float WALL_RIGHT_X = 29.29f;
 	public static float WALL_RIGHT_Y = 1.67f;
 	public static float WALL_FRONT_DEPTH = 3.9f;
-	public static float WALL_FRONT_SCALE = 0.01333f;
-	public static float WALL_FRONT_SCALE_VERTICAL = 0.0223f;
+	public static float WALL_FRONT_SCALE = 0.01333f*3;
+	public static float WALL_FRONT_SCALE_VERTICAL = 0.0223f*3;
 	public static float WALL_BACK_DEPTH = 3.1f;
-	public static float WALL_BACK_SCALE = 0.00812f;
-	public static float WALL_BACK_SCALE_VERTICAL = 0.0109f;
+	public static float WALL_BACK_SCALE = 0.00812f*3;
+	public static float WALL_BACK_SCALE_VERTICAL = 0.0109f*3;
 	public static float WALL_SIDE_SCALE = 0.016f;
 	public static float WALL_SIDE_SCALE_VERTICAL = 0.029f;
 
@@ -99,6 +99,9 @@ public final class Const
 	
 	public static float MAPPING_DEPTH = 2.5f;
 	public static float MAPPING_WIDTH = 0.4f;
+	public static float MAPPING_POINT_X = 0.0f;
+	public static float MAPPING_POINT_Y = 0.0f;
+	public static float MAPPING_POINT_SCALE = 0.63f;
 	
 	public static float UI_DEPTH = 3.0f;
 	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
@@ -132,6 +135,7 @@ public final class Const
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
 	public static Image MAP_IMAGE;
+	public static Image CONSTRUCTION_PANEL_EMPTY;
 	public static Image CONSTRUCTION_PALACE_LEVEL1;
 	public static Image CONSTRUCTION_TOWER_LEVEL1;
 	public static Image CONSTRUCTION_BAZAR_FOOD_LEVEL1;
@@ -140,6 +144,7 @@ public final class Const
 	public static Image CONSTRUCTION_SMITHY_LEVEL1;
 	public static Image CONSTRUCTION_WALL_LEVEL1;
 	public static Image CONSTRUCTION_GARDEN_LEVEL1;
+	public static Image CONSTRUCTION_TENT1_LEVEL1;
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
@@ -188,6 +193,7 @@ public final class Const
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
+		CONSTRUCTION_PANEL_EMPTY = assets().getImage("images/UI/costructionPanel.png");
 		CONSTRUCTION_PALACE_LEVEL1 = assets().getImage("images/UI/costructionPanel_palace.png");
 		CONSTRUCTION_BAZAR_CARPET_LEVEL1 = assets().getImage("images/UI/costructionPanel_carpetMarket.png");
 		CONSTRUCTION_BAZAR_CHINA_LEVEL1 = assets().getImage("images/UI/costructionPanel_chinaMarket.png");
@@ -196,6 +202,7 @@ public final class Const
 		CONSTRUCTION_SMITHY_LEVEL1 = assets().getImage("images/UI/costructionPanel_smithy.png");
 		CONSTRUCTION_TOWER_LEVEL1 = assets().getImage("images/UI/costructionPanel_tower.png");
 		CONSTRUCTION_WALL_LEVEL1 = assets().getImage("images/UI/costructionPanel_wall.png");
+		CONSTRUCTION_TENT1_LEVEL1 = assets().getImage("images/UI/costructionPanel_tent1.png");
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");

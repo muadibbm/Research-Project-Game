@@ -15,14 +15,32 @@ import com.domain.project.core.graph.City;
 
 public class Gui
 {
-	private ImageLayer option1;//TOWN_HALL
-	private ImageLayer option2;//FOOD_BAZAR
-	private ImageLayer option3;//CHINA_BAZAR
-	private ImageLayer option4;//CARPET_BAZAR
-	private ImageLayer option5;//GARDEN
-	private ImageLayer option6;//SMITHY
-	private ImageLayer option7;//TOWER
-	private ImageLayer option8;//WALL
+    private ImageLayer option1_empty;
+	private ImageLayer option2_empty;
+	private ImageLayer option3_empty;
+	private ImageLayer option4_empty;
+	private ImageLayer option5_empty;
+	private ImageLayer option6_empty;
+	private ImageLayer option7_empty;
+	private ImageLayer option8_empty;
+	
+	private ImageLayer option1_city;//TOWN_HALL
+	private ImageLayer option2_city;//FOOD_BAZAR
+	private ImageLayer option3_city;//CHINA_BAZAR
+	private ImageLayer option4_city;//CARPET_BAZAR
+	private ImageLayer option5_city;//GARDEN
+	private ImageLayer option6_city;//SMITHY
+	private ImageLayer option7_city;//TOWER
+	private ImageLayer option8_city;//WALL
+	
+	private ImageLayer option1_camp;//
+	private ImageLayer option2_camp;//
+	private ImageLayer option3_camp;//
+	private ImageLayer option4_camp;//
+	private ImageLayer option5_camp;//
+	private ImageLayer option6_camp;//
+	private ImageLayer option7_camp;//
+	private ImageLayer option8_camp;//
 	
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
@@ -33,25 +51,59 @@ public class Gui
 	
 	public Gui(final GroupLayer uiLayer)
 	{
-        option1 = graphics().createImageLayer(Const.CONSTRUCTION_PALACE_LEVEL1);
-		createImage(uiLayer, option1, Const.CONSTRUCTION_PALACE_LEVEL1, 0.0f);
-		option2 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_FOOD_LEVEL1);
-		createImage(uiLayer, option2, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.3f);
-		option3 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1);
-		createImage(uiLayer, option3, Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1, 0.6f);
-		option4 = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1);
-		createImage(uiLayer, option4, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.9f);
-		option5 = graphics().createImageLayer(Const.CONSTRUCTION_GARDEN_LEVEL1);
-		createImage(uiLayer, option5, Const.CONSTRUCTION_GARDEN_LEVEL1, 1.2f);
-		option6 = graphics().createImageLayer(Const.CONSTRUCTION_SMITHY_LEVEL1);
-		createImage(uiLayer, option6, Const.CONSTRUCTION_SMITHY_LEVEL1, 1.5f);
-		option7 = graphics().createImageLayer(Const.CONSTRUCTION_TOWER_LEVEL1);
-		createImage(uiLayer, option7, Const.CONSTRUCTION_TOWER_LEVEL1, 1.8f);
-		option8 = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
-		createImage(uiLayer, option8, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
+		option1_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option1_empty, Const.CONSTRUCTION_PANEL_EMPTY, 0.0f);
+		option2_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option2_empty, Const.CONSTRUCTION_PANEL_EMPTY, 0.3f);
+		option3_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option3_empty, Const.CONSTRUCTION_PANEL_EMPTY, 0.6f);
+		option4_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option4_empty, Const.CONSTRUCTION_PANEL_EMPTY, 0.9f);
+		option5_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option5_empty, Const.CONSTRUCTION_PANEL_EMPTY, 1.2f);
+		option6_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option6_empty, Const.CONSTRUCTION_PANEL_EMPTY, 1.5f);
+		option7_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option7_empty, Const.CONSTRUCTION_PANEL_EMPTY, 1.8f);
+		option8_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
+		createImage(uiLayer, option8_empty, Const.CONSTRUCTION_PANEL_EMPTY, 2.1f);
+		
+        option1_city = graphics().createImageLayer(Const.CONSTRUCTION_PALACE_LEVEL1);
+		createImage(uiLayer, option1_city, Const.CONSTRUCTION_PALACE_LEVEL1, 0.0f);
+		option2_city = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_FOOD_LEVEL1);
+		createImage(uiLayer, option2_city, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.3f);
+		option3_city = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1);
+		createImage(uiLayer, option3_city, Const.CONSTRUCTION_BAZAR_CHINA_LEVEL1, 0.6f);
+		option4_city = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1);
+		createImage(uiLayer, option4_city, Const.CONSTRUCTION_BAZAR_CARPET_LEVEL1, 0.9f);
+		option5_city = graphics().createImageLayer(Const.CONSTRUCTION_GARDEN_LEVEL1);
+		createImage(uiLayer, option5_city, Const.CONSTRUCTION_GARDEN_LEVEL1, 1.2f);
+		option6_city = graphics().createImageLayer(Const.CONSTRUCTION_SMITHY_LEVEL1);
+		createImage(uiLayer, option6_city, Const.CONSTRUCTION_SMITHY_LEVEL1, 1.5f);
+		option7_city = graphics().createImageLayer(Const.CONSTRUCTION_TOWER_LEVEL1);
+		createImage(uiLayer, option7_city, Const.CONSTRUCTION_TOWER_LEVEL1, 1.8f);
+		option8_city = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
+		createImage(uiLayer, option8_city, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
+		
+		option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option1_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.0f);
+		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option2_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.3f);
+		option3_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option3_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.6f);
+		option4_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option4_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.9f);
+		option5_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option5_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.2f);
+		option6_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option6_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.5f);
+		option7_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option7_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.8f);
+		option8_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
+		createImage(uiLayer, option8_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
-		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE);
+		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE, 1.0f);
 		
 		map = graphics().createImageLayer(Const.MAP_BUTTON_IMAGE);
 		unmap = graphics().createImageLayer(Const.UNMAP_BUTTON_IMAGE);
@@ -153,7 +205,7 @@ public class Gui
 		});
 		
 		/* Building TOWN HALL */
-		option1.addListener(new Mouse.Listener() {
+		option1_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -186,7 +238,7 @@ public class Gui
 		});
 		
 		/* Building BAZAR FOOD */
-		option2.addListener(new Mouse.Listener() {
+		option2_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -219,7 +271,7 @@ public class Gui
 		});
 		
 		/* Building BAZAR CHINA */
-		option3.addListener(new Mouse.Listener() {
+		option3_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -252,7 +304,7 @@ public class Gui
 		});
 		
 		/* Building BAZAR CARPET */
-		option4.addListener(new Mouse.Listener() {
+		option4_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -285,7 +337,7 @@ public class Gui
 		});
 		
 		/* Building GARDEN */
-		option5.addListener(new Mouse.Listener() {
+		option5_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -318,7 +370,7 @@ public class Gui
 		});
 		
 		/* Building TOWER */
-		option7.addListener(new Mouse.Listener() {
+		option7_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -351,7 +403,7 @@ public class Gui
 		});
 		
 		/* Building WALL */
-		option8.addListener(new Mouse.Listener() {
+		option8_city.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -411,8 +463,89 @@ public class Gui
 		gold.setDigits(amount);
 	}
 	
-	public void paint(boolean isCity) {
-		
+	/**
+	* Activates the empty Construction panel
+	* @param active - boolean
+	*/
+	public void setEmptyConstruction(boolean active) {
+		option1_empty.setVisible(active);
+		option2_empty.setVisible(active);
+		option3_empty.setVisible(active);
+		option4_empty.setVisible(active);
+		option5_empty.setVisible(active);
+		option6_empty.setVisible(active);
+		option7_empty.setVisible(active);
+		option8_empty.setVisible(active);
+	}
+	
+	/**
+	* Activates the city Construction panel
+	* @param active - boolean
+	*/
+	public void setCityConstruction(boolean active) {
+		option1_city.setVisible(active);
+		option2_city.setVisible(active);
+		option3_city.setVisible(active);
+		option4_city.setVisible(active);
+		option5_city.setVisible(active);
+		option6_city.setVisible(active);
+		option7_city.setVisible(active);
+		option8_city.setVisible(active);
+		option1_city.setInteractive(active);
+		option2_city.setInteractive(active);
+		option3_city.setInteractive(active);
+		option4_city.setInteractive(active);
+		option5_city.setInteractive(active);
+		option6_city.setInteractive(active);
+		option7_city.setInteractive(active);
+		option8_city.setInteractive(active);
+	}
+	
+	/**
+	* Activates the camp Construction panel
+	* @param active - boolean
+	*/
+	public void setCampConstruction(boolean active) {
+		option1_camp.setVisible(active);
+		option2_camp.setVisible(active);
+		option3_camp.setVisible(active);
+		option4_camp.setVisible(active);
+		option5_camp.setVisible(active);
+		option6_camp.setVisible(active);
+		option7_camp.setVisible(active);
+		option8_camp.setVisible(active);
+		option1_camp.setInteractive(active);
+		option2_camp.setInteractive(active);
+		option3_camp.setInteractive(active);
+		option4_camp.setInteractive(active);
+		option5_camp.setInteractive(active);
+		option6_camp.setInteractive(active);
+		option7_camp.setInteractive(active);
+		option8_camp.setInteractive(active);
+	}
+	
+	/**
+	* Control the layers of the UI construction panel based on the given attributes
+	*/
+	public void showConstructions(boolean isCity, boolean belongsToPlayer) {
+		if(belongsToPlayer) {
+			if(isCity) {
+				setCityConstruction(true);
+				setCampConstruction(false);
+				setEmptyConstruction(false);
+			}
+			else
+			{
+				setCityConstruction(false);
+				setCampConstruction(true);
+				setEmptyConstruction(false);
+			}
+		}
+		else {
+			setCityConstruction(false);
+			setCampConstruction(false);
+			setEmptyConstruction(true);
+		}
 	}
 	
 	private void createImage(final GroupLayer uiLayer, final ImageLayer layerImage, Image optionImage, final float x_offset) {
