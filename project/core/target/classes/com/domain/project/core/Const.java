@@ -31,7 +31,7 @@ public final class Const
 	public static float BASE_DEPTH = 3.0f;
 	public static float BASE_ALPHA = 0.93f;
 
-    public static float MIN_CITY_DISTANCE = 90;
+    public static float MIN_CITY_DISTANCE = 150;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
@@ -93,6 +93,14 @@ public final class Const
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
+	public static float SOLDIER_TENT_X = 23.0f;
+	public static float SOLDIER_TENT_Y = 3.0f;
+	public static float SOLDIER_TENT_DEPTH = 3.3f;
+	public static float SOLDIER_TENT_SCALE = 0.066f;
+	public static float COMMAND_TENT_X = 0.0f;
+	public static float COMMAND_TENT_Y = 0.0f;
+	public static float COMMAND_TENT_DEPTH = 3.7f;
+	public static float COMMAND_TENT_SCALE = 0.075f;
 
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
@@ -124,7 +132,7 @@ public final class Const
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
-	public static float TREE_SCALE = 0.08f;
+	public static float TREE_SCALE = 0.07f;
 	public static int MAX_TREE_NUMBER = 7000;
 	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
 	public static float MIN_NODE_TREE_DISTANCE = 50.0f;
@@ -174,6 +182,8 @@ public final class Const
 	public static Image WALL_BACK_LEVEL1;
 	public static Image WALL_LEFT_LEVEL1;
 	public static Image WALL_RIGHT_LEVEL1;
+	public static Image SOLDIER_TENT_LEVEL1;
+	public static Image COMMAND_TENT_LEVEL1;
 	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.1f;
@@ -232,5 +242,7 @@ public final class Const
 		WALL_LEFT_LEVEL1 = assets().getImage("images/City/Wall_left_level1.png");
 		WALL_RIGHT_LEVEL1 = assets().getImage("images/City/Wall_right_level1.png");
 		GARDEN_LEVEL1 = assets().getImage("images/City/Garden_Level1.png");
+		SOLDIER_TENT_LEVEL1 = assets().getImage("images/Camp/soldierTent.png"); 
+		COMMAND_TENT_LEVEL1 = assets().getImage("images/Camp/commandTent.png");
     }
 }

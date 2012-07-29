@@ -198,9 +198,7 @@ public class Node {
     }
 	
 	/**
-<<<<<<< HEAD
 	* Automatically sets the population of this node to its degree
-=======
 	* @param node - of type Node
 	* @return true if the given node is one of this node's neighbors
 	*/
@@ -210,8 +208,7 @@ public class Node {
 	
 	
 	/**
-	* automaticly sets the population of this node to its degree
->>>>>>> 0c7824458e2950eacb20524019a47175f5a3d1a9
+	* Automatically sets the population of this node to its degree
 	*/
 	public void setNodeLevel() {
 		base.setPopulation(neighbors.size());

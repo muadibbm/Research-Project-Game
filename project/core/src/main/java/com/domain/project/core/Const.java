@@ -31,7 +31,7 @@ public final class Const
 	public static float BASE_DEPTH = 3.0f;
 	public static float BASE_ALPHA = 0.93f;
 
-    public static float MIN_CITY_DISTANCE = 90;
+    public static float MIN_CITY_DISTANCE = 150;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;

@@ -62,7 +62,7 @@ public class KeyboardControls implements Keyboard.Listener {
 
     @Override
     public void onKeyDown(Keyboard.Event event) {
-        System.out.println(env.getX() + " " + env.getY());
+//        System.out.println(env.getX() + " " + env.getY());
         switch(event.key()) {
             case W: {
                 scrollUp = true;

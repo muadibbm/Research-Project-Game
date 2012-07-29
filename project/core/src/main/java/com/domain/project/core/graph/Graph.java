@@ -299,61 +299,81 @@ public class Graph {
 		//TODO: finish the placement algorithm
 		float tempNodeX = 0;
 		float tempNodeY = 0;
-		float scaledWidth;
-		float scaledHeight;
 		ArrayList<Node> placedNodesList = new ArrayList<Node>();
 
-		// Check every node in the list
+		// First, place the nodes onto the graph
 		for (Entry<Integer, Node> entry : nodes.entrySet()) {
 			Node node = entry.getValue();
 
 			while (!node.isPlaced()) {
-				scaledWidth = node.getBase().getBaseLayer().scaledWidth() / 3;
-				scaledHeight = node.getBase().getBaseLayer().scaledHeight() / 3;
 				tempNodeX = r.nextFloat() * this.width + this.xOffset;
 				tempNodeY = r.nextFloat() * this.height + this.yOffset;
-				boolean restartLoops = false;
-
-				if (!placedNodesList.isEmpty()) {
-					for (Node n: placedNodesList) {
-						if (!node.equals(n)) {
-							for (Node neighbour: n.getNeighbors()) {
-								if (!node.equals(neighbour) && neighbour.isPlaced()) {
-									Line2D.Float line = new Line2D.Float(n.getPos().getX(), n.getPos().getY(), neighbour.getPos().getX(), neighbour.getPos().getY());
-									Rectangle2D.Float rectangle = new Rectangle2D.Float(tempNodeX, tempNodeY, scaledWidth, scaledHeight);
-									
-									if (rectangle.intersectsLine(line)) {
-										restartLoops = true;
-										break;
-									}
-								}
-							}
-						}
-						
-						if (restartLoops) {
-							break;
-						}
-					}
-					
-					if (restartLoops) {
-						continue;
-					}
-				}
 
 				if (this.isSeperated(new Tuple2f(tempNodeX, tempNodeY))) {
 					node.placeNode(tempNodeX, tempNodeY);
 				}
 			}
-
 			placedNodesList.add(node);
+		}
+
+		// Second, reallocate any node which is on any edge
+		for (Node node: placedNodesList) {
+			float scaledWidth = node.getBase().getBaseLayer().scaledWidth() / 10;
+			float scaledHeight = node.getBase().getBaseLayer().scaledHeight() / 10;
+			boolean shouldContinue = true;
+
+			while (shouldContinue) {
+				for (Entry<Integer, Edge> entry: edges.entrySet()) {
+					Edge edge = entry.getValue();
+					Node node1 = getNode1(edge);
+					Node node2 = getNode2(edge);
+
+					// Check whether the node to compare with the edge does not equal any of the nodes of the edge
+					if (!node.equals(node1) && !node.equals(node2)) {
+						float x1 = getNode1(edge).getPos().getX();
+						float y1 = getNode1(edge).getPos().getY();
+						float x2 = getNode2(edge).getPos().getX();
+						float y2 = getNode2(edge).getPos().getY();
+
+						Line2D.Float line = new Line2D.Float(x1, y1, x2, y2);
+						Rectangle2D.Float rectangle = new Rectangle2D.Float(node.getPos().getX(), node.getPos().getY(), scaledWidth, scaledHeight);
+
+						// Check for an intersection exists between the current node and the current edge
+						if (rectangle.intersectsLine(line)) {
+							// If there is such in intersection, then move the current node to a new position and check against all edges, again
+							tempNodeX = r.nextFloat() * this.width + this.xOffset;
+							tempNodeY = r.nextFloat() * this.height + this.yOffset;
+							node.placeNode(tempNodeX, tempNodeY);
+							break;
+						} else {
+							shouldContinue = false;
+						}
+					}
+				}
+			}
+		}
+		
+		for (Node node: placedNodesList) {
+			for (Node node2: placedNodesList) {
+				if (!node.equals(node2)) {
+					float distance = node.getPos().getDistanceFrom(node2.getPos());
+					if (isCityGraph) {
+						if (distance < Const.MIN_CITY_DISTANCE) {
+							tempNodeX = r.nextFloat() * this.width + this.xOffset;
+							tempNodeY = r.nextFloat() * this.height + this.yOffset;
+							node.placeNode(tempNodeX, tempNodeY);
+						}
+					} else if (distance < Const.MIN_CAMP_DISTANCE) {
+						tempNodeX = r.nextFloat() * this.width + this.xOffset;
+						tempNodeY = r.nextFloat() * this.height + this.yOffset;
+						node.placeNode(tempNodeX, tempNodeY);
+					}
+				}
+			}
 
 			if (node.getMapping() != null) {
 				node.getMapping().setVisible(node.getMapping().isVisible());
-            }
-
-			if(entry.getValue().getMapping() != null) {
-				entry.getValue().getMapping().setVisible(entry.getValue().getMapping().isVisible());
-				entry.getValue().getMapping().setScore(entry.getValue().getMapping().getScore());
+				node.getMapping().setScore(node.getMapping().getScore());
 			}
 		}
 	}
