@@ -1,93 +1,91 @@
 package com.domain.project.core;
 
-import static playn.core.PlayN.*;
+import static playn.core.PlayN.keyboard;
+import static playn.core.PlayN.mouse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import playn.core.Game;
+import playn.core.Mouse;
 
+import com.domain.project.core.controls.KeyboardControls;
+import com.domain.project.core.controls.MouseControls;
+import com.domain.project.core.graph.Camp;
+import com.domain.project.core.graph.Caravan;
+import com.domain.project.core.graph.City;
+import com.domain.project.core.graph.Edge;
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
 import com.domain.project.core.graph.Tree;
 import com.domain.project.core.graph.Tuple2f;
-import com.domain.project.core.graph.City;
-import com.domain.project.core.graph.Camp;
-import com.domain.project.core.graph.Edge;
-import com.domain.project.core.Gui;
-import com.domain.project.core.Const;
-
-import com.domain.project.core.controls.KeyboardControls;
-import com.domain.project.core.controls.MouseControls;
-import playn.core.Mouse;
-
-import java.lang.Integer;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
-* This is the main game loop where are the calculations and drawing takes place.
-*/
+ * This is the main game loop where are the calculations and drawing takes place.
+ */
 public class GameLoop implements Game {
 
-    private Environment environment;
+	private Environment environment;
 
-    private KeyboardControls kbControls;
-    private MouseControls mControls;
-	
+	private KeyboardControls kbControls;
+	private MouseControls mControls;
+
 	private Graph cityGraphA;
 	private Graph cityGraphB;
 	private Graph campGraphA;
 	private Graph campGraphB;
-    
-    private String graphA = "1FUF_modified";
-    private String graphB = "1FUF_modified";
-	
+
+	private String graphA = "1FUF_modified";
+	private String graphB = "1FUF_modified";
+
 	private Player player1;
 	private Gui gui1;
 	private Player player2;
-	private Gui gui2;
-	
+	//	private Gui gui2;
+
 	private java.util.Random r = new java.util.Random();
-	private List <Tree> trees;;
+	private List <Tree> trees;
 
 	/**
-	* Initializes all the game variables before starting the game.
-	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
-	*/
-    @Override
-    public void init() { 
+	 * Initializes all the game variables before starting the game.
+	 * @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	 */
+	@Override
+	public void init() { 
 
-        Const.loadImages();
-        environment = new Environment();
+		Const.loadImages();
+		environment = new Environment();
 		trees = new ArrayList <Tree> ();
-		
+
 		player1 = new Player(1, "player 1");
 		gui1 = new Gui(environment.getUILayer());
 		player2 = new Player(2, "player 2");
 		//TODO : gui2 = new Gui(environment.getUILayer());
-		
+
 		float graphXOffset = 90;
 		float graphYOffset = 30;
 		//TODO : read two graphs from database and put into these 4 graph instances
-		
-        cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
-        cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
+
+		cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
+		cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
 		campGraphA = new Graph(false, Const.WORLD_WIDTH/4 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2);
-        campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
-		
+		campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
+
 		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3);
-        campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
+		campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
 		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
-        cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
-		
+		cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
+
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
 		plantTrees();
 		paintTrees();//performance ?
 
-        //create and set controls
-        kbControls = new KeyboardControls(environment);
-        keyboard().setListener(kbControls);
-        mControls = new MouseControls(environment);
-        mouse().setListener(mControls);
+		//create and set controls
+		kbControls = new KeyboardControls(environment);
+		keyboard().setListener(kbControls);
+		mControls = new MouseControls(environment);
+		mouse().setListener(mControls);
 		gui1.addListener(player1, environment.getGraphLayer());
 		gui1.showConstructions(false, false);
 		/*TODO : gui2.addListener(player2, environment.getGraphLayer());
@@ -96,63 +94,80 @@ public class GameLoop implements Game {
 		addAllListeners(campGraphA, player1, gui1);
 		addAllListeners(campGraphB, player1, gui1);
 		addAllListeners(cityGraphB, player1, gui1);
-    }
-	
+	}
+
 	/**
-	* Paints all the images contained in the scene graph layers.
-	* Any transformation applied to the layers should be called here.
-	* @param alpha - a value between 0 and 1, representing the proportion of time passed between the last two update ticks
-	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
-	*/
-    @Override
-    public void paint(float alpha) {
-        // the background automatically paints itself, so no need to do anything here!
-        environment.paint(alpha);
+	 * Paints all the images contained in the scene graph layers.
+	 * Any transformation applied to the layers should be called here.
+	 * @param alpha - a value between 0 and 1, representing the proportion of time passed between the last two update ticks
+	 * @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	 */
+	@Override
+	public void paint(float alpha) {
+		// the background automatically paints itself, so no need to do anything here!
+		environment.paint(alpha);
 		cityGraphA.paintAll();
 		cityGraphB.paintAll();
 		campGraphA.paintAll();
 		campGraphB.paintAll();
 		//paintTrees(); <-- for html it has to be here
 		gui1.setGold(player1.getGold());
-    }
+	}
 
 	/**
-	* All the updates to the game logic should be called here.
-	* @param delta - time, in ms, passed since the previous update(float)
-	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
-	*/
-    @Override
-    public void update(float delta) {
-        kbControls.parse();
-        environment.update(delta);
+	 * All the updates to the game logic should be called here.
+	 * @param delta - time, in ms, passed since the previous update(float)
+	 * @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	 */
+	@Override
+	public void update(float delta) {
+		kbControls.parse();
+		environment.update(delta);
 		cityGraphA.updateAll();
 		cityGraphB.updateAll();
 		campGraphA.updateAll();
 		campGraphB.updateAll();
-		/*gold test*/
-		player1.setGold(player1.getGold()+1);
-    }
+		/* gold test */
+		for (Caravan caravan: cityGraphA.getCaravanList()) {
+			if (caravan.hasArrived()) {
+				caravan.setHasArrived(false);
+				
+				switch (caravan.getCaravanLevel()) {
+				case 1:
+					player1.setGold(player1.getGold() + 10);
+					break;
+				case 2:
+					player1.setGold(player1.getGold() + 15);
+					break;
+				case 3:
+					player1.setGold(player1.getGold() + 20);
+					break;
+				}
+				caravan.swapDestination();
+			}
+		}
+	}
 
 	/**
-	* Return the update rate of the main game loop, in ms.
-	* @return update rate of the main game loop, in ms
-	* @see http://docs.playn.googlecode.com/git/javadoc/index.html
-	*/
-    @Override
-    public int updateRate() {
-        return Const.UPDATE_RATE;
-    }
-	
+	 * Return the update rate of the main game loop, in ms.
+	 * @return update rate of the main game loop, in ms
+	 * @see http://docs.playn.googlecode.com/git/javadoc/index.html
+	 */
+	@Override
+	public int updateRate() {
+		return Const.UPDATE_RATE;
+	}
+
 	//TODO : Multiplayer aspect, mouse should be associated with a player
-	//TODO : add Networking, where does the players interations diverge ?
-	
+	//TODO : add Networking, where does the players interactions diverge ?
+
 	/** 
-	* Contains any interatcion with the layers in the game's graphs and the corresponding game logic. 
-	* TODO : This does not affect paint method in html version of the game.
-	* @param graph - the associated graph object
-	* @param player - the assciated player with the mouse click
-	* @param gui - the user interface corresponding to the player
-	*/
+	 * Contains any interaction with the layers in the game's graphs and the corresponding game logic. 
+	 * TODO : This does not affect paint method in html version of the game.
+	 * @param graph - the associated graph object
+	 * @param player - the associated player with the mouse click
+	 * @param gui - the user interface corresponding to the player
+	 */
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
 		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
@@ -207,21 +222,21 @@ public class GameLoop implements Game {
 											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 2);
 										}
 									}
-								System.out.println("remove graphical indication");
-								//TODO : remove graphical indication (not yet added)
-								player.setNodeToBeMapped(null);
+									System.out.println("remove graphical indication");
+									//TODO : remove graphical indication (not yet added)
+									player.setNodeToBeMapped(null);
 								}
 							}
 							/* Set the mapping of the selected node visible */
 							if(node.getMapping() != null)
 								node.getMapping().setVisible(true);
-								
+
 							/* Set the edges of the mapped_node of the selected node visible */ //TODO : too much ???
 							//if(node.getMappedNode()!= null)
-								//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
-									//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
-										//edge.getValue().getRoad().setVisible(true);
-										
+							//for(Map.Entry<Integer, Edge> edge : getGraph(node.getMappedNode().getGraphId()).getEdges().entrySet())
+							//if(node.getMappedNode().equals(getGraph(node.getMappedNode().getGraphId()).getNode1(edge.getValue())))
+							//edge.getValue().getRoad().setVisible(true);
+
 							/* show the available Constructions for this node*/
 							gui.showConstructions(graph.isCityGraph(), true);
 						}
@@ -231,16 +246,16 @@ public class GameLoop implements Game {
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
-							case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-							case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-							case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-							case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-							case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-							case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+						case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+						case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+						case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+						case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+						case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+						case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+						case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+						case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+						case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+						default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
 						}
 					}
 				}
@@ -259,13 +274,13 @@ public class GameLoop implements Game {
 			});
 		}
 	}
-	
+
 	/**
-	* Returns the graph object that has the given graphId
-	* @param graphId - the unique integer id associated with the graph at the time of construction
-	* @return the graph instance
-	*/
-	private Graph getGraph(int graphId) {
+	 * Returns the graph object that has the given graphId
+	 * @param graphId - the unique integer id associated with the graph at the time of construction
+	 * @return the graph instance
+	 */
+	/*private Graph getGraph(int graphId) {
 		if(cityGraphA.getId() == graphId)
 			return cityGraphA;
 		else if(campGraphA.getId() == graphId)
@@ -276,58 +291,58 @@ public class GameLoop implements Game {
 			return campGraphB;
 		else
 			return null; //Is this safe ? may cause bug !!
-	}
-	
+	}*/
+
 	/**
-	* sets all the edges invisible
-	*/
+	 * sets all the edges invisible
+	 */
 	private void HideAllEdges() {
 		HideEdges(cityGraphA);
 		HideEdges(campGraphA);
 		HideEdges(campGraphB);
 		HideEdges(cityGraphB);
 	}
-	
+
 	/**
-	* sets the edges of the given graph invisible
-	*/
+	 * sets the edges of the given graph invisible
+	 */
 	private void HideEdges(Graph graph) {
 		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
 			edge.getValue().getRoad().setVisible(false);
 	}
-	
+
 	/**
-	* sets all the mappings invisible
-	*/
+	 * sets all the mappings invisible
+	 */
 	private void HideAllMappings() {
 		HideMappings(cityGraphA);
 		HideMappings(campGraphA);
 		HideMappings(campGraphB);
 		HideMappings(cityGraphB);
 	}
-	
+
 	/**
-	* sets the mappings of the nodes in the given graph invisible
-	*/
+	 * sets the mappings of the nodes in the given graph invisible
+	 */
 	private void HideMappings(Graph graph) {
 		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet())
 			if(node.getValue().getMapping() != null) {
 				node.getValue().getMapping().setVisible(false);
 			}
 	}
-	
+
 	/**
-	* draws all the background tree imagesLayers
-	*/
+	 * draws all the background tree imagesLayers
+	 */
 	private void plantTrees() {
 		int number = 0;
 		float tmpX = 0.0f;
 		float tmpY = 0.0f;
 		while(number < Const.MAX_TREE_NUMBER) {
 			tmpX = r.nextFloat()*Const.WORLD_WIDTH;
-            tmpY = r.nextFloat()*Const.WORLD_HEIGHT;
+			tmpY = r.nextFloat()*Const.WORLD_HEIGHT;
 			if(isTreeSeperated(cityGraphA, tmpX, tmpY) & isTreeSeperated(campGraphA, tmpX, tmpY) &
-				isTreeSeperated(campGraphB, tmpX, tmpY) & isTreeSeperated(cityGraphB, tmpX, tmpY)) {
+					isTreeSeperated(campGraphB, tmpX, tmpY) & isTreeSeperated(cityGraphB, tmpX, tmpY)) {
 				Tree tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE1_IMAGE, Const.TREE1_SHADOW_IMAGE);
 				/*switch(r.nextInt(4))
 				{
@@ -342,28 +357,28 @@ public class GameLoop implements Game {
 			}
 		}
 	}
-	
+
 	/**
-	* Checks if a tree is as far as a given distance from all the other already placed trees
-	*/
+	 * Checks if a tree is as far as a given distance from all the other already placed trees
+	 */
 	private boolean isTreeSeperated(Graph graph, float posX, float posY) {
-        float distance = 0.0f;
-        for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
+		float distance = 0.0f;
+		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
 			distance = entry.getValue().getPos().getDistanceFrom(new Tuple2f(posX, posY));
 			if(distance < Const.MIN_NODE_TREE_DISTANCE)
 				return false;
-        }
+		}
 		//for(Tree tree : trees) {
 		//	distance = entry.getValue().getPos().getDistanceFrom(new Tuple2f(posX, posY));
 		//	if(distance < Const.MIN_NODE_TREE_DISTANCE)
 		//		return false;
 		//}
-        return true;
-    }
-	
+		return true;
+	}
+
 	/**
-	* paints all the trees
-	*/
+	 * paints all the trees
+	 */
 	private void paintTrees() {
 		for(Tree tree : trees)
 			tree.paint();

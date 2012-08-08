@@ -14,18 +14,18 @@ public class City extends Base
 	private ImageLayer palace;
 	private int city_level;
 	//TODO : add houses
-	
+
 	//private ImageLayer tavern;
 	//private int tavern_level;
-	
+
 	private ImageLayer bazar_food;
 	private ImageLayer bazar_china;
 	private ImageLayer bazar_carpet;
 	private int bazar_level;
-	
+
 	private ImageLayer garden;
 	private int garden_level;
-	
+
 	private ImageLayer tower1;
 	private ImageLayer tower2;
 	private ImageLayer tower3;
@@ -33,166 +33,203 @@ public class City extends Base
 	private ImageLayer tower_gate1;
 	private ImageLayer tower_gate2;
 	private int tower_level;
-	
+
 	private ImageLayer wall_front;
 	private ImageLayer wall_back;
 	private ImageLayer wall_right;
 	private ImageLayer wall_left;
 	private int wall_level;
-	
-	private ImageLayer smithy;
-	private int smithy_level;
 
-	public City(GroupLayer graphLayer){
+	//	private ImageLayer smithy;
+	//	private int smithy_level;
+	//	private Tuple2f coordinates;
+	private boolean hasBazaar;
+	private boolean hasCaravan;
+	private int id;
+
+	public City(GroupLayer graphLayer, int id) {
 		super(graphLayer, Const.CITY_BASE_IMAGE);
 		city_level = 0;
 		bazar_level = 0;
 		garden_level = 0;
 		tower_level = 0;
 		wall_level = 0;
-		smithy_level = 0;
+		//		smithy_level = 0;
+		this.id = id;
+		hasBazaar = false;
+		hasCaravan = false;
 	}
-	
+
 	@Override
 	public void buildPalace(final GroupLayer graphLayer, Image palace_image) {
-		if(palace != null)
+		if(palace != null) {
 			palace.destroy();
-		
+		}
+
 		palace = graphics().createImageLayer(palace_image);
 		palace.setDepth(Const.PALACE_DEPTH);
-		
-		palace_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                palace.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(palace);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		palace_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				palace.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(palace);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading palace", e);
+			}
+		});
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public int getCityLevel() {
 		return city_level;
 	}
-	
+
 	@Override
 	public void setCityLevel(int level) {
 		city_level = level;
 	}
-	
+
 	@Override
 	public void buildBazarFood(final GroupLayer graphLayer, Image bazar_food_image) {
-		if(bazar_food != null)
+		if (bazar_food != null) {
 			bazar_food.destroy();
-		
+		}
+
 		bazar_food = graphics().createImageLayer(bazar_food_image);
 		bazar_food.setDepth(Const.BAZAR_FOOD_DEPTH);
-		
-		bazar_food_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                bazar_food.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(bazar_food);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		bazar_food_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				bazar_food.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(bazar_food);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
+
+		hasBazaar = true;
 	}
-	
+
 	@Override
 	public void buildBazarChina(final GroupLayer graphLayer, Image bazar_china_image) {
-		if(bazar_china != null)
+		if (bazar_china != null) {
 			bazar_china.destroy();
-		
+		}
+
 		bazar_china = graphics().createImageLayer(bazar_china_image);
 		bazar_china.setDepth(Const.BAZAR_CHINA_DEPTH);
-		
-		bazar_china_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                bazar_china.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(bazar_china);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		bazar_china_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				bazar_china.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(bazar_china);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
+
+		hasBazaar = true;
 	}
-	
+
 	@Override
 	public void buildBazarCarpet(final GroupLayer graphLayer, Image bazar_carpet_image) {
-		if(bazar_carpet != null)
+		if (bazar_carpet != null) {
 			bazar_carpet.destroy();
-		
+		}
+
 		bazar_carpet = graphics().createImageLayer(bazar_carpet_image);
 		bazar_carpet.setDepth(Const.BAZAR_CARPET_DEPTH);
-		
-		bazar_carpet_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                bazar_carpet.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(bazar_carpet);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		bazar_carpet_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				bazar_carpet.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(bazar_carpet);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
+
+		hasBazaar = true;
 	}
-	
+
 	@Override
 	public int getBazarLevel() {
 		return bazar_level;
 	}
-	
+
 	@Override
 	public void setBazarLevel(int level) {
 		bazar_level = level;
 	}
-	
+
 	@Override
 	public void buildGarden(final GroupLayer graphLayer, Image garden_image) {
 		if(garden != null)
 			garden.destroy();
-		
+
 		garden = graphics().createImageLayer(garden_image);
 		garden.setDepth(Const.GARDEN_DEPTH);
-		
-		garden_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                garden.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(garden);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		garden_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				garden.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(garden);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 	}
-	
+
+	public boolean hasBazaar() {
+		return hasBazaar;
+	}
+
+	public void setHasBazaar(boolean hasBazaar) {
+		this.hasBazaar = hasBazaar;
+	}
+
+	public boolean hasCaravan() {
+		return hasCaravan;
+	}
+
+	public void setHasCaravan(boolean hasCaravan) {
+		this.hasCaravan = hasCaravan;
+	}
+
 	@Override
 	public int getGardenLevel() {
 		return garden_level;
 	}
-	
+
 	@Override
 	public void setGardenLevel(int level) {
 		garden_level = level;
 	}
-	
+
 	@Override
 	public void buildTower(final GroupLayer graphLayer, Image tower_image) {
 		if(tower1 != null)
@@ -207,7 +244,7 @@ public class City extends Base
 			tower_gate1.destroy();
 		if(tower_gate2 != null)
 			tower_gate2.destroy();
-		
+
 		tower1 = graphics().createImageLayer(tower_image);
 		tower1.setDepth(Const.TOWER_FRONT_DEPTH);
 		tower2 = graphics().createImageLayer(tower_image);
@@ -220,41 +257,41 @@ public class City extends Base
 		tower3.setDepth(Const.TOWER_BACK_DEPTH);
 		tower4 = graphics().createImageLayer(tower_image);
 		tower4.setDepth(Const.TOWER_BACK_DEPTH);
-		
+
 		tower_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                tower1.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(tower1);
+			@Override
+			public void done(Image image) {
+				tower1.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(tower1);
 				tower2.setOrigin(image.width()/2f, image.height()/2f);
 				graphLayer.add(tower2);
 				tower_gate1.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(tower_gate1);
+				graphLayer.add(tower_gate1);
 				tower_gate2.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(tower_gate2);
+				graphLayer.add(tower_gate2);
 				tower3.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(tower3);
+				graphLayer.add(tower3);
 				tower4.setOrigin(image.width()/2f, image.height()/2f);
 				graphLayer.add(tower4);
-            }
+			}
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 	}
-	
+
 	@Override
 	public int getTowerLevel() {
 		return tower_level;
 	}
-	
+
 	@Override
 	public void setTowerLevel(int level) {
 		tower_level = level;
 	}
-	
+
 	@Override
 	public void buildWall(final GroupLayer graphLayer, Image wall_front_image, Image wall_back_image, Image wall_right_image, Image wall_left_image) {
 		if(wall_front != null)
@@ -265,7 +302,7 @@ public class City extends Base
 			wall_right.destroy();
 		if(wall_left != null)
 			wall_left.destroy();
-		
+
 		wall_front = graphics().createImageLayer(wall_front_image);
 		wall_front.setDepth(Const.WALL_FRONT_DEPTH);
 		wall_back = graphics().createImageLayer(wall_back_image);
@@ -274,69 +311,68 @@ public class City extends Base
 		wall_right.setDepth(Const.WALL_BACK_DEPTH);
 		wall_left = graphics().createImageLayer(wall_left_image);
 		wall_left.setDepth(Const.WALL_BACK_DEPTH);
-		
-		wall_front_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                wall_front.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(wall_front);
-            }
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+		wall_front_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				wall_front.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(wall_front);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 		wall_back_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
+			@Override
+			public void done(Image image) {
 				wall_back.setOrigin(image.width()/2f, image.height()/2f);
 				wall_back.setAlpha(0.75f);
 				graphLayer.add(wall_back);
-            }
+			}
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 		wall_right_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                wall_right.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(wall_right);
-            }
+			@Override
+			public void done(Image image) {
+				wall_right.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(wall_right);
+			}
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
-		
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 		wall_left_image.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                wall_left.setOrigin(image.width()/2f, image.height()/2f);
-                graphLayer.add(wall_left);
-            }
+			@Override
+			public void done(Image image) {
+				wall_left.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(wall_left);
+			}
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
 	}
-	
+
 	@Override
 	public int getWallLevel() {
 		return wall_level;
 	}
-	
+
 	@Override
 	public void setWallLevel(int level) {
 		wall_level = level;
 	}
-	
+
 	@Override
 	public void paint(float x, float y) {
 		super.paint(x, y);

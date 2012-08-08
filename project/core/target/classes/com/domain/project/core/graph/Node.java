@@ -243,6 +243,7 @@ public class Node {
     public void setPos(float x, float y) {
         coordinates.setX(x);
         coordinates.setY(y);
+        base.setPosition(coordinates);
     }
 
 	/**

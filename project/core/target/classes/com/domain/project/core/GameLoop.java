@@ -1,27 +1,24 @@
 package com.domain.project.core;
 
-import static playn.core.PlayN.*;
+import static playn.core.PlayN.keyboard;
+import static playn.core.PlayN.mouse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import playn.core.Game;
+import playn.core.Mouse;
 
+import com.domain.project.core.controls.KeyboardControls;
+import com.domain.project.core.controls.MouseControls;
+import com.domain.project.core.graph.Camp;
+import com.domain.project.core.graph.City;
+import com.domain.project.core.graph.Edge;
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
 import com.domain.project.core.graph.Tree;
 import com.domain.project.core.graph.Tuple2f;
-import com.domain.project.core.graph.City;
-import com.domain.project.core.graph.Camp;
-import com.domain.project.core.graph.Edge;
-import com.domain.project.core.Gui;
-import com.domain.project.core.Const;
-
-import com.domain.project.core.controls.KeyboardControls;
-import com.domain.project.core.controls.MouseControls;
-import playn.core.Mouse;
-
-import java.lang.Integer;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
 * This is the main game loop where are the calculations and drawing takes place.
@@ -47,7 +44,7 @@ public class GameLoop implements Game {
 	private Gui gui2;
 	
 	private java.util.Random r = new java.util.Random();
-	private List <Tree> trees;;
+	private List <Tree> trees;
 
 	/**
 	* Initializes all the game variables before starting the game.
@@ -144,13 +141,13 @@ public class GameLoop implements Game {
     }
 	
 	//TODO : Multiplayer aspect, mouse should be associated with a player
-	//TODO : add Networking, where does the players interations diverge ?
+	//TODO : add Networking, where does the players interactions diverge ?
 	
 	/** 
-	* Contains any interatcion with the layers in the game's graphs and the corresponding game logic. 
+	* Contains any interaction with the layers in the game's graphs and the corresponding game logic. 
 	* TODO : This does not affect paint method in html version of the game.
 	* @param graph - the associated graph object
-	* @param player - the assciated player with the mouse click
+	* @param player - the associated player with the mouse click
 	* @param gui - the user interface corresponding to the player
 	*/
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {

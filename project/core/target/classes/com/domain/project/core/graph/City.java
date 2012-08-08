@@ -42,6 +42,8 @@ public class City extends Base
 	
 	private ImageLayer smithy;
 	private int smithy_level;
+	private Tuple2f coordinates;
+	private Caravan caravan;
 
 	public City(GroupLayer graphLayer){
 		super(graphLayer, Const.CITY_BASE_IMAGE);
@@ -70,7 +72,7 @@ public class City extends Base
 
             @Override
             public void error(Throwable e) {
-                log().error("error loading node", e);
+                log().error("error loading palace", e);
             }
         });
 	}
@@ -105,6 +107,8 @@ public class City extends Base
                 log().error("error loading node", e);
             }
         });
+		
+		caravan = new Caravan(graphLayer, this);
 	}
 	
 	@Override
@@ -127,6 +131,8 @@ public class City extends Base
                 log().error("error loading node", e);
             }
         });
+		
+		caravan = new Caravan(graphLayer, this);
 	}
 	
 	@Override
@@ -149,8 +155,10 @@ public class City extends Base
                 log().error("error loading node", e);
             }
         });
+		
+		caravan = new Caravan(graphLayer, this);
 	}
-	
+
 	@Override
 	public int getBazarLevel() {
 		return bazar_level;
