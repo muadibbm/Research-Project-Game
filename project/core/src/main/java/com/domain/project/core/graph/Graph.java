@@ -444,17 +444,9 @@ public class Graph {
 					for (Node neighbour: neighbours) {
 						City c2 = (City) neighbour.getBase();
 						if (c2.hasBazaar()) {
-							if (!c1.hasCaravan() && !c2.hasCaravan()) {
+							if (!c1.hasCaravan() || !c2.hasCaravan()) {
 								c1.setHasCaravan(true);
 								c2.setHasCaravan(true);
-								
-//								Random random = new Random();
-//								int t = random.nextInt(10);
-//								
-//								if () {
-//									
-//								}
-								
 								caravanList.add(new Caravan(node.getGraphLayer(), node.getPos(), neighbour.getPos(), node.getBase().getBaseLayer().scaledWidth() / 10));
 							}
 						}
