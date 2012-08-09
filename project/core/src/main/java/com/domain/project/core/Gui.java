@@ -85,22 +85,22 @@ public class Gui
 		option8_city = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
 		createImage(uiLayer, option8_city, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
 		
-		option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option1_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.0f);
-		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option2_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.3f);
-		option3_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option3_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.6f);
-		option4_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option4_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 0.9f);
-		option5_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option5_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.2f);
-		option6_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option6_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.5f);
-		option7_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option7_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 1.8f);
-		option8_camp = graphics().createImageLayer(Const.CONSTRUCTION_TENT1_LEVEL1);
-		createImage(uiLayer, option8_camp, Const.CONSTRUCTION_TENT1_LEVEL1, 2.1f);
+		//option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
+		//createImage(uiLayer, option1_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.0f);
+		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
+		createImage(uiLayer, option2_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.3f);
+		option3_camp = graphics().createImageLayer(Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1);
+		createImage(uiLayer, option3_camp, Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1, 0.6f);
+		option4_camp = graphics().createImageLayer(Const.CONSTRUCTION_MAGE_TENT_LEVEL1);
+		createImage(uiLayer, option4_camp, Const.CONSTRUCTION_MAGE_TENT_LEVEL1, 0.9f);
+		option5_camp = graphics().createImageLayer(Const.CONSTRUCTION_HEALER_TENT_LEVEL1);
+		createImage(uiLayer, option5_camp, Const.CONSTRUCTION_HEALER_TENT_LEVEL1, 1.2f);
+		option6_camp = graphics().createImageLayer(Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1);
+		createImage(uiLayer, option6_camp, Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1, 1.5f);
+		option7_camp = graphics().createImageLayer(Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1);
+		createImage(uiLayer, option7_camp, Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1, 1.8f);
+		//option8_camp = graphics().createImageLayer(Const.CONSTRUCTION_MAGE_TENT_LEVEL1);
+		//createImage(uiLayer, option8_camp, Const.CONSTRUCTION_MAGE_TENT_LEVEL1, 2.1f);
 		
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE, 1.0f);
@@ -422,7 +422,7 @@ public class Gui
 		});
 		
 		/* Building COMMAND TENT */
-		option1_camp.addListener(new Mouse.Listener() {
+		option2_camp.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -453,7 +453,7 @@ public class Gui
 		});
 		
 		/* Building SOLDIER TENT */
-		option2_camp.addListener(new Mouse.Listener() {
+		option3_camp.addListener(new Mouse.Listener() {
 				Base base;
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
@@ -465,6 +465,130 @@ public class Gui
 								    //TODO : check level, check resources, update gui itself
 									base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
 									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+								}
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+	
+		/* Building MAGE TENT */
+		option4_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setMageTentLevel(base.getMageTentLevel() + 1);
+									base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
+								}
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+	
+		/* Building HEALER TENT */
+		option5_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setHealerTentLevel(base.getHealerTentLevel() + 1);
+									base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
+								}
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+	
+		/* Building SUPPLY TENT */
+		option6_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setSupplyTentLevel(base.getSupplyTentLevel() + 1);
+									base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
+								}
+							}
+					}
+				}
+				@Override
+				public void onMouseMove(Mouse.MotionEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseUp(Mouse.ButtonEvent event) {
+					//TODO
+				}
+				@Override
+				public void onMouseWheelScroll(Mouse.WheelEvent event) {
+					//TODO
+				}
+		});
+	
+		/* Building DEPLOMATIC TENT */
+		option7_camp.addListener(new Mouse.Listener() {
+				Base base;
+				@Override
+				public void onMouseDown(Mouse.ButtonEvent event) {
+					if(event.button() == Mouse.BUTTON_LEFT) {
+						if(player.getSelectedNode() != null)
+							if(player.getId() == player.getSelectedNode().getPlayer()) {
+								base = player.getSelectedNode().getBase();
+								if(base instanceof Camp){
+								    //TODO : check level, check resources, update gui itself
+									base.setDeplomaticTentLevel(base.getDeplomaticTentLevel() + 1);
+									base.buildDeplomaticTent(graphLayer, Const.DEPLOMATIC_TENT_LEVEL1);
 								}
 							}
 					}
@@ -554,22 +678,22 @@ public class Gui
 	* @param active - boolean
 	*/
 	public void setCampConstruction(boolean active) {
-		option1_camp.setVisible(active);
+		//option1_camp.setVisible(active);
 		option2_camp.setVisible(active);
 		option3_camp.setVisible(active);
 		option4_camp.setVisible(active);
 		option5_camp.setVisible(active);
 		option6_camp.setVisible(active);
 		option7_camp.setVisible(active);
-		option8_camp.setVisible(active);
-		option1_camp.setInteractive(active);
+		//option8_camp.setVisible(active);
+		//option1_camp.setInteractive(active);
 		option2_camp.setInteractive(active);
 		option3_camp.setInteractive(active);
 		option4_camp.setInteractive(active);
 		option5_camp.setInteractive(active);
 		option6_camp.setInteractive(active);
 		option7_camp.setInteractive(active);
-		option8_camp.setInteractive(active);
+		//option8_camp.setInteractive(active);
 	}
 	
 	/**

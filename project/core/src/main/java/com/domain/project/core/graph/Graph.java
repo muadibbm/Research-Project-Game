@@ -315,7 +315,7 @@ public class Graph {
 			}
 			placedNodesList.add(node);
 		}
-
+		/*
 		// Second, reallocate any node which is on any edge
 		for (Node node: placedNodesList) {
 			float scaledWidth = node.getBase().getBaseLayer().scaledWidth() / 10;
@@ -352,7 +352,7 @@ public class Graph {
 				}
 			}
 		}
-		
+		*/
 		for (Node node: placedNodesList) {
 			for (Node node2: placedNodesList) {
 				if (!node.equals(node2)) {
@@ -370,7 +370,7 @@ public class Graph {
 					}
 				}
 			}
-
+			
 			if (node.getMapping() != null) {
 				node.getMapping().setVisible(node.getMapping().isVisible());
 				node.getMapping().setScore(node.getMapping().getScore());

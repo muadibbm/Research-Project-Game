@@ -132,4 +132,16 @@ public class Base
 	public void buildCommandTent(GroupLayer graphLayer, Image image){};
 	public int getCommandTentLevel(){return 0;};
 	public void setCommandTentLevel(int level){};
+	public void buildMageTent(GroupLayer graphLayer, Image image){};
+	public int getMageTentLevel(){return 0;};
+	public void setMageTentLevel(int level){};
+	public void buildHealerTent(GroupLayer graphLayer, Image image){};
+	public int getHealerTentLevel(){return 0;};
+	public void setHealerTentLevel(int level){};
+	public void buildSupplyTent(GroupLayer graphLayer, Image image){};
+	public int getSupplyTentLevel(){return 0;};
+	public void setSupplyTentLevel(int level){};
+	public void buildDeplomaticTent(GroupLayer graphLayer, Image image){};
+	public int getDeplomaticTentLevel(){return 0;};
+	public void setDeplomaticTentLevel(int level){};
 }

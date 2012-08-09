@@ -11,8 +11,10 @@ public final class Const
 		
     public static final int UPDATE_RATE = 25;
 
-    public static int WINDOW_WIDTH = 1024;
-    public static int WINDOW_HEIGHT = 768;
+	public static int WINDOW_WIDTH = 3*graphics().screenWidth()/4;
+    public static int WINDOW_HEIGHT = 3*graphics().screenHeight()/4;
+    //public static int WINDOW_WIDTH = 1024;
+    //public static int WINDOW_HEIGHT = 768;
 
     public static int WORLD_WIDTH = 3000;
     public static int WORLD_HEIGHT = 1800;
@@ -27,7 +29,7 @@ public final class Const
     public static float GRAPH_DEPTH = 2.0f;
 
     public static float BASE_CITY_SCALE = 0.06f;
-	public static float BASE_CAMP_SCALE = 0.05f;
+	public static float BASE_CAMP_SCALE = 0.075f;
 	public static float BASE_DEPTH = 3.0f;
 	public static float BASE_ALPHA = 0.93f;
 
@@ -89,18 +91,34 @@ public final class Const
 	public static float WALL_SIDE_SCALE = 0.016f;
 	public static float WALL_SIDE_SCALE_VERTICAL = 0.029f;
 
-    public static float MIN_CAMP_DISTANCE = 50;
+    public static float MIN_CAMP_DISTANCE = 100;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
 	public static float SOLDIER_TENT_X = 23.0f;
-	public static float SOLDIER_TENT_Y = 3.0f;
+	public static float SOLDIER_TENT_Y = 3.2f;
 	public static float SOLDIER_TENT_DEPTH = 3.3f;
 	public static float SOLDIER_TENT_SCALE = 0.066f;
 	public static float COMMAND_TENT_X = 0.0f;
 	public static float COMMAND_TENT_Y = 0.0f;
-	public static float COMMAND_TENT_DEPTH = 3.7f;
+	public static float COMMAND_TENT_DEPTH = 3.3f;
 	public static float COMMAND_TENT_SCALE = 0.075f;
+	public static float MAGE_TENT_X = 0.0f;
+	public static float MAGE_TENT_Y = -10.0f;
+	public static float MAGE_TENT_DEPTH = 3.1f;
+	public static float MAGE_TENT_SCALE = 0.043f;
+	public static float HEALER_TENT_X = -17.9f;
+	public static float HEALER_TENT_Y = 0.9f;
+	public static float HEALER_TENT_DEPTH = 3.3f;
+	public static float HEALER_TENT_SCALE = 0.066f;
+	public static float SUPPLY_TENT_X = 0.0f;
+	public static float SUPPLY_TENT_Y = 23.0f;
+	public static float SUPPLY_TENT_DEPTH = 3.5f;
+	public static float SUPPLY_TENT_SCALE = 0.067f;
+	public static float DEPLOMATIC_TENT_X = 0.0f;
+	public static float DEPLOMATIC_TENT_Y = 10.0f;
+	public static float DEPLOMATIC_TENT_DEPTH = 3.4f;
+	public static float DEPLOMATIC_TENT_SCALE = 0.068f;
 
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
@@ -132,10 +150,10 @@ public final class Const
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
-	public static float TREE_SCALE = 0.07f;
-	public static int MAX_TREE_NUMBER = 7000;
+	public static float TREE_SCALE = 0.063f;
+	public static int MAX_TREE_NUMBER = 10000;
 	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
-	public static float MIN_NODE_TREE_DISTANCE = 50.0f;
+	public static float MIN_NODE_TREE_DISTANCE = 70.0f;
 
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;
@@ -152,7 +170,12 @@ public final class Const
 	public static Image CONSTRUCTION_SMITHY_LEVEL1;
 	public static Image CONSTRUCTION_WALL_LEVEL1;
 	public static Image CONSTRUCTION_GARDEN_LEVEL1;
-	public static Image CONSTRUCTION_TENT1_LEVEL1;
+	public static Image CONSTRUCTION_COMMAND_TENT_LEVEL1;
+	public static Image CONSTRUCTION_SOLDIER_TENT_LEVEL1;
+	public static Image CONSTRUCTION_MAGE_TENT_LEVEL1;
+	public static Image CONSTRUCTION_HEALER_TENT_LEVEL1;
+	public static Image CONSTRUCTION_SUPPLY_TENT_LEVEL1;
+	public static Image CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1;
 	public static Image MAP_BUTTON_IMAGE;
 	public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
@@ -184,9 +207,13 @@ public final class Const
 	public static Image WALL_RIGHT_LEVEL1;
 	public static Image SOLDIER_TENT_LEVEL1;
 	public static Image COMMAND_TENT_LEVEL1;
+	public static Image MAGE_TENT_LEVEL1;
+	public static Image HEALER_TENT_LEVEL1;
+	public static Image SUPPLY_TENT_LEVEL1;
+	public static Image DEPLOMATIC_TENT_LEVEL1;
 	
 	public static float VISIBLE = 1.0f;
-	public static float HIDDEN_ROAD = 0.1f;
+	public static float HIDDEN_ROAD = 0.07f;
 	public static float HIDDEN_MAPPING = 0.33f;
 	public static float SHADOW = 0.45f;
 
@@ -212,7 +239,12 @@ public final class Const
 		CONSTRUCTION_SMITHY_LEVEL1 = assets().getImage("images/UI/costructionPanel_smithy.png");
 		CONSTRUCTION_TOWER_LEVEL1 = assets().getImage("images/UI/costructionPanel_tower.png");
 		CONSTRUCTION_WALL_LEVEL1 = assets().getImage("images/UI/costructionPanel_wall.png");
-		CONSTRUCTION_TENT1_LEVEL1 = assets().getImage("images/UI/costructionPanel_tent1.png");
+		CONSTRUCTION_COMMAND_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_commandTent.png");
+		CONSTRUCTION_SOLDIER_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_soldierTent.png");
+		CONSTRUCTION_MAGE_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_mageTent.png");
+		CONSTRUCTION_HEALER_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_healerTent.png");
+		CONSTRUCTION_SUPPLY_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_supplyTent.png");
+		CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/UI/costructionPanel_deplomaticTent.png");
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
@@ -244,5 +276,9 @@ public final class Const
 		GARDEN_LEVEL1 = assets().getImage("images/City/Garden_Level1.png");
 		SOLDIER_TENT_LEVEL1 = assets().getImage("images/Camp/soldierTent.png"); 
 		COMMAND_TENT_LEVEL1 = assets().getImage("images/Camp/commandTent.png");
+		MAGE_TENT_LEVEL1 = assets().getImage("images/Camp/mageTent.png");
+		HEALER_TENT_LEVEL1 = assets().getImage("images/Camp/healerTent.png");
+		SUPPLY_TENT_LEVEL1 = assets().getImage("images/Camp/supplyTent.png");
+		DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/Camp/deplomaticTent.png");
     }
 }
