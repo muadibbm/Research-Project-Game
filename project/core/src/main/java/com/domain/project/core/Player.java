@@ -79,7 +79,7 @@ public class Player
 	}
 	
 	/**
-	* @return the node instance the player has selected fro mapping
+	* @return the node instance the player has selected from mapping
 	*/
 	public Node getNodeToBeMapped() {
 		return nodeToBeMapped;

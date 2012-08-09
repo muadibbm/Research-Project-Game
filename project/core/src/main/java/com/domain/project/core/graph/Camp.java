@@ -13,7 +13,7 @@ public class Camp extends Base
 {
 	private ImageLayer soldierTent;
 	private int soldierTent_level;
-	
+
 	private ImageLayer healerTent;
 	private int healerTent_level;
 	

@@ -10,24 +10,24 @@ import playn.core.GroupLayer;
 import com.domain.project.core.Const;
 
 /**
-* This class contains all the image and game logic for a corresponding node
-*/
+ * This class contains all the image and game logic for a corresponding node
+ */
 public class Base
 {
 	private int population;//degree of the node
 	//private ImageLayer infoLayer;
-
+	private Tuple2f position;
 	private ImageLayer baseLayer;
 
 	/**
-	* Constructor of the Base
-	* @param graphLayer - the GroupLayer of the graph
-	* @param baseImage - the image of the base
-	*/
+	 * Constructor of the Base
+	 * @param graphLayer - the GroupLayer of the graph
+	 * @param baseImage - the image of the base
+	 */
 	public Base(final GroupLayer graphLayer, Image baseImage)
 	{
 		this.population = 0;
-		
+
 		baseLayer = graphics().createImageLayer(baseImage);
 
 		baseLayer.setDepth(Const.BASE_DEPTH);
@@ -48,7 +48,7 @@ public class Base
 				log().error("error loading node", e);
 			}
 		});
-		
+
 		/*
 		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
             @Override
@@ -65,27 +65,27 @@ public class Base
         });
 		 */
 	}
-	
+
 	/**
-	* Sets the population of this node to the given number
-	* @param population - int
-	*/
+	 * Sets the population of this node to the given number
+	 * @param population - int
+	 */
 	public void setPopulation(int population) {
 		this.population = population;
 	}
-		
+
 	/**
-	* @return the population of this node
-	*/
+	 * @return the population of this node
+	 */
 	public int getPopulation() {
 		return population;
 	}
-	
+
 	/**
-	* paints the base at the given coordinates
-	* @param x - float x coordinate
-	* @param y - float y coordinate
-	*/
+	 * paints the base at the given coordinates
+	 * @param x - float x coordinate
+	 * @param y - float y coordinate
+	 */
 	public void paint(float x, float y) {
 		if(this instanceof City) { 
 			baseLayer.setScale(Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
@@ -93,18 +93,26 @@ public class Base
 			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);			
 		}
 		baseLayer.setTranslation(x, y);
-		
+
 		//infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
 	}
-	
+
 	/**
-	* @return the baseLayer of type ImageLayer
-	*/
+	 * @return the baseLayer of type ImageLayer
+	 */
 	public ImageLayer getBaseLayer(){
 		return baseLayer;
 	}
-	
-//	public float getScale
+
+	public Tuple2f getPosition() {
+		return position;
+	}
+
+	public void setPosition(Tuple2f position) {
+		this.position = position;
+	}
+
+	//	public float getScale
 
 	/* OVERRIDEN METHODS IN SUBCLASSES*/
 	//CITY METHODS

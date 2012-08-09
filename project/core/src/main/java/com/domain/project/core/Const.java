@@ -55,6 +55,9 @@ public final class Const
 	public static float BAZAR_CARPET_SCALE = 0.016f;
 	public static float GARDEN_X = 18.8f;
 	public static float GARDEN_Y = -5.0f;
+	public static float CARAVAN_DEPTH = 4.0f;
+	public static float CARAVAN_ALPHA = 0.93f;
+	public static float CARAVAN_SCALE = 0.015f;
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
 	public static float TOWER1_X = 29.0f;
@@ -160,6 +163,7 @@ public final class Const
 	public static Image CITY_BASE_IMAGE;
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
+    public static Image CARAVAN_IMAGE;
 	public static Image MAP_IMAGE;
 	public static Image CONSTRUCTION_PANEL_EMPTY;
 	public static Image CONSTRUCTION_PALACE_LEVEL1;
@@ -229,6 +233,7 @@ public final class Const
         CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
+        CARAVAN_IMAGE = assets().getImage("images/Caravan/Caravan.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
 		CONSTRUCTION_PANEL_EMPTY = assets().getImage("images/UI/costructionPanel.png");
 		CONSTRUCTION_PALACE_LEVEL1 = assets().getImage("images/UI/costructionPanel_palace.png");
