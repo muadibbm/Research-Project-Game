@@ -25,6 +25,9 @@ public class City extends Base
 
 	private ImageLayer garden;
 	private int garden_level;
+	
+	private ImageLayer smithy;
+	private int smithy_level;
 
 	private ImageLayer tower1;
 	private ImageLayer tower2;
@@ -54,7 +57,7 @@ public class City extends Base
 		garden_level = 0;
 		tower_level = 0;
 		wall_level = 0;
-		//		smithy_level = 0;
+		smithy_level = 0;
 		this.id = id;
 		hasBazaar = false;
 		hasCaravan = false;
@@ -203,23 +206,7 @@ public class City extends Base
 			}
 		});
 	}
-
-	public boolean hasBazaar() {
-		return hasBazaar;
-	}
-
-	public void setHasBazaar(boolean hasBazaar) {
-		this.hasBazaar = hasBazaar;
-	}
-
-	public boolean hasCaravan() {
-		return hasCaravan;
-	}
-
-	public void setHasCaravan(boolean hasCaravan) {
-		this.hasCaravan = hasCaravan;
-	}
-
+	
 	@Override
 	public int getGardenLevel() {
 		return garden_level;
@@ -228,6 +215,38 @@ public class City extends Base
 	@Override
 	public void setGardenLevel(int level) {
 		garden_level = level;
+	}
+	
+	@Override
+	public void buildSmithy(final GroupLayer graphLayer, Image smithy_image) {
+		if(smithy != null)
+			smithy.destroy();
+
+		smithy = graphics().createImageLayer(smithy_image);
+		smithy.setDepth(Const.SMITHY_DEPTH);
+
+		smithy_image.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				smithy.setOrigin(image.width()/2f, image.height()/2f);
+				graphLayer.add(smithy);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("error loading node", e);
+			}
+		});
+	}
+
+	@Override
+	public int getSmithyLevel() {
+		return smithy_level;
+	}
+
+	@Override
+	public void setSmithyLevel(int level) {
+		smithy_level = level;
 	}
 
 	@Override
@@ -373,6 +392,22 @@ public class City extends Base
 		wall_level = level;
 	}
 
+	public boolean hasBazaar() {
+		return hasBazaar;
+	}
+
+	public void setHasBazaar(boolean hasBazaar) {
+		this.hasBazaar = hasBazaar;
+	}
+	
+	public boolean hasCaravan() {
+		return hasCaravan;
+	}
+
+	public void setHasCaravan(boolean hasCaravan) {
+		this.hasCaravan = hasCaravan;
+	}
+	
 	@Override
 	public void paint(float x, float y) {
 		super.paint(x, y);
@@ -395,6 +430,10 @@ public class City extends Base
 		if(garden != null) {
 			garden.setScale(Const.GARDEN_SCALE, Const.GARDEN_SCALE);
 			garden.setTranslation(x + Const.GARDEN_X, y + Const.GARDEN_Y);
+		}
+		if(smithy != null) {
+			smithy.setScale(Const.SMITHY_SCALE, Const.SMITHY_SCALE);
+			smithy.setTranslation(x + Const.SMITHY_X, y + Const.SMITHY_Y);
 		}
 		if(tower1 != null) {
 			tower1.setScale(Const.TOWER_FRONT_SCALE, Const.TOWER_FRONT_SCALE);

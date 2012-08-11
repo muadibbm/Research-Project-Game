@@ -21,7 +21,7 @@ public class Player
 	public Player(int player_id, String name) {
 		this.player_id = player_id;
 		this.name = name;
-		gold = 0;
+		gold = Const.STARTING_GOLD;
 		selected_node = null;
 		nodeToBeMapped = null;
 	}

@@ -59,7 +59,7 @@ public class Caravan {
 		caravanLayer.setScale(Const.CARAVAN_SCALE, Const.CARAVAN_SCALE);
 		caravanLayer.setTranslation(currentPosition.getX(), currentPosition.getY());
 		
-		timer = new Timer(250, new ActionListener() {
+		timer = new Timer(Const.CARAVAN_SPEED, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (currentPosition.getDistanceFrom(finalPosition) > stoppingDist) {

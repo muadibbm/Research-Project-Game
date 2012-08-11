@@ -135,13 +135,13 @@ public class GameLoop implements Game {
 				
 				switch (caravan.getCaravanLevel()) {
 				case 1:
-					player1.setGold(player1.getGold() + 10);
+					//player1.setGold(player1.getGold() + 10);
 					break;
 				case 2:
-					player1.setGold(player1.getGold() + 15);
+					//player1.setGold(player1.getGold() + 15);
 					break;
 				case 3:
-					player1.setGold(player1.getGold() + 20);
+					//player1.setGold(player1.getGold() + 20);
 					break;
 				}
 				caravan.swapDestination();
