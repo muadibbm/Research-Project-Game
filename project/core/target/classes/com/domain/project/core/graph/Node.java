@@ -15,20 +15,16 @@ public class Node {
 
     private Base base;
 	private GroupLayer graphLayer;
-
 	private int id;
     private Nucleotide nucleotide;
     private List<Node> neighbors;
     private Tuple2f coordinates;
-	
 	private int graph_id;
 	private int player_id;
-
     private boolean placed;
-	
 	private Node mapped_node;
 	private Mapping mapping;
-
+	
 	/**
 	* Constructor of the Node
 	* @param id - the unique integer associated with this node read from the raw data
@@ -60,7 +56,7 @@ public class Node {
         placed = false;
 		this.graphLayer = graphLayer;
         if(isCity)
-            base = new City(this.graphLayer);
+            base = new City(this.graphLayer, this.id);
 		else
             base = new Camp(this.graphLayer);
 		this.graph_id = graph_id;

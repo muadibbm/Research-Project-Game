@@ -53,7 +53,7 @@ public class Digits
 
             @Override
             public void error(Throwable e) {
-                log().error("error loading node", e);
+                log().error("Error loading node", e);
             }
         });
 

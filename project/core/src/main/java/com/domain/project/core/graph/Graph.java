@@ -13,13 +13,14 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import com.domain.project.core.Const;
+import com.domain.project.core.enums.EdgeType;
+import com.domain.project.core.enums.Isomer;
+import com.domain.project.core.enums.Nucleotide;
+
 import playn.core.GroupLayer;
 import playn.core.ResourceCallback;
 
-import com.domain.project.core.Const;
-import com.domain.project.core.enums.Nucleotide;
-import com.domain.project.core.enums.Isomer;
-import com.domain.project.core.enums.EdgeType;
 
 /**
  * This class contains the nodes and edges of the graph read from the database

@@ -5,6 +5,7 @@ import static playn.core.PlayN.log;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.Timer;
 
@@ -28,6 +29,7 @@ public class Caravan {
 	private float stoppingDist;
 	private int caravanLevel;
 	private boolean hasArrived;
+	private Random r;
 	private Timer timer;
 
 	public Caravan(final GroupLayer graphLayer, Tuple2f city1, Tuple2f city2, float stoppingDistance) {

@@ -7,37 +7,37 @@ import java.awt.geom.Rectangle2D;
 import java.lang.Integer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Random;
+
+import com.domain.project.core.Const;
+import com.domain.project.core.enums.EdgeType;
+import com.domain.project.core.enums.Isomer;
+import com.domain.project.core.enums.Nucleotide;
 
 import playn.core.GroupLayer;
 import playn.core.ResourceCallback;
 
-import com.domain.project.core.Const;
-import com.domain.project.core.enums.Nucleotide;
-import com.domain.project.core.enums.Isomer;
-import com.domain.project.core.enums.EdgeType;
 
 /**
  * This class contains the nodes and edges of the graph read from the database
  */
 public class Graph {
 
-	private java.util.Random r = new java.util.Random();
+	private Random r = new Random();
 
 	private final Map<Integer, Node> nodes;
 	private final Map<Integer, Edge> edges;
-
 	private final String PATH = "graph_data/";
-
 	private float xOffset;
 	private float yOffset;
 	private float width;
 	private float height;
-
+	private ArrayList<Caravan> caravanList;
 	private boolean isCityGraph;
-
 	private int id;
 
 	/**
@@ -58,6 +58,7 @@ public class Graph {
 		this.width = width;
 		this.height = height;
 		this.id = id;
+		caravanList = new ArrayList<Caravan>();
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class Graph {
 		parseGraphFile(filename, graphLayer, player_id);
 		placeNodes();
 		setNodeLevels();
-		placeEdges();
+		placeEdges();		
 	}
 
 	/**
@@ -100,10 +101,11 @@ public class Graph {
 	public void updateAll() {
 		placeNodes();
 		placeEdges();
+		movingCaravans();
 	}
 
 	/**
-	 * parses the file containing the raw graph data and create all the nodes and edges instances
+	 * parses the file containing the raw graph data and creates all the nodes and edges instances
 	 */
 	private void parseGraphFile(String filename, final GroupLayer graphLayer, final int player_id) {
 
@@ -122,9 +124,8 @@ public class Graph {
 				Isomer iso = null;
 				EdgeType et1 = null, et2 = null;
 
-				int nodeID, neighborID, lineNumber;
+				int nodeID, neighborID;
 				int edgeID; //line number in file
-				int data;
 
 				entries = resource.split("\n");
 				for(String s1 : entries) {
@@ -279,8 +280,7 @@ public class Graph {
 		});
 	}
 
-	/**
-	 * paints all the imageLayers in this graph instance
+	/** Paints all the imageLayers in this graph instance
 	 */
 	public void paintAll() {
 		for(Entry<Integer, Node> entry : nodes.entrySet()) {
@@ -296,7 +296,6 @@ public class Graph {
 	}
 
 	private void placeNodes() {
-		//TODO: finish the placement algorithm
 		float tempNodeX = 0;
 		float tempNodeY = 0;
 		ArrayList<Node> placedNodesList = new ArrayList<Node>();
@@ -352,7 +351,7 @@ public class Graph {
 				}
 			}
 		}
-		
+
 		for (Node node: placedNodesList) {
 			for (Node node2: placedNodesList) {
 				if (!node.equals(node2)) {
@@ -387,7 +386,6 @@ public class Graph {
 	private void placeEdges() {
 		Node n1;
 		Node n2;
-		//Road road;
 		for(Entry<Integer, Edge> entry : edges.entrySet()) {
 			if(!entry.getValue().getRoad().isPlaced()) {
 				n1 = getNode1(entry.getValue());
@@ -434,8 +432,29 @@ public class Graph {
 				}
 			}
 		}
-		//System.out.println(distance);
 		return true;
+	}
+
+	private void movingCaravans() {
+		for (Entry<Integer, Node> entry: nodes.entrySet()) {
+			Node node = entry.getValue();
+			if (node.getBase() instanceof City) {
+				City c1 = (City) node.getBase(); 
+				if (c1.hasBazaar()) {
+					List<Node> neighbours = node.getNeighbors();
+					for (Node neighbour: neighbours) {
+						City c2 = (City) neighbour.getBase();
+						if (c2.hasBazaar()) {
+							if (!c1.hasCaravan() || !c2.hasCaravan()) {
+								c1.setHasCaravan(true);
+								c2.setHasCaravan(true);
+								caravanList.add(new Caravan(node.getGraphLayer(), node.getPos(), neighbour.getPos(), node.getBase().getBaseLayer().scaledWidth() / 10));
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void addNode(Node n) {
@@ -464,15 +483,23 @@ public class Graph {
 		return isCityGraph;
 	}
 
+	public ArrayList<Caravan> getCaravanList() {
+		return caravanList;
+	}
+
+	public void setCaravanList(ArrayList<Caravan> caravanList) {
+		this.caravanList = caravanList;
+	}
+
 	@Override
 	public String toString() {
 		String ret = "";
-		for(Map.Entry<Integer, Node> entry : nodes.entrySet()) {
+		for (Entry<Integer, Node> entry : nodes.entrySet()) {
 			ret = ret + entry.getValue() + "\n";
 		}
 		ret = ret + "Total number of nodes: " + nodes.size() + "\n\n";
 
-		for(Map.Entry<Integer, Edge> entry : edges.entrySet()) {
+		for (Entry<Integer, Edge> entry : edges.entrySet()) {
 			ret = ret + entry.getValue() + "\n";
 		}
 		ret = ret + "Total number of edges: " + edges.size();

@@ -14,9 +14,9 @@ public class Camp extends Base
 	private ImageLayer soldierTent;
 	private int soldierTent_level;
 	
-	private ImageLayer healerTent;
-	private ImageLayer supplyTent;
-	private ImageLayer deplomaticTent;
+//	private ImageLayer healerTent;
+//	private ImageLayer supplyTent;
+//	private ImageLayer deplomaticTent;
 	
 	private ImageLayer commandTent;
 	private int commandTent_level;
