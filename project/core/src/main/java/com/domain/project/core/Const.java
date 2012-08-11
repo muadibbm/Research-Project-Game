@@ -28,6 +28,8 @@ public final class Const
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
 
+	public static int STARTING_GOLD = 8000;
+	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
 	public static float BASE_DEPTH = 3.0f;
@@ -55,11 +57,12 @@ public final class Const
 	public static float BAZAR_CARPET_SCALE = 0.016f;
 	public static float GARDEN_X = 18.8f;
 	public static float GARDEN_Y = -5.0f;
-	public static float CARAVAN_DEPTH = 4.0f;
-	public static float CARAVAN_ALPHA = 0.93f;
-	public static float CARAVAN_SCALE = 0.015f;
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
+	public static float SMITHY_X = 21.0f;
+	public static float SMITHY_Y = 15.0f;
+	public static float SMITHY_DEPTH = 3.4f;
+	public static float SMITHY_SCALE = 0.021f;
 	public static float TOWER1_X = 29.0f;
 	public static float TOWER1_Y = 19.0f;
 	public static float TOWER2_X = -29.0f;
@@ -93,7 +96,21 @@ public final class Const
 	public static float WALL_BACK_SCALE_VERTICAL = 0.0109f*3;
 	public static float WALL_SIDE_SCALE = 0.016f;
 	public static float WALL_SIDE_SCALE_VERTICAL = 0.029f;
+	
+	public static int PALACE_COST = 100;
+	public static int BAZAR_FOOD_COST = 40;
+	public static int BAZAR_CHINA_COST = 50;
+	public static int BAZAR_CARPET_COST = 60;
+	public static int GARDEN_COST = 80;
+	public static int SMITHY_COST = 70;
+	public static int TOWER_COST = 60;
+	public static int WALL_COST = 50;
 
+	public static float CARAVAN_DEPTH = 4.0f;
+	public static float CARAVAN_ALPHA = 0.93f;
+	public static float CARAVAN_SCALE = 0.05f;
+	public static int CARAVAN_SPEED = 18;
+	
     public static float MIN_CAMP_DISTANCE = 100;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
@@ -122,6 +139,13 @@ public final class Const
 	public static float DEPLOMATIC_TENT_Y = 10.0f;
 	public static float DEPLOMATIC_TENT_DEPTH = 3.4f;
 	public static float DEPLOMATIC_TENT_SCALE = 0.068f;
+	
+	public static int COMMAND_TENT_COST = 90;
+	public static int SOLDIER_TENT_COST = 60;
+	public static int MAGE_TENT_COST = 70;
+	public static int HEALER_TENT_COST = 60;
+	public static int SUPPLY_TENT_COST = 50;
+	public static int DEPLOMATIC_TENT_COST = 80;
 
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
@@ -205,6 +229,7 @@ public final class Const
 	public static Image BAZAR_CHINA_LEVEL1;
 	public static Image BAZAR_CARPET_LEVEL1;
 	public static Image GARDEN_LEVEL1;
+	public static Image SMITHY_LEVEL1;
 	public static Image WALL_FRONT_LEVEL1;
 	public static Image WALL_BACK_LEVEL1;
 	public static Image WALL_LEFT_LEVEL1;
@@ -279,6 +304,7 @@ public final class Const
 		WALL_LEFT_LEVEL1 = assets().getImage("images/City/Wall_left_level1.png");
 		WALL_RIGHT_LEVEL1 = assets().getImage("images/City/Wall_right_level1.png");
 		GARDEN_LEVEL1 = assets().getImage("images/City/Garden_Level1.png");
+		SMITHY_LEVEL1 = assets().getImage("images/City/Smithie_Level1.png");
 		SOLDIER_TENT_LEVEL1 = assets().getImage("images/Camp/soldierTent.png"); 
 		COMMAND_TENT_LEVEL1 = assets().getImage("images/Camp/commandTent.png");
 		MAGE_TENT_LEVEL1 = assets().getImage("images/Camp/mageTent.png");
