@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import playn.core.Game;
-import playn.core.Mouse;
-
 import com.domain.project.core.controls.KeyboardControls;
 import com.domain.project.core.controls.MouseControls;
 import com.domain.project.core.graph.Camp;
@@ -20,6 +17,10 @@ import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
 import com.domain.project.core.graph.Tree;
 import com.domain.project.core.graph.Tuple2f;
+
+import playn.core.Game;
+import playn.core.Mouse;
+
 
 /**
  * This is the main game loop where are the calculations and drawing takes place.
