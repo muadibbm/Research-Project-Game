@@ -2,8 +2,6 @@ package com.domain.project.core.graph;
 
 import static playn.core.PlayN.*;
 
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 import java.lang.Integer;
 
 import java.util.ArrayList;

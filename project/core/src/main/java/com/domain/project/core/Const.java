@@ -58,6 +58,7 @@ public final class Const
 	public static float CARAVAN_DEPTH = 4.0f;
 	public static float CARAVAN_ALPHA = 0.93f;
 	public static float CARAVAN_SCALE = 0.015f;
+	public static int CARAVAN_TRADING_TIME = 5000; // in milliseconds
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
 	public static float TOWER1_X = 29.0f;
