@@ -3,6 +3,7 @@ package com.domain.project.core.controls;
 import playn.core.Keyboard;
 import com.domain.project.core.Environment;
 import com.domain.project.core.Const;
+import com.domain.project.core.enums.Zoom;
 
 public class KeyboardControls implements Keyboard.Listener {
 

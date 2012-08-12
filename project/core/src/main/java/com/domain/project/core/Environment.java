@@ -6,7 +6,7 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 
-import com.domain.project.core.Const;
+import com.domain.project.core.enums.Zoom;
 import tripleplay.anim.Animator;
 
 /**

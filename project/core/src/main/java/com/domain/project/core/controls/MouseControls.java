@@ -5,6 +5,7 @@ import playn.core.GroupLayer;
 
 import com.domain.project.core.Environment;
 import com.domain.project.core.Const;
+import com.domain.project.core.enums.Zoom;
 
 public class MouseControls implements Mouse.Listener {
 
