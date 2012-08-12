@@ -153,7 +153,11 @@ public class Caravan {
 		Tuple2f temp = finalPosition;
 		finalPosition = initialPosition;
 		initialPosition = temp;
+<<<<<<< HEAD
 		timer.setInitialDelay(5000);
+=======
+		timer.setInitialDelay(Const.CARAVAN_TRADING_TIME);
+>>>>>>> 7b9e77cfad22d5e026ef5ab0a1437faca1aab9fe
 		timer.start();
 	}
 	

@@ -57,6 +57,11 @@ public final class Const
 	public static float BAZAR_CARPET_SCALE = 0.016f;
 	public static float GARDEN_X = 18.8f;
 	public static float GARDEN_Y = -5.0f;
+	public static float CARAVAN_DEPTH = 4.0f;
+	public static float CARAVAN_ALPHA = 0.93f;
+	public static float CARAVAN_SCALE = 0.05f;
+	public static int CARAVAN_TRADING_TIME = 5000; // in milliseconds
+	public static int CARAVAN_SPEED = 18;
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
 	public static float SMITHY_X = 21.0f;
@@ -105,11 +110,6 @@ public final class Const
 	public static int SMITHY_COST = 70;
 	public static int TOWER_COST = 60;
 	public static int WALL_COST = 50;
-
-	public static float CARAVAN_DEPTH = 4.0f;
-	public static float CARAVAN_ALPHA = 0.93f;
-	public static float CARAVAN_SCALE = 0.05f;
-	public static int CARAVAN_SPEED = 18;
 	
     public static float MIN_CAMP_DISTANCE = 100;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;

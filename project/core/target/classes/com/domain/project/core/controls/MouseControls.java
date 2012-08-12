@@ -4,7 +4,10 @@ import playn.core.Mouse;
 import playn.core.GroupLayer;
 
 import com.domain.project.core.Environment;
+<<<<<<< HEAD
 import com.domain.project.core.enums.Zoom;
+=======
+>>>>>>> 7b9e77cfad22d5e026ef5ab0a1437faca1aab9fe
 import com.domain.project.core.Const;
 
 public class MouseControls implements Mouse.Listener {

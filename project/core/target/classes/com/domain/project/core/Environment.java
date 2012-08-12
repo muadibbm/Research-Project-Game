@@ -7,8 +7,11 @@ import playn.core.Image;
 import playn.core.ImageLayer;
 
 import com.domain.project.core.Const;
+<<<<<<< HEAD
 import com.domain.project.core.enums.Zoom;
 
+=======
+>>>>>>> 7b9e77cfad22d5e026ef5ab0a1437faca1aab9fe
 import tripleplay.anim.Animator;
 
 /**
