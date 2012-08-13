@@ -28,7 +28,7 @@ public final class Const
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
 
-	public static int STARTING_GOLD = 8000;
+	public static int STARTING_GOLD = 500;
 	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
@@ -61,7 +61,7 @@ public final class Const
 	public static float CARAVAN_ALPHA = 0.93f;
 	public static float CARAVAN_SCALE = 0.05f;
 	public static int CARAVAN_TRADING_TIME = 5000; // in milliseconds
-	public static int CARAVAN_SPEED = 18;
+	public static int CARAVAN_SPEED = 100;
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
 	public static float SMITHY_X = 21.0f;

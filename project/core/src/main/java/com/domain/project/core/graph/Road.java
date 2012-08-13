@@ -2,12 +2,12 @@ package com.domain.project.core.graph;
 
 import static playn.core.PlayN.*;
 
+import com.domain.project.core.Const;
+
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
 import playn.core.GroupLayer;
-
-import com.domain.project.core.Const;
 
 /**
 * This class contains all the image and game logic for a corresponding edge

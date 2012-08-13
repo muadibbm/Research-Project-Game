@@ -2,10 +2,10 @@ package com.domain.project.core.graph;
 
 //import static playn.core.PlayN.*;
 
-import playn.core.GroupLayer;
-
-import com.domain.project.core.enums.Isomer;
 import com.domain.project.core.enums.EdgeType;
+import com.domain.project.core.enums.Isomer;
+
+import playn.core.GroupLayer;
 
 public class Edge {
     

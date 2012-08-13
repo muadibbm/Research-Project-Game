@@ -22,13 +22,13 @@ public class Tuple2f {
 
 	public float getSlope(Tuple2f point) {
 		float infinityCheck = this.x - point.x;
-		
+
 		if (Math.floor(infinityCheck) != 0) {
 			return (float) Math.floor((this.y - point.y) / (this.x - point.x));
 		}
 		return 0.0f;
 	}
-	
+
 	public float getX() {
 		return x;
 	}

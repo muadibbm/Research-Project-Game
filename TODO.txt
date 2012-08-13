@@ -1,0 +1,26 @@
+TODOs FOR RESEARCH_PROEJCT PHASE I(Deadline:September 30th):
+
+*NOTE: Please choose any you want and tell me which(but if u choose you better try to do it).
+(Also several people can work on same task)
+
+1. Addition of a fluid zooming function (at least 7 levels) (EXTRA feature: a level of detail for all textures at diffrent zoom levels).
+Also, the movment with right click and amount of movement the window has, should change.(for example at lowest zoom, the movment should be lowered)
+2. A Complete gameplay of building structure in a city where each determine a functionality. - Andrey is assigned
+3. A Complete gameplay of building structure in a camp where each determine a functionality. - Andrey is assigned
+4. Complete images in cities or camp. 					- Andrey is assigned
+5. EXTRA  feature : leveling for cities or camps ?
+6. Generating resources through caravans between cities. 		- Andrey is assigned
+7. Images of Army representatives. - Andrey is assigned
+8. Gameplay of engaging enemy camp and moving armies to the enemy.
+9. Coding the Multiplayer aspect of the game (wevsockets, Client/Server, facebook server).
+10. Placing the game in the provided server and then onto facebook canvas..
+11. Fixing the BUGS in html version. (the transforms of the layer in the listeners events(such as mouse clickng on cities) are not updated in the gameLoop).
+12. Researching on how to use Java version in the Server and on facebook.
+13. Fighting gameplay, destruction of cities and camps. 		- Andrey is assigned
+14. Animation.
+15. Fixing the bug in camera movement(cannot move beyond a point at lowest zoom level).
+
+*NOTE: I will be on skype for any questions regarding any of the todos
+*NOTE: If u think we need anymore TODOs please tell me.
+
+THANKS

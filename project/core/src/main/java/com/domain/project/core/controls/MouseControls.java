@@ -1,16 +1,17 @@
 package com.domain.project.core.controls;
 
-import playn.core.Mouse;
-import playn.core.GroupLayer;
-
-import com.domain.project.core.Environment;
 import com.domain.project.core.Const;
+import com.domain.project.core.Environment;
+import com.domain.project.core.enums.Zoom;
+
+import playn.core.GroupLayer;
+import playn.core.Mouse;
 
 public class MouseControls implements Mouse.Listener {
 
     public boolean clickScroll = false;
     
-    private float zoomSpeed = 600f; // in mseconds
+    private float zoomSpeed = 600f; // in milliseconds
 
     private Environment env;
 

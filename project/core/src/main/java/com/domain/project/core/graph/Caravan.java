@@ -5,8 +5,6 @@ import static playn.core.PlayN.log;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
-
 import javax.swing.Timer;
 
 import com.domain.project.core.Const;
@@ -27,9 +25,9 @@ public class Caravan {
 	private Tuple2f currentPosition;
 	private Tuple2f finalPosition;
 	private float stoppingDist;
-	private int caravanLevel;
+	private byte caravanLevel;
 	private boolean hasArrived;
-	private Random r;
+	private int dx, dy, err, sx, sy;
 	private Timer timer;
 
 	public Caravan(final GroupLayer graphLayer, Tuple2f city1, Tuple2f city2, float stoppingDistance) {
@@ -42,7 +40,22 @@ public class Caravan {
 		finalPosition = city2;
 		stoppingDist = stoppingDistance;
 		hasArrived = false;
+		dx = (int) Math.abs(finalPosition.getX() - initialPosition.getX());
+		dy = (int) Math.abs(finalPosition.getY() - initialPosition.getY());
+		err = dx - dy;
 		
+		if (currentPosition.getX() < finalPosition.getX()) { 
+			sx = 1;
+		} else { 
+			sx = -1;
+		}
+
+		if (currentPosition.getY() < finalPosition.getY()) {
+			sy = 1;
+		} else {
+			sy = -1;
+		}
+
 		caravanImage.addCallback(new ResourceCallback<Image>() {
 			@Override
 			public void done(Image image) {
@@ -58,16 +71,17 @@ public class Caravan {
 
 		caravanLayer.setScale(Const.CARAVAN_SCALE, Const.CARAVAN_SCALE);
 		caravanLayer.setTranslation(currentPosition.getX(), currentPosition.getY());
-		
+
 		timer = new Timer(Const.CARAVAN_SPEED, new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				if (currentPosition.getDistanceFrom(finalPosition) > stoppingDist) {
 					moveCaravan();
 				} else {
 					hasArrived = true;
 					caravanStopMoving();
 				}
+
 				paint(currentPosition.getX(), currentPosition.getY());
 			}
 		});
@@ -83,8 +97,21 @@ public class Caravan {
 	/** Move the caravan from city to city to gain resources. I will implement a path finding algorithm
 	 * to make the camel/caravan find the right city and going around the cities, the current node is connected to.
 	 */
-	public void moveCaravan() {
-		Tuple2f upperLeftCorner = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY() - 1);
+	public void moveCaravan() {		
+		int e2 = 2 * err;
+		Tuple2f newPosition = new Tuple2f(currentPosition.getX(), currentPosition.getY());
+		
+		if (e2 > -dy) {
+			err -= dy;
+			newPosition.setX(newPosition.getX() + sx);
+		}
+
+		if (e2 < dx) {
+			err += dx;
+			newPosition.setY(newPosition.getY() + sy);
+		}
+
+		/*Tuple2f upperLeftCorner = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY() - 1);
 		Tuple2f top = new Tuple2f(currentPosition.getX(), currentPosition.getY() - 1);
 		Tuple2f upperRightCorner = new Tuple2f(currentPosition.getX() + 1, currentPosition.getY() - 1);
 		Tuple2f left = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY());
@@ -138,7 +165,9 @@ public class Caravan {
 		case 7:
 			currentPosition = lowerRightCorner;
 			break;
-		}
+		}*/
+		
+		currentPosition = newPosition;
 	}
 
 	public boolean hasArrived() {
@@ -153,19 +182,36 @@ public class Caravan {
 		Tuple2f temp = finalPosition;
 		finalPosition = initialPosition;
 		initialPosition = temp;
+		
+		dx = (int) Math.abs(finalPosition.getX() - initialPosition.getX());
+		dy = (int) Math.abs(finalPosition.getY() - initialPosition.getY());
+		err = dx - dy;
+		
+		if (currentPosition.getX() < finalPosition.getX()) { 
+			sx = 1;
+		} else { 
+			sx = -1;
+		}
+
+		if (currentPosition.getY() < finalPosition.getY()) {
+			sy = 1;
+		} else {
+			sy = -1;
+		}
+		
 		timer.setInitialDelay(Const.CARAVAN_TRADING_TIME);
 		timer.start();
 	}
-	
+
 	public void caravanStopMoving() {
 		timer.stop();
 	}
-	
+
 	public int getCaravanLevel() {
 		return caravanLevel;
 	}
 
-	public void setCaravanLevel(int caravanLevel) {
+	public void setCaravanLevel(byte caravanLevel) {
 		this.caravanLevel = caravanLevel;
 	}
 
