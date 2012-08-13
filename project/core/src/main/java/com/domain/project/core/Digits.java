@@ -115,8 +115,13 @@ public class Digits
 				case 3 : setFourthDigit(Integer.parseInt(sDigit)); break;
 				default : break;
 			}
-			
 		}
+		if(sDigits.length() == 1 & digit2 != null)
+			digit2.setVisible(false);
+		if(sDigits.length() == 2 & digit3 != null)
+			digit3.setVisible(false);
+		if(sDigits.length() == 3 & digit4 != null)
+			digit4.setVisible(false);;
 	}
 	
 	private String reverse(String s) {

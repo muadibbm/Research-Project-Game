@@ -27,8 +27,7 @@ public final class Const
 
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
-
-	public static int STARTING_GOLD = 500;
+	public static int STARTING_GOLD = 300;
 	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
