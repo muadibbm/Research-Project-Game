@@ -28,6 +28,8 @@ public class Camp extends Base
 	
 	private ImageLayer mageTent;
 	private int mageTent_level;
+	
+	private Army current_army;
 
 	public Camp(GroupLayer graphLayer){
 		super(graphLayer, Const.CAMP_BASE_IMAGE);
@@ -37,6 +39,15 @@ public class Camp extends Base
 		healerTent_level = 0;
 		supplyTent_level = 0;
 		deplomaticTent_level = 0;
+		current_army = null;
+	}
+	
+	public void setArmy(Army army) {
+		current_army = army;
+	}
+	
+	public Army getArmy() {
+		return current_army;
 	}
 	
 	@Override

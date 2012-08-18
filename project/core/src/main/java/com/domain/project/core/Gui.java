@@ -12,6 +12,7 @@ import playn.core.Mouse;
 import com.domain.project.core.graph.Base;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.City;
+import com.domain.project.core.graph.Army;
 
 public class Gui
 {
@@ -526,6 +527,7 @@ public class Gui
 										player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
 										base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
 										base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+										player.addArmy(new Army(graphLayer, base, Const.ARMY_DEPTH, Const.ARMY_ALPHA, Const.ARMY_LEVEL1, base.getBaseLayer().scaledWidth() / 10));
 									}
 								}
 							}

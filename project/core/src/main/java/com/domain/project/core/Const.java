@@ -146,6 +146,13 @@ public final class Const
 	public static int SUPPLY_TENT_COST = 50;
 	public static int DEPLOMATIC_TENT_COST = 80;
 
+	public static float AMRY_INITIAL_POS_X = 40.0f;
+	public static float AMRY_INITIAL_POS_Y = 10.0f;
+	public static float ARMY_SCALE = 0.2f;
+	public static float ARMY_ALPHA = 1.0f;
+	public static float ARMY_DEPTH = 5.0f;
+	public static int ARMY_SPEED = 100;
+	
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
 	
@@ -239,6 +246,9 @@ public final class Const
 	public static Image HEALER_TENT_LEVEL1;
 	public static Image SUPPLY_TENT_LEVEL1;
 	public static Image DEPLOMATIC_TENT_LEVEL1;
+	public static Image ARMY_LEVEL1;
+	public static Image ARMY_LEVEL2;
+	public static Image ARMY_LEVEL3;
 	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.07f;
@@ -310,5 +320,6 @@ public final class Const
 		HEALER_TENT_LEVEL1 = assets().getImage("images/Camp/healerTent.png");
 		SUPPLY_TENT_LEVEL1 = assets().getImage("images/Camp/supplyTent.png");
 		DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/Camp/deplomaticTent.png");
+		ARMY_LEVEL1 = assets().getImage("images/Army/Sepah.png");
     }
 }
