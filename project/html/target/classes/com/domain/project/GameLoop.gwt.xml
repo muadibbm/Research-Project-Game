@@ -1,0 +1,12 @@
+<module rename-to='project'>
+  <inherits name='playn.PlayN'/>
+
+  <source path='core'/>
+  <source path='html'/>
+
+  <public path="resources" />
+
+  <entry-point class='com.domain.project.html.GameLoopHtml'/>
+
+  <inherits name="tripleplay.TriplePlay"/>
+</module>

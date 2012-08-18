@@ -2,6 +2,8 @@ package com.domain.project.core;
 
 import static playn.core.PlayN.*;
 
+import java.util.ArrayList;
+
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
@@ -12,6 +14,7 @@ import playn.core.Mouse;
 import com.domain.project.core.graph.Base;
 import com.domain.project.core.graph.Camp;
 import com.domain.project.core.graph.City;
+import com.domain.project.core.graph.Node;
 
 public class Gui
 {
@@ -23,6 +26,15 @@ public class Gui
 	private ImageLayer option6_empty;
 	private ImageLayer option7_empty;
 	private ImageLayer option8_empty;
+
+	private ImageLayer option1_selected;
+	private ImageLayer option2_selected;
+	private ImageLayer option3_selected;
+	private ImageLayer option4_selected;
+	private ImageLayer option5_selected;
+	private ImageLayer option6_selected;
+	private ImageLayer option7_selected;
+	private ImageLayer option8_selected;
 
 	private ImageLayer option1_city;//TOWN_HALL
 	private ImageLayer option2_city;//FOOD_BAZAR
@@ -44,13 +56,18 @@ public class Gui
 
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
-	private Digits gold;
-
 	private ImageLayer map;
 	private ImageLayer unmap;
 
+	private ArrayList<ImageLayer> emptyOptionsList;
+	private ArrayList<ImageLayer> selectedOptionsList;
+	private Digits gold;
+
 	public Gui(final GroupLayer uiLayer)
 	{
+		emptyOptionsList = new ArrayList<ImageLayer>();
+		selectedOptionsList = new ArrayList<ImageLayer>();
+
 		option1_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
 		createImage(uiLayer, option1_empty, Const.CONSTRUCTION_PANEL_EMPTY, 0.0f);
 		option2_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
@@ -68,6 +85,44 @@ public class Gui
 		option8_empty = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_EMPTY);
 		createImage(uiLayer, option8_empty, Const.CONSTRUCTION_PANEL_EMPTY, 2.1f);
 
+		emptyOptionsList.add(option1_empty);
+		emptyOptionsList.add(option2_empty);
+		emptyOptionsList.add(option3_empty);
+		emptyOptionsList.add(option4_empty);
+		emptyOptionsList.add(option5_empty);
+		emptyOptionsList.add(option6_empty);
+		emptyOptionsList.add(option7_empty);
+		emptyOptionsList.add(option8_empty);
+		
+		option1_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option1_selected, Const.CONSTRUCTION_PANEL_SELECTED, 0.0f);
+		option2_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option2_selected, Const.CONSTRUCTION_PANEL_SELECTED, 0.3f);
+		option3_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option3_selected, Const.CONSTRUCTION_PANEL_SELECTED, 0.6f);
+		option4_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option4_selected, Const.CONSTRUCTION_PANEL_SELECTED, 0.9f);
+		option5_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option5_selected, Const.CONSTRUCTION_PANEL_SELECTED, 1.2f);
+		option6_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option6_selected, Const.CONSTRUCTION_PANEL_SELECTED, 1.5f);
+		option7_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option7_selected, Const.CONSTRUCTION_PANEL_SELECTED, 1.8f);
+		option8_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
+		createImage(uiLayer, option8_selected, Const.CONSTRUCTION_PANEL_SELECTED, 2.1f);
+
+		// Add all the selected options to a list
+		selectedOptionsList.add(option1_selected);
+		selectedOptionsList.add(option2_selected);
+		selectedOptionsList.add(option3_selected);
+		selectedOptionsList.add(option4_selected);
+		selectedOptionsList.add(option5_selected);
+		selectedOptionsList.add(option6_selected);
+		selectedOptionsList.add(option7_selected);
+		selectedOptionsList.add(option8_selected);
+		
+		clearSelectedPanels();
+
 		option1_city = graphics().createImageLayer(Const.CONSTRUCTION_PALACE_LEVEL1);
 		createImage(uiLayer, option1_city, Const.CONSTRUCTION_PALACE_LEVEL1, 0.0f);
 		option2_city = graphics().createImageLayer(Const.CONSTRUCTION_BAZAR_FOOD_LEVEL1);
@@ -84,7 +139,7 @@ public class Gui
 		createImage(uiLayer, option7_city, Const.CONSTRUCTION_TOWER_LEVEL1, 1.8f);
 		option8_city = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
 		createImage(uiLayer, option8_city, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
-		
+
 		//option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
 		//createImage(uiLayer, option1_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.0f);
 		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
@@ -151,6 +206,12 @@ public class Gui
 		});
 	}
 
+	private void clearSelectedPanels() {
+		for (ImageLayer imageL: selectedOptionsList) {
+			imageL.setVisible(false);
+		}
+	}
+
 	public void addListener(final Player player, final GroupLayer graphLayer) {
 		map.addListener(new Mouse.Listener() {
 			@Override
@@ -160,21 +221,22 @@ public class Gui
 						if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
 							player.setNodeToBeMapped(player.getSelectedNode());
 							//TODO : add some graphical indication
+							
 						}
 					}
 				}
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -195,15 +257,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -216,11 +278,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.PALACE_COST) {
 									player.setGold(player.getGold()-Const.PALACE_COST);
 									//base.setCityLevel(base.getCityLevel() + 1);
 									base.buildPalace(graphLayer, Const.PALACE_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 0) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -229,15 +301,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -250,11 +322,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.BAZAR_FOOD_COST) {
 									player.setGold(player.getGold()-Const.BAZAR_FOOD_COST);
 									//TODO : check level
 									base.buildBazarFood(graphLayer, Const.BAZAR_FOOD_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 1) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -263,15 +345,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -284,11 +366,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.BAZAR_CHINA_COST) {
 									player.setGold(player.getGold()-Const.BAZAR_CHINA_COST);
 									//TODO : check level
 									base.buildBazarChina(graphLayer, Const.BAZAR_CHINA_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 2) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -297,15 +389,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -318,11 +410,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.BAZAR_CARPET_COST) {
 									player.setGold(player.getGold()-Const.BAZAR_CARPET_COST);
 									//TODO : check level
 									base.buildBazarCarpet(graphLayer, Const.BAZAR_CARPET_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 3) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -331,15 +433,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -352,11 +454,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.GARDEN_COST) {
 									player.setGold(player.getGold()-Const.GARDEN_COST);
 									//TODO : check garden level
 									base.buildGarden(graphLayer, Const.GARDEN_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 4) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -365,18 +477,18 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
-		
+
 		/* Building SMITHY */
 		option6_city.addListener(new Mouse.Listener() {
 			Base base;
@@ -386,11 +498,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.SMITHY_COST) {
 									player.setGold(player.getGold()-Const.SMITHY_COST);
 									//TODO : check smithy level
 									base.buildSmithy(graphLayer, Const.SMITHY_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 5) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -399,15 +521,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -420,11 +542,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.TOWER_COST) {
 									player.setGold(player.getGold()-Const.TOWER_COST);
 									//base.setTowerLevel(base.getTowerLevel() + 1);
 									base.buildTower(graphLayer, Const.TOWER_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 6) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -433,15 +565,15 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
@@ -454,11 +586,21 @@ public class Gui
 					if(player.getSelectedNode() != null) {
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof City){
+							if(base instanceof City) {
 								if(player.getGold() >= Const.WALL_COST) {
 									player.setGold(player.getGold()-Const.WALL_COST);
 									//base.setWallLevel(base.getWallLevel() + 1);
 									base.buildWall(graphLayer, Const.WALL_FRONT_LEVEL1, Const.WALL_BACK_LEVEL1, Const.WALL_RIGHT_LEVEL1, Const.WALL_LEFT_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 7) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
 								}
 							}
 						}
@@ -467,214 +609,274 @@ public class Gui
 			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
 		/* Building COMMAND TENT */
 		option2_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.COMMAND_TENT_COST) {
-										player.setGold(player.getGold()-Const.COMMAND_TENT_COST);
-										//base.setCommandTentLevel(base.getCommandTentLevel() + 1);
-										base.buildCommandTent(graphLayer, Const.COMMAND_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp) {
+								if(player.getGold() >= Const.COMMAND_TENT_COST) {
+									player.setGold(player.getGold()-Const.COMMAND_TENT_COST);
+									//base.setCommandTentLevel(base.getCommandTentLevel() + 1);
+									base.buildCommandTent(graphLayer, Const.COMMAND_TENT_LEVEL1);
+									
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 1) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
 						}
 				}
+			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
 
 		/* Building SOLDIER TENT */
 		option3_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.SOLDIER_TENT_COST) {
-										player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
-										base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
-										base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp) {
+								if(player.getGold() >= Const.SOLDIER_TENT_COST) {
+									player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
+									base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
+									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+								
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 2) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
 						}
 				}
+			}
 			@Override
 			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
+
 			}
 			@Override
 			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
+
 			}
 		});
-	
+
 		/* Building MAGE TENT */
 		option4_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.MAGE_TENT_COST) {
-										player.setGold(player.getGold()-Const.MAGE_TENT_COST);
-										//base.setMageTentLevel(base.getMageTentLevel() + 1);
-										base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp){
+								if(player.getGold() >= Const.MAGE_TENT_COST) {
+									player.setGold(player.getGold()-Const.MAGE_TENT_COST);
+									//base.setMageTentLevel(base.getMageTentLevel() + 1);
+									base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
+								
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 3) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
-					}
+						}
 				}
-				@Override
-				public void onMouseMove(Mouse.MotionEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseUp(Mouse.ButtonEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseWheelScroll(Mouse.WheelEvent event) {
-					//TODO
-				}
+			}
+			@Override
+			public void onMouseMove(Mouse.MotionEvent event) {
+
+			}
+			@Override
+			public void onMouseUp(Mouse.ButtonEvent event) {
+
+			}
+			@Override
+			public void onMouseWheelScroll(Mouse.WheelEvent event) {
+
+			}
 		});
-	
+
 		/* Building HEALER TENT */
 		option5_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.HEALER_TENT_COST) {
-										player.setGold(player.getGold()-Const.HEALER_TENT_COST);
-										//base.setHealerTentLevel(base.getHealerTentLevel() + 1);
-										base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp){
+								if(player.getGold() >= Const.HEALER_TENT_COST) {
+									player.setGold(player.getGold()-Const.HEALER_TENT_COST);
+									//base.setHealerTentLevel(base.getHealerTentLevel() + 1);
+									base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
+								
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 4) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
-					}
+						}
 				}
-				@Override
-				public void onMouseMove(Mouse.MotionEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseUp(Mouse.ButtonEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseWheelScroll(Mouse.WheelEvent event) {
-					//TODO
-				}
+			}
+			@Override
+			public void onMouseMove(Mouse.MotionEvent event) {
+
+			}
+			@Override
+			public void onMouseUp(Mouse.ButtonEvent event) {
+
+			}
+			@Override
+			public void onMouseWheelScroll(Mouse.WheelEvent event) {
+
+			}
 		});
-	
+
 		/* Building SUPPLY TENT */
 		option6_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.SUPPLY_TENT_COST) {
-										player.setGold(player.getGold()-Const.SUPPLY_TENT_COST);
-										//base.setSupplyTentLevel(base.getSupplyTentLevel() + 1);
-										base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp){
+								if(player.getGold() >= Const.SUPPLY_TENT_COST) {
+									player.setGold(player.getGold()-Const.SUPPLY_TENT_COST);
+									//base.setSupplyTentLevel(base.getSupplyTentLevel() + 1);
+									base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
+								
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 5) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
-					}
+						}
 				}
-				@Override
-				public void onMouseMove(Mouse.MotionEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseUp(Mouse.ButtonEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseWheelScroll(Mouse.WheelEvent event) {
-					//TODO
-				}
+			}
+			@Override
+			public void onMouseMove(Mouse.MotionEvent event) {
+
+			}
+			@Override
+			public void onMouseUp(Mouse.ButtonEvent event) {
+
+			}
+			@Override
+			public void onMouseWheelScroll(Mouse.WheelEvent event) {
+
+			}
 		});
-	
+
 		/* Building DEPLOMATIC TENT */
 		option7_camp.addListener(new Mouse.Listener() {
-				Base base;
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.DEPLOMATIC_TENT_COST) {
-										player.setGold(player.getGold()-Const.DEPLOMATIC_TENT_COST);
-										//base.setDeplomaticTentLevel(base.getDeplomaticTentLevel() + 1);
-										base.buildDeplomaticTent(graphLayer, Const.DEPLOMATIC_TENT_LEVEL1);
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp){
+								if(player.getGold() >= Const.DEPLOMATIC_TENT_COST) {
+									player.setGold(player.getGold()-Const.DEPLOMATIC_TENT_COST);
+									//base.setDeplomaticTentLevel(base.getDeplomaticTentLevel() + 1);
+									base.buildDeplomaticTent(graphLayer, Const.DEPLOMATIC_TENT_LEVEL1);
+								
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 6) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
 									}
 								}
 							}
-					}
+						}
 				}
-				@Override
-				public void onMouseMove(Mouse.MotionEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseUp(Mouse.ButtonEvent event) {
-					//TODO
-				}
-				@Override
-				public void onMouseWheelScroll(Mouse.WheelEvent event) {
-					//TODO
-				}
+			}
+			@Override
+			public void onMouseMove(Mouse.MotionEvent event) {
+
+			}
+			@Override
+			public void onMouseUp(Mouse.ButtonEvent event) {
+
+			}
+			@Override
+			public void onMouseWheelScroll(Mouse.WheelEvent event) {
+
+			}
 		});
 	}
 
@@ -767,25 +969,28 @@ public class Gui
 
 	/**
 	 * Control the layers of the UI construction panel based on the given attributes
+	 * @param node 
 	 */
-	public void showConstructions(boolean isCity, boolean belongsToPlayer) {
+	public void showConstructions(Node node, boolean isCity, boolean belongsToPlayer) {
 		if(belongsToPlayer) {
 			if(isCity) {
 				setCityConstruction(true);
 				setCampConstruction(false);
-				setEmptyConstruction(false);
-			}
-			else
-			{
+			} else {
 				setCityConstruction(false);
 				setCampConstruction(true);
-				setEmptyConstruction(false);
 			}
-		}
-		else {
+		} else {
 			setCityConstruction(false);
 			setCampConstruction(false);
-			setEmptyConstruction(true);
+		}
+		
+		for (ImageLayer option: selectedOptionsList) {
+			option.setVisible(false);
+		}
+		
+		for (ImageLayer option: emptyOptionsList) {
+			option.setVisible(true);
 		}
 	}
 
