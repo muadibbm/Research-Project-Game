@@ -1,4 +1,3 @@
-
 package com.domain.project.core.graph;
 
 import static playn.core.PlayN.graphics;
@@ -26,7 +25,6 @@ public class Army {
 	private ImageLayer armyLayer;
 	private float stoppingDist;
 	private int armyLevel;
-	private boolean hasArrived;
 	private int dx, dy, err, sx, sy;
 	private int speed;
 	private Timer timer;
@@ -39,8 +37,6 @@ public class Army {
 		armyLayer = graphics().createImageLayer(armyImage);
 		armyLayer.setDepth(depth);
 		armyLayer.setAlpha(alpha);
-		
-		hasArrived = false;
 		
 		armyImage.addCallback(new ResourceCallback<Image>() {
 			@Override
@@ -70,7 +66,6 @@ public class Army {
 				if (currentPosition.getDistanceFrom(destination.getPosition()) > stoppingDist) {
 					moveArmy();
 				} else {
-					hasArrived = true;
 					current_base = destination;
 					stop();
 				}

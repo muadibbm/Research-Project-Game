@@ -52,8 +52,6 @@ public class Gui
 	private ImageLayer option4_camp;//
 	private ImageLayer option5_camp;//
 	private ImageLayer option6_camp;//
-	private ImageLayer option7_camp;//
-	private ImageLayer option8_camp;//
 
 	private ImageLayer infoPanel;
 	private ImageLayer populationLayer;
@@ -94,7 +92,7 @@ public class Gui
 		emptyOptionsList.add(option6_empty);
 		emptyOptionsList.add(option7_empty);
 		emptyOptionsList.add(option8_empty);
-		
+
 		option1_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
 		createImage(uiLayer, option1_selected, Const.CONSTRUCTION_PANEL_SELECTED, 0.0f);
 		option2_selected = graphics().createImageLayer(Const.CONSTRUCTION_PANEL_SELECTED);
@@ -121,7 +119,7 @@ public class Gui
 		selectedOptionsList.add(option6_selected);
 		selectedOptionsList.add(option7_selected);
 		selectedOptionsList.add(option8_selected);
-		
+
 		clearSelectedPanels();
 
 		option1_city = graphics().createImageLayer(Const.CONSTRUCTION_PALACE_LEVEL1);
@@ -141,22 +139,18 @@ public class Gui
 		option8_city = graphics().createImageLayer(Const.CONSTRUCTION_WALL_LEVEL1);
 		createImage(uiLayer, option8_city, Const.CONSTRUCTION_WALL_LEVEL1, 2.1f);
 
-		//option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
-		//createImage(uiLayer, option1_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.0f);
-		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
-		createImage(uiLayer, option2_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.3f);
-		option3_camp = graphics().createImageLayer(Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1);
-		createImage(uiLayer, option3_camp, Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1, 0.6f);
-		option4_camp = graphics().createImageLayer(Const.CONSTRUCTION_MAGE_TENT_LEVEL1);
-		createImage(uiLayer, option4_camp, Const.CONSTRUCTION_MAGE_TENT_LEVEL1, 0.9f);
-		option5_camp = graphics().createImageLayer(Const.CONSTRUCTION_HEALER_TENT_LEVEL1);
-		createImage(uiLayer, option5_camp, Const.CONSTRUCTION_HEALER_TENT_LEVEL1, 1.2f);
-		option6_camp = graphics().createImageLayer(Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1);
-		createImage(uiLayer, option6_camp, Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1, 1.5f);
-		option7_camp = graphics().createImageLayer(Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1);
-		createImage(uiLayer, option7_camp, Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1, 1.8f);
-		//option8_camp = graphics().createImageLayer(Const.CONSTRUCTION_MAGE_TENT_LEVEL1);
-		//createImage(uiLayer, option8_camp, Const.CONSTRUCTION_MAGE_TENT_LEVEL1, 2.1f);
+		option1_camp = graphics().createImageLayer(Const.CONSTRUCTION_COMMAND_TENT_LEVEL1);
+		createImage(uiLayer, option1_camp, Const.CONSTRUCTION_COMMAND_TENT_LEVEL1, 0.3f);
+		option2_camp = graphics().createImageLayer(Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1);
+		createImage(uiLayer, option2_camp, Const.CONSTRUCTION_SOLDIER_TENT_LEVEL1, 0.6f);
+		option3_camp = graphics().createImageLayer(Const.CONSTRUCTION_MAGE_TENT_LEVEL1);
+		createImage(uiLayer, option3_camp, Const.CONSTRUCTION_MAGE_TENT_LEVEL1, 0.9f);
+		option4_camp = graphics().createImageLayer(Const.CONSTRUCTION_HEALER_TENT_LEVEL1);
+		createImage(uiLayer, option4_camp, Const.CONSTRUCTION_HEALER_TENT_LEVEL1, 1.2f);
+		option5_camp = graphics().createImageLayer(Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1);
+		createImage(uiLayer, option5_camp, Const.CONSTRUCTION_SUPPLY_TENT_LEVEL1, 1.5f);
+		option6_camp = graphics().createImageLayer(Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1);
+		createImage(uiLayer, option6_camp, Const.CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1, 1.8f);
 
 		infoPanel = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
 		gold = new Digits(uiLayer, Const.GOLD_X, Const.GOLD_Y, Const.GOLD_SCALE, 1.0f);
@@ -222,7 +216,7 @@ public class Gui
 						if(player.getId() == player.getSelectedNode().getPlayer() & player.getSelectedNode().getMapping() == null) {
 							player.setNodeToBeMapped(player.getSelectedNode());
 							//TODO : add some graphical indication
-							
+
 						}
 					}
 				}
@@ -284,7 +278,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.PALACE_COST);
 									//base.setCityLevel(base.getCityLevel() + 1);
 									base.buildPalace(graphLayer, Const.PALACE_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 0) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -328,7 +322,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.BAZAR_FOOD_COST);
 									//TODO : check level
 									base.buildBazarFood(graphLayer, Const.BAZAR_FOOD_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 1) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -372,7 +366,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.BAZAR_CHINA_COST);
 									//TODO : check level
 									base.buildBazarChina(graphLayer, Const.BAZAR_CHINA_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 2) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -416,7 +410,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.BAZAR_CARPET_COST);
 									//TODO : check level
 									base.buildBazarCarpet(graphLayer, Const.BAZAR_CARPET_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 3) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -460,7 +454,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.GARDEN_COST);
 									//TODO : check garden level
 									base.buildGarden(graphLayer, Const.GARDEN_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 4) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -504,7 +498,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.SMITHY_COST);
 									//TODO : check smithy level
 									base.buildSmithy(graphLayer, Const.SMITHY_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 5) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -548,7 +542,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.TOWER_COST);
 									//base.setTowerLevel(base.getTowerLevel() + 1);
 									base.buildTower(graphLayer, Const.TOWER_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 6) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -592,7 +586,7 @@ public class Gui
 									player.setGold(player.getGold()-Const.WALL_COST);
 									//base.setWallLevel(base.getWallLevel() + 1);
 									base.buildWall(graphLayer, Const.WALL_FRONT_LEVEL1, Const.WALL_BACK_LEVEL1, Const.WALL_RIGHT_LEVEL1, Const.WALL_LEFT_LEVEL1);
-									
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 7) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -623,7 +617,7 @@ public class Gui
 		});
 
 		/* Building COMMAND TENT */
-		option2_camp.addListener(new Mouse.Listener() {
+		option1_camp.addListener(new Mouse.Listener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -636,7 +630,50 @@ public class Gui
 									player.setGold(player.getGold()-Const.COMMAND_TENT_COST);
 									//base.setCommandTentLevel(base.getCommandTentLevel() + 1);
 									base.buildCommandTent(graphLayer, Const.COMMAND_TENT_LEVEL1);
-									
+
+									for (int i = 0; i < selectedOptionsList.size(); i++) {
+										if (i == 0) {
+											emptyOptionsList.get(i).setVisible(false);
+											selectedOptionsList.get(i).setVisible(true);
+										} else {
+											emptyOptionsList.get(i).setVisible(true);
+											selectedOptionsList.get(i).setVisible(false);
+										}
+									}
+								}
+							}
+						}
+				}
+			}
+			@Override
+			public void onMouseMove(Mouse.MotionEvent event) {
+
+			}
+			@Override
+			public void onMouseUp(Mouse.ButtonEvent event) {
+
+			}
+			@Override
+			public void onMouseWheelScroll(Mouse.WheelEvent event) {
+
+			}
+		});
+
+		/* Building SOLDIER TENT */
+		option2_camp.addListener(new Mouse.Listener() {
+			Base base;
+			@Override
+			public void onMouseDown(Mouse.ButtonEvent event) {
+				if(event.button() == Mouse.BUTTON_LEFT) {
+					if(player.getSelectedNode() != null)
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							base = player.getSelectedNode().getBase();
+							if(base instanceof Camp) {
+								if(player.getGold() >= Const.SOLDIER_TENT_COST) {
+									player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
+									base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
+									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
+									player.addArmy(new Army(graphLayer, base, Const.ARMY_DEPTH, Const.ARMY_ALPHA, Const.ARMY_LEVEL1, base.getBaseLayer().scaledWidth() / 10));
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 1) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -665,7 +702,7 @@ public class Gui
 			}
 		});
 
-		/* Building SOLDIER TENT */
+		/* Building MAGE TENT */
 		option3_camp.addListener(new Mouse.Listener() {
 			Base base;
 			@Override
@@ -674,12 +711,12 @@ public class Gui
 					if(player.getSelectedNode() != null)
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
-							if(base instanceof Camp) {
-								if(player.getGold() >= Const.SOLDIER_TENT_COST) {
-									player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
-									base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
-									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
-									player.addArmy(new Army(graphLayer, base, Const.ARMY_DEPTH, Const.ARMY_ALPHA, Const.ARMY_LEVEL1, base.getBaseLayer().scaledWidth() / 10));
+							if(base instanceof Camp){
+								if(player.getGold() >= Const.MAGE_TENT_COST) {
+									player.setGold(player.getGold()-Const.MAGE_TENT_COST);
+									//base.setMageTentLevel(base.getMageTentLevel() + 1);
+									base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 2) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -708,7 +745,7 @@ public class Gui
 			}
 		});
 
-		/* Building MAGE TENT */
+		/* Building HEALER TENT */
 		option4_camp.addListener(new Mouse.Listener() {
 			Base base;
 			@Override
@@ -718,11 +755,11 @@ public class Gui
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
 							if(base instanceof Camp){
-								if(player.getGold() >= Const.MAGE_TENT_COST) {
-									player.setGold(player.getGold()-Const.MAGE_TENT_COST);
-									//base.setMageTentLevel(base.getMageTentLevel() + 1);
-									base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
-								
+								if(player.getGold() >= Const.HEALER_TENT_COST) {
+									player.setGold(player.getGold()-Const.HEALER_TENT_COST);
+									//base.setHealerTentLevel(base.getHealerTentLevel() + 1);
+									base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 3) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -751,7 +788,7 @@ public class Gui
 			}
 		});
 
-		/* Building HEALER TENT */
+		/* Building SUPPLY TENT */
 		option5_camp.addListener(new Mouse.Listener() {
 			Base base;
 			@Override
@@ -761,11 +798,11 @@ public class Gui
 						if(player.getId() == player.getSelectedNode().getPlayer()) {
 							base = player.getSelectedNode().getBase();
 							if(base instanceof Camp){
-								if(player.getGold() >= Const.HEALER_TENT_COST) {
-									player.setGold(player.getGold()-Const.HEALER_TENT_COST);
-									//base.setHealerTentLevel(base.getHealerTentLevel() + 1);
-									base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
-								
+								if(player.getGold() >= Const.SUPPLY_TENT_COST) {
+									player.setGold(player.getGold()-Const.SUPPLY_TENT_COST);
+									//base.setSupplyTentLevel(base.getSupplyTentLevel() + 1);
+									base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
 										if (i == 4) {
 											emptyOptionsList.get(i).setVisible(false);
@@ -794,51 +831,8 @@ public class Gui
 			}
 		});
 
-		/* Building SUPPLY TENT */
-		option6_camp.addListener(new Mouse.Listener() {
-			Base base;
-			@Override
-			public void onMouseDown(Mouse.ButtonEvent event) {
-				if(event.button() == Mouse.BUTTON_LEFT) {
-					if(player.getSelectedNode() != null)
-						if(player.getId() == player.getSelectedNode().getPlayer()) {
-							base = player.getSelectedNode().getBase();
-							if(base instanceof Camp){
-								if(player.getGold() >= Const.SUPPLY_TENT_COST) {
-									player.setGold(player.getGold()-Const.SUPPLY_TENT_COST);
-									//base.setSupplyTentLevel(base.getSupplyTentLevel() + 1);
-									base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
-								
-									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 5) {
-											emptyOptionsList.get(i).setVisible(false);
-											selectedOptionsList.get(i).setVisible(true);
-										} else {
-											emptyOptionsList.get(i).setVisible(true);
-											selectedOptionsList.get(i).setVisible(false);
-										}
-									}
-								}
-							}
-						}
-				}
-			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
-			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
-			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
-			}
-		});
-
 		/* Building DEPLOMATIC TENT */
-		option7_camp.addListener(new Mouse.Listener() {
+		option6_camp.addListener(new Mouse.Listener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -851,9 +845,9 @@ public class Gui
 									player.setGold(player.getGold()-Const.DEPLOMATIC_TENT_COST);
 									//base.setDeplomaticTentLevel(base.getDeplomaticTentLevel() + 1);
 									base.buildDeplomaticTent(graphLayer, Const.DEPLOMATIC_TENT_LEVEL1);
-								
+
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 6) {
+										if (i == 5) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
@@ -950,22 +944,18 @@ public class Gui
 	 * @param active - boolean
 	 */
 	public void setCampConstruction(boolean active) {
-		//option1_camp.setVisible(active);
+		option1_camp.setVisible(active);
 		option2_camp.setVisible(active);
 		option3_camp.setVisible(active);
 		option4_camp.setVisible(active);
 		option5_camp.setVisible(active);
 		option6_camp.setVisible(active);
-		option7_camp.setVisible(active);
-		//option8_camp.setVisible(active);
-		//option1_camp.setInteractive(active);
+		option1_camp.setInteractive(active);
 		option2_camp.setInteractive(active);
 		option3_camp.setInteractive(active);
 		option4_camp.setInteractive(active);
 		option5_camp.setInteractive(active);
 		option6_camp.setInteractive(active);
-		option7_camp.setInteractive(active);
-		//option8_camp.setInteractive(active);
 	}
 
 	/**
@@ -973,25 +963,29 @@ public class Gui
 	 * @param node 
 	 */
 	public void showConstructions(Node node, boolean isCity, boolean belongsToPlayer) {
+		for (ImageLayer option: selectedOptionsList) {
+			option.setVisible(false);
+		}
+
+		for (ImageLayer option: emptyOptionsList) {
+			option.setVisible(true);
+		}
+
 		if(belongsToPlayer) {
 			if(isCity) {
+				// City
 				setCityConstruction(true);
 				setCampConstruction(false);
 			} else {
+				// Camp
 				setCityConstruction(false);
 				setCampConstruction(true);
+				emptyOptionsList.get(0).setVisible(false);
+				emptyOptionsList.get(emptyOptionsList.size() - 1).setVisible(false);
 			}
 		} else {
 			setCityConstruction(false);
 			setCampConstruction(false);
-		}
-		
-		for (ImageLayer option: selectedOptionsList) {
-			option.setVisible(false);
-		}
-		
-		for (ImageLayer option: emptyOptionsList) {
-			option.setVisible(true);
 		}
 	}
 

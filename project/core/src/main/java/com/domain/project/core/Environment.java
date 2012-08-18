@@ -1,13 +1,12 @@
 package com.domain.project.core;
 
-import static playn.core.PlayN.*;
+import static playn.core.PlayN.graphics;
 
 import com.domain.project.core.enums.Zoom;
 
 import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
-
 import tripleplay.anim.Animator;
 
 /**
