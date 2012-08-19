@@ -110,62 +110,6 @@ public class Caravan {
 			err += dx;
 			newPosition.setY(newPosition.getY() + sy);
 		}
-
-		/*Tuple2f upperLeftCorner = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY() - 1);
-		Tuple2f top = new Tuple2f(currentPosition.getX(), currentPosition.getY() - 1);
-		Tuple2f upperRightCorner = new Tuple2f(currentPosition.getX() + 1, currentPosition.getY() - 1);
-		Tuple2f left = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY());
-		Tuple2f right = new Tuple2f(currentPosition.getX() + 1, currentPosition.getY());
-		Tuple2f lowerLeftCorner = new Tuple2f(currentPosition.getX() - 1, currentPosition.getY() + 1);
-		Tuple2f bottom = new Tuple2f(currentPosition.getX(), currentPosition.getY() + 1);
-		Tuple2f lowerRightCorner = new Tuple2f(currentPosition.getX(), currentPosition.getY());
-
-		float[] distances = new float[8];
-		distances[0] = upperLeftCorner.getDistanceFrom(finalPosition);
-		distances[1] = top.getDistanceFrom(finalPosition);
-		distances[2] = upperRightCorner.getDistanceFrom(finalPosition);
-		distances[3] = left.getDistanceFrom(finalPosition);
-		distances[4] = right.getDistanceFrom(finalPosition);
-		distances[5] = lowerLeftCorner.getDistanceFrom(finalPosition);
-		distances[6] = bottom.getDistanceFrom(finalPosition);
-		distances[7] = lowerRightCorner.getDistanceFrom(finalPosition);
-
-		float minDistance = Float.POSITIVE_INFINITY;
-		int counter = 0;
-
-		for (int i = 0; i < distances.length; i++) {
-			if (distances[i] < minDistance) {
-				minDistance = distances[i];
-				counter = i;
-			}
-		}
-
-		switch (counter) {
-		case 0:
-			currentPosition = upperLeftCorner;
-			break;
-		case 1:
-			currentPosition = top;
-			break;
-		case 2:
-			currentPosition = upperRightCorner;
-			break;
-		case 3:
-			currentPosition = left;
-			break;
-		case 4:
-			currentPosition = right;
-			break;
-		case 5:
-			currentPosition = lowerLeftCorner;
-			break;
-		case 6:
-			currentPosition = bottom;
-			break;
-		case 7:
-			currentPosition = lowerRightCorner;
-			break;
-		}*/
 		
 		currentPosition = newPosition;
 	}

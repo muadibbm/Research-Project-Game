@@ -43,9 +43,6 @@ public class City extends Base
 	private ImageLayer wall_left;
 	private int wall_level;
 
-	//	private ImageLayer smithy;
-	//	private int smithy_level;
-	//	private Tuple2f coordinates;
 	private boolean hasBazaar;
 	private boolean hasCaravan;
 	private int id;
