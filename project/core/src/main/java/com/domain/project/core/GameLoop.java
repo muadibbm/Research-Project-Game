@@ -47,6 +47,8 @@ public class GameLoop implements Game {
 
 	private java.util.Random r = new java.util.Random();
 	private List <Tree> trees;
+	private boolean isTreeUpdated = false;
+	private boolean isTreePainted = false;
 
 	/**
 	 * Initializes all the game variables before starting the game.
@@ -79,9 +81,7 @@ public class GameLoop implements Game {
 		cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
 
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
-		plantTrees();
-		paintTrees();//performance ?
-
+		
 		//create and set controls
 		kbControls = new KeyboardControls(environment);
 		keyboard().setListener(kbControls);
@@ -111,7 +111,10 @@ public class GameLoop implements Game {
 		cityGraphB.paintAll();
 		campGraphA.paintAll();
 		campGraphB.paintAll();
-		//paintTrees(); <-- for html it has to be here
+		if(isTreeUpdated & !isTreePainted) {
+			paintTrees();// <-- for html it has to be here
+			isTreePainted = true;
+		}
 		gui1.setGold(player1.getGold());
 	}
 
@@ -147,6 +150,10 @@ public class GameLoop implements Game {
 				caravan.swapDestination();
 			}
 		}
+		if(!isTreeUpdated & cityGraphA.isAllPlaced() & cityGraphB.isAllPlaced() & campGraphA.isAllPlaced() & campGraphB.isAllPlaced()) {
+			plantTrees();
+			isTreeUpdated = true;
+		}
 	}
 
 	/**
@@ -177,10 +184,14 @@ public class GameLoop implements Game {
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
 						/* Hide previous selections */
+						HideAllNodes();
 						HideAllEdges();
 						HideAllMappings();
-						/* Select New Node */
+						/* Select New Node and set ne neigbors visible */
 						player.selectNode(node);
+						node.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
+						for(Node neigbor : node.getNeighbors())
+							neigbor.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
 						/* Set all edges of the selected node visible */
 						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
 							if(node.equals(graph.getNode1(edge.getValue())))
@@ -308,6 +319,24 @@ public class GameLoop implements Game {
 	private void HideEdges(Graph graph) {
 		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
 			edge.getValue().getRoad().setVisible(false);
+	}
+	
+	/**
+	 * sets all the nodes invisible
+	 */
+	private void HideAllNodes() {
+		HideNodes(cityGraphA);
+		HideNodes(campGraphA);
+		HideNodes(campGraphB);
+		HideNodes(cityGraphB);
+	}
+
+	/**
+	 * sets the edges of the given nodes invisible
+	 */
+	private void HideNodes(Graph graph) {
+		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet())
+			node.getValue().getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
 	}
 
 	/**

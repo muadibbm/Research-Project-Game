@@ -16,8 +16,8 @@ public final class Const
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 3000;
-    public static int WORLD_HEIGHT = 1800;
+    public static int WORLD_WIDTH = 10*3000/9;
+    public static int WORLD_HEIGHT = 10*1800/9;
 
 	public static int FRAME_SIZE = 60;//Adjust this only
     public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
@@ -27,12 +27,13 @@ public final class Const
 
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
-	public static int STARTING_GOLD = 300;
+	public static int STARTING_GOLD = 500;
 	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
 	public static float BASE_DEPTH = 3.0f;
-	public static float BASE_ALPHA = 0.93f;
+	public static float BASE_ALPHA = 0.45f;
+	public static float SELECTED_BASE_ALPHA = 1.0f;
 
     public static float MIN_CITY_DISTANCE = 150;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
@@ -58,7 +59,7 @@ public final class Const
 	public static float GARDEN_Y = -5.0f;
 	public static float CARAVAN_DEPTH = 4.0f;
 	public static float CARAVAN_ALPHA = 0.93f;
-	public static float CARAVAN_SCALE = 0.05f;
+	public static float CARAVAN_SCALE = 0.023f;
 	public static int CARAVAN_TRADING_TIME = 5000; // in milliseconds
 	public static int CARAVAN_SPEED = 100;
 	public static float GARDEN_DEPTH = 3.3f;
@@ -110,34 +111,35 @@ public final class Const
 	public static int TOWER_COST = 60;
 	public static int WALL_COST = 50;
 	
-    public static float MIN_CAMP_DISTANCE = 100;
+    public static float MIN_CAMP_DISTANCE = 60;
+	public static float CAMP_SCALE = 1.3f;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
 	public static float SOLDIER_TENT_X = 23.0f;
 	public static float SOLDIER_TENT_Y = 3.2f;
 	public static float SOLDIER_TENT_DEPTH = 3.3f;
-	public static float SOLDIER_TENT_SCALE = 0.066f;
+	public static float SOLDIER_TENT_SCALE = 0.066f*CAMP_SCALE;
 	public static float COMMAND_TENT_X = 0.0f;
 	public static float COMMAND_TENT_Y = 0.0f;
 	public static float COMMAND_TENT_DEPTH = 3.3f;
-	public static float COMMAND_TENT_SCALE = 0.075f;
+	public static float COMMAND_TENT_SCALE = 0.075f*CAMP_SCALE;
 	public static float MAGE_TENT_X = 0.0f;
 	public static float MAGE_TENT_Y = -10.0f;
 	public static float MAGE_TENT_DEPTH = 3.1f;
-	public static float MAGE_TENT_SCALE = 0.043f;
+	public static float MAGE_TENT_SCALE = 0.043f*CAMP_SCALE;
 	public static float HEALER_TENT_X = -17.9f;
 	public static float HEALER_TENT_Y = 0.9f;
 	public static float HEALER_TENT_DEPTH = 3.3f;
-	public static float HEALER_TENT_SCALE = 0.066f;
+	public static float HEALER_TENT_SCALE = 0.066f*CAMP_SCALE;
 	public static float SUPPLY_TENT_X = 0.0f;
 	public static float SUPPLY_TENT_Y = 23.0f;
 	public static float SUPPLY_TENT_DEPTH = 3.5f;
-	public static float SUPPLY_TENT_SCALE = 0.067f;
+	public static float SUPPLY_TENT_SCALE = 0.067f*CAMP_SCALE;
 	public static float DEPLOMATIC_TENT_X = 0.0f;
 	public static float DEPLOMATIC_TENT_Y = 10.0f;
 	public static float DEPLOMATIC_TENT_DEPTH = 3.4f;
-	public static float DEPLOMATIC_TENT_SCALE = 0.068f;
+	public static float DEPLOMATIC_TENT_SCALE = 0.068f*CAMP_SCALE;
 	
 	public static int COMMAND_TENT_COST = 90;
 	public static int SOLDIER_TENT_COST = 60;
@@ -148,7 +150,7 @@ public final class Const
 
 	public static float AMRY_INITIAL_POS_X = 40.0f;
 	public static float AMRY_INITIAL_POS_Y = 10.0f;
-	public static float ARMY_SCALE = 0.2f;
+	public static float ARMY_SCALE = 0.17f;
 	public static float ARMY_ALPHA = 1.0f;
 	public static float ARMY_DEPTH = 5.0f;
 	public static int ARMY_SPEED = 100;

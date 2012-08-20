@@ -16,6 +16,9 @@ import com.domain.project.core.enums.EdgeType;
 import com.domain.project.core.enums.Isomer;
 import com.domain.project.core.enums.Nucleotide;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+
 import playn.core.GroupLayer;
 import playn.core.ResourceCallback;
 
@@ -37,6 +40,7 @@ public class Graph {
 	private ArrayList<Caravan> caravanList;
 	private boolean isCityGraph;
 	private int id;
+	private boolean allPlaced = false;
 
 	/**
 	 * Constructs a graph instance 
@@ -372,6 +376,11 @@ public class Graph {
 				node.getMapping().setScore(node.getMapping().getScore());
 			}
 		}
+		allPlaced = true;
+	}
+	
+	public boolean isAllPlaced() {
+		return allPlaced;
 	}
 
 	private void setNodeLevels() {
