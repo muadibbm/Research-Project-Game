@@ -19,6 +19,8 @@ public class Base
 	//private ImageLayer infoLayer;
 	private Tuple2f position;
 	private ImageLayer baseLayer;
+	private ImageLayer selectionLayer1;
+	private ImageLayer selectionLayer2;
 
 	/**
 	 * Constructor of the Base
@@ -30,12 +32,16 @@ public class Base
 		this.population = 0;
 
 		baseLayer = graphics().createImageLayer(baseImage);
-
 		baseLayer.setDepth(Const.BASE_DEPTH);
 		baseLayer.setAlpha(Const.BASE_ALPHA);
 
-		//infoLayer = graphics().createImageLayer(Const.INFO_PANEL_IMAGE);
-		//infoLayer.setDepth(Const.UI_DEPTH);
+		selectionLayer1 = graphics().createImageLayer(Const.CITY_BASE_SELECTED_IMAGE1);
+		selectionLayer1.setDepth(Const.BASE_DEPTH);
+		selectionLayer1.setAlpha(Const.SELECTION_ALPHA);
+
+		selectionLayer2 = graphics().createImageLayer(Const.CITY_BASE_SELECTED_IMAGE2);
+		selectionLayer2.setDepth(Const.BASE_DEPTH);
+		selectionLayer2.setAlpha(Const.SELECTION_ALPHA);
 
 		baseImage.addCallback(new ResourceCallback<Image>() {
 			@Override
@@ -50,21 +56,35 @@ public class Base
 			}
 		});
 
-		/*
-		Const.INFO_PANEL_IMAGE.addCallback(new ResourceCallback<Image>() {
-            @Override
-            public void done(Image image) {
-                infoLayer.setOrigin(image.width()/2, image.height()/2);
-				infoLayer.setScale(Const.INFO_PANEL_SCALE, Const.INFO_PANEL_SCALE);
-                graphLayer.add(infoLayer);
-            }
+		Const.CITY_BASE_SELECTED_IMAGE1.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				selectionLayer1.setOrigin(image.width() / 2, image.height() / 2);
+				selectionLayer1.setScale(Const.CITY_SELECTION_SCALE1);
+				graphLayer.add(selectionLayer1);
+			}
 
-            @Override
-            public void error(Throwable e) {
-                log().error("error loading node", e);
-            }
-        });
-		 */
+			@Override
+			public void error(Throwable e) {
+				log().error("Error loading node", e);
+			}
+		});
+
+		Const.CITY_BASE_SELECTED_IMAGE2.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				selectionLayer2.setOrigin(image.width() / 2, image.height() / 2);
+				selectionLayer2.setScale(Const.CITY_SELECTION_SCALE2);
+				graphLayer.add(selectionLayer2);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("Error loading node", e);
+			}
+		});
+
+		setSelection(false);
 	}
 
 	/**
@@ -82,6 +102,24 @@ public class Base
 		return population;
 	}
 
+	/** Toggle the selection around a city or a camp.
+	 * @param action
+	 * @author Andrey
+	 */
+	public void setSelection(boolean action) {
+		selectionLayer1.setVisible(action);
+		selectionLayer2.setVisible(action);
+	}
+
+	/** Position the selection around a city.
+	 * @param position
+	 * @author Andrey
+	 */
+	public void positionSelection(Tuple2f position) {
+		selectionLayer1.setTranslation(position.getX(), position.getY());
+		selectionLayer2.setTranslation(position.getX(), position.getY());
+	}
+
 	/**
 	 * paints the base at the given coordinates
 	 * @param x - float x coordinate
@@ -94,8 +132,6 @@ public class Base
 			baseLayer.setScale(Const.BASE_CAMP_SCALE, Const.BASE_CAMP_SCALE);			
 		}
 		baseLayer.setTranslation(x, y);
-
-		//infoLayer.setTranslation(x + Const.INFO_PANEL_X, y + Const.INFO_PANEL_Y);
 	}
 
 	/**

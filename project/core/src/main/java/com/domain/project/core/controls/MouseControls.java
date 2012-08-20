@@ -95,6 +95,7 @@ public class MouseControls implements Mouse.Listener {
                 zoomIn(env.getMainLayer(), Zoom.DEFAULT.getScale());
             }
         }
+        
         if(event.velocity() < 0) {
             if(env.zLevel() == Zoom.DEFAULT) {
                 env.setZoomLevel(Zoom.OUT);
@@ -131,7 +132,7 @@ public class MouseControls implements Mouse.Listener {
 
             float scaledWidth = (Const.WORLD_END_WIDTH - Const.FRAME_SIZE) * scale;
             float scaledHeight = (Const.WORLD_END_HEIGHT - Const.FRAME_SIZE) * scale;
-            float newOffsetX = ((Const.WINDOW_WIDTH - scaledWidth ) / 2.0f) + (env.getX() * scale);
+            float newOffsetX = ((Const.WINDOW_WIDTH - scaledWidth) / 2.0f) + (env.getX() * scale);
             float newOffsetY = ((Const.WINDOW_HEIGHT - scaledHeight) / 2.0f) + (env.getY() * scale);
 
             env.animator.tweenScale(layer).in(zoomSpeed).easeInOut().to(scale);

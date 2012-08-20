@@ -7,7 +7,7 @@ import playn.core.Image;
 public final class Const 
 {
 	//graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
-    //TODO : Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
+    //Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
 		
     public static final int UPDATE_RATE = 25;
 
@@ -31,8 +31,12 @@ public final class Const
 	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
+	public static float CITY_SELECTION_SCALE1 = 0.35f;
+	public static float CITY_SELECTION_SCALE2 = 0.36f;
+	public static float CAMP_SELECTION_SCALE = 0.14f;
 	public static float BASE_DEPTH = 3.0f;
 	public static float BASE_ALPHA = 0.45f;
+	public static float SELECTION_ALPHA = 0.75f;
 	public static float SELECTED_BASE_ALPHA = 1.0f;
 
     public static float MIN_CITY_DISTANCE = 150;
@@ -62,6 +66,7 @@ public final class Const
 	public static float CARAVAN_SCALE = 0.023f;
 	public static int CARAVAN_TRADING_TIME = 5000; // in milliseconds
 	public static int CARAVAN_SPEED = 100;
+	public static int BASE_SELECTION_SPEED = 1000;
 	public static float GARDEN_DEPTH = 3.3f;
 	public static float GARDEN_SCALE = 0.029f;
 	public static float SMITHY_X = 21.0f;
@@ -112,7 +117,7 @@ public final class Const
 	public static int WALL_COST = 50;
 	
     public static float MIN_CAMP_DISTANCE = 60;
-	public static float CAMP_SCALE = 1.3f;
+	public static float CAMP_SCALE = 1.0f;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
@@ -193,6 +198,8 @@ public final class Const
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;
 	public static Image CITY_BASE_IMAGE;
+	public static Image CITY_BASE_SELECTED_IMAGE1;
+	public static Image CITY_BASE_SELECTED_IMAGE2;
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
     public static Image CARAVAN_IMAGE;
@@ -228,10 +235,6 @@ public final class Const
 	public static Image N9_IMAGE;
 	public static Image TREE1_IMAGE;
 	public static Image TREE1_SHADOW_IMAGE;
-	//public static Image TREE2_IMAGE;
-	//public static Image TREE3_IMAGE;
-	//public static Image TREE4_IMAGE;
-	//public static Image TREE5_IMAGE;
 	public static Image PALACE_LEVEL1;
 	public static Image TOWER_LEVEL1;
 	public static Image BAZAR_FOOD_LEVEL1;
@@ -264,11 +267,12 @@ public final class Const
     }
 
     public static void loadImages() {
-//		FRAME_IMAGE = assets().getImage("images/Background/texture_sky1.png");
 		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
         CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
+        CITY_BASE_SELECTED_IMAGE1 = assets().getImage("images/City/buildingSelection1.png");
+        CITY_BASE_SELECTED_IMAGE2 = assets().getImage("images/City/buildingSelection2.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
         CARAVAN_IMAGE = assets().getImage("images/Caravan/Caravan.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
@@ -303,10 +307,6 @@ public final class Const
 		N9_IMAGE = assets().getImage("images/UI/9.png");
 		TREE1_IMAGE = assets().getImage("images/Background/texture_trees1.png");
 		TREE1_SHADOW_IMAGE = assets().getImage("images/Background/texture_trees1_shadow.png");
-		//TREE2_IMAGE = assets().getImage("images/Background/texture_trees2.png");
-		//TREE3_IMAGE = assets().getImage("images/Background/texture_trees3.png");
-		//TREE4_IMAGE = assets().getImage("images/Background/texture_trees4.png");
-		//TREE5_IMAGE = assets().getImage("images/Background/texture_trees5.png");
 		PALACE_LEVEL1 = assets().getImage("images/City/Palace_level1.png");
 		TOWER_LEVEL1 = assets().getImage("images/City/Tower_level1.png");
 		BAZAR_FOOD_LEVEL1 = assets().getImage("images/City/Food_Bazar_Level1.png");

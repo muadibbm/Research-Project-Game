@@ -6,6 +6,7 @@ import static playn.core.PlayN.mouse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.domain.project.core.controls.KeyboardControls;
 import com.domain.project.core.controls.MouseControls;
@@ -45,7 +46,7 @@ public class GameLoop implements Game {
 	private Player player2;
 	//	private Gui gui2;
 
-	private java.util.Random r = new java.util.Random();
+	private Random r = new Random();
 	private List <Tree> trees;
 	private boolean isTreeUpdated = false;
 	private boolean isTreePainted = false;
@@ -59,7 +60,7 @@ public class GameLoop implements Game {
 
 		Const.loadImages();
 		environment = new Environment();
-		trees = new ArrayList <Tree> ();
+		trees = new ArrayList<Tree> ();
 
 		player1 = new Player(1, "player 1");
 		gui1 = new Gui(environment.getUILayer());
@@ -135,7 +136,7 @@ public class GameLoop implements Game {
 		for (Caravan caravan: cityGraphA.getCaravanList()) {
 			if (caravan.hasArrived()) {
 				caravan.setHasArrived(false);
-				
+
 				switch (caravan.getCaravanLevel()) {
 				case 1:
 					player1.setGold(player1.getGold() + 10);
@@ -177,9 +178,9 @@ public class GameLoop implements Game {
 	 * @param gui - the user interface corresponding to the player
 	 */
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
-		for(Map.Entry<Integer, Node> entry : graph.getNodes().entrySet()) {
+		for(Map.Entry<Integer, Node> entry: graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
-			entry.getValue().getBase().getBaseLayer().addListener(new Mouse.Listener() {
+			node.getBase().getBaseLayer().addListener(new Mouse.Listener() {
 				@Override
 				public void onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
@@ -193,9 +194,14 @@ public class GameLoop implements Game {
 						for(Node neigbor : node.getNeighbors())
 							neigbor.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
 						/* Set all edges of the selected node visible */
-						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
-							if(node.equals(graph.getNode1(edge.getValue())))
+						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
+							if(node.equals(graph.getNode1(edge.getValue()))) {
 								edge.getValue().getRoad().setVisible(true);
+								node.getBase().positionSelection(node.getPos());
+								node.getBase().setSelection(true);
+							}
+						}
+						
 						if(node.getPlayer() == player.getId()) {
 							/* Create Mapping if a Node is already set to be mapped */
 							if(player.getNodeToBeMapped() != null) {
@@ -256,16 +262,16 @@ public class GameLoop implements Game {
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
-						case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-						case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-						case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-						case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-						case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-						case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-						case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-						case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-						case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-						default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+							case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
 						}
 					}
 				}
@@ -317,8 +323,9 @@ public class GameLoop implements Game {
 	 * sets the edges of the given graph invisible
 	 */
 	private void HideEdges(Graph graph) {
-		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet())
+		for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
 			edge.getValue().getRoad().setVisible(false);
+		}
 	}
 	
 	/**
@@ -353,10 +360,12 @@ public class GameLoop implements Game {
 	 * sets the mappings of the nodes in the given graph invisible
 	 */
 	private void HideMappings(Graph graph) {
-		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet())
+		for(Map.Entry<Integer, Node> node : graph.getNodes().entrySet()) {
 			if(node.getValue().getMapping() != null) {
 				node.getValue().getMapping().setVisible(false);
 			}
+			node.getValue().getBase().setSelection(false);
+		}
 	}
 
 	/**

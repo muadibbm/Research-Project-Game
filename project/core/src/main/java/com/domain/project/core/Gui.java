@@ -632,12 +632,16 @@ public class Gui
 									base.buildCommandTent(graphLayer, Const.COMMAND_TENT_LEVEL1);
 
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 0) {
+										if (i == 1) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -675,12 +679,16 @@ public class Gui
 									base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
 									player.addArmy(new Army(graphLayer, base, Const.ARMY_DEPTH, Const.ARMY_ALPHA, Const.ARMY_LEVEL1, base.getBaseLayer().scaledWidth() / 10));
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 1) {
+										if (i == 2) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -718,12 +726,16 @@ public class Gui
 									base.buildMageTent(graphLayer, Const.MAGE_TENT_LEVEL1);
 
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 2) {
+										if (i == 3) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -761,12 +773,16 @@ public class Gui
 									base.buildHealerTent(graphLayer, Const.HEALER_TENT_LEVEL1);
 
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 3) {
+										if (i == 4) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -804,12 +820,16 @@ public class Gui
 									base.buildSupplyTent(graphLayer, Const.SUPPLY_TENT_LEVEL1);
 
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 4) {
+										if (i == 5) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -847,12 +867,16 @@ public class Gui
 									base.buildDeplomaticTent(graphLayer, Const.DEPLOMATIC_TENT_LEVEL1);
 
 									for (int i = 0; i < selectedOptionsList.size(); i++) {
-										if (i == 5) {
+										if (i == 6) {
 											emptyOptionsList.get(i).setVisible(false);
 											selectedOptionsList.get(i).setVisible(true);
 										} else {
 											emptyOptionsList.get(i).setVisible(true);
 											selectedOptionsList.get(i).setVisible(false);
+											
+											if (i == 0 || i == (emptyOptionsList.size() - 1)) {
+												emptyOptionsList.get(i).setVisible(false);
+											}
 										}
 									}
 								}
@@ -901,20 +925,20 @@ public class Gui
 		gold.setDigits(amount);
 	}
 
-	/**
-	 * Activates the empty Construction panel
-	 * @param active - boolean
-	 */
-	public void setEmptyConstruction(boolean active) {
-		option1_empty.setVisible(active);
-		option2_empty.setVisible(active);
-		option3_empty.setVisible(active);
-		option4_empty.setVisible(active);
-		option5_empty.setVisible(active);
-		option6_empty.setVisible(active);
-		option7_empty.setVisible(active);
-		option8_empty.setVisible(active);
-	}
+	//	/**
+	//	 * Activates the empty Construction panel
+	//	 * @param active - boolean
+	//	 */
+	//	public void setEmptyConstruction(boolean active) {
+	//		option1_empty.setVisible(active);
+	//		option2_empty.setVisible(active);
+	//		option3_empty.setVisible(active);
+	//		option4_empty.setVisible(active);
+	//		option5_empty.setVisible(active);
+	//		option6_empty.setVisible(active);
+	//		option7_empty.setVisible(active);
+	//		option8_empty.setVisible(active);
+	//	}
 
 	/**
 	 * Activates the city Construction panel
@@ -969,6 +993,12 @@ public class Gui
 
 		for (ImageLayer option: emptyOptionsList) {
 			option.setVisible(true);
+			
+			if (!isCity) {
+				if (emptyOptionsList.indexOf(option) == 0 || emptyOptionsList.indexOf(option) == (emptyOptionsList.size() - 1)) {
+					option.setVisible(false);
+				}
+			}
 		}
 
 		if(belongsToPlayer) {
@@ -980,8 +1010,6 @@ public class Gui
 				// Camp
 				setCityConstruction(false);
 				setCampConstruction(true);
-				emptyOptionsList.get(0).setVisible(false);
-				emptyOptionsList.get(emptyOptionsList.size() - 1).setVisible(false);
 			}
 		} else {
 			setCityConstruction(false);
