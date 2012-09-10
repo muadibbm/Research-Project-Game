@@ -142,12 +142,8 @@ public class Environment
         return uiLayer;
     }
 
-//    public void update(float x, float y) {
-//        mainLayer.setOrigin(x, y);
-//    }
     public void update(float delta) {
         elapsed += delta;
-//        mainLayer.setOrigin(xOffset, yOffset);
     }
 
 	/**
@@ -189,7 +185,7 @@ public class Environment
     }
   
     /**
-	* Sets the zoom level the the given level
+	* Sets the zoom level to the given level
 	* @param zlevel - zoom level of type Zoom
 	*/
     public void setZoomLevel(Zoom zLevel) {
