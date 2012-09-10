@@ -76,6 +76,22 @@ public class Graph {
 		placeEdges();		
 	}
 
+	public float getWidth() {
+		return width;
+	}
+	
+	public float getHeight() {
+		return height;
+	}
+	
+	public float getX() {
+		return xOffset;
+	}
+	
+	public float getY() {
+		return yOffset;
+	}
+	
 	/**
 	 * @return the graph id
 	 */

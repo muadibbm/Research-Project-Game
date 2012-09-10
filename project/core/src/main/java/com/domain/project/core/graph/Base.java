@@ -173,13 +173,14 @@ public class Base
 	public void setTowerLevel(int level){};
 	public int getWallLevel(){return 0;};
 	public void setWallLevel(int level){};
-	//CAMP METHODS
+	//TOWER METHODS
+	public void buildCommandTent(GroupLayer graphLayer, Image image){};
+	public int getLevel(){return 0;};
+	public void setLevel(int level){};
+	/*
 	public void buildSoldierTent(GroupLayer graphLayer, Image image){};
 	public int getSoldierTentLevel(){return 0;};
 	public void setSoldierTentLevel(int level){};
-	public void buildCommandTent(GroupLayer graphLayer, Image image){};
-	public int getCommandTentLevel(){return 0;};
-	public void setCommandTentLevel(int level){};
 	public void buildMageTent(GroupLayer graphLayer, Image image){};
 	public int getMageTentLevel(){return 0;};
 	public void setMageTentLevel(int level){};
@@ -191,5 +192,5 @@ public class Base
 	public void setSupplyTentLevel(int level){};
 	public void buildDeplomaticTent(GroupLayer graphLayer, Image image){};
 	public int getDeplomaticTentLevel(){return 0;};
-	public void setDeplomaticTentLevel(int level){};
+	public void setDeplomaticTentLevel(int level){};*/
 }

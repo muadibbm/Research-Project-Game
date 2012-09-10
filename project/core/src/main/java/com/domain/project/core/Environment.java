@@ -22,6 +22,9 @@ public class Environment
 {
     final private GroupLayer mainLayer;
     final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
+	final private ImageLayer bgPathLayer;
+	final private ImageLayer deeveCave;
+	final private ImageLayer treeOfLife;
     final private ImageLayer bgLayer;
     final private ImageLayer frameLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
@@ -44,7 +47,21 @@ public class Environment
         bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);
+		
+		bgPathLayer = graphics().createImageLayer(Const.BACKGROUND_PATH_IMAGE);
+		//bgPathLayer.setTranslation(2*Const.WORLD_WIDTH/5+Const.WORLD_WIDTH/80, 0);
+        //bgPathLayer.setSize(2*Const.WORLD_WIDTH/10, Const.WORLD_HEIGHT);
+        //bgPathLayer.setRepeatX(true);
+        //bgPathLayer.setRepeatY(true);
         
+		deeveCave = graphics().createImageLayer(Const.DEEVE_CAVE);
+		deeveCave.setTranslation(Const.DEEVE_CAVE_X, Const.DEEVE_CAVE_Y);
+        deeveCave.setSize(Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+		
+		treeOfLife = graphics().createImageLayer(Const.TREE_OF_LIFE);
+		treeOfLife.setTranslation(Const.TREE_OF_LIFE_X, Const.TREE_OF_LIFE_Y);
+        treeOfLife.setSize(Const.TREE_OF_LIFE_SCALE, Const.TREE_OF_LIFE_SCALE);
+		
         frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
         frameLayer.setTranslation(Const.WORLD_ORIGIN_X*2, Const.WORLD_ORIGIN_Y*2);
         frameLayer.setSize(Const.WORLD_END_WIDTH*2 - Const.WORLD_ORIGIN_X, Const.WORLD_END_HEIGHT*2 - Const.WORLD_ORIGIN_Y);
@@ -58,6 +75,8 @@ public class Environment
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
         graphLayer.add(bgLayer);
+		graphLayer.add(deeveCave);
+		graphLayer.add(treeOfLife);
         mainLayer.add(graphLayer);
         mainLayer.add(frameLayer);
 		//mainLayer.add(uiLayer);
@@ -66,6 +85,8 @@ public class Environment
 
         frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
+		deeveCave.setDepth(Const.BACKGROUND_DEPTH+1.6f);
+		treeOfLife.setDepth(Const.BACKGROUND_DEPTH+4.0f);
         graphLayer.setDepth(Const.GRAPH_DEPTH);
 		uiLayer.setDepth(Const.UI_DEPTH);
         
@@ -83,6 +104,22 @@ public class Environment
         return bgLayer.image();
     }
 
+	/**
+	* @return the cave layer of ImageLayer type
+	*/
+    public ImageLayer getDeeveCaveLayer()
+    {
+        return deeveCave;
+    }
+	
+	/**
+	* @return the tree of life layer of ImageLayer type
+	*/
+    public ImageLayer getTreeOfLifeLayer()
+    {
+        return treeOfLife;
+    }
+	
 	/**
 	* @return the graph layer of GroupLayer type
 	*/

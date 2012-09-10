@@ -1,7 +1,6 @@
 package com.domain.project.core;
 
 import com.domain.project.core.graph.Node;
-import com.domain.project.core.graph.Army;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ public class Player
 	private Node selected_node;
 	private Node nodeToBeMapped;
 	
-	private List <Army> armies;
-	
 	/**
 	* Constructor of the Player
 	* @param player_id - the unique integer associated with this player
@@ -30,20 +27,6 @@ public class Player
 		gold = Const.STARTING_GOLD;
 		selected_node = null;
 		nodeToBeMapped = null;
-		armies = new ArrayList <Army> ();
-	}
-	
-	//public Army getArmy(Army army) {
-	//	return armies.get(army);
-	//}
-	
-	public void removeArmy(Army army) {
-		armies.remove(army);
-	}
-	
-	public void addArmy(Army army) {
-		armies.add(army);
-		//addArmyListener(army);
 	}
 	
 	/**
@@ -104,38 +87,4 @@ public class Player
 	public Node getNodeToBeMapped() {
 		return nodeToBeMapped;
 	}
-	/*
-	private void addArmyListener() {
-		armyLayer.addListener(new Mouse.Listener() {
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
-					if(event.button() == Mouse.BUTTON_LEFT) {
-						if(player.getSelectedNode() != null)
-							if(player.getId() == player.getSelectedNode().getPlayer()) {
-								base = player.getSelectedNode().getBase();
-								if(base instanceof Camp){
-									if(player.getGold() >= Const.SOLDIER_TENT_COST) {
-										player.setGold(player.getGold()-Const.SOLDIER_TENT_COST);
-										base.setSoldierTentLevel(base.getSoldierTentLevel() + 1);
-										base.buildSoldierTent(graphLayer, Const.SOLDIER_TENT_LEVEL1);
-										player.addArmy(new Army(graphLayer, base, Const.ARMY_DEPTH, Const.ARMY_ALPHA, Const.ARMY_LEVEL1, base.getBaseLayer().scaledWidth() / 10));
-									}
-								}
-							}
-						}
-				}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-				//TODO
-			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-				//TODO
-			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-				//TODO
-			}
-		});
-	}*/
 }

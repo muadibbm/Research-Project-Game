@@ -67,18 +67,16 @@ public class GameLoop implements Game {
 		player2 = new Player(2, "player 2");
 		//TODO : gui2 = new Gui(environment.getUILayer());
 
-		float graphXOffset = 90;
-		float graphYOffset = 30;
 		//TODO : read two graphs from database and put into these 4 graph instances
 
-		cityGraphA = new Graph(true, graphXOffset/3, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
+		cityGraphA = new Graph(true, Const.graphXOffset/3, Const.graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
 		cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
-		campGraphA = new Graph(false, Const.WORLD_WIDTH/4 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 2);
+		campGraphA = new Graph(false, Const.WORLD_WIDTH/5 + 3*Const.graphXOffset/2, 5*Const.graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT-5*Const.graphYOffset, 2);
 		campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
 
-		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + graphXOffset/2, graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT, 3);
+		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + 3*Const.graphXOffset, 5*Const.graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT-5*Const.graphYOffset, 3);
 		campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
-		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - graphXOffset, graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
+		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - Const.graphXOffset, Const.graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
 		cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
 
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
@@ -152,7 +150,14 @@ public class GameLoop implements Game {
 			}
 		}
 		if(!isTreeUpdated & cityGraphA.isAllPlaced() & cityGraphB.isAllPlaced() & campGraphA.isAllPlaced() & campGraphB.isAllPlaced()) {
-			plantTrees();
+			plantTrees(0, 0, cityGraphA.getWidth()+Const.graphXOffset, 
+						Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
+			plantTrees(cityGraphB.getX(), 0, 
+						cityGraphB.getWidth()+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
+			plantTrees(campGraphA.getX()-Const.graphXOffset/2, 0, 
+						campGraphA.getWidth()/2+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/2);
+			plantTrees(campGraphB.getX()+campGraphB.getWidth()/2, 0, 
+						campGraphB.getWidth()/2+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/2);
 			isTreeUpdated = true;
 		}
 	}
@@ -371,13 +376,13 @@ public class GameLoop implements Game {
 	/**
 	 * draws all the background tree imagesLayers
 	 */
-	private void plantTrees() {
+	private void plantTrees(float x, float y, float w, float h, int max_number) {
 		int number = 0;
 		float tmpX = 0.0f;
 		float tmpY = 0.0f;
-		while(number < Const.MAX_TREE_NUMBER) {
-			tmpX = r.nextFloat()*Const.WORLD_WIDTH;
-			tmpY = r.nextFloat()*Const.WORLD_HEIGHT;
+		while(number < max_number) {
+			tmpX = r.nextFloat()*w + x;
+			tmpY = r.nextFloat()*h + y;
 			if(isTreeSeperated(cityGraphA, tmpX, tmpY) & isTreeSeperated(campGraphA, tmpX, tmpY) &
 					isTreeSeperated(campGraphB, tmpX, tmpY) & isTreeSeperated(cityGraphB, tmpX, tmpY)) {
 				Tree tree = new Tree(environment.getGraphLayer(), tmpX, tmpY, Const.TREE1_IMAGE, Const.TREE1_SHADOW_IMAGE);

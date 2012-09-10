@@ -16,10 +16,10 @@ public final class Const
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 10*3000/9;
-    public static int WORLD_HEIGHT = 10*1800/9;
+    public static int WORLD_WIDTH = 10*3000/7;
+    public static int WORLD_HEIGHT = 10*1800/7;
 
-	public static int FRAME_SIZE = 60;//Adjust this only
+	public static int FRAME_SIZE = 30;//Adjust this only
     public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
     public static int WORLD_ORIGIN_Y = 0 - 5*FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
@@ -27,7 +27,9 @@ public final class Const
 
     public static float BACKGROUND_DEPTH = 1.0f;
     public static float GRAPH_DEPTH = 2.0f;
-	public static int STARTING_GOLD = 500;
+	public static float graphXOffset = 90;
+	public static float graphYOffset = 30;
+	public static int STARTING_GOLD = 1000;
 	
     public static float BASE_CITY_SCALE = 0.06f;
 	public static float BASE_CAMP_SCALE = 0.075f;
@@ -41,7 +43,7 @@ public final class Const
 
     public static float MIN_CITY_DISTANCE = 150;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
-    public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(4.5f);
+    public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(5.0f);
     public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
 	public static float PALACE_X = 0.0f;
 	public static float PALACE_Y = -23.0f;
@@ -116,19 +118,16 @@ public final class Const
 	public static int TOWER_COST = 60;
 	public static int WALL_COST = 50;
 	
+	//Tower base = camp
     public static float MIN_CAMP_DISTANCE = 60;
 	public static float CAMP_SCALE = 1.0f;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
-    public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(4.7f);
+    public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(5.0f);
     public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
-	public static float SOLDIER_TENT_X = 23.0f;
+	/*public static float SOLDIER_TENT_X = 23.0f;
 	public static float SOLDIER_TENT_Y = 3.2f;
 	public static float SOLDIER_TENT_DEPTH = 3.3f;
 	public static float SOLDIER_TENT_SCALE = 0.066f*CAMP_SCALE;
-	public static float COMMAND_TENT_X = 0.0f;
-	public static float COMMAND_TENT_Y = 0.0f;
-	public static float COMMAND_TENT_DEPTH = 3.3f;
-	public static float COMMAND_TENT_SCALE = 0.075f*CAMP_SCALE;
 	public static float MAGE_TENT_X = 0.0f;
 	public static float MAGE_TENT_Y = -10.0f;
 	public static float MAGE_TENT_DEPTH = 3.1f;
@@ -146,19 +145,30 @@ public final class Const
 	public static float DEPLOMATIC_TENT_DEPTH = 3.4f;
 	public static float DEPLOMATIC_TENT_SCALE = 0.068f*CAMP_SCALE;
 	
-	public static int COMMAND_TENT_COST = 90;
 	public static int SOLDIER_TENT_COST = 60;
 	public static int MAGE_TENT_COST = 70;
 	public static int HEALER_TENT_COST = 60;
 	public static int SUPPLY_TENT_COST = 50;
-	public static int DEPLOMATIC_TENT_COST = 80;
+	public static int DEPLOMATIC_TENT_COST = 80;*/
+	public static float COMMAND_TENT_X = 0.0f;
+	public static float COMMAND_TENT_Y = 0.0f;
+	public static float COMMAND_TENT_DEPTH = 3.3f;
+	public static float COMMAND_TENT_SCALE = 0.075f*CAMP_SCALE;
+	public static int COMMAND_TENT_COST = 90;
 
-	public static float AMRY_INITIAL_POS_X = 40.0f;
-	public static float AMRY_INITIAL_POS_Y = 10.0f;
-	public static float ARMY_SCALE = 0.17f;
-	public static float ARMY_ALPHA = 1.0f;
-	public static float ARMY_DEPTH = 5.0f;
-	public static int ARMY_SPEED = 100;
+	public static float TREE_OF_LIFE_SCALE = 240.0f;
+	public static float TREE_OF_LIFE_X = WORLD_WIDTH/2 - TREE_OF_LIFE_SCALE/2;
+	public static float TREE_OF_LIFE_Y = WORLD_HEIGHT - WORLD_HEIGHT/10;
+	
+	public static float DEEVE_CAVE_SCALE = 300.0f;
+	public static float DEEVE_CAVE_X = WORLD_WIDTH/2 - DEEVE_CAVE_SCALE/2;
+	public static float DEEVE_CAVE_Y = WORLD_HEIGHT/10000 - DEEVE_CAVE_SCALE/2;
+	public static float DEEVE_INITIAL_POS_X = WORLD_WIDTH/2;
+	public static float DEEVE_INITIAL_POS_Y = WORLD_HEIGHT/10;
+	public static float DEEVE_SCALE = 0.17f;
+	public static float DEEVE_ALPHA = 1.0f;
+	public static float DEEVE_DEPTH = 5.0f;
+	public static int DEEVE_SPEED = 100;
 	
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
@@ -191,12 +201,13 @@ public final class Const
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
 	public static float TREE_SCALE = 0.063f;
-	public static int MAX_TREE_NUMBER = 10000;
+	public static int MAX_TREE_NUMBER = 3000;
 	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
 	public static float MIN_NODE_TREE_DISTANCE = 70.0f;
 
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;
+	public static Image BACKGROUND_PATH_IMAGE;
 	public static Image CITY_BASE_IMAGE;
 	public static Image CITY_BASE_SELECTED_IMAGE1;
 	public static Image CITY_BASE_SELECTED_IMAGE2;
@@ -252,9 +263,8 @@ public final class Const
 	public static Image HEALER_TENT_LEVEL1;
 	public static Image SUPPLY_TENT_LEVEL1;
 	public static Image DEPLOMATIC_TENT_LEVEL1;
-	public static Image ARMY_LEVEL1;
-	public static Image ARMY_LEVEL2;
-	public static Image ARMY_LEVEL3;
+	public static Image DEEVE_CAVE;
+	public static Image TREE_OF_LIFE;
 	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.07f;
@@ -269,6 +279,7 @@ public final class Const
     public static void loadImages() {
 		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
+		BACKGROUND_PATH_IMAGE = assets().getImage("images/Deeve/texture_wall_painted16.png");
         CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         CITY_BASE_SELECTED_IMAGE1 = assets().getImage("images/City/buildingSelection1.png");
@@ -287,11 +298,11 @@ public final class Const
 		CONSTRUCTION_TOWER_LEVEL1 = assets().getImage("images/UI/constructionPanel_tower.png");
 		CONSTRUCTION_WALL_LEVEL1 = assets().getImage("images/UI/constructionPanel_wall.png");
 		CONSTRUCTION_COMMAND_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_commandTent.png");
-		CONSTRUCTION_SOLDIER_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_soldierTent.png");
+		/*CONSTRUCTION_SOLDIER_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_soldierTent.png");
 		CONSTRUCTION_MAGE_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_mageTent.png");
 		CONSTRUCTION_HEALER_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_healerTent.png");
 		CONSTRUCTION_SUPPLY_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_supplyTent.png");
-		CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_deplomaticTent.png");
+		CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_deplomaticTent.png");*/
 		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
 		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
@@ -318,12 +329,13 @@ public final class Const
 		WALL_RIGHT_LEVEL1 = assets().getImage("images/City/Wall_right_level1.png");
 		GARDEN_LEVEL1 = assets().getImage("images/City/Garden_Level1.png");
 		SMITHY_LEVEL1 = assets().getImage("images/City/Smithie_Level1.png");
+		COMMAND_TENT_LEVEL1 = assets().getImage("images/Tower/Tower_level1.png");
+		/*MAGE_TENT_LEVEL1 = assets().getImage("images/Camp/mageTent.png");
 		SOLDIER_TENT_LEVEL1 = assets().getImage("images/Camp/soldierTent.png"); 
-		COMMAND_TENT_LEVEL1 = assets().getImage("images/Camp/commandTent.png");
-		MAGE_TENT_LEVEL1 = assets().getImage("images/Camp/mageTent.png");
 		HEALER_TENT_LEVEL1 = assets().getImage("images/Camp/healerTent.png");
 		SUPPLY_TENT_LEVEL1 = assets().getImage("images/Camp/supplyTent.png");
-		DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/Camp/deplomaticTent.png");
-		ARMY_LEVEL1 = assets().getImage("images/Army/Sepah.png");
+		DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/Camp/deplomaticTent.png");*/
+		DEEVE_CAVE = assets().getImage("images/Deeve/texture_div_base.png");
+		TREE_OF_LIFE = assets().getImage("images/Deeve/texture_trees1.png");
     }
 }
