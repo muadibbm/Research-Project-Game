@@ -11,17 +11,17 @@ public final class Const
 		
     public static final int UPDATE_RATE = 25;
 
-	public static int WINDOW_WIDTH = 3*graphics().screenWidth()/4;
-    public static int WINDOW_HEIGHT = 3*graphics().screenHeight()/4;
+	public static int WINDOW_WIDTH = 3 * graphics().screenWidth() / 4;
+    public static int WINDOW_HEIGHT = 3 * graphics().screenHeight() / 4;
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 10*3000/9;
-    public static int WORLD_HEIGHT = 10*1800/9;
+    public static int WORLD_WIDTH = 10 * 3000 / 9;
+    public static int WORLD_HEIGHT = 10 * 1800 / 9;
 
-	public static int FRAME_SIZE = 60;//Adjust this only
-    public static int WORLD_ORIGIN_X = 0 - 5*FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0 - 5*FRAME_SIZE;
+	public static int FRAME_SIZE = 60; // Adjust this only
+    public static int WORLD_ORIGIN_X = 0 - 5 * FRAME_SIZE;
+    public static int WORLD_ORIGIN_Y = 0 - 5 * FRAME_SIZE;
     public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
     public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
 

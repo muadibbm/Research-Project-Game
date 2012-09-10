@@ -16,9 +16,6 @@ import com.domain.project.core.enums.EdgeType;
 import com.domain.project.core.enums.Isomer;
 import com.domain.project.core.enums.Nucleotide;
 
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-
 import playn.core.GroupLayer;
 import playn.core.ResourceCallback;
 
