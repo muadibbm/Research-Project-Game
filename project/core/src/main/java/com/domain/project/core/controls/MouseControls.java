@@ -58,8 +58,8 @@ public class MouseControls implements Mouse.Listener {
 			percentageX = xCurrent / Const.WINDOW_WIDTH;
 			percentageY = yCurrent / Const.WINDOW_HEIGHT;
 		
-			int newXOffset = (int) (-(Const.WORLD_END_WIDTH + Const.FRAME_SIZE) * percentageX - Const.WORLD_ORIGIN_X);
-			int newYOffset = (int) (-(Const.WORLD_END_HEIGHT + Const.FRAME_SIZE) * percentageY - Const.WORLD_ORIGIN_Y);
+			int newXOffset = (int) (-(Const.WORLD_WIDTH) * percentageX - Const.WORLD_ORIGIN_X);
+			int newYOffset = (int) (-(Const.WORLD_HEIGHT) * percentageY - Const.WORLD_ORIGIN_Y);
 			
 			savedPositionX = newXOffset;
 			savedPositionY = newYOffset;
@@ -70,7 +70,7 @@ public class MouseControls implements Mouse.Listener {
 			yOffset = yCurrent - yOld;
 
 			// set x bounds
-			if (env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= Const.WORLD_END_WIDTH) {
+			if (env.getX() >= Const.WORLD_ORIGIN_X && env.getX() <= Const.WORLD_WIDTH) {
 				env.setX(env.getX() - xOffset);
 			}
 
@@ -78,12 +78,12 @@ public class MouseControls implements Mouse.Listener {
 				env.setX(Const.WORLD_ORIGIN_X);
 			}
 
-			if (env.getX() > Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH) {
-				env.setX(Const.WORLD_END_WIDTH - Const.WINDOW_WIDTH);
+			if (env.getX() > Const.WORLD_WIDTH - Const.WINDOW_WIDTH) {
+				env.setX(Const.WORLD_WIDTH - Const.WINDOW_WIDTH);
 			}
 
 			//set y bounds
-			if (env.getY() >= Const.WORLD_ORIGIN_Y && env.getY() <= Const.WORLD_END_HEIGHT) {
+			if (env.getY() >= Const.WORLD_ORIGIN_Y && env.getY() <= Const.WORLD_HEIGHT) {
 				env.setY(env.getY() - yOffset);
 			}
 
@@ -91,8 +91,8 @@ public class MouseControls implements Mouse.Listener {
 				env.setY(Const.WORLD_ORIGIN_Y);
 			}
 
-			if (env.getY() > Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) {
-				env.setY(Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT);
+			if (env.getY() > Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) {
+				env.setY(Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT);
 			}
 
 			xOld = xCurrent;
@@ -132,8 +132,8 @@ public class MouseControls implements Mouse.Listener {
 
 	private void zoomOut(GroupLayer layer, float scale) {
 		if (scale == 0.0f) {
-			float xScale = (float)Const.WINDOW_WIDTH / (float)(Const.WORLD_END_WIDTH - Const.WORLD_ORIGIN_X);
-			float yScale = (float)Const.WINDOW_HEIGHT / (float)(Const.WORLD_END_HEIGHT - Const.WORLD_ORIGIN_Y);
+			float xScale = (float)Const.WINDOW_WIDTH / (float)(Const.WORLD_WIDTH - Const.WORLD_ORIGIN_X);
+			float yScale = (float)Const.WINDOW_HEIGHT / (float)(Const.WORLD_HEIGHT - Const.WORLD_ORIGIN_Y);
 
 			if (xScale < yScale) {
 				scale = xScale;
@@ -141,8 +141,8 @@ public class MouseControls implements Mouse.Listener {
 				scale = yScale;
 			}
 
-			float scaledWidth = (Const.WORLD_END_WIDTH - Const.FRAME_SIZE) * scale;
-			float scaledHeight = (Const.WORLD_END_HEIGHT - Const.FRAME_SIZE) * scale;
+			float scaledWidth = (Const.WORLD_WIDTH) * scale;
+			float scaledHeight = (Const.WORLD_HEIGHT) * scale;
 			float newOffsetX = ((Const.WINDOW_WIDTH - scaledWidth) / 2.0f) + (env.getX() * scale);
 			float newOffsetY = ((Const.WINDOW_HEIGHT - scaledHeight) / 2.0f) + (env.getY() * scale);
 

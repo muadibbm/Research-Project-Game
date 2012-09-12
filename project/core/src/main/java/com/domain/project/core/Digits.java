@@ -155,7 +155,7 @@ public class Digits
 		getNumberImage(digit).addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-				digit2.setTranslation(xPos - 35.0f, yPos);
+				digit2.setTranslation(xPos - 20.0f, yPos);
 				digit2.setScale(scale);
 				digit2.setDepth(depth);
                 uiLayer.add(digit2);
@@ -175,7 +175,7 @@ public class Digits
 		getNumberImage(digit).addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-				digit3.setTranslation(xPos - 65.0f, yPos);
+				digit3.setTranslation(xPos - 40.0f, yPos);
 				digit3.setScale(scale);
 				digit3.setDepth(depth);
                 uiLayer.add(digit3);
@@ -195,7 +195,7 @@ public class Digits
 		getNumberImage(digit).addCallback(new ResourceCallback<Image>() {
             @Override
             public void done(Image image) {
-				digit4.setTranslation(xPos - 95.0f, yPos);
+				digit4.setTranslation(xPos - 60.0f, yPos);
 				digit4.setScale(scale);
 				digit4.setDepth(depth);
                 uiLayer.add(digit4);

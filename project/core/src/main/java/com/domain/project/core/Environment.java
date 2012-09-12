@@ -26,7 +26,7 @@ public class Environment
 	final private ImageLayer deeveCave;
 	final private ImageLayer treeOfLife;
     final private ImageLayer bgLayer;
-    final private ImageLayer frameLayer;
+    //final private ImageLayer frameLayer;
     final private GroupLayer uiLayer; //contains all the objects and layers for the game UI
 
     public final Animator animator = Animator.create();
@@ -44,7 +44,8 @@ public class Environment
         graphics().setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 
         bgLayer = graphics().createImageLayer(Const.BACKGROUND_IMAGE);
-        bgLayer.setSize(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
+		bgLayer.setTranslation(Const.BACKGROUND_WORLD_ORIGIN_X, Const.BACKGROUND_WORLD_ORIGIN_Y);
+        bgLayer.setSize(Const.BACKGROUND_WORLD_WIDTH, Const.BACKGROUND_WORLD_HEIGHT);
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);
 		
@@ -62,11 +63,11 @@ public class Environment
 		treeOfLife.setTranslation(Const.TREE_OF_LIFE_X, Const.TREE_OF_LIFE_Y);
         treeOfLife.setSize(Const.TREE_OF_LIFE_SCALE, Const.TREE_OF_LIFE_SCALE);
 		
-        frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
+        /*frameLayer = graphics().createImageLayer(Const.FRAME_IMAGE);
         frameLayer.setTranslation(Const.WORLD_ORIGIN_X*2, Const.WORLD_ORIGIN_Y*2);
         frameLayer.setSize(Const.WORLD_END_WIDTH*2 - Const.WORLD_ORIGIN_X, Const.WORLD_END_HEIGHT*2 - Const.WORLD_ORIGIN_Y);
         frameLayer.setRepeatX(true);
-        frameLayer.setRepeatY(true);
+        frameLayer.setRepeatY(true);*/
 
         mainLayer = graphics().createGroupLayer();
         //create group layer containing the graphs
@@ -74,20 +75,20 @@ public class Environment
         //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
-        graphLayer.add(bgLayer);
 		graphLayer.add(deeveCave);
 		graphLayer.add(treeOfLife);
+		mainLayer.add(bgLayer);
         mainLayer.add(graphLayer);
-        mainLayer.add(frameLayer);
+        //mainLayer.add(frameLayer);
 		//mainLayer.add(uiLayer);
 		graphics().rootLayer().add(uiLayer);
         graphics().rootLayer().add(mainLayer);
 
-        frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
+        //frameLayer.setDepth(Const.BACKGROUND_DEPTH-1);
         bgLayer.setDepth(Const.BACKGROUND_DEPTH);
 		deeveCave.setDepth(Const.BACKGROUND_DEPTH+1.6f);
 		treeOfLife.setDepth(Const.BACKGROUND_DEPTH+4.0f);
-        graphLayer.setDepth(Const.GRAPH_DEPTH);
+        graphLayer.setDepth(Const.BACKGROUND_DEPTH+1.0f);
 		uiLayer.setDepth(Const.UI_DEPTH);
         
         xOffset = 0.0f;

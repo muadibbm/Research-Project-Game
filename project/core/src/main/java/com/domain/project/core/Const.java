@@ -8,7 +8,7 @@ public final class Const
 {
 	//graphics().setSize(graphics().screenWidth(),graphics().screenHeight());
     //Each device has different screen parameters (see http://playn-2011.appspot.com/slides/index.html#19)
-		
+	
     public static final int UPDATE_RATE = 25;
 
 	public static int WINDOW_WIDTH = 3 * graphics().screenWidth() / 4;
@@ -16,20 +16,19 @@ public final class Const
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-    public static int WORLD_WIDTH = 10 * 3000 / 7;
-    public static int WORLD_HEIGHT = 10 * 1800 / 7;
-
-	public static int FRAME_SIZE = 60; // Adjust this only
-    public static int WORLD_ORIGIN_X = 0 - 5 * FRAME_SIZE;
-    public static int WORLD_ORIGIN_Y = 0 - 5 * FRAME_SIZE;
-
-    public static int WORLD_END_WIDTH = WORLD_WIDTH + FRAME_SIZE;
-    public static int WORLD_END_HEIGHT = WORLD_HEIGHT + FRAME_SIZE;
+	public static int WORLD_WIDTH = WINDOW_WIDTH*5;
+    public static int WORLD_HEIGHT = WINDOW_HEIGHT*5;
+	public static int WORLD_ORIGIN_X = 0;
+    public static int WORLD_ORIGIN_Y = 0;
+	
+	public static int BACKGROUND_WORLD_WIDTH = WORLD_WIDTH + 2*WORLD_WIDTH/5;
+	public static int BACKGROUND_WORLD_HEIGHT = WORLD_HEIGHT + 2*WORLD_HEIGHT/5;
+	public static int BACKGROUND_WORLD_ORIGIN_X = -WORLD_WIDTH/5;
+	public static int BACKGROUND_WORLD_ORIGIN_Y = -WORLD_HEIGHT/5;
 
     public static float BACKGROUND_DEPTH = 1.0f;
-    public static float GRAPH_DEPTH = 2.0f;
-	public static float graphXOffset = 90;
-	public static float graphYOffset = 30;
+	//public static float graphXOffset = 200;
+	public static float graphYOffset = WORLD_WIDTH/30;
 	public static int STARTING_GOLD = 1000;
 	
     public static float BASE_CITY_SCALE = 0.06f;
@@ -163,7 +162,7 @@ public final class Const
 	
 	public static float DEEVE_CAVE_SCALE = 300.0f;
 	public static float DEEVE_CAVE_X = WORLD_WIDTH/2 - DEEVE_CAVE_SCALE/2;
-	public static float DEEVE_CAVE_Y = WORLD_HEIGHT/10000 - DEEVE_CAVE_SCALE/2;
+	public static float DEEVE_CAVE_Y = WORLD_HEIGHT/10000;
 	public static float DEEVE_INITIAL_POS_X = WORLD_WIDTH/2;
 	public static float DEEVE_INITIAL_POS_Y = WORLD_HEIGHT/10;
 	public static float DEEVE_SCALE = 0.17f;
@@ -178,31 +177,31 @@ public final class Const
 	public static float MAPPING_WIDTH = 0.4f;
 	public static float MAPPING_POINT_X = 0.0f;
 	public static float MAPPING_POINT_Y = 0.0f;
-	public static float MAPPING_POINT_SCALE = 0.63f;
+	public static float MAPPING_POINT_SCALE = 1.0f;
 	
 	public static float UI_DEPTH = 3.0f;
-	public static float CONSTRUCTION_PANEL_X = WINDOW_WIDTH/4;
-	public static float CONSTRUCTION_PANEL_Y = 0.0f;
-	public static float CONSTRUCTION_PANEL_SCALE = 0.2f;
+	public static float CONSTRUCTION_PANEL_X = 0.0f;
+	public static float CONSTRUCTION_PANEL_Y = WINDOW_WIDTH/13;
+	public static float CONSTRUCTION_PANEL_SCALE = 0.15f;
 	public static float INFO_PANEL_X = 0.0f;
-	public static float INFO_PANEL_Y = WINDOW_HEIGHT-90;
-	public static float INFO_PANEL_SCALE = 0.3f;
-	public static float POPULATION_SCALE = 0.7f;
-	public static float POPULATION_X = INFO_PANEL_X + 3*WINDOW_WIDTH/9;
-	public static float POPULATION_Y = WINDOW_HEIGHT-67;
-	public static float GOLD_SCALE = 0.6f;
-	public static float GOLD_X = INFO_PANEL_X + WINDOW_WIDTH/9;
-	public static float GOLD_Y = WINDOW_HEIGHT-67;
-	public static float MAP_BUTTON_X = INFO_PANEL_X + 2*WINDOW_WIDTH/3;
-	public static float MAP_BUTTON_Y = WINDOW_HEIGHT-90;
-	public static float BUTTON_SCALE = 0.3f;
-	public static float UNMAP_BUTTON_X = 2*WINDOW_WIDTH/3+110;
-	public static float UNMAP_BUTTON_Y = WINDOW_HEIGHT-90;
+	public static float INFO_PANEL_Y = 0.0f;
+	public static float INFO_PANEL_SCALE = 0.3f/1.9f;
+	public static float POPULATION_SCALE = 0.7f/1.9f;
+	public static float POPULATION_X = INFO_PANEL_X + 2*assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE;
+	public static float POPULATION_Y = assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE;
+	public static float GOLD_SCALE = 0.6f/1.9f;
+	public static float GOLD_X = INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE;
+	public static float GOLD_Y = assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE;
+	//public static float MAP_BUTTON_X = INFO_PANEL_X + 2*WINDOW_WIDTH/3;
+	//public static float MAP_BUTTON_Y = WINDOW_HEIGHT-90;
+	//public static float BUTTON_SCALE = 0.3f;
+	//public static float UNMAP_BUTTON_X = 2*WINDOW_WIDTH/3+110;
+	//public static float UNMAP_BUTTON_Y = WINDOW_HEIGHT-90;
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
 	public static float TREE_SCALE = 0.063f;
-	public static int MAX_TREE_NUMBER = 3000;
+	public static int MAX_TREE_NUMBER = 5000;
 	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
 	public static float MIN_NODE_TREE_DISTANCE = 70.0f;
 
@@ -212,6 +211,8 @@ public final class Const
 	public static Image CITY_BASE_IMAGE;
 	public static Image CITY_BASE_SELECTED_IMAGE1;
 	public static Image CITY_BASE_SELECTED_IMAGE2;
+	public static Image CITY_BASE_SELECTED_IMAGE3;
+	public static Image CITY_BASE_SELECTED_IMAGE4;
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
     public static Image CARAVAN_IMAGE;
@@ -232,8 +233,8 @@ public final class Const
 	public static Image CONSTRUCTION_HEALER_TENT_LEVEL1;
 	public static Image CONSTRUCTION_SUPPLY_TENT_LEVEL1;
 	public static Image CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1;
-	public static Image MAP_BUTTON_IMAGE;
-	public static Image UNMAP_BUTTON_IMAGE;
+	//public static Image MAP_BUTTON_IMAGE;
+	//public static Image UNMAP_BUTTON_IMAGE;
 	public static Image INFO_PANEL_IMAGE;
 	public static Image N0_IMAGE;
 	public static Image N1_IMAGE;
@@ -258,18 +259,18 @@ public final class Const
 	public static Image WALL_BACK_LEVEL1;
 	public static Image WALL_LEFT_LEVEL1;
 	public static Image WALL_RIGHT_LEVEL1;
-	public static Image SOLDIER_TENT_LEVEL1;
 	public static Image COMMAND_TENT_LEVEL1;
+	/*public static Image SOLDIER_TENT_LEVEL1;
 	public static Image MAGE_TENT_LEVEL1;
 	public static Image HEALER_TENT_LEVEL1;
 	public static Image SUPPLY_TENT_LEVEL1;
-	public static Image DEPLOMATIC_TENT_LEVEL1;
+	public static Image DEPLOMATIC_TENT_LEVEL1;*/
 	public static Image DEEVE_CAVE;
 	public static Image TREE_OF_LIFE;
 	
 	public static float VISIBLE = 1.0f;
 	public static float HIDDEN_ROAD = 0.07f;
-	public static float HIDDEN_MAPPING = 0.33f;
+	public static float HIDDEN_MAPPING = 0.5f;
 	public static float SHADOW = 0.45f;
 
     private Const() {
@@ -281,10 +282,12 @@ public final class Const
 		FRAME_IMAGE = assets().getImage("images/Background/sampleFrame.png");
         BACKGROUND_IMAGE = assets().getImage("images/Background/texture_wall_painted15.png");
 		BACKGROUND_PATH_IMAGE = assets().getImage("images/Deeve/texture_wall_painted16.png");
-        CAMP_BASE_IMAGE = assets().getImage("images/Camp/campBase.png");
+        CAMP_BASE_IMAGE = assets().getImage("images/Tower/towerBase.png");
         CITY_BASE_IMAGE = assets().getImage("images/City/cityBase.png");        
         CITY_BASE_SELECTED_IMAGE1 = assets().getImage("images/City/buildingSelection1.png");
         CITY_BASE_SELECTED_IMAGE2 = assets().getImage("images/City/buildingSelection2.png");
+		CITY_BASE_SELECTED_IMAGE3 = assets().getImage("images/City/buildingSelection3.png");
+        CITY_BASE_SELECTED_IMAGE4 = assets().getImage("images/City/buildingSelection4.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
         CARAVAN_IMAGE = assets().getImage("images/Caravan/Caravan.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
@@ -304,8 +307,8 @@ public final class Const
 		CONSTRUCTION_HEALER_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_healerTent.png");
 		CONSTRUCTION_SUPPLY_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_supplyTent.png");
 		CONSTRUCTION_DEPLOMATIC_TENT_LEVEL1 = assets().getImage("images/UI/constructionPanel_deplomaticTent.png");*/
-		MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
-		UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
+		//MAP_BUTTON_IMAGE = assets().getImage("images/UI/mapButton.png");
+		//UNMAP_BUTTON_IMAGE = assets().getImage("images/UI/unmapButton.png");
 		INFO_PANEL_IMAGE = assets().getImage("images/UI/infoPanel.png");
 		N0_IMAGE = assets().getImage("images/UI/0.png");
 		N1_IMAGE = assets().getImage("images/UI/1.png");

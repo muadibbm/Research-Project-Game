@@ -69,14 +69,14 @@ public class GameLoop implements Game {
 
 		//TODO : read two graphs from database and put into these 4 graph instances
 
-		cityGraphA = new Graph(true, Const.graphXOffset/3, Const.graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 1);
+		cityGraphA = new Graph(true, Const.WORLD_WIDTH/7, Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CITY_GRAPH_HEIGHT, 1);
 		cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
-		campGraphA = new Graph(false, Const.WORLD_WIDTH/5 + 3*Const.graphXOffset/2, 5*Const.graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT-5*Const.graphYOffset, 2);
+		campGraphA = new Graph(false, 2*Const.WORLD_WIDTH/7, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 2);
 		campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
 
-		campGraphB = new Graph(false, Const.WORLD_WIDTH/2 + 3*Const.graphXOffset, 5*Const.graphYOffset, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT-5*Const.graphYOffset, 3);
+		campGraphB = new Graph(false, 4*Const.WORLD_WIDTH/7, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 3);
 		campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
-		cityGraphB = new Graph(true, Const.WORLD_WIDTH - Const.CAMP_GRAPH_WIDTH - Const.graphXOffset, Const.graphYOffset, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, 4);
+		cityGraphB = new Graph(true, 5*Const.WORLD_WIDTH/7, Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CITY_GRAPH_HEIGHT, 4);
 		cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
 
 		//environment.getGraphLayer().setScale(0.5f,0.5f);
@@ -150,14 +150,14 @@ public class GameLoop implements Game {
 			}
 		}
 		if(!isTreeUpdated & cityGraphA.isAllPlaced() & cityGraphB.isAllPlaced() & campGraphA.isAllPlaced() & campGraphB.isAllPlaced()) {
-			plantTrees(0, 0, cityGraphA.getWidth()+Const.graphXOffset, 
-						Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
-			plantTrees(cityGraphB.getX(), 0, 
-						cityGraphB.getWidth()+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
-			plantTrees(campGraphA.getX()-Const.graphXOffset/2, 0, 
-						campGraphA.getWidth()/2+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/2);
+			plantTrees(0, 0, 
+						cityGraphA.getWidth()+Const.WORLD_WIDTH/7, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
+			plantTrees(cityGraphB.getX(), 0,
+						cityGraphB.getWidth()+Const.WORLD_WIDTH/7, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
+			plantTrees(campGraphA.getX(), 0, 
+						campGraphA.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);
 			plantTrees(campGraphB.getX()+campGraphB.getWidth()/2, 0, 
-						campGraphB.getWidth()/2+Const.graphXOffset, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/2);
+						campGraphB.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);
 			isTreeUpdated = true;
 		}
 	}
@@ -244,10 +244,10 @@ public class GameLoop implements Game {
 											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 2);
 										}
 									}
-									System.out.println("remove graphical indication");
-									//TODO : remove graphical indication (not yet added)
-									player.setNodeToBeMapped(null);
-								}
+								} 
+								System.out.println("remove graphical indication");
+								//TODO : remove graphical indication (not yet added)
+								player.setNodeToBeMapped(null);
 							}
 							/* Set the mapping of the selected node visible */
 							if(node.getMapping() != null)
@@ -264,6 +264,72 @@ public class GameLoop implements Game {
 						} else {//This node does not belong to the player
 							/* show the available Constructions for this node*/
 							gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), false);
+							System.out.println("remove graphical indication");
+							//TODO : remove graphical indication (not yet added)
+							player.setNodeToBeMapped(null);
+						}
+						/* Show population */
+						switch(node.getNodeLevel()) {
+							case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+						}
+					}
+					else if(event.button() == Mouse.BUTTON_RIGHT) {
+						/* Hide previous selections */
+						HideAllNodes();
+						HideAllEdges();
+						HideAllMappings();
+						/* Select New Node and set ne neigbors visible */
+						player.selectNode(node);
+						node.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
+						for(Node neigbor : node.getNeighbors())
+							neigbor.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
+						/* Set all edges of the selected node visible */
+						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
+							if(node.equals(graph.getNode1(edge.getValue()))) {
+								edge.getValue().getRoad().setVisible(true);
+								if(player.getSelectedNode().getMapping() != null) {
+									node.getBase().positionSelection(node.getPos());
+									node.getBase().setSelection(true);
+								} else {
+									node.getBase().positionMappingSelection(node.getPos());
+									node.getBase().setMappingSelection(true);
+								}
+							}
+						}
+						if(player.getId() == player.getSelectedNode().getPlayer()) {
+							//remove the previous node to be mapped
+							player.setNodeToBeMapped(null);
+								
+							if(player.getSelectedNode().getMapping() != null) {
+									if(player.getSelectedNode().getBase() instanceof City)
+										player.getSelectedNode().unMap();
+									else if(player.getSelectedNode().getBase() instanceof Camp)
+										player.getSelectedNode().getMappedNode().unMap();
+							} else if(player.getNodeToBeMapped() == null) {
+								if(player.getSelectedNode().getMapping() == null) {
+									player.setNodeToBeMapped(player.getSelectedNode());
+									//TODO : add some graphical indication - Andrey add drag mapping HERE <--
+								}
+							}
+							/* Set the mapping of the selected node visible */
+							if(node.getMapping() != null)
+								node.getMapping().setVisible(true);
+								
+							/* show the available Constructions for this node*/
+							gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), true);
+							
+						} else {//This node does not belong to the player
+								/* show the available Constructions for this node*/
+								gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), false);
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
@@ -280,6 +346,9 @@ public class GameLoop implements Game {
 						}
 					}
 				}
+				//public void onMouseOver(Mouse.MotionEvent event) {
+					//TODO : update PlayN
+				//}
 				@Override
 				public void onMouseMove(Mouse.MotionEvent event) {
 					//TODO
@@ -370,6 +439,7 @@ public class GameLoop implements Game {
 				node.getValue().getMapping().setVisible(false);
 			}
 			node.getValue().getBase().setSelection(false);
+			node.getValue().getBase().setMappingSelection(false);
 		}
 	}
 

@@ -121,7 +121,7 @@ public class KeyboardControls implements Keyboard.Listener {
 		}
 		
 		if(scrollDown) {
-			if (env.getY() < (Const.WORLD_END_HEIGHT - Const.WINDOW_HEIGHT) && env.zLevel() != Zoom.OUT) {
+			if (env.getY() < (Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) && env.zLevel() != Zoom.OUT) {
 				env.setY(env.getY() + panRate);
 			}
 		}
@@ -133,7 +133,7 @@ public class KeyboardControls implements Keyboard.Listener {
 		}
 		
 		if(scrollRight) {
-			if(env.getX() < (Const.WORLD_END_WIDTH + (2 * Const.FRAME_SIZE) - Const.WINDOW_WIDTH) && env.zLevel() != Zoom.OUT) {
+			if(env.getX() < (Const.WORLD_WIDTH - Const.WINDOW_WIDTH) && env.zLevel() != Zoom.OUT) {
 				env.setX(env.getX() + panRate);
 			}
 		}

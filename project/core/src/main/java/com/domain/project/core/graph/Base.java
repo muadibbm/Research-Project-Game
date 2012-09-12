@@ -21,6 +21,8 @@ public class Base
 	private ImageLayer baseLayer;
 	private ImageLayer selectionLayer1;
 	private ImageLayer selectionLayer2;
+	private ImageLayer selectionLayerM1;//selection for mapping node
+	private ImageLayer selectionLayerM2;//selection for mapping node
 
 	/**
 	 * Constructor of the Base
@@ -42,6 +44,14 @@ public class Base
 		selectionLayer2 = graphics().createImageLayer(Const.CITY_BASE_SELECTED_IMAGE2);
 		selectionLayer2.setDepth(Const.BASE_DEPTH);
 		selectionLayer2.setAlpha(Const.SELECTION_ALPHA);
+		
+		selectionLayerM1 = graphics().createImageLayer(Const.CITY_BASE_SELECTED_IMAGE3);
+		selectionLayerM1.setDepth(Const.BASE_DEPTH);
+		selectionLayerM1.setAlpha(Const.SELECTION_ALPHA);
+
+		selectionLayerM2 = graphics().createImageLayer(Const.CITY_BASE_SELECTED_IMAGE4);
+		selectionLayerM2.setDepth(Const.BASE_DEPTH);
+		selectionLayerM2.setAlpha(Const.SELECTION_ALPHA);
 
 		baseImage.addCallback(new ResourceCallback<Image>() {
 			@Override
@@ -83,8 +93,37 @@ public class Base
 				log().error("Error loading node", e);
 			}
 		});
+		
+		Const.CITY_BASE_SELECTED_IMAGE3.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				selectionLayerM1.setOrigin(image.width() / 2, image.height() / 2);
+				selectionLayerM1.setScale(Const.CITY_SELECTION_SCALE1);
+				graphLayer.add(selectionLayerM1);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("Error loading node", e);
+			}
+		});
+		
+		Const.CITY_BASE_SELECTED_IMAGE4.addCallback(new ResourceCallback<Image>() {
+			@Override
+			public void done(Image image) {
+				selectionLayerM2.setOrigin(image.width() / 2, image.height() / 2);
+				selectionLayerM2.setScale(Const.CITY_SELECTION_SCALE2);
+				graphLayer.add(selectionLayerM2);
+			}
+
+			@Override
+			public void error(Throwable e) {
+				log().error("Error loading node", e);
+			}
+		});
 
 		setSelection(false);
+		setMappingSelection(false);
 	}
 
 	/**
@@ -111,13 +150,31 @@ public class Base
 		selectionLayer2.setVisible(action);
 	}
 
-	/** Position the selection around a city.
+	/** Position the selection around a city or a camp.
 	 * @param position
 	 * @author Andrey
 	 */
 	public void positionSelection(Tuple2f position) {
 		selectionLayer1.setTranslation(position.getX(), position.getY());
 		selectionLayer2.setTranslation(position.getX(), position.getY());
+	}
+	
+	/** Toggle the mapping selection around a city or a camp.
+	 * @param action
+	 * @author Mehrdad
+	 */
+	public void setMappingSelection(boolean action) {
+		selectionLayerM1.setVisible(action);
+		selectionLayerM2.setVisible(action);
+	}
+
+	/** Position the mapping selection around a city or a camp.
+	 * @param position
+	 * @author Mehrdad
+	 */
+	public void positionMappingSelection(Tuple2f position) {
+		selectionLayerM1.setTranslation(position.getX(), position.getY());
+		selectionLayerM2.setTranslation(position.getX(), position.getY());
 	}
 
 	/**
