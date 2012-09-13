@@ -632,6 +632,11 @@ public class Gui
 			}
 		});
 	}
+	
+	public void hidePopulation() {
+		if(populationLayer != null)
+			populationLayer.destroy();
+	}
 
 	public void setGold(int amount) {
 		gold.setDigits(amount);

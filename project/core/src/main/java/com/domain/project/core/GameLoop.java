@@ -312,9 +312,9 @@ public class GameLoop implements Game {
 								
 							if(player.getSelectedNode().getMapping() != null) {
 									if(player.getSelectedNode().getBase() instanceof City)
-										player.getSelectedNode().unMap();
+										player.getSelectedNode().unMap(player.getSelectedNode().getMapping().getScore());
 									else if(player.getSelectedNode().getBase() instanceof Camp)
-										player.getSelectedNode().getMappedNode().unMap();
+										player.getSelectedNode().getMappedNode().unMap(player.getSelectedNode().getMapping().getScore());
 							} else if(player.getNodeToBeMapped() == null) {
 								if(player.getSelectedNode().getMapping() == null) {
 									player.setNodeToBeMapped(player.getSelectedNode());
@@ -369,8 +369,37 @@ public class GameLoop implements Game {
 								}
 							}
 							hover_node = null;
+							gui.hidePopulation();
 						}
 					}
+					if(player.getSelectedNode()!=null)
+						/* Show population */
+						switch(player.getSelectedNode().getNodeLevel()) {
+							case 1 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+						}
+					if(player.getNodeToBeMapped() != null)
+						/* Show population */
+						switch(player.getNodeToBeMapped().getNodeLevel()) {
+							case 1 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+						}
 				}
 				@Override //Called when the mouse enters a Layer.
 				public void	onMouseOver(Mouse.MotionEvent event) {

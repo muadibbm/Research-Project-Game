@@ -83,9 +83,8 @@ public class Node {
 	}
 	
 	/* Mapping Score Propagation Logic */
-	//TODO add more gameplay scoring elements
 	private void propagateMapping(int score) {
-		for(Node neighbor : neighbors) {
+		for(Node neighbor :neighbors) {
 			if(neighbor.getMapping() != null) {
 				if(mapped_node!=null & neighbor.getMappedNode() != null) {
 					if(neighbor.getMappedNode().isNeighbor(mapped_node))
@@ -95,6 +94,21 @@ public class Node {
 					neighbor.getMapping().setScore(neighbor.getMapping().getScore()+score);
 			}
 		}
+	}
+	
+	/* Unmapping Score Propagation Logic */
+	private void propagateUnmapping(int score) {
+		if(score > 0)
+			for(Node neighbor : neighbors) {
+				if(neighbor.getMapping() != null) {
+					if(mapped_node!=null & neighbor.getMappedNode() != null) {
+						if(neighbor.getMappedNode().isNeighbor(mapped_node))
+							neighbor.getMapping().setScore(neighbor.getMapping().getScore()-score-1);
+					}
+					else
+						neighbor.getMapping().setScore(neighbor.getMapping().getScore()-score);
+				}
+			}
 	}
 	
 	private void setMapping(Mapping mapping) {
@@ -113,7 +127,8 @@ public class Node {
 	* Removes the existing mapping from this node to the given node
 	* Note : If used on a node with no mapping will cause a NullPointerException
 	*/
-	public void unMap() {
+	public void unMap(int score) {
+		propagateUnmapping(score-1);
 		mapped_node.removeMapping();
 		mapping.destroy();
 		removeMapping();
