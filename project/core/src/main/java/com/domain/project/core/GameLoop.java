@@ -185,9 +185,10 @@ public class GameLoop implements Game {
 	private void addAllListeners(final Graph graph, final Player player, final Gui gui) {
 		for(Map.Entry<Integer, Node> entry: graph.getNodes().entrySet()) {
 			final Node node = entry.getValue();
-			node.getBase().getBaseLayer().addListener(new Mouse.Listener() {
-				@Override
-				public void onMouseDown(Mouse.ButtonEvent event) {
+			node.getBase().getBaseLayer().addListener(new Mouse.LayerListener() {
+				Node hover_node = null;
+				@Override //Called when the mouse is pressed.
+				public void	onMouseDown(Mouse.ButtonEvent event) {
 					if(event.button() == Mouse.BUTTON_LEFT) {
 						/* Hide previous selections */
 						HideAllNodes();
@@ -244,8 +245,8 @@ public class GameLoop implements Game {
 											player.getNodeToBeMapped().setMapping(player.getSelectedNode(), 2);
 										}
 									}
-								} 
-								System.out.println("remove graphical indication");
+								}//else --> Andrey remove drag mapping indication HERE <-- 
+								//System.out.println("remove graphical indication");
 								//TODO : remove graphical indication (not yet added)
 								player.setNodeToBeMapped(null);
 							}
@@ -264,7 +265,7 @@ public class GameLoop implements Game {
 						} else {//This node does not belong to the player
 							/* show the available Constructions for this node*/
 							gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), false);
-							System.out.println("remove graphical indication");
+							//System.out.println("remove graphical indication");
 							//TODO : remove graphical indication (not yet added)
 							player.setNodeToBeMapped(null);
 						}
@@ -330,6 +331,7 @@ public class GameLoop implements Game {
 						} else {//This node does not belong to the player
 								/* show the available Constructions for this node*/
 								gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), false);
+								//TODO : remove the graphical indication - Andrey add removal drag mapping HERE <--
 						}
 						/* Show population */
 						switch(node.getNodeLevel()) {
@@ -346,25 +348,79 @@ public class GameLoop implements Game {
 						}
 					}
 				}
-				//public void onMouseOver(Mouse.MotionEvent event) {
-					//TODO : update PlayN
-				//}
-				@Override
-				public void onMouseMove(Mouse.MotionEvent event) {
-					//TODO
+				@Override //Called when the mouse is dragged.
+				public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 				}
-				@Override
-				public void onMouseUp(Mouse.ButtonEvent event) {
-					//TODO
+				@Override //Called when the mouse leaves a Layer.
+				public void	onMouseOut(Mouse.MotionEvent event) {
+					if(hover_node != null) {
+						if((player.getSelectedNode() == null &  player.getNodeToBeMapped() == null) || 
+							(player.getSelectedNode()!=null & player.getSelectedNode() != hover_node) || 
+							(player.getNodeToBeMapped()!=null & player.getNodeToBeMapped()!=hover_node)) {
+							hover_node.getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
+							for(Node neigbor : node.getNeighbors())
+								neigbor.getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
+							/* Set all edges of the selected node visible */
+							for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
+								if(node.equals(graph.getNode1(edge.getValue()))) {
+									edge.getValue().getRoad().setVisible(false);
+									node.getBase().setHoverSelection(false);
+								}
+							}
+							hover_node = null;
+						}
+					}
 				}
-				@Override
-				public void onMouseWheelScroll(Mouse.WheelEvent event) {
-					//TODO
+				@Override //Called when the mouse enters a Layer.
+				public void	onMouseOver(Mouse.MotionEvent event) {
+					if((player.getSelectedNode() == null &  player.getNodeToBeMapped() == null) || 
+						(player.getSelectedNode() != null & player.getSelectedNode()!=node) ||
+						(player.getNodeToBeMapped()!=null & player.getNodeToBeMapped()!=node)) {
+						hover_node = node;
+						/* Set the node and neigbors visible */
+						node.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
+						for(Node neigbor : node.getNeighbors())
+							neigbor.getBase().getBaseLayer().setAlpha(Const.SELECTED_BASE_ALPHA);
+						/* Set all edges of the selected node visible */
+						for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
+							if(node.equals(graph.getNode1(edge.getValue()))) {
+								edge.getValue().getRoad().setVisible(true);
+								node.getBase().positionHoverSelection(node.getPos());
+								node.getBase().setHoverSelection(true);
+							}
+						}
+						/* Set the mapping of the selected node visible */
+						if(node.getMapping() != null)
+							node.getMapping().setVisible(true);
+					
+						/* Show population */
+						switch(node.getNodeLevel()) {
+							case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+							case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+							case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+							case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+							case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+							case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+							case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+							case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+							case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+							default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+						}
+					}
+				}
+				@Override //Called when the mouse is released.
+				public void	onMouseUp(Mouse.ButtonEvent event) {
+				
+				}
+				@Override //Called when the mouse is scrolled.
+				public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+				
 				}
 			});
 		}
 	}
-
+	
 	/**
 	 * Returns the graph object that has the given graphId
 	 * @param graphId - the unique integer id associated with the graph at the time of construction
@@ -440,6 +496,7 @@ public class GameLoop implements Game {
 			}
 			node.getValue().getBase().setSelection(false);
 			node.getValue().getBase().setMappingSelection(false);
+			node.getValue().getBase().setHoverSelection(false);
 		}
 	}
 

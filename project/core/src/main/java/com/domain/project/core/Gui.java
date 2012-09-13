@@ -192,7 +192,7 @@ public class Gui
 	public void addListener(final Player player, final GroupLayer graphLayer) {
 
 		/* Building TOWN HALL */
-		option1_city.addListener(new Mouse.Listener() {
+		option1_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -221,22 +221,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building BAZAR FOOD */
-		option2_city.addListener(new Mouse.Listener() {
+		option2_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -265,22 +273,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building BAZAR CHINA */
-		option3_city.addListener(new Mouse.Listener() {
+		option3_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -309,22 +325,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building BAZAR CARPET */
-		option4_city.addListener(new Mouse.Listener() {
+		option4_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -353,22 +377,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building GARDEN */
-		option5_city.addListener(new Mouse.Listener() {
+		option5_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -397,22 +429,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building SMITHY */
-		option6_city.addListener(new Mouse.Listener() {
+		option6_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -441,22 +481,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building WALL and TOWER for city */
-		option7_city.addListener(new Mouse.Listener() {
+		option7_city.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -485,22 +533,30 @@ public class Gui
 					}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 
 		/* Building DEFENSIVE TOWER */
-		option1_tower.addListener(new Mouse.Listener() {
+		option1_tower.addListener(new Mouse.LayerListener() {
 			Base base;
 			@Override
 			public void onMouseDown(Mouse.ButtonEvent event) {
@@ -532,17 +588,25 @@ public class Gui
 						}
 				}
 			}
-			@Override
-			public void onMouseMove(Mouse.MotionEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseDrag(Mouse.MotionEvent event) {
+				
 			}
-			@Override
-			public void onMouseUp(Mouse.ButtonEvent event) {
-
+			@Override //Called when the mouse is dragged.
+			public void	onMouseOut(Mouse.MotionEvent event) {
+			
 			}
-			@Override
-			public void onMouseWheelScroll(Mouse.WheelEvent event) {
-
+			@Override //Called when the mouse leaves a Layer.
+			public void	onMouseOver(Mouse.MotionEvent event) {
+			
+			}
+			@Override //Called when the mouse enters a Layer.
+			public void	onMouseUp(Mouse.ButtonEvent event) {
+			
+			}
+			@Override //Called when the mouse is released.
+			public void	onMouseWheelScroll(Mouse.WheelEvent event) {
+			
 			}
 		});
 	}

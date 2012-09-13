@@ -213,6 +213,8 @@ public final class Const
 	public static Image CITY_BASE_SELECTED_IMAGE2;
 	public static Image CITY_BASE_SELECTED_IMAGE3;
 	public static Image CITY_BASE_SELECTED_IMAGE4;
+	public static Image CITY_BASE_SELECTED_IMAGE5;
+	public static Image CITY_BASE_SELECTED_IMAGE6;
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
     public static Image CARAVAN_IMAGE;
@@ -288,6 +290,8 @@ public final class Const
         CITY_BASE_SELECTED_IMAGE2 = assets().getImage("images/City/buildingSelection2.png");
 		CITY_BASE_SELECTED_IMAGE3 = assets().getImage("images/City/buildingSelection3.png");
         CITY_BASE_SELECTED_IMAGE4 = assets().getImage("images/City/buildingSelection4.png");
+		CITY_BASE_SELECTED_IMAGE5 = assets().getImage("images/City/buildingSelection5.png");
+        CITY_BASE_SELECTED_IMAGE6 = assets().getImage("images/City/buildingSelection6.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
         CARAVAN_IMAGE = assets().getImage("images/Caravan/Caravan.png");
 		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");

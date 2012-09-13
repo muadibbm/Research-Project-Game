@@ -14,7 +14,7 @@
   <name>GameLoop Metaproject</name>
 
   <properties>
-    <playn.version>1.3.1</playn.version>
+    <playn.version>1.4</playn.version>
   </properties>
 
   <profiles>
