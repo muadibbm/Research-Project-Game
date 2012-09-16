@@ -23,8 +23,8 @@ public final class Const
 	
 	public static int BACKGROUND_WORLD_WIDTH = 7 * WORLD_WIDTH / 5;
 	public static int BACKGROUND_WORLD_HEIGHT = 7 * WORLD_HEIGHT / 5;
-	public static int BACKGROUND_WORLD_ORIGIN_X = WORLD_ORIGIN_X;
-	public static int BACKGROUND_WORLD_ORIGIN_Y = WORLD_ORIGIN_Y;
+	public static int BACKGROUND_WORLD_ORIGIN_X = WORLD_ORIGIN_X - WORLD_WIDTH / 5;
+	public static int BACKGROUND_WORLD_ORIGIN_Y = WORLD_ORIGIN_Y - WORLD_HEIGHT / 5;
 
     public static float BACKGROUND_DEPTH = 1.0f;
 	//public static float graphXOffset = 200;

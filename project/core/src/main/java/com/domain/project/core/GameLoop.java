@@ -133,6 +133,9 @@ public class GameLoop implements Game {
 	 */
 	@Override
 	public void update(float delta) {
+		System.out.println(environment.getX());
+		System.out.println(environment.getY());
+					
 		kbControls.parse();
 		environment.update(delta);
 		cityGraphA.updateAll();
@@ -460,11 +463,11 @@ public class GameLoop implements Game {
 				}
 				@Override //Called when the mouse is released.
 				public void	onMouseUp(Mouse.ButtonEvent event) {
-
+					deeveList.add(new Deeve(environment.getGraphLayer(), deeveMovesList, environment.getTreeOfLifeLayer().scaledWidth() / 10));
 				}
 				@Override //Called when the mouse is scrolled.
 				public void	onMouseWheelScroll(Mouse.WheelEvent event) {
-
+				
 				}
 			});
 		}
