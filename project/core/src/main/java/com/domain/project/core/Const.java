@@ -160,7 +160,8 @@ public final class Const
 	public static float TREE_OF_LIFE_X = WORLD_WIDTH/2 - TREE_OF_LIFE_SCALE/2;
 	public static float TREE_OF_LIFE_Y = WORLD_HEIGHT - WORLD_HEIGHT/10;
 	
-	public static float DEEVE_CAVE_SCALE = 300.0f;
+	public static float DEEVE_CAVE_SCALE = 250.0f;
+	public static int DEEVE_WAVE_WAITING_TIME = 5000;
 	public static float DEEVE_CAVE_X = WORLD_WIDTH/2 - DEEVE_CAVE_SCALE/2;
 	public static float DEEVE_CAVE_Y = WORLD_HEIGHT/10000;
 	public static float DEEVE_INITIAL_POS_X = WORLD_WIDTH/2;
@@ -168,7 +169,7 @@ public final class Const
 	public static float DEEVE_SCALE = 0.17f;
 	public static float DEEVE_ALPHA = 1.0f;
 	public static float DEEVE_DEPTH = 5.0f;
-	public static int DEEVE_SPEED = 100;
+	public static int DEEVE_SPEED = 10;
 	
     public static float ROAD_DEPTH = 2.4f;
     public static float ROAD_WIDTH = 0.5f;
@@ -218,6 +219,7 @@ public final class Const
 	public static Image CAMP_BASE_IMAGE;
     public static Image ROAD_IMAGE;
     public static Image CARAVAN_IMAGE;
+    public static Image DEEVE_IMAGE;
 	public static Image MAP_IMAGE;
 	public static Image CONSTRUCTION_PANEL_EMPTY;
 	public static Image CONSTRUCTION_PANEL_SELECTED;
@@ -294,7 +296,8 @@ public final class Const
         CITY_BASE_SELECTED_IMAGE6 = assets().getImage("images/City/buildingSelection6.png");
         ROAD_IMAGE = assets().getImage("images/Road/sampleRoad.png");
         CARAVAN_IMAGE = assets().getImage("images/Caravan/Caravan.png");
-		MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
+        DEEVE_IMAGE = assets().getImage("images/Deeve/texture_deeve1.png");
+        MAP_IMAGE = assets().getImage("images/Road/sampleMapping.png");
 		CONSTRUCTION_PANEL_EMPTY = assets().getImage("images/UI/constructionPanel.png");
 		CONSTRUCTION_PANEL_SELECTED = assets().getImage("images/UI/constructionPanelSelected.png");
 		CONSTRUCTION_PALACE_LEVEL1 = assets().getImage("images/UI/constructionPanel_palace.png");
