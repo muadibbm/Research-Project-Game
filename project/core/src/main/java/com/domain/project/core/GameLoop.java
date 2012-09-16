@@ -464,7 +464,7 @@ public class GameLoop implements Game {
 				}
 				@Override //Called when the mouse is released.
 				public void	onMouseUp(Mouse.ButtonEvent event) {
-					deeveList.add(new Deeve(environment.getGraphLayer(), deeveMovesList, environment.getTreeOfLifeLayer().scaledWidth() / 10));
+					deeveList.add(new Deeve(environment.getGraphLayer(), deeveMovesList));
 				}
 				@Override //Called when the mouse is scrolled.
 				public void	onMouseWheelScroll(Mouse.WheelEvent event) {

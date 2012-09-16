@@ -168,7 +168,7 @@ public final class Const
 	public static float DEEVE_INITIAL_POS_Y = WORLD_HEIGHT/10;
 	public static float DEEVE_SCALE = 0.17f;
 	public static float DEEVE_ALPHA = 1.0f;
-	public static float DEEVE_DEPTH = 5.0f;
+	public static float DEEVE_DEPTH = 3.0f;
 	public static int DEEVE_SPEED = 10;
 	
     public static float ROAD_DEPTH = 2.4f;
