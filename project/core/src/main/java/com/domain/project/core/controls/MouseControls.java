@@ -10,21 +10,16 @@ import playn.core.Mouse;
 public class MouseControls implements Mouse.Listener {
 
 	public boolean clickScroll = false;
-
 	private float zoomSpeed = 1000.0f; // in milliseconds
-
 	private Environment env;
-
 	private float xOld = 0.0f;
 	private float yOld = 0.0f;
 	private float xOffset = 0.0f;
 	private float yOffset = 0.0f;
 	private float xCurrent = 0.0f;
 	private float yCurrent = 0.0f;
-	private float percentageX = 0.0f;
-	private float percentageY = 0.0f;
-	private int savedPositionX = 0;
-	private int savedPositionY = 0;
+	private float xNext = 0.0f;
+	private float yNext = 0.0f;
 
 	/** Constructor
 	 * @param env
@@ -53,19 +48,8 @@ public class MouseControls implements Mouse.Listener {
 	public void onMouseMove(Mouse.MotionEvent event) {
 		xCurrent = event.x(); // with respect to window coordinates
 		yCurrent = event.y();
-		
-		if (env.zLevel() == Zoom.OUT) {
-			percentageX = xCurrent / Const.WINDOW_WIDTH;
-			percentageY = yCurrent / Const.WINDOW_HEIGHT;
-		
-			int newXOffset = (int) (-(Const.WORLD_WIDTH) * percentageX - Const.WORLD_ORIGIN_X);
-			int newYOffset = (int) (-(Const.WORLD_HEIGHT) * percentageY - Const.WORLD_ORIGIN_Y);
-			
-			savedPositionX = newXOffset;
-			savedPositionY = newYOffset;
-		}
-		
-		if (clickScroll && env.zLevel() != Zoom.OUT) {
+
+		if (clickScroll && env.getZoomLevel() != Zoom.OUT) {
 			xOffset = xCurrent - xOld;
 			yOffset = yCurrent - yOld;
 
@@ -104,10 +88,28 @@ public class MouseControls implements Mouse.Listener {
 	public void onMouseWheelScroll(Mouse.WheelEvent event) {
 		// Scroll in
 		if (event.velocity() > 0) {
-			if (env.zLevel() == Zoom.DEFAULT) {
-				env.setZoomLevel(Zoom.IN);
-				zoomIn(env.getMainLayer(), Zoom.IN.getScale());
-			} else if (env.zLevel() == Zoom.OUT) {
+			if (env.getZoomLevel() == Zoom.DEFAULT) {
+				env.setZoomLevel(Zoom.IN_1);
+				zoomIn(env.getMainLayer(), Zoom.IN_1.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_1) {
+				env.setZoomLevel(Zoom.IN_2);
+				zoomIn(env.getMainLayer(), Zoom.IN_2.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_2) {
+				env.setZoomLevel(Zoom.IN_3);
+				zoomIn(env.getMainLayer(), Zoom.IN_3.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_3) {
+				env.setZoomLevel(Zoom.IN_4);
+				zoomIn(env.getMainLayer(), Zoom.IN_4.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_4) {
+				env.setZoomLevel(Zoom.IN_5);
+				zoomIn(env.getMainLayer(), Zoom.IN_5.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_5) {
+				env.setZoomLevel(Zoom.IN_6);
+				zoomIn(env.getMainLayer(), Zoom.IN_6.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_6) {
+				env.setZoomLevel(Zoom.IN_7);
+				zoomIn(env.getMainLayer(), Zoom.IN_7.getScale());
+			} else if (env.getZoomLevel() == Zoom.OUT) {
 				env.setZoomLevel(Zoom.DEFAULT);
 				zoomIn(env.getMainLayer(), Zoom.DEFAULT.getScale());
 			}
@@ -115,19 +117,45 @@ public class MouseControls implements Mouse.Listener {
 
 		// Scroll out
 		if (event.velocity() < 0) {
-			if (env.zLevel() == Zoom.DEFAULT) {
+			if (env.getZoomLevel() == Zoom.DEFAULT) {
 				env.setZoomLevel(Zoom.OUT);
 				zoomOut(env.getMainLayer(), Zoom.OUT.getScale()); // 0.0f to zoom all the way out
-			} else if (env.zLevel() == Zoom.IN) {
+			} else if (env.getZoomLevel() == Zoom.IN_1) {
 				env.setZoomLevel(Zoom.DEFAULT);
 				zoomOut(env.getMainLayer(), Zoom.DEFAULT.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_2) {
+				env.setZoomLevel(Zoom.IN_1);
+				zoomOut(env.getMainLayer(), Zoom.IN_1.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_3) {
+				env.setZoomLevel(Zoom.IN_2);
+				zoomOut(env.getMainLayer(), Zoom.IN_2.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_4) {
+				env.setZoomLevel(Zoom.IN_3);
+				zoomOut(env.getMainLayer(), Zoom.IN_3.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_5) {
+				env.setZoomLevel(Zoom.IN_4);
+				zoomOut(env.getMainLayer(), Zoom.IN_4.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_6) {
+				env.setZoomLevel(Zoom.IN_5);
+				zoomOut(env.getMainLayer(), Zoom.IN_5.getScale());
+			} else if (env.getZoomLevel() == Zoom.IN_7) {
+				env.setZoomLevel(Zoom.IN_6);
+				zoomOut(env.getMainLayer(), Zoom.IN_6.getScale());
 			}
 		}
 	}
 
 	private void zoomIn(GroupLayer layer, float scale) {
+		xNext = -(scale * xCurrent * 4);
+		yNext = -(scale * yCurrent * 4);
+		
+		if (scale > 1.0f) {
+			xNext += -xCurrent;
+			yNext += -yCurrent;
+		}
+
 		env.animator.tweenScale(layer).to(scale).in(zoomSpeed).easeIn();
-		env.animator.tweenXY(layer).to(savedPositionX * scale - Const.WORLD_ORIGIN_X, savedPositionY * scale - Const.WORLD_ORIGIN_Y).in(zoomSpeed).easeIn();
+		env.animator.tweenXY(layer).to(xNext, yNext).in(zoomSpeed).easeIn();
 	}
 
 	private void zoomOut(GroupLayer layer, float scale) {
@@ -146,11 +174,11 @@ public class MouseControls implements Mouse.Listener {
 			float newOffsetX = ((Const.WINDOW_WIDTH - scaledWidth) / 2.0f) + (env.getX() * scale);
 			float newOffsetY = ((Const.WINDOW_HEIGHT - scaledHeight) / 2.0f) + (env.getY() * scale);
 
-			env.animator.tweenScale(layer).in(zoomSpeed).easeInOut().to(scale);
-			env.animator.tweenXY(layer).in(zoomSpeed).easeInOut().to(newOffsetX, newOffsetY);
-		} else {			
+			env.animator.tweenScale(layer).to(scale).in(zoomSpeed).easeInOut();
+			env.animator.tweenXY(layer).to(newOffsetX, newOffsetY).in(zoomSpeed).easeInOut();
+		} else {
 			env.animator.tweenScale(layer).to(scale).in(zoomSpeed).easeIn();
-			env.animator.tweenXY(layer).to(savedPositionX * scale - Const.WORLD_ORIGIN_X, savedPositionY * scale - Const.WORLD_ORIGIN_Y).in(zoomSpeed).easeIn();
+			env.animator.tweenXY(layer).to(xNext, xNext).in(zoomSpeed).easeIn();
 		}
 	}
 }

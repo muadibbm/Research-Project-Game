@@ -115,25 +115,25 @@ public class KeyboardControls implements Keyboard.Listener {
 	public void parse() {
 		//parse keyboard input
 		if(scrollUp) {
-			if (env.getY() > (Const.WORLD_ORIGIN_Y) && env.zLevel() != Zoom.OUT) {
+			if (env.getY() > (Const.WORLD_ORIGIN_X) && env.getZoomLevel() != Zoom.OUT) {
 				env.setY(env.getY() - panRate);
 			}
 		}
 		
 		if(scrollDown) {
-			if (env.getY() < (Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) && env.zLevel() != Zoom.OUT) {
+			if (env.getY() < (Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) && env.getZoomLevel() != Zoom.OUT) {
 				env.setY(env.getY() + panRate);
 			}
 		}
 		
 		if(scrollLeft) {
-			if (env.getX() > (Const.WORLD_ORIGIN_X) && env.zLevel() != Zoom.OUT) {
+			if (env.getX() > (Const.WORLD_ORIGIN_X) && env.getZoomLevel() != Zoom.OUT) {
 				env.setX(env.getX() - panRate);
 			}
 		}
 		
 		if(scrollRight) {
-			if(env.getX() < (Const.WORLD_WIDTH - Const.WINDOW_WIDTH) && env.zLevel() != Zoom.OUT) {
+			if(env.getX() < (Const.WORLD_WIDTH - Const.WINDOW_WIDTH) && env.getZoomLevel() != Zoom.OUT) {
 				env.setX(env.getX() + panRate);
 			}
 		}

@@ -16,19 +16,19 @@ public final class Const
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-	public static int WORLD_WIDTH = WINDOW_WIDTH*5;
-    public static int WORLD_HEIGHT = WINDOW_HEIGHT*5;
+	public static int WORLD_WIDTH = WINDOW_WIDTH * 5;
+    public static int WORLD_HEIGHT = WINDOW_HEIGHT * 5;
 	public static int WORLD_ORIGIN_X = 0;
     public static int WORLD_ORIGIN_Y = 0;
 	
-	public static int BACKGROUND_WORLD_WIDTH = WORLD_WIDTH + 2*WORLD_WIDTH/5;
-	public static int BACKGROUND_WORLD_HEIGHT = WORLD_HEIGHT + 2*WORLD_HEIGHT/5;
-	public static int BACKGROUND_WORLD_ORIGIN_X = -WORLD_WIDTH/5;
-	public static int BACKGROUND_WORLD_ORIGIN_Y = -WORLD_HEIGHT/5;
+	public static int BACKGROUND_WORLD_WIDTH = 7 * WORLD_WIDTH / 5;
+	public static int BACKGROUND_WORLD_HEIGHT = 7 * WORLD_HEIGHT / 5;
+	public static int BACKGROUND_WORLD_ORIGIN_X = WORLD_ORIGIN_X;
+	public static int BACKGROUND_WORLD_ORIGIN_Y = WORLD_ORIGIN_Y;
 
     public static float BACKGROUND_DEPTH = 1.0f;
 	//public static float graphXOffset = 200;
-	public static float graphYOffset = WORLD_WIDTH/30;
+	public static float graphYOffset = WORLD_WIDTH / 30;
 	public static int STARTING_GOLD = 1000;
 	
     public static float BASE_CITY_SCALE = 0.06f;

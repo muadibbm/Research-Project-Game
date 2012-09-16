@@ -2,9 +2,6 @@ package com.domain.project.core;
 
 import com.domain.project.core.graph.Node;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
 * The Class contains all the game logic required for the player 
 */

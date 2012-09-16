@@ -22,7 +22,7 @@ public class Environment
 {
     final private GroupLayer mainLayer;
     final private GroupLayer graphLayer; //contains graph layer objects(city graphs, camp graphs, etc)
-	final private ImageLayer bgPathLayer;
+//	final private ImageLayer bgPathLayer;
 	final private ImageLayer deeveCave;
 	final private ImageLayer treeOfLife;
     final private ImageLayer bgLayer;
@@ -49,7 +49,7 @@ public class Environment
         bgLayer.setRepeatX(true);
         bgLayer.setRepeatY(true);
 		
-		bgPathLayer = graphics().createImageLayer(Const.BACKGROUND_PATH_IMAGE);
+//		bgPathLayer = graphics().createImageLayer(Const.BACKGROUND_PATH_IMAGE);
 		//bgPathLayer.setTranslation(2*Const.WORLD_WIDTH/5+Const.WORLD_WIDTH/80, 0);
         //bgPathLayer.setSize(2*Const.WORLD_WIDTH/10, Const.WORLD_HEIGHT);
         //bgPathLayer.setRepeatX(true);
@@ -194,9 +194,9 @@ public class Environment
     }
 	
 	/**
-     * @return zlevel of type Zoom
+     * @return gets the zoom level
      */
-    public Zoom zLevel() {
+    public Zoom getZoomLevel() {
         return zLevel;
     }
 }
