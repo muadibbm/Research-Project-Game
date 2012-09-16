@@ -98,11 +98,12 @@ public class GameLoop implements Game {
 		addAllListeners(campGraphB, player1, gui1);
 		addAllListeners(cityGraphB, player1, gui1);
 
+		// This is just for testing. The Deeves might not be created here.
 		deeveMovesList = new ArrayList<Tuple2f>();
 		deeveList = new ArrayList<Deeve>();
 		deeveMovesList.add(new Tuple2f(environment.getDeeveCaveLayer().transform().tx() + environment.getDeeveCaveLayer().scaledWidth() / 2, environment.getDeeveCaveLayer().transform().ty() + environment.getDeeveCaveLayer().scaledHeight()));
 		deeveMovesList.add(new Tuple2f(environment.getTreeOfLifeLayer().transform().tx() + environment.getTreeOfLifeLayer().scaledWidth() / 2, environment.getTreeOfLifeLayer().transform().ty() + environment.getTreeOfLifeLayer().scaledHeight()));
-		deeveList.add(new Deeve(environment.getGraphLayer(), deeveMovesList, environment.getTreeOfLifeLayer().scaledWidth() / 10));
+		deeveList.add(new Deeve(environment.getGraphLayer(), deeveMovesList));
 	}
 
 	/**
@@ -336,7 +337,7 @@ public class GameLoop implements Game {
 								if (player.getSelectedNode().getMapping() == null) {
 									player.setNodeToBeMapped(player.getSelectedNode());
 									//TODO : add some graphical indication - Andrey add drag mapping HERE <--
-									
+
 								}
 							}
 							/* Set the mapping of the selected node visible */
@@ -366,12 +367,12 @@ public class GameLoop implements Game {
 						}
 					}
 				}
-				
+
 				@Override //Called when the mouse is dragged.
 				public void	onMouseDrag(Mouse.MotionEvent event) {
 
 				}
-				
+
 				@Override //Called when the mouse leaves a Layer.
 				public void	onMouseOut(Mouse.MotionEvent event) {
 					if (hover_node != null) {

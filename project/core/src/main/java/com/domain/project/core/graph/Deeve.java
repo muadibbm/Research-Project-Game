@@ -30,33 +30,21 @@ public class Deeve {
 	private byte deeveLevel;
 	private boolean hasArrived;
 	private int dx, dy, err, sx, sy;
+	private int i;
 	private Timer timer;
 
-	public Deeve(final GroupLayer graphLayer, ArrayList<Tuple2f> pointsList, float stoppingDistance) {
+	public Deeve(final GroupLayer graphLayer, final ArrayList<Tuple2f> pointsList) {
 		deeveLayer = graphics().createImageLayer(deeveImage);
 		deeveLayer.setDepth(Const.DEEVE_DEPTH);
 		deeveLayer.setAlpha(Const.DEEVE_ALPHA);
 		deeveLevel = 1;
-		initialPosition = pointsList.get(0);
+		i = 0;
+		initialPosition = pointsList.get(i);
 		currentPosition = initialPosition;
-		finalPosition = pointsList.get(pointsList.size() - 1);
-		stoppingDist = stoppingDistance;
+		finalPosition = pointsList.get(i + 1);
+		stoppingDist = 15;
 		hasArrived = false;
-		dx = (int) Math.abs(finalPosition.getX() - initialPosition.getX());
-		dy = (int) Math.abs(finalPosition.getY() - initialPosition.getY());
-		err = dx - dy;
-
-		if (currentPosition.getX() < finalPosition.getX()) { 
-			sx = 1;
-		} else { 
-			sx = -1;
-		}
-
-		if (currentPosition.getY() < finalPosition.getY()) {
-			sy = 1;
-		} else {
-			sy = -1;
-		}
+		reeval();
 
 		deeveImage.addCallback(new ResourceCallback<Image>() {
 			@Override
@@ -80,8 +68,16 @@ public class Deeve {
 				if (currentPosition.getDistanceFrom(finalPosition) > stoppingDist) {
 					moveDeeve();
 				} else {
-					hasArrived = true;
-					deeveStopMoving();
+					if (i == (pointsList.size() - 1)) {
+						hasArrived = true;
+						deeveStopMoving();
+					} else {
+						initialPosition = finalPosition;
+						currentPosition = initialPosition;
+						i++;
+						finalPosition = pointsList.get(i);
+						reeval();
+					}					
 				}
 
 				paint(currentPosition.getX(), currentPosition.getY());
@@ -94,6 +90,24 @@ public class Deeve {
 	public void paint(float x, float y) {
 		deeveLayer.setScale(Const.DEEVE_SCALE, Const.DEEVE_SCALE);
 		deeveLayer.setTranslation(x, y);
+	}
+
+	private void reeval() {
+		dx = (int) Math.abs(finalPosition.getX() - initialPosition.getX());
+		dy = (int) Math.abs(finalPosition.getY() - initialPosition.getY());
+		err = dx - dy;
+
+		if (currentPosition.getX() < finalPosition.getX()) { 
+			sx = 1;
+		} else { 
+			sx = -1;
+		}
+
+		if (currentPosition.getY() < finalPosition.getY()) {
+			sy = 1;
+		} else {
+			sy = -1;
+		}
 	}
 
 	/** Move the deeve from the cave to the tree of life to destroy it.
