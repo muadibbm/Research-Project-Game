@@ -17,6 +17,7 @@ import com.domain.project.core.graph.Deeve;
 import com.domain.project.core.graph.Edge;
 import com.domain.project.core.graph.Graph;
 import com.domain.project.core.graph.Node;
+import com.domain.project.core.graph.Road;
 import com.domain.project.core.graph.Tree;
 import com.domain.project.core.graph.Tuple2f;
 
@@ -54,6 +55,10 @@ public class GameLoop implements Game {
 
 	private ArrayList<Tuple2f> deeveMovesList;
 	private ArrayList<Deeve> deeveList;
+	
+	private float mouseX;
+	private float mouseY;
+	private Road mouseRoad;
 
 	/**
 	 * Initializes all the game variables before starting the game.
@@ -340,7 +345,11 @@ public class GameLoop implements Game {
 								if (player.getSelectedNode().getMapping() == null) {
 									player.setNodeToBeMapped(player.getSelectedNode());
 									//TODO : add some graphical indication - Andrey add drag mapping HERE <--
-
+									mouseRoad = new Road(environment.getGraphLayer());
+									mouseRoad.placeRoad(player.getSelectedNode().getPos(), new Tuple2f(mouseX, mouseY));
+									mouseRoad.setVisible(true);
+									mouseRoad.paint();
+									mouseRoad.paintVisibility(true);
 								}
 							}
 							/* Set the mapping of the selected node visible */
@@ -427,6 +436,10 @@ public class GameLoop implements Game {
 				}
 				@Override //Called when the mouse enters a Layer.
 				public void	onMouseOver(Mouse.MotionEvent event) {
+					mouseX = event.x();
+					mouseY = event.y();
+					System.out.println(mouseX + ", " + mouseY);
+					
 					if ((player.getSelectedNode() == null &  player.getNodeToBeMapped() == null) || 
 							(player.getSelectedNode() != null & player.getSelectedNode()!=node) ||
 							(player.getNodeToBeMapped()!=null & player.getNodeToBeMapped()!=node)) {

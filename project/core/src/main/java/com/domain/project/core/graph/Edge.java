@@ -38,9 +38,7 @@ public class Edge {
 		road = new Road(graphLayer);
     }
     
-    public Edge(GroupLayer graphLayer, int n1, int n2) {
-    	this.n1 = n1;
-        this.n2 = n2;
+    public Edge(GroupLayer graphLayer) {
         road = new Road(graphLayer);
     }
 	
