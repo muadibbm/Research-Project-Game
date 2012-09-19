@@ -56,9 +56,9 @@ public class GameLoop implements Game {
 	private ArrayList<Tuple2f> deeveMovesList;
 	private ArrayList<Deeve> deeveList;
 	
-	private float mouseX;
-	private float mouseY;
-	private Road mouseRoad;
+	//private float mouseX;
+	//private float mouseY;
+	//private Road mouseRoad;
 
 	/**
 	 * Initializes all the game variables before starting the game.
@@ -139,10 +139,17 @@ public class GameLoop implements Game {
 	 */
 	@Override
 	public void update(float delta) {
-		System.out.println(environment.getX());
-		System.out.println(environment.getY());
-					
-		kbControls.parse();
+		
+		System.out.println("W = " +  Const.WINDOW_WIDTH);
+		System.out.println("H = " +  Const.WINDOW_HEIGHT);
+		
+		System.out.println("Mx : " + mControls.getX());
+		System.out.println("My : " + mControls.getY());
+		
+		System.out.println("ENVx : " + environment.getX());
+		System.out.println("ENVy : " + environment.getY());
+		
+		kbControls.parse(mControls.getX(), mControls.getY());
 		environment.update(delta);
 		cityGraphA.updateAll();
 		cityGraphB.updateAll();
@@ -182,7 +189,9 @@ public class GameLoop implements Game {
 			plantTrees(campGraphA.getX(), 0, 
 					campGraphA.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);
 			plantTrees(campGraphB.getX()+campGraphB.getWidth()/2, 0, 
-					campGraphB.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);
+					campGraphB.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);	
+			//plantTrees(0, Const.WORLD_HEIGHT, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER*2);
+			//plantTrees(Const.WORLD_WIDTH, 0, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER*2);
 			isTreeUpdated = true;
 		}
 	}
@@ -345,11 +354,11 @@ public class GameLoop implements Game {
 								if (player.getSelectedNode().getMapping() == null) {
 									player.setNodeToBeMapped(player.getSelectedNode());
 									//TODO : add some graphical indication - Andrey add drag mapping HERE <--
-									mouseRoad = new Road(environment.getGraphLayer());
-									mouseRoad.placeRoad(player.getSelectedNode().getPos(), new Tuple2f(mouseX, mouseY));
-									mouseRoad.setVisible(true);
-									mouseRoad.paint();
-									mouseRoad.paintVisibility(true);
+									//mouseRoad = new Road(environment.getGraphLayer());
+									//mouseRoad.placeRoad(player.getSelectedNode().getPos(), new Tuple2f(mouseX, mouseY));
+									//mouseRoad.setVisible(true);
+									//mouseRoad.paint();
+									//mouseRoad.paintVisibility(true);
 								}
 							}
 							/* Set the mapping of the selected node visible */
@@ -436,9 +445,9 @@ public class GameLoop implements Game {
 				}
 				@Override //Called when the mouse enters a Layer.
 				public void	onMouseOver(Mouse.MotionEvent event) {
-					mouseX = event.x();
-					mouseY = event.y();
-					System.out.println(mouseX + ", " + mouseY);
+					//mouseX = event.x();
+					//mouseY = event.y();
+					//System.out.println(mouseX + ", " + mouseY);
 					
 					if ((player.getSelectedNode() == null &  player.getNodeToBeMapped() == null) || 
 							(player.getSelectedNode() != null & player.getSelectedNode()!=node) ||

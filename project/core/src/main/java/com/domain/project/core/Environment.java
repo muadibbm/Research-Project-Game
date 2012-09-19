@@ -72,6 +72,7 @@ public class Environment
         mainLayer = graphics().createGroupLayer();
         //create group layer containing the graphs
         graphLayer = graphics().createGroupLayer();
+		//graphLayer.setOrigin(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
         //create group layer containing the UI
         uiLayer = graphics().createGroupLayer();
         //add all the layer to the main Layer and then the root Layer
@@ -91,8 +92,8 @@ public class Environment
         graphLayer.setDepth(Const.BACKGROUND_DEPTH+1.0f);
 		uiLayer.setDepth(Const.UI_DEPTH);
         
-        xOffset = 0.0f;
-        yOffset = 0.0f;
+        xOffset = Const.WORLD_ORIGIN_X;
+        yOffset = Const.WORLD_ORIGIN_Y;;
         
         zLevel = Zoom.DEFAULT;
     }

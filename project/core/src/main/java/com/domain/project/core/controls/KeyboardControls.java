@@ -13,7 +13,7 @@ public class KeyboardControls implements Keyboard.Listener {
 	public static boolean scrollLeft = false;
 	public static boolean scrollRight = false;
 
-	private float panRate = 5.0f;
+	private float panRate = 25.0f;
 
 	private Environment env;
 
@@ -112,29 +112,33 @@ public class KeyboardControls implements Keyboard.Listener {
 
 	}
 
-	public void parse() {
+	public void parse(float mX, float mY) {
 		//parse keyboard input
-		if(scrollUp) {
-			if (env.getY() > (Const.WORLD_ORIGIN_X) && env.getZoomLevel() != Zoom.OUT) {
-				env.setY(env.getY() - panRate);
+		if(scrollUp || mY <= Const.WINDOW_HEIGHT/100) {
+			if (env.getY() >= Const.WORLD_ORIGIN_Y && env.getZoomLevel() != Zoom.OUT) {
+				if(env.getY() - panRate >= Const.WORLD_ORIGIN_Y)
+					env.setY(env.getY() - panRate);
 			}
 		}
 		
-		if(scrollDown) {
-			if (env.getY() < (Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) && env.getZoomLevel() != Zoom.OUT) {
-				env.setY(env.getY() + panRate);
+		if(scrollDown || mY >= 99*Const.WINDOW_HEIGHT/100) {
+			if (env.getY() <= (Const.WORLD_HEIGHT - Const.WINDOW_HEIGHT) && env.getZoomLevel() != Zoom.OUT) {
+				if(env.getY() + panRate <= Const.WORLD_HEIGHT)
+					env.setY(env.getY() + panRate);
 			}
 		}
 		
-		if(scrollLeft) {
-			if (env.getX() > (Const.WORLD_ORIGIN_X) && env.getZoomLevel() != Zoom.OUT) {
-				env.setX(env.getX() - panRate);
+		if(scrollLeft || mX <= Const.WINDOW_WIDTH/100) {
+			if (env.getX() >= (Const.WORLD_ORIGIN_X) && env.getZoomLevel() != Zoom.OUT) {
+				if(env.getX() - panRate >= Const.WORLD_ORIGIN_X)
+					env.setX(env.getX() - panRate);
 			}
 		}
 		
-		if(scrollRight) {
-			if(env.getX() < (Const.WORLD_WIDTH - Const.WINDOW_WIDTH) && env.getZoomLevel() != Zoom.OUT) {
-				env.setX(env.getX() + panRate);
+		if(scrollRight || mX >= 99*Const.WINDOW_WIDTH/100) {
+			if (env.getX() <= (Const.WORLD_WIDTH - Const.WINDOW_WIDTH) && env.getZoomLevel() != Zoom.OUT) {
+				if(env.getX() + panRate <= Const.WORLD_WIDTH)
+					env.setX(env.getX() + panRate);
 			}
 		}
 	}

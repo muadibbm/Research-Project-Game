@@ -16,15 +16,15 @@ public final class Const
     //public static int WINDOW_WIDTH = 1024;
     //public static int WINDOW_HEIGHT = 768;
 
-	public static int WORLD_WIDTH = WINDOW_WIDTH * 5;
-    public static int WORLD_HEIGHT = WINDOW_HEIGHT * 5;
+	public static int WORLD_WIDTH = WINDOW_WIDTH * 4;
+    public static int WORLD_HEIGHT = WINDOW_HEIGHT * 4;
 	public static int WORLD_ORIGIN_X = 0;
     public static int WORLD_ORIGIN_Y = 0;
 	
-	public static int BACKGROUND_WORLD_WIDTH = 7 * WORLD_WIDTH / 5;
-	public static int BACKGROUND_WORLD_HEIGHT = 7 * WORLD_HEIGHT / 5;
-	public static int BACKGROUND_WORLD_ORIGIN_X = WORLD_ORIGIN_X - WORLD_WIDTH / 5;
-	public static int BACKGROUND_WORLD_ORIGIN_Y = WORLD_ORIGIN_Y - WORLD_HEIGHT / 5;
+	public static int BACKGROUND_WORLD_WIDTH = 7 * WORLD_WIDTH/3;
+	public static int BACKGROUND_WORLD_HEIGHT = 7 * WORLD_HEIGHT/3;
+	public static int BACKGROUND_WORLD_ORIGIN_X = WORLD_ORIGIN_X - WORLD_WIDTH/3;
+	public static int BACKGROUND_WORLD_ORIGIN_Y = WORLD_ORIGIN_Y - WORLD_HEIGHT/3;
 
     public static float BACKGROUND_DEPTH = 1.0f;
 	//public static float graphXOffset = 200;
@@ -44,7 +44,7 @@ public final class Const
     public static float MIN_CITY_DISTANCE = 150;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CITY_GRAPH_WIDTH = WORLD_WIDTH/(5.0f);
-    public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-80;
+    public static float CITY_GRAPH_HEIGHT = WORLD_HEIGHT-WORLD_HEIGHT/10;
 	public static float PALACE_X = 0.0f;
 	public static float PALACE_Y = -23.0f;
 	public static float PALACE_DEPTH = 3.2f;
@@ -123,7 +123,7 @@ public final class Const
 	public static float CAMP_SCALE = 1.0f;
     //public static float MAX_CITY_DISTANCE = WORLD_WIDTH-100;
     public static float CAMP_GRAPH_WIDTH = WORLD_WIDTH/(5.0f);
-    public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-100;
+    public static float CAMP_GRAPH_HEIGHT = WORLD_HEIGHT-WORLD_HEIGHT/10;
 	/*public static float SOLDIER_TENT_X = 23.0f;
 	public static float SOLDIER_TENT_Y = 3.2f;
 	public static float SOLDIER_TENT_DEPTH = 3.3f;
@@ -202,7 +202,7 @@ public final class Const
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
 	public static float TREE_SCALE = 0.063f;
-	public static int MAX_TREE_NUMBER = 5000;
+	public static int MAX_TREE_NUMBER = 4500;
 	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
 	public static float MIN_NODE_TREE_DISTANCE = 70.0f;
 
