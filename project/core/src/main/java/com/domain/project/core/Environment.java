@@ -94,8 +94,6 @@ public class Environment
         
         xOffset = Const.WORLD_ORIGIN_X;
         yOffset = Const.WORLD_ORIGIN_Y;;
-        
-        zLevel = Zoom.DEFAULT;
     }
 
 	/**

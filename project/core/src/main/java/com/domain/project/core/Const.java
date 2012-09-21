@@ -29,9 +29,10 @@ public final class Const
     public static float BACKGROUND_DEPTH = 1.0f;
 	//public static float graphXOffset = 200;
 	public static float graphYOffset = WORLD_WIDTH / 30;
+	public static float campCityGraphGap = WORLD_WIDTH / 30;
 	public static int STARTING_GOLD = 1000;
 	
-    public static float BASE_CITY_SCALE = 0.06f;
+    public static float BASE_CITY_SCALE = 0.1f;
 	public static float BASE_CAMP_SCALE = 0.075f;
 	public static float CITY_SELECTION_SCALE1 = 0.35f;
 	public static float CITY_SELECTION_SCALE2 = 0.36f;
@@ -201,10 +202,10 @@ public final class Const
 	
 	public static float TREE_SHADOW_DEPTH = 2.65f;
 	public static float TREE_DEPTH = 2.7f;
-	public static float TREE_SCALE = 0.063f;
-	public static int MAX_TREE_NUMBER = 4500;
-	public static float MIN_INBETWEEN_TREE_DISTANCE = 5.0f;
-	public static float MIN_NODE_TREE_DISTANCE = 70.0f;
+	public static float TREE_SCALE = 0.13f;
+	public static int MAX_TREE_NUMBER = 5000;
+	public static float MIN_INBETWEEN_TREE_DISTANCE = 10.0f;
+	public static float MIN_NODE_TREE_DISTANCE = 100.0f;
 
 	public static Image FRAME_IMAGE;
     public static Image BACKGROUND_IMAGE;

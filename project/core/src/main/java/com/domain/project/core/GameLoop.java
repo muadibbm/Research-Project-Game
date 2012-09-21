@@ -79,10 +79,10 @@ public class GameLoop implements Game {
 
 		cityGraphA = new Graph(true, Const.WORLD_WIDTH/7, Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CITY_GRAPH_HEIGHT, 1);
 		cityGraphA.generateGraph(graphA, environment.getGraphLayer(), player1.getId());
-		campGraphA = new Graph(false, 2*Const.WORLD_WIDTH/7, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 2);
+		campGraphA = new Graph(false, 2*Const.WORLD_WIDTH/7 + Const.campCityGraphGap, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 2);
 		campGraphA.generateGraph(graphB, environment.getGraphLayer(), player1.getId());
 
-		campGraphB = new Graph(false, 4*Const.WORLD_WIDTH/7, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 3);
+		campGraphB = new Graph(false, 4*Const.WORLD_WIDTH/7 - Const.campCityGraphGap, 2*Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CAMP_GRAPH_HEIGHT-Const.graphYOffset, 3);
 		campGraphB.generateGraph(graphA, environment.getGraphLayer(), player2.getId());
 		cityGraphB = new Graph(true, 5*Const.WORLD_WIDTH/7, Const.graphYOffset, Const.WORLD_WIDTH/7, Const.CITY_GRAPH_HEIGHT, 4);
 		cityGraphB.generateGraph(graphB, environment.getGraphLayer(), player2.getId());
@@ -139,16 +139,17 @@ public class GameLoop implements Game {
 	 */
 	@Override
 	public void update(float delta) {
-		
-		System.out.println("W = " +  Const.WINDOW_WIDTH);
-		System.out.println("H = " +  Const.WINDOW_HEIGHT);
-		
-		System.out.println("Mx : " + mControls.getX());
-		System.out.println("My : " + mControls.getY());
-		
+
+		//System.out.println(Const.WORLD_WIDTH + " " + Const.WORLD_HEIGHT);
+		//TODO
+		//System.out.println("Mx : " + mControls.getX());
+		//System.out.println("My : " + mControls.getY());
+		//System.out.println("new Mx : " + mControls.getX()*Const.WORLD_WIDTH/Const.WINDOW_WIDTH);
+		//System.out.println("new My : " + mControls.getY()*Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT);
+		/*
 		System.out.println("ENVx : " + environment.getX());
 		System.out.println("ENVy : " + environment.getY());
-		
+		*/
 		kbControls.parse(mControls.getX(), mControls.getY());
 		environment.update(delta);
 		cityGraphA.updateAll();
@@ -186,9 +187,9 @@ public class GameLoop implements Game {
 					cityGraphA.getWidth()+Const.WORLD_WIDTH/7, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
 			plantTrees(cityGraphB.getX(), 0,
 					cityGraphB.getWidth()+Const.WORLD_WIDTH/7, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER);
-			plantTrees(campGraphA.getX(), 0, 
+			plantTrees(campGraphA.getX()-Const.campCityGraphGap, 0, 
 					campGraphA.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);
-			plantTrees(campGraphB.getX()+campGraphB.getWidth()/2, 0, 
+			plantTrees(campGraphB.getX()+campGraphB.getWidth()/2+Const.campCityGraphGap, 0, 
 					campGraphB.getWidth()/2, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER/10);	
 			//plantTrees(0, Const.WORLD_HEIGHT, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER*2);
 			//plantTrees(Const.WORLD_WIDTH, 0, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER*2);
@@ -402,7 +403,8 @@ public class GameLoop implements Game {
 								(player.getNodeToBeMapped()!=null & player.getNodeToBeMapped()!=hover_node)) {
 							hover_node.getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
 							for(Node neigbor : node.getNeighbors())
-								neigbor.getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
+								if(player.getSelectedNode()!=neigbor & player.getNodeToBeMapped()!=neigbor)
+									neigbor.getBase().getBaseLayer().setAlpha(Const.BASE_ALPHA);
 							/* Set all edges of the selected node visible */
 							for(Map.Entry<Integer, Edge> edge : graph.getEdges().entrySet()) {
 								if (node.equals(graph.getNode1(edge.getValue()))) {

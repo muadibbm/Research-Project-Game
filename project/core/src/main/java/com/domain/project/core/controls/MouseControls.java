@@ -12,7 +12,7 @@ import pythagoras.f.Transform;
 public class MouseControls implements Mouse.Listener{
 
 	public boolean clickScroll = false;
-	private float zoomSpeed = 390.0f; // in milliseconds
+	private float zoomSpeed = 900.0f; // in milliseconds
 	private Environment env;
 	
 	private float xNext = 0.0f;
@@ -20,13 +20,16 @@ public class MouseControls implements Mouse.Listener{
 	private float xCurrent = 0.0f;
 	private float yCurrent = 0.0f;
 	
-	private float nextScale = 0.0f;
+	private float nextScaleX = 0.0f;
+	private float nextScaleY = 0.0f;
 
 	/** Constructor
 	 * @param env
 	 */
 	public MouseControls(Environment env) {
 		this.env = env;
+		env.setZoomLevel(Zoom.OUT);
+		zoomOut(env.getMainLayer(), Zoom.OUT.getScale()); // 0.0f to zoom all the way out
 	}
 
 	public float getX() {
@@ -61,7 +64,7 @@ public class MouseControls implements Mouse.Listener{
 			if (env.getZoomLevel() == Zoom.OUT) {
 				env.setZoomLevel(Zoom.DEFAULT);
 				zoomIn(env.getMainLayer(), Zoom.DEFAULT.getScale());
-			}/* else if (env.getZoomLevel() == Zoom.DEFAULT) {
+			} /*else if (env.getZoomLevel() == Zoom.DEFAULT) {
 				env.setZoomLevel(Zoom.IN_1);
 				zoomIn(env.getMainLayer(), Zoom.IN_1.getScale());
 			} else if (env.getZoomLevel() == Zoom.IN_1) {
@@ -78,7 +81,7 @@ public class MouseControls implements Mouse.Listener{
 			if (env.getZoomLevel() == Zoom.DEFAULT) {
 				env.setZoomLevel(Zoom.OUT);
 				zoomOut(env.getMainLayer(), Zoom.OUT.getScale()); // 0.0f to zoom all the way out
-			}/* else if (env.getZoomLevel() == Zoom.IN_1) {
+			} /*else if (env.getZoomLevel() == Zoom.IN_1) {
 				env.setZoomLevel(Zoom.DEFAULT);
 				zoomOut(env.getMainLayer(), Zoom.DEFAULT.getScale());
 			} else if (env.getZoomLevel() == Zoom.IN_2) {
@@ -92,68 +95,63 @@ public class MouseControls implements Mouse.Listener{
 	}
 
 	private void zoomIn(GroupLayer layer, float scale) {
-		xNext = 0.0f;
-		yNext = 0.0f;
 		if(scale == 1.0f) {
-			nextScale = scale-0.25f;
-			xNext = xCurrent*Const.WORLD_WIDTH/Const.WINDOW_WIDTH*nextScale;
-			yNext = yCurrent*Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT*nextScale;
-			//TODO from HERE
-			//if(xNext + Const.WINDOW_WIDTH >= Const.WORLD_WIDTH)
-			//	xNext = (xNext - (xNext + Const.WINDOW_WIDTH - Const.WORLD_WIDTH)))*nextScale;
-			//if(yNext + Const.WINDOW_HEIGHT >= Const.WORLD_HEIGHT)
-			//	yNext = (yNext - (yNext + Const.WINDOW_HEIGHT - Const.WORLD_HEIGHT))*nextScale;
-			/*if(xCurrent <= Const.WINDOW_WIDTH/2 & yCurrent <= Const.WINDOW_HEIGHT/2) {
-				xNext = Const.WORLD_ORIGIN_X+Const.WORLD_WIDTH/4;
-				yNext = Const.WORLD_ORIGIN_Y+Const.WORLD_HEIGHT/4;
-			}
-			else if(xCurrent > Const.WINDOW_WIDTH/2 & yCurrent <= Const.WINDOW_HEIGHT/2) {
-				xNext = Const.WORLD_ORIGIN_X+3*Const.WORLD_WIDTH/4;
-				yNext = Const.WORLD_ORIGIN_Y+Const.WORLD_HEIGHT/4;
-			}
-			else if(xCurrent > Const.WINDOW_WIDTH/2 & yCurrent > Const.WINDOW_HEIGHT/2) {
-				xNext = Const.WORLD_ORIGIN_X+3*Const.WORLD_WIDTH/4;
-				yNext = Const.WORLD_ORIGIN_Y+3*Const.WORLD_HEIGHT/4;
-			}
-			else if(xCurrent <= Const.WINDOW_WIDTH/2 & yCurrent > Const.WINDOW_HEIGHT/2) {
-				xNext = Const.WORLD_ORIGIN_X+Const.WORLD_WIDTH/4;
-				yNext = Const.WORLD_ORIGIN_Y+3*Const.WORLD_HEIGHT/4;
-			}
-			nextScale = scale-0.25f;*/
-		}/* else if(scale == 4.0f) {
-			xNext = -xCurrent*Const.WORLD_WIDTH/Const.WINDOW_WIDTH/4/4;
-			yNext = -yCurrent*Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT/4/4;
-			nextScale = scale;
-		} else if(scale == 8.0f) {
-			xNext = -xCurrent*Const.WORLD_WIDTH/Const.WINDOW_WIDTH/16/4;
-			yNext = -yCurrent*Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT/16/4;
-			nextScale = scale;
-		} else if(scale == 16.0f) {
-			xNext = -xCurrent*Const.WORLD_WIDTH/Const.WINDOW_WIDTH/16/16;
-			yNext = -yCurrent*Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT/16/16;
-			nextScale = scale;
+			nextScaleX = Const.WORLD_WIDTH/Const.WINDOW_WIDTH;
+			nextScaleY = Const.WORLD_HEIGHT/Const.WINDOW_HEIGHT;
+			xNext = xCurrent*nextScaleX - Const.WINDOW_WIDTH/nextScaleX/2;
+			yNext = yCurrent*nextScaleY - Const.WINDOW_HEIGHT/nextScaleY/2;
+			if(xNext + Const.WINDOW_WIDTH >= Const.WORLD_WIDTH)
+				xNext = xNext - Const.WINDOW_WIDTH/nextScaleX/4;
+			if(yNext + Const.WINDOW_HEIGHT >= Const.WORLD_HEIGHT)
+				yNext = yNext  - Const.WINDOW_HEIGHT/nextScaleY/4;
+			if(xNext < Const.WORLD_ORIGIN_X)
+				xNext = Const.WORLD_ORIGIN_X;
+			if(yNext < Const.WORLD_ORIGIN_Y)
+				yNext = Const.WORLD_ORIGIN_Y;
+		}/*
+		else if(scale == 2.0f) {
+			nextScaleX = Const.WINDOW_WIDTH/nextScaleX;
+			nextScaleY = Const.WINDOW_HEIGHT/nextScaleY;
+			xNext = xCurrent*nextScaleX - Const.WINDOW_WIDTH/nextScaleX/2;
+			yNext = yCurrent*nextScaleY - Const.WINDOW_HEIGHT/nextScaleY/2;
+			if(xNext + Const.WINDOW_WIDTH/4 >= Const.WORLD_WIDTH)
+				xNext = xNext - Const.WINDOW_WIDTH/nextScaleX/4;
+			if(yNext + Const.WINDOW_HEIGHT/4 >= Const.WORLD_HEIGHT)
+				yNext = yNext  - Const.WINDOW_HEIGHT/nextScaleY/4;
+			if(xNext < Const.WORLD_ORIGIN_X)
+				xNext = Const.WORLD_ORIGIN_X;
+			if(yNext < Const.WORLD_ORIGIN_Y)
+				yNext = Const.WORLD_ORIGIN_Y;
 		}*/
-		//env.animator.tweenTranslation(layer).to(-xNext, -yNext).in(zoomSpeed).easeIn();
-		env.animator.tweenScale(layer).to(nextScale).in(zoomSpeed).easeIn();
+		env.animator.tweenScaleX(layer).to(nextScaleX).in(zoomSpeed).easeIn();
+		env.animator.tweenScaleY(layer).to(nextScaleY).in(zoomSpeed).easeIn();
 		env.setX(xNext);
 		env.setY(yNext);
 	}
 
 	private void zoomOut(GroupLayer layer, float scale) {
-		xNext = 0.0f;
-		yNext = 0.0f;
 		if (scale == 0.0f) {
 			xNext = Const.WORLD_ORIGIN_X;
 			yNext = Const.WORLD_ORIGIN_Y;
-			nextScale = 0.25f;
-		}
-		/*else if{
-			xNext = xCurrent/Const.WORLD_WIDTH*Const.WINDOW_WIDTH;
-			yNext = yCurrent/Const.WORLD_HEIGHT*Const.WINDOW_HEIGHT;
-			nextScale = scale;
+			nextScaleX = 0.25f;
+			nextScaleY = 0.25f;
+		}/*
+		else if(scale == 1.0f) {
+			nextScaleX = Const.WINDOW_WIDTH/Const.WORLD_WIDTH;
+			nextScaleY = Const.WINDOW_HEIGHT/Const.WORLD_HEIGHT;
+			xNext = xCurrent*nextScaleX - Const.WINDOW_WIDTH/nextScaleX/2;
+			yNext = yCurrent*nextScaleY - Const.WINDOW_HEIGHT/nextScaleY/2;
+			if(xNext + Const.WINDOW_WIDTH >= Const.WORLD_WIDTH)
+				xNext = xNext - Const.WINDOW_WIDTH/nextScaleX/4;
+			if(yNext + Const.WINDOW_HEIGHT >= Const.WORLD_HEIGHT)
+				yNext = yNext  - Const.WINDOW_HEIGHT/nextScaleY/4;
+			if(xNext < Const.WORLD_ORIGIN_X)
+				xNext = Const.WORLD_ORIGIN_X;
+			if(yNext < Const.WORLD_ORIGIN_Y)
+				yNext = Const.WORLD_ORIGIN_Y;
 		}*/
-		//env.animator.tweenTranslation(layer).to(xNext, yNext).in(zoomSpeed).easeIn();
-		env.animator.tweenScale(layer).to(nextScale).in(zoomSpeed).easeIn();
+		env.animator.tweenScaleX(layer).to(nextScaleX).in(zoomSpeed).easeOut();
+		env.animator.tweenScaleY(layer).to(nextScaleY).in(zoomSpeed).easeOut();
 		env.setX(xNext);
 		env.setY(yNext);
 	}
