@@ -1,7 +1,4 @@
-TODOs FOR RESEARCH_PROEJCT PHASE I(Deadline:September 30th):
-
-*NOTE: Please choose any you want and tell me which(but if u choose you better try to do it).
-(Also several people can work on same task)
+<<Project Development Stopped. Moved to Xna C#>>
 
 1. Addition of a fluid zooming function (at least 7 levels) (EXTRA feature: a level of detail for all textures at diffrent zoom levels).
 Also, the movment with right click and amount of movement the window has, should change.(for example at lowest zoom, the movment should be lowered)
@@ -19,8 +16,3 @@ Also, the movment with right click and amount of movement the window has, should
 13. Fighting gameplay, destruction of cities and camps. 		- Andrey is assigned
 14. Animation.
 15. Fixing the bug in camera movement(cannot move beyond a point at lowest zoom level).
-
-*NOTE: I will be on skype for any questions regarding any of the todos
-*NOTE: If u think we need anymore TODOs please tell me.
-
-THANKS
