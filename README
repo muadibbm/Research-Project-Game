@@ -1,6 +1,6 @@
 A Protoype of an Online multiplayer game based on Biochemistry Research using playn games 
 library. To run this project, you have to install Google PlayN and maven. Only the java 
-version is working without bugs so using to see the correct game execute the commad 
+version is working without bugs so execute the commad 
 "mvn clean test" on the command line from inside the folder "project".
 You can find the official project in development at the repository 
 https://github.com/muadibbm/Xrpg (becomes public when completed)
